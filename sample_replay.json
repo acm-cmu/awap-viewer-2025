@@ -1,0 +1,43 @@
+{
+    "metadata": {
+        "map_name": "map1",
+        "p1_name": "../bots/smart_bot.py",
+        "p2_name": "../bots/random_bot.py",
+        "num_frames": 3
+    },
+    "game_constants": {
+        "map_length": 64,
+        "start_num_bases": 1,
+        "start_num_metal": 5,
+        "start_time_bank": 30
+    },
+    "asset_ids": {
+        "0": "Hidden Tile",
+        "1": "Base Tile",
+        "2": "Mining Tile",
+        "3": "Rough Tile",
+        "4": "Terraform Tile",
+        "5": "Explorer",
+        "6": "Miner",
+        "7": "Terraformer"
+    },
+    "map": {
+        "fixed": [[2,2], [2,3], [2,4]],
+        "dynamic": [
+            [["tile_type_prev", "tile_type_now", "player owning it", "x", "y"]],
+            [["0", "3", -1, 1, 5], ["0", "2", -1, 1, 6]],
+            [["3", "4", 1, 1, 5], ["2", "1", 1, 1, 6]],
+            [["3", "4", 1, 1, 5], ["2", "1", 1, 1, 6]]
+        ]
+    },
+    "robot": [
+        [[["robot_type_prev", "skill_prev", "energy_prev", "x_prev", "y_prev"], ["robot_type_now", "skill_now", "energy_now", "x_now", "y_now"]]],
+        [[[], ["5", "1", 99, 3, 5]]],
+        [[["5", "1", 100, 2, 5], ["5", "1", 99, 3, 5]]],
+        [[["5", "1", 99, 3, 5], ["6", "0", 98, 8, 5]], [[], ["7", "1", 99, 3, 5]]]
+    ],
+    "resource": {
+        "p1": [1, 1, 1],
+        "p2": [1, 1, 1]
+    }
+}
