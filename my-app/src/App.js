@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import MapGrid from './MapGrid/MapGrid';
+import MapGrid from './components/MapGrid/MapGrid';
 function App() {
   return (
     <div className="App">
