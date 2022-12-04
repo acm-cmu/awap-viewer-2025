@@ -1,0 +1,6 @@
+.side-panel {
+  border-style: solid;
+  background-color: rgb(241, 11, 168);
+  margin: 1% 1% 1% 1%;
+  flex-grow: 1;
+}
