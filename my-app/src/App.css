@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+:root {
+  --bg-color: rgba(150, 150, 150, 1);
+
+  /* Numbers define values that will be used throughout the CSS.
+  --tile-size: 20px for example will set size of the grid squares. */
+  --cols: 10;
+  --rows: 10;
+  --tile-size: calc(90vmin / var(--cols));
+  --border-width: 1px;
+}
+
+.row-structure{
+  display: flex;
+  flex-direction: row;
+}
