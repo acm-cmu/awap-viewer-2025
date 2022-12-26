@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <div className="row-structure">
-        <GridBoard nrows="10" ncols="10" />
-        <SidePanel />
+        <GridBoard nrows="10" ncols="10"/>
+        <SidePanel/>
       </div>
     </div>
   );

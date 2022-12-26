@@ -1,13 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react';
 import './SidePanel.css'
 
 export default function SidePanel(props) {
+  const showFile = async (event) => {
+    // object.preventDefault()
+    const reader = new FileReader()
+    reader.onload = async (e) => { 
+      const replay_text = e.target.result
+      try {
+        var replay_object = JSON.parse(replay_text)
+      }
+      catch(err) {
+        console.log(err.message)
+      }
+      console.log(Object.keys(replay_object))
+    };
+    reader.readAsText(event.target.files[0])
+  }
+
   return (
       <div className="side-panel">
           <h1>
             <font face="Impact" size="5">AWAP 2023 Viewer</font><br />
           </h1>
-         <button type="button">Upload</button> 
+          <input type="file" onChange={showFile} />
       </div>
   )
 }
