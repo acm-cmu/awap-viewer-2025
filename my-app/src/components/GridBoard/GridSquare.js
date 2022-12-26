@@ -4,9 +4,9 @@ import './Grid.css'
 // Represents a grid square
 
 export default function GridSquare(props) {
-    const color = props.color
+    const classes = `grid-square color-${props.color}`
     return (
-        <div className="grid-square">
+        <div className={classes}>
         </div>
     )
 }

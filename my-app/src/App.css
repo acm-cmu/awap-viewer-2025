@@ -42,8 +42,8 @@
 
   /* Numbers define values that will be used throughout the CSS.
   --tile-size: 20px for example will set size of the grid squares. */
-  --cols: 10;
-  --rows: 10;
+  --cols: 32;
+  --rows: 32;
   --tile-size: calc(86vmin / var(--cols));
   --border-width: 1px;
 }

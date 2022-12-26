@@ -2,18 +2,20 @@ import React, {useState} from 'react';
 import './SidePanel.css'
 
 export default function SidePanel(props) {
+
   const showFile = async (event) => {
     // object.preventDefault()
     const reader = new FileReader()
     reader.onload = async (e) => { 
       const replay_text = e.target.result
       try {
-        var replay_object = JSON.parse(replay_text)
+          var replay_object = JSON.parse(props.replayData)
       }
       catch(err) {
-        console.log(err.message)
+          console.log(err.message)
       }
-      console.log(Object.keys(replay_object))
+      props.parentCallback(replay_object)
+      alert(replay_text)
     };
     reader.readAsText(event.target.files[0])
   }
