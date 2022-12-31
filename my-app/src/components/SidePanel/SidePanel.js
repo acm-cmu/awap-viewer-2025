@@ -2,6 +2,25 @@ import React, {useState} from 'react';
 import './SidePanel.css'
 
 export default function SidePanel(props) {
+  const playButton = document.getElementById("play-button");
+  var framePlaying = false;
+  //var hasLoadedFrames = false;
+  function changePlay() {
+    //if (hasLoadedFrames) {
+      framePlaying = !framePlaying;
+      if (framePlaying) {
+        playButton.innerHTML = "Pause";
+      } else {
+        playButton.innerHTML = "Play";
+      }
+    //}
+  }
+
+  playButton.onclick = changePlay;
+
+  // const playFile = async (event) => {
+
+  // }
 
   const showFile = async (event) => {
     // object.preventDefault()
@@ -25,7 +44,8 @@ export default function SidePanel(props) {
           <h1>
             <font face="Impact" size="5">AWAP 2023 Viewer</font><br />
           </h1>
-          <input type="file" onChange={showFile} />
+          <input type="file" onChange={showFile} /><br /><br />
+          <button id="play-button">Play</button>
       </div>
   )
 }
