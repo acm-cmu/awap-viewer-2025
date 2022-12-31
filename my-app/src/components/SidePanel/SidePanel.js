@@ -1,5 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState} from 'react'
 import './SidePanel.css'
+import Button from 'react-bootstrap/Button'
 
 export default function SidePanel(props) {
   document.addEventListener('DOMContentLoaded', () => {
@@ -43,7 +44,7 @@ export default function SidePanel(props) {
           <font face="Impact" size="5">AWAP 2023 Viewer</font><br />
         </h1>
         <input type="file" onChange={showFile} /><br /><br />
-        <button id="play-button">Play</button>
+        <Button id="play-button">Play</Button>
       </div>
   )
 }

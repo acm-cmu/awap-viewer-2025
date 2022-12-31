@@ -1,5 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import GridBoard from './components/GridBoard/GridBoard'
 import SidePanel from './components/SidePanel/SidePanel'
 import React, {useState} from 'react';
