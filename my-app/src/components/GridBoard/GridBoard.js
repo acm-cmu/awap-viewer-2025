@@ -6,10 +6,12 @@ export default function GridBoard(props) {
     const nrows = props.nrows
     const ncols = props.ncols
     const replay_object = props.replayData
+    const isPlay = props.isPlay
+
     // Generate sample change array
     const coords = []
     let c = 0
-    for (let i = 0; i < 250; i++) {
+    for (let i = 0; i < 50; i++) {
         coords.push([])
         for (let j = 0; j < 32; j++) {
             coords[i].push([(0 + c) % 32, j])
@@ -30,11 +32,11 @@ export default function GridBoard(props) {
     const [index, setIndex] = useState(0)
     const [intervalID, setIntervalID] = useState(null)
 
+    // Modifies grid according t
     useEffect(() => {
-        console.log("index" + index)
         if (index >= coords.length) {
-            console.log("Clearing interval with ID " + intervalID)
             clearInterval(intervalID)
+            setIntervalID(null)
             return
         }
         let turn = coords[index]
@@ -55,22 +57,31 @@ export default function GridBoard(props) {
         setGrid(nextGrid)
     }, [index])
 
-    let iterateFrames = () => {
+    const iterateFrames = () => {
         setIndex((index) => index + 1)
     }
 
-    let runAnimation = () => {
-        console.log("Running animation...")
+    const runAnimation = () => {
         if (!intervalID) {
-            const intID = setInterval(iterateFrames, 50)
+            const intID = setInterval(iterateFrames, 100)
             setIntervalID(intID)
         }
     }
 
+    useEffect(() => {
+        if (isPlay) {
+            runAnimation()
+        }
+        else {
+            clearInterval(intervalID)
+            setIntervalID(null)
+        }
+    }, [isPlay])
+
     // The components generated in makeGrid are rendered in div.grid-board
       return (
         <div>
-            <button id="start" onClick={runAnimation}>Start</button>
+            {/* <button id="start" onClick={toggleplay}>Play</button> */}
             <div className='grid-board'>
                 {grid}
             </div>

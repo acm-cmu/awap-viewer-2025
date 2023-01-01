@@ -6,16 +6,21 @@ import React, {useState} from 'react';
 
 function App() {
   const [replay, setReplay] = useState(null)
+  const [isPlay, setIsPlay] = useState(false)
 
-  let handleCallback = (replayData) => {
+  const handleFileData = (replayData) => {
     setReplay(replayData)
+  }
+
+  const handlePlayData = (playStatus) => {
+    setIsPlay(playStatus)
   }
   
   return (
     <div className="App">
       <div className="row-structure">
-        <GridBoard nrows="32" ncols="32" replayData={replay}/>
-        <SidePanel parentCallback={handleCallback} />
+        <GridBoard nrows="32" ncols="32" replayData={replay} isPlay={isPlay}/>
+        <SidePanel onFileData={handleFileData} onPlayData={handlePlayData}/>
       </div>
     </div>
   );

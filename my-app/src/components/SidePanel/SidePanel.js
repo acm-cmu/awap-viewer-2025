@@ -3,15 +3,18 @@ import './SidePanel.css'
 import Button from 'react-bootstrap/Button'
 
 export default function SidePanel(props) {
-  let framePlaying = false
+  const [framePlaying, setframePlaying] = useState(false)
+
   const changePlay = () => {
-    var playButton = document.getElementById("play-button")
-    framePlaying = !framePlaying
-    if (framePlaying) {
+    let playButton = document.getElementById("play-button")
+    const newFramePlaying = !framePlaying
+    setframePlaying(newFramePlaying)
+    if (newFramePlaying) {
       playButton.innerHTML = "Pause"
     } else {
       playButton.innerHTML = "Play"
     }
+    props.onPlayData(newFramePlaying)
   }
 
   const showFile = async (event) => {
@@ -25,7 +28,7 @@ export default function SidePanel(props) {
       catch(err) {
           console.log(err.message)
       }
-      props.parentCallback(replay_object)
+      props.onFileData(replay_object)
       alert(replay_text)
     };
     reader.readAsText(event.target.files[0])
