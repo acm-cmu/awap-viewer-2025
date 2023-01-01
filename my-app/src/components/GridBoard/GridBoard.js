@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useMemo, useRef } from "react"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
 
@@ -9,15 +9,18 @@ export default function GridBoard(props) {
   const isPlay = props.isPlay
 
   // Generate sample change array
-  const coords = []
-  let c = 0
-  for (let i = 0; i < 50; i++) {
-    coords.push([])
-    for (let j = 0; j < 32; j++) {
-      coords[i].push([(0 + c) % 32, j])
+  const coords = useMemo(() => {
+    let temp_arr = []
+    let c = 0
+    for (let i = 0; i < 50; i++) {
+      temp_arr.push([])
+      for (let j = 0; j < 32; j++) {
+        temp_arr[i].push([(0 + c) % 32, j])
+      }
+      c += 1
     }
-    c += 1
-  }
+    return temp_arr
+  }, [])
 
   // generates an initial array of <nrows> rows, each containing <ncols> GridSquares.
   const initialGrid = []
@@ -30,13 +33,13 @@ export default function GridBoard(props) {
 
   const [grid, setGrid] = useState(initialGrid)
   const [index, setIndex] = useState(0)
-  const [intervalID, setIntervalID] = useState(null)
+  const intervalID = useRef(null)
 
-  // Modifies grid according t
+  // Modifies grid according to changes in index
   useEffect(() => {
     if (index >= coords.length) {
-      clearInterval(intervalID)
-      setIntervalID(null)
+      clearInterval(intervalID.current)
+      intervalID.current = null
       return
     }
     let turn = coords[index]
@@ -53,25 +56,23 @@ export default function GridBoard(props) {
       nextGrid[y][x] = <GridSquare key={`${x}${y}`} color="1" />
     }
     setGrid(nextGrid)
-  }, [index])
+  }, [index, coords])
 
   const iterateFrames = () => {
     setIndex((index) => index + 1)
   }
 
-  const runAnimation = () => {
-    if (!intervalID) {
-      const intID = setInterval(iterateFrames, 100)
-      setIntervalID(intID)
-    }
-  }
-
   useEffect(() => {
+    const runAnimation = () => {
+      if (!intervalID.current) {
+        intervalID.current = setInterval(iterateFrames, 100)
+      }
+    }
     if (isPlay) {
       runAnimation()
     } else {
-      clearInterval(intervalID)
-      setIntervalID(null)
+      clearInterval(intervalID.current)
+      intervalID.current = null
     }
   }, [isPlay])
 
