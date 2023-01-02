@@ -1,61 +1,70 @@
 {
-    "metadata": {
-		"game_name": "game_1",
-		"map_name": "map_1",
-		"map_row": 8,
-		"map_col": 8,
-        "p1_name": "../bots/smart_bot.py",
-        "p2_name": "../bots/random_bot.py",
-		"initial_metal": 5,
-        "start_time_bank": 30
-	},
-    "asset_ids": {
-		"e": "Explorer",
-        "m": "Miner",
-        "t": "Terraformer"
-	},
-    // array of impassable tile coordinates
-    "initial_map_passability": [[0, 0], [2,0]],
-    // [[x-coord, y-coord, max amt of metal obtainable per turn], ...]
-    "initial_map_metal": [[1, 0, 200], [6, 7, 10]],
-    // array of terraformed tiles, i.e. terraform no. > 0, initial terraform no. here is either -10 or 10
-    // [x-coord, y-coord, terraform number], ...]
-    "initial_map_terraformed": [[1, 0, -10], [6, 7, 10]],
-    "turns": [
-        {
-            "metadata": {
-                "turn": "player1",
-                "number": 0,
-                "metal": 5
-            },
-            "grid_changes": [
-                // x-coord, y-coord, is_passable, is_mining_tile, blue: is_visible, red: is_visible, is_terraformed"
-                [2, 2, 0, 0, 0, -10],
-                [7, 7, 1, 0, 0, 0, 10]
-            ],
-            "robot_changes": [
-                // id, x-coord, y-coord, robot type, robot battery level
-                ["id1", 2, 1, "e", 100],
-                ["id2", 2, 2, "m", 100],
-                ["id3", 2, 3, "t", 100]
-            ]
-        },
-        {
-            "metadata": {
-                "turn": "player2",
-                "number": 0,
-                "metal": 5
-            },
-            "grid_changes": [
-                // x-coord, y-coord, is_passable, is_mining_tile, blue: is_visible, red: is_visible, is_terraformed"
-                [2, 3, 0, 0, 0, -9]
-            ],
-            "robot_changes": [
-                // id, x-coord, y-coord, robot type, robot battery level
-                ["id4", 6, 7, "e", 100],
-                ["id5", 5, 7, "m", 100],
-                ["id6", 4, 7, "t", 100]
-            ]
-        }
-    ]
+  "metadata": {
+    "game_name": "game_1",
+    "map_name": "map_1",
+    "map_row": 8,
+    "map_col": 8,
+    "p1_name": "../bots/smart_bot.py",
+    "p2_name": "../bots/random_bot.py",
+    "initial_metal": 5,
+    "start_time_bank": 30
+  },
+  "asset_ids": {
+    "e": "Explorer",
+    "m": "Miner",
+    "t": "Terraformer"
+  },
+  // array of impassable tile coordinates
+  "initial_map_passability": [
+    [0, 0],
+    [2, 0]
+  ],
+  // [[x-coord, y-coord, max amt of metal obtainable per turn], ...]
+  "initial_map_metal": [
+    [2, 0, 200],
+    [3, 7, 10]
+  ],
+  // array of terraformed tiles, i.e. terraform no. > 0, initial terraform no. here is either -10 or 10
+  // [x-coord, y-coord, terraform number], ...]
+  "initial_map_terraformed": [
+    [1, 0, -10],
+    [6, 7, 10]
+  ],
+  "turns": [
+    {
+      "metadata": {
+        "turn": "player1",
+        "number": 0,
+        "metal": 5
+      },
+      "grid_changes": [
+        // x-coord, y-coord, is_passable, is_mining_tile, blue: is_visible, red: is_visible, is_terraformed"
+        [2, 2, 0, 0, 0, -10],
+        [7, 7, 1, 0, 0, 0, 10]
+      ],
+      "robot_changes": [
+        // id, x-coord, y-coord, robot type, robot battery level
+        ["id1", 2, 1, "e", 100],
+        ["id2", 2, 2, "m", 100],
+        ["id3", 2, 3, "t", 100]
+      ]
+    },
+    {
+      "metadata": {
+        "turn": "player2",
+        "number": 0,
+        "metal": 5
+      },
+      "grid_changes": [
+        // x-coord, y-coord, is_passable, is_mining_tile, blue: is_visible, red: is_visible, is_terraformed"
+        [2, 3, 0, 0, 0, -9]
+      ],
+      "robot_changes": [
+        // id, x-coord, y-coord, robot type, robot battery level
+        ["id4", 6, 7, "e", 100],
+        ["id5", 5, 7, "m", 100],
+        ["id6", 4, 7, "t", 100]
+      ]
+    }
+  ]
 }
