@@ -3,37 +3,42 @@ import GridSquare from "./GridSquare"
 import "./Grid.css"
 
 export default function GridBoard(props) {
-  const nrows = props.nrows
-  const ncols = props.ncols
-  // const replay_object = props.replayData
+  const replay_object = props.replayData
+  const nrows = replay_object.metadata.map_row
+  const ncols = replay_object.metadata.map_col
   const isPlay = props.isPlay
 
   // Generate sample change array
   const coords = useMemo(() => {
-    let temp_arr = []
+    let coordsTempArr = []
     let c = 0
     for (let i = 0; i < 50; i++) {
-      temp_arr.push([])
-      for (let j = 0; j < 32; j++) {
-        temp_arr[i].push([(0 + c) % 32, j])
+      coordsTempArr.push([])
+      for (let j = 0; j < nrows; j++) {
+        coordsTempArr[i].push([c % ncols, j])
       }
       c += 1
     }
-    return temp_arr
-  }, [])
+    return coordsTempArr
+  }, [nrows, ncols])
 
-  // generates an initial array of <nrows> rows, each containing <ncols> GridSquares.
-  const initialGrid = []
-  for (let row = 0; row < nrows; row++) {
-    initialGrid.push([])
-    for (let col = 0; col < ncols; col++) {
-      initialGrid[row].push(<GridSquare key={`${col}${row}`} color="0" />)
-    }
-  }
-
-  const grid = useRef(initialGrid)
+  const [grid, setGrid] = useState(null)
   const [index, setIndex] = useState(0)
   const intervalID = useRef(null)
+
+  // generates an initial array of <nrows> rows, each containing <ncols> GridSquares.
+  // eslint-disable-next-line
+  const initialGrid = useMemo(() => {
+    let tempArr = []
+    for (let row = 0; row < nrows; row++) {
+      tempArr.push([])
+      for (let col = 0; col < ncols; col++) {
+        tempArr[row].push(<GridSquare key={`${col}${row}`} color="0" />)
+      }
+    }
+    setGrid(tempArr)
+    return tempArr
+  }, [nrows, ncols])
 
   // Modifies grid according to changes in index
   useEffect(() => {
@@ -44,7 +49,7 @@ export default function GridBoard(props) {
     }
     let turn = coords[index]
     // Create a copy of the initial grid
-    const nextGrid = grid.current.map((row, i) => {
+    const nextGrid = grid.map((row, i) => {
       return row.map((elem, j) => {
         return <GridSquare key={`${j}${i}`} color="0" />
       })
@@ -56,7 +61,8 @@ export default function GridBoard(props) {
       nextGrid[y][x] = <GridSquare key={`${x}${y}`} color="1" />
     }
 
-    grid.current = nextGrid
+    setGrid(nextGrid)
+    // eslint-disable-next-line
   }, [index, coords])
 
   const iterateFrames = () => {
@@ -79,13 +85,7 @@ export default function GridBoard(props) {
 
   return (
     <div>
-      <div className="grid-board">
-        {grid.current.map((elem) => {
-          return elem.map((cell) => {
-            return cell
-          })
-        })}
-      </div>
+      <div className="grid-board">{grid}</div>
     </div>
   )
 }

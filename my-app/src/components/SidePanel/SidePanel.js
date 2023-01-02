@@ -23,12 +23,11 @@ export default function SidePanel(props) {
     reader.onload = async (e) => {
       const replay_text = e.target.result
       try {
-        var replay_object = JSON.parse(props.replayData)
+        var replay_object = JSON.parse(replay_text)
       } catch (err) {
         console.log(err.message)
       }
       props.onFileData(replay_object)
-      alert(replay_text)
     }
     reader.readAsText(event.target.files[0])
   }
