@@ -20,7 +20,7 @@
   grid-template-columns: repeat(var(--cols), var(--tile-size));
   grid-gap: 0;
   align-items: center;
-  flex-grow: 1;
-  margin-left: 20vw;
-  padding: 5vmin;
+  flex-grow: 0.3;
+  margin: auto;
+  padding: 5vmin 10vw 5vmin 5vmin;
 }

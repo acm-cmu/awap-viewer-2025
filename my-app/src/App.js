@@ -1,8 +1,8 @@
-import './App.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import GridBoard from './components/GridBoard/GridBoard'
-import SidePanel from './components/SidePanel/SidePanel'
-import React, {useState} from 'react';
+import "./App.css"
+import "bootstrap/dist/css/bootstrap.min.css"
+import GridBoard from "./components/GridBoard/GridBoard"
+import SidePanel from "./components/SidePanel/SidePanel"
+import React, { useState } from "react"
 
 function App() {
   const [replay, setReplay] = useState(null)
@@ -10,21 +10,29 @@ function App() {
 
   const handleFileData = (replayData) => {
     setReplay(replayData)
+    let root = document.documentElement
+    try {
+      root.style.setProperty("--cols", replayData.metadata.map_col)
+      root.style.setProperty("--rows", replayData.metadata.map_row)
+    } catch (err) {
+      console.log(err.message)
+    }
   }
 
   const handlePlayData = (playStatus) => {
     setIsPlay(playStatus)
   }
-  
+
   return (
     <div className="App">
       <div className="row-structure">
-        <GridBoard nrows="32" ncols="32" replayData={replay} isPlay={isPlay}/>
-        <SidePanel onFileData={handleFileData} onPlayData={handlePlayData}/>
+        <SidePanel onFileData={handleFileData} onPlayData={handlePlayData} />
+        {replay != null ? (
+          <GridBoard replayData={replay} isPlay={isPlay} />
+        ) : null}
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
-
+export default App
