@@ -16,11 +16,12 @@
   },
   "initial_map_passability": [
     [0, 0],
-    [2, 0]
+    [2, 0],
+    [6, 5]
   ],
   "initial_map_metal": [
-    [1, 0, 200],
-    [6, 7, 10]
+    [2, 0, 200],
+    [3, 7, 10]
   ],
   "initial_map_terraformed": [
     [1, 0, -10],
