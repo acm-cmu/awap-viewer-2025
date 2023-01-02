@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "game_name": "game_1",
+    "map_name": "map_1",
+    "map_row": 8,
+    "map_col": 8,
+    "p1_name": "../bots/smart_bot.py",
+    "p2_name": "../bots/random_bot.py",
+    "initial_metal": 5,
+    "start_time_bank": 30
+  },
+  "asset_ids": {
+    "e": "Explorer",
+    "m": "Miner",
+    "t": "Terraformer"
+  },
+  "initial_map_passability": [
+    [0, 0],
+    [2, 0]
+  ],
+  "initial_map_metal": [
+    [1, 0, 200],
+    [6, 7, 10]
+  ],
+  "initial_map_terraformed": [
+    [1, 0, -10],
+    [6, 7, 10]
+  ],
+  "turns": [
+    {
+      "metadata": {
+        "turn": "player1",
+        "number": 0,
+        "metal": 5
+      },
+      "grid_changes": [
+        [2, 2, 0, 0, 0, -10],
+        [7, 7, 1, 0, 0, 0, 10]
+      ],
+      "robot_changes": [
+        ["id1", 2, 1, "e", 100],
+        ["id2", 2, 2, "m", 100],
+        ["id3", 2, 3, "t", 100]
+      ]
+    },
+    {
+      "metadata": {
+        "turn": "player2",
+        "number": 0,
+        "metal": 5
+      },
+      "grid_changes": [[2, 3, 0, 0, 0, -9]],
+      "robot_changes": [
+        ["id4", 6, 7, "e", 100],
+        ["id5", 5, 7, "m", 100],
+        ["id6", 4, 7, "t", 100]
+      ]
+    }
+  ]
+}
