@@ -1,7 +1,7 @@
 .side-panel {
   background-color: rgb(149, 192, 236);
-  flex-grow: 0.1;
-  width: 40vw;
+  flex-grow: 0;
+  width: 30vw;
   height: 100vh;
 }
 
@@ -11,4 +11,9 @@ button {
   background: rgb(255, 255, 255);
   border-radius: 50px;
   padding: 5px;
+}
+
+.form-control {
+  width: 25vw;
+  margin: 0 2vw 0 2vw;
 }

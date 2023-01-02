@@ -40,7 +40,7 @@ export default function SidePanel(props) {
         </font>
         <br />
       </h1>
-      <input type="file" onChange={showFile} />
+      <input type="file" class="form-control" onChange={showFile} />
       <br />
       <br />
       <Button id="play-button" onClick={changePlay}>
