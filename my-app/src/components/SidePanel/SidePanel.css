@@ -1,8 +1,29 @@
 .side-panel {
-  background-color: rgb(149, 192, 236);
+  background-color: #e27b58;
   flex-grow: 0;
   width: 30vw;
   height: 100vh;
+}
+
+h1 {
+  font-family: "Earth Orbiter", Sans-Serif;
+  color: #663926;
+  font-size: 4.5vmin;
+  padding: 3vmin;
+}
+
+.form-control {
+  width: 25vw;
+  margin: 0 2vw 0 2vw;
+}
+
+.btn-custom:focus {
+  background: #663926;
+  color: #fba279;
+}
+.btn-custom:hover {
+  background: #542f1f;
+  color: #fba279;
 }
 
 button {
@@ -11,9 +32,4 @@ button {
   background: rgb(255, 255, 255);
   border-radius: 50px;
   padding: 5px;
-}
-
-.form-control {
-  width: 25vw;
-  margin: 0 2vw 0 2vw;
 }

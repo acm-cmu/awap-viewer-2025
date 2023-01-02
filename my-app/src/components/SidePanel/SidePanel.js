@@ -34,16 +34,11 @@ export default function SidePanel(props) {
 
   return (
     <div className="side-panel">
-      <h1>
-        <font face="Impact" size="5">
-          AWAP 2023 Viewer
-        </font>
-        <br />
-      </h1>
-      <input type="file" class="form-control" onChange={showFile} />
+      <h1>AWAP 2023 Viewer</h1>
+      <input type="file" className="form-control" onChange={showFile} />
       <br />
       <br />
-      <Button id="play-button" onClick={changePlay}>
+      <Button id="play-button" variant="custom" onClick={changePlay}>
         Play
       </Button>
     </div>
