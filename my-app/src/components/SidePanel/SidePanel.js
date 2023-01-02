@@ -3,23 +3,19 @@ import './SidePanel.css'
 import Button from 'react-bootstrap/Button'
 
 export default function SidePanel(props) {
-  document.addEventListener('DOMContentLoaded', () => {
-    var playButton = document.getElementById("play-button")
-    var framePlaying = false;
-    //var hasLoadedFrames = false;
-    const changePlay = () => {
-      //if (hasLoadedFrames) {
-        framePlaying = !framePlaying;
-        if (framePlaying) {
-          playButton.innerHTML = "Pause"
-        } else {
-          playButton.innerHTML = "Play"
-        }
-      //}
+  const [framePlaying, setframePlaying] = useState(false)
+
+  const changePlay = () => {
+    let playButton = document.getElementById("play-button")
+    const newFramePlaying = !framePlaying
+    setframePlaying(newFramePlaying)
+    if (newFramePlaying) {
+      playButton.innerHTML = "Pause"
+    } else {
+      playButton.innerHTML = "Play"
     }
-    
-    playButton.onclick = changePlay;
-  })
+    props.onPlayData(newFramePlaying)
+  }
 
   const showFile = async (event) => {
     // object.preventDefault()
@@ -32,7 +28,7 @@ export default function SidePanel(props) {
       catch(err) {
           console.log(err.message)
       }
-      props.parentCallback(replay_object)
+      props.onFileData(replay_object)
       alert(replay_text)
     };
     reader.readAsText(event.target.files[0])
@@ -44,7 +40,7 @@ export default function SidePanel(props) {
           <font face="Impact" size="5">AWAP 2023 Viewer</font><br />
         </h1>
         <input type="file" onChange={showFile} /><br /><br />
-        <Button id="play-button">Play</Button>
+        <Button id="play-button" onClick={changePlay}>Play</Button>
       </div>
   )
 }
