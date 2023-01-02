@@ -5,7 +5,7 @@ import "./Grid.css"
 export default function GridBoard(props) {
   const nrows = props.nrows
   const ncols = props.ncols
-  const replay_object = props.replayData
+  // const replay_object = props.replayData
   const isPlay = props.isPlay
 
   // Generate sample change array
@@ -31,7 +31,7 @@ export default function GridBoard(props) {
     }
   }
 
-  const [grid, setGrid] = useState(initialGrid)
+  const grid = useRef(initialGrid)
   const [index, setIndex] = useState(0)
   const intervalID = useRef(null)
 
@@ -44,7 +44,7 @@ export default function GridBoard(props) {
     }
     let turn = coords[index]
     // Create a copy of the initial grid
-    const nextGrid = grid.map((row, i) => {
+    const nextGrid = grid.current.map((row, i) => {
       return row.map((elem, j) => {
         return <GridSquare key={`${j}${i}`} color="0" />
       })
@@ -55,7 +55,8 @@ export default function GridBoard(props) {
       let y = change[1]
       nextGrid[y][x] = <GridSquare key={`${x}${y}`} color="1" />
     }
-    setGrid(nextGrid)
+
+    grid.current = nextGrid
   }, [index, coords])
 
   const iterateFrames = () => {
@@ -78,7 +79,13 @@ export default function GridBoard(props) {
 
   return (
     <div>
-      <div className="grid-board">{grid}</div>
+      <div className="grid-board">
+        {grid.current.map((elem) => {
+          return elem.map((cell) => {
+            return cell
+          })
+        })}
+      </div>
     </div>
   )
 }
