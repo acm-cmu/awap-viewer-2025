@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import "./SidePanel.css"
 import Button from "react-bootstrap/Button"
+import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
   const disablePlay = props.disablePlay
@@ -40,6 +41,16 @@ export default function SidePanel(props) {
     }
   }, [disablePlay])
 
+  const handleToggleP1Vis = () => {
+    let checkbox = document.getElementById("p1vis")
+    props.onP1VisToggled(checkbox.checked)
+  }
+
+  const handleToggleP2Vis = () => {
+    let checkbox = document.getElementById("p2vis")
+    props.onP2VisToggled(checkbox.checked)
+  }
+
   return (
     <div className="side-panel">
       <h1>AWAP 2023 Viewer</h1>
@@ -54,6 +65,12 @@ export default function SidePanel(props) {
       >
         Play
       </Button>
+      <ToggleSwitch onToggle={handleToggleP1Vis} useID="p1vis">
+        Player 1 Visibility
+      </ToggleSwitch>
+      <ToggleSwitch onToggle={handleToggleP2Vis} useID="p2vis">
+        Player 2 Visibility
+      </ToggleSwitch>
     </div>
   )
 }
