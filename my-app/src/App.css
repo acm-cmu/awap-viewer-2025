@@ -38,7 +38,12 @@
 }
 
 :root {
-  --bg-color: rgba(150, 150, 150, 1);
+  --dark-accent-color: #47281a;
+  --dark-color: #663926;
+  --mid-color: #e27b58;
+  --light-color: #f9b697;
+  --p1-color: rgb(249, 60, 60);
+  --p2-color: rgb(45, 45, 245);
 
   /* Numbers define values that will be used throughout the CSS.
   --tile-size: 20px for example will set size of the grid squares. */

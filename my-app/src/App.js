@@ -8,6 +8,8 @@ function App() {
   const [replay, setReplay] = useState(null)
   const [isPlay, setIsPlay] = useState(false)
   const [isPlayDisabled, setIsPlayDisabled] = useState(true)
+  const [isP1VisToggled, setIsP1VisToggled] = useState(false)
+  const [isP2VisToggled, setIsP2VisToggled] = useState(false)
 
   const handleFileData = (replayData) => {
     setIsPlayDisabled(false)
@@ -29,6 +31,14 @@ function App() {
     setIsPlayDisabled(true)
   }
 
+  const handleP1VisToggled = (toggleStatus) => {
+    setIsP1VisToggled(toggleStatus)
+  }
+
+  const handleP2VisToggled = (toggleStatus) => {
+    setIsP2VisToggled(toggleStatus)
+  }
+
   return (
     <div className="App">
       <div className="row-structure">
@@ -36,12 +46,16 @@ function App() {
           onFileData={handleFileData}
           onPlayData={handlePlayData}
           disablePlay={isPlayDisabled}
+          onP1VisToggled={handleP1VisToggled}
+          onP2VisToggled={handleP2VisToggled}
         />
         {replay != null ? (
           <GridBoard
             replayData={replay}
             isPlay={isPlay}
             onPlayDisabled={handlePlayDisabled}
+            isP1VisToggled={isP1VisToggled}
+            isP2VisToggled={isP2VisToggled}
           />
         ) : null}
       </div>
