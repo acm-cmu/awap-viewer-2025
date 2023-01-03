@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./SidePanel.css"
 import Button from "react-bootstrap/Button"
 
 export default function SidePanel(props) {
+  const disablePlay = props.disablePlay
   const [framePlaying, setframePlaying] = useState(false)
 
   const changePlay = () => {
@@ -32,13 +33,25 @@ export default function SidePanel(props) {
     reader.readAsText(event.target.files[0])
   }
 
+  useEffect(() => {
+    if (disablePlay) {
+      let playButton = document.getElementById("play-button")
+      playButton.innerHTML = "Play"
+    }
+  }, [disablePlay])
+
   return (
     <div className="side-panel">
       <h1>AWAP 2023 Viewer</h1>
-      <input type="file" className="form-control" onChange={showFile} />
+      <input type="file" className="file-upload" onChange={showFile} />
       <br />
       <br />
-      <Button id="play-button" variant="custom" onClick={changePlay}>
+      <Button
+        id="play-button"
+        variant="custom"
+        disabled={props.disablePlay}
+        onClick={changePlay}
+      >
         Play
       </Button>
     </div>

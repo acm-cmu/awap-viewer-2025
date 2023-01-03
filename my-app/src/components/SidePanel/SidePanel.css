@@ -6,30 +6,52 @@
 }
 
 h1 {
-  font-family: "Earth Orbiter", Sans-Serif;
+  font-family: "Earth Orbiter", sans-serif;
   color: #663926;
   font-size: 4.5vmin;
   padding: 3vmin;
 }
 
-.form-control {
+.file-upload {
   width: 25vw;
   margin: 0 2vw 0 2vw;
+  background: #f9b697;
+  border-radius: 5px;
+  border: 2px solid #663926;
+  font-family: "Helveltica Nue", sans-serif;
+  font-size: 2vmin;
+}
+
+.file-upload::file-selector-button {
+  font-weight: bold;
+  color: #f9b697;
+  background: #663926;
+  border: 1px solid #663926;
+  padding: 1vmin;
+  cursor: pointer;
+}
+
+.file-upload::file-selector-button:hover {
+  color: #f9b697;
+  background: #47281a;
+}
+
+.btn-custom {
+  background: #663926;
+  color: #f9b697;
 }
 
 .btn-custom:focus {
   background: #663926;
-  color: #fba279;
-}
-.btn-custom:hover {
-  background: #542f1f;
-  color: #fba279;
+  color: #f9b697;
 }
 
-button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 100;
-  background: rgb(255, 255, 255);
-  border-radius: 50px;
-  padding: 5px;
+.btn-custom:hover {
+  background: #47281a;
+  color: #f9b697;
+}
+
+.btn-custom:disabled {
+  background: #663926;
+  color: #f9b697;
 }

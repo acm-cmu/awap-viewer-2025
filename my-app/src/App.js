@@ -7,8 +7,10 @@ import React, { useState } from "react"
 function App() {
   const [replay, setReplay] = useState(null)
   const [isPlay, setIsPlay] = useState(false)
+  const [isPlayDisabled, setIsPlayDisabled] = useState(true)
 
   const handleFileData = (replayData) => {
+    setIsPlayDisabled(false)
     setReplay(replayData)
     let root = document.documentElement
     try {
@@ -23,12 +25,24 @@ function App() {
     setIsPlay(playStatus)
   }
 
+  const handlePlayDisabled = () => {
+    setIsPlayDisabled(true)
+  }
+
   return (
     <div className="App">
       <div className="row-structure">
-        <SidePanel onFileData={handleFileData} onPlayData={handlePlayData} />
+        <SidePanel
+          onFileData={handleFileData}
+          onPlayData={handlePlayData}
+          disablePlay={isPlayDisabled}
+        />
         {replay != null ? (
-          <GridBoard replayData={replay} isPlay={isPlay} />
+          <GridBoard
+            replayData={replay}
+            isPlay={isPlay}
+            onPlayDisabled={handlePlayDisabled}
+          />
         ) : null}
       </div>
     </div>
