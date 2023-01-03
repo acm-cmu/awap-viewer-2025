@@ -39,7 +39,7 @@
       },
       "grid_changes": [
         // x-coord, y-coord, is_passable, is_mining_tile, blue: is_visible, red: is_visible, is_terraformed"
-        [2, 2, 0, 0, 0, -10],
+        [2, 2, 0, 0, 0, 0, -10],
         [7, 7, 1, 0, 0, 0, 10]
       ],
       "robot_changes": [
@@ -57,7 +57,7 @@
       },
       "grid_changes": [
         // x-coord, y-coord, is_passable, is_mining_tile, blue: is_visible, red: is_visible, is_terraformed"
-        [2, 3, 0, 0, 0, -9]
+        [2, 3, 0, 0, 0, 0, -9]
       ],
       "robot_changes": [
         // id, x-coord, y-coord, robot type, robot battery level
