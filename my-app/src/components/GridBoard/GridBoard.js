@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo, useRef } from "react"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
 import ExplorerImg from "../../img/circle.png"
-// import TerraformerImg from "../../img/square.png"
+import TerraformerImg from "../../img/square.png"
+import MinerImg from "../../img/triangle.png"
 
 export default function GridBoard(props) {
   const isPlay = props.isPlay
@@ -73,16 +74,15 @@ export default function GridBoard(props) {
     setRobots(tempArr)
     setPrevRobots({})
     return tempArr
-  }, [nrows, ncols])
+    // eslint-disable-next-line
+  }, [nrows, ncols, replay_object])
 
   // animates grid when index changes
   useEffect(() => {
-    console.log("index: " + index)
     if (index >= gameTurns.length) {
       clearInterval(intervalID.current)
       intervalID.current = null
       disablePlay()
-      console.log("disable play called")
       return
     } else if (index === -1) {
     } else {
@@ -95,6 +95,13 @@ export default function GridBoard(props) {
         })
       })
       // Modify grid
+      for (let gridCh of turn.grid_changes) {
+        let x = gridCh[0]
+        let y = gridCh[1]
+        let terrNum = gridCh[5]
+        let terrCol = terrNum > 0 ? 3 : 4
+        nextGrid[y][x] = <GridSquare key={`${x}${y}`} color={terrCol} />
+      }
 
       // Create a copy of the initial robot array
       const nextRobots = robots.map((row, i) => {
@@ -118,9 +125,14 @@ export default function GridBoard(props) {
         // Add robot at new position
         let x = robotCh[1]
         let y = robotCh[2]
+        let robotType = robotCh[3]
+        let robotImg
+        if (robotType === "e") robotImg = ExplorerImg
+        else if (robotType === "t") robotImg = TerraformerImg
+        else robotImg = MinerImg
         nextRobots[y][x] = (
           <div key={`${x}${y}`} className="empty-grid-square">
-            <img src={ExplorerImg} alt="" />
+            <img src={robotImg} alt="" />
           </div>
         )
         // Store robot coordinates
@@ -130,6 +142,7 @@ export default function GridBoard(props) {
       setGrid(nextGrid)
       setRobots(nextRobots)
     }
+    // eslint-disable-next-line
   }, [index, gameTurns, disablePlay])
 
   const iterateFrames = () => {
