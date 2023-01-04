@@ -15,19 +15,24 @@
   z-index: 1;
 }
 
+.board.visibility {
+  position: absolute;
+  z-index: 2;
+}
+
 .grid-square {
   border-style: solid;
   width: var(--tile-size);
   height: var(--tile-size);
   border-width: var(--border-width);
-  background-color: rgb(255, 255, 255);
 }
 
-.empty-grid-square {
-  border-style: solid;
-  width: var(--tile-size);
-  height: var(--tile-size);
-  border-width: 0;
+.grid-square.p1tint {
+  background-color: rgba(249, 60, 60, 0.4);
+}
+
+.grid-square.p2tint {
+  background-color: rgba(45, 45, 245, 0.4);
 }
 
 img {
@@ -52,10 +57,10 @@ img {
 
 /* terraformed tile red */
 .color-3 {
-  background-color: rgb(249, 60, 60);
+  background-color: var(--p1-color);
 }
 
 /* terraformed tile blue */
 .color-4 {
-  background-color: rgb(45, 45, 245);
+  background-color: var(--p2-color);
 }
