@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useCallback } from "react"
 import "./SidePanel.css"
 import Button from "react-bootstrap/Button"
 import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
   const disablePlay = props.disablePlay
+  const onPlayData = props.onPlayData
   const [framePlaying, setframePlaying] = useState(false)
 
   const changePlay = () => {
@@ -16,8 +17,14 @@ export default function SidePanel(props) {
     } else {
       playButton.innerHTML = "Play"
     }
-    props.onPlayData(newFramePlaying)
+    onPlayData(newFramePlaying)
   }
+  const resetPlaybutton = useCallback(() => {
+    let playButton = document.getElementById("play-button")
+    playButton.innerHTML = "Play"
+    setframePlaying(false)
+    onPlayData(false)
+  }, [onPlayData])
 
   const showFile = async (event) => {
     // object.preventDefault()
@@ -26,6 +33,7 @@ export default function SidePanel(props) {
       const replay_text = e.target.result
       try {
         var replay_object = JSON.parse(replay_text)
+        resetPlaybutton()
       } catch (err) {
         console.log(err.message)
       }
@@ -36,12 +44,9 @@ export default function SidePanel(props) {
 
   useEffect(() => {
     if (disablePlay) {
-      let playButton = document.getElementById("play-button")
-      playButton.innerHTML = "Play"
-      setframePlaying(false)
-      props.onPlayData(false)
+      resetPlaybutton()
     }
-  }, [disablePlay])
+  }, [disablePlay, resetPlaybutton])
 
   const handleToggleP1Vis = () => {
     let checkbox = document.getElementById("p1vis")
