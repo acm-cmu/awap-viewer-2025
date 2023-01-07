@@ -1,0 +1,36 @@
+.form-check {
+  margin: 0;
+  padding: 0;
+}
+
+.form-check-label {
+  font-size: 2.5vmin;
+}
+
+/* Border: all; Circle color: unchecked */
+.form-switch .form-check-input {
+  border-color: var(--dark-color);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23663926'/%3e%3c/svg%3e");
+}
+
+/* Background color: focus (checked, unchecked) */
+.form-check-input:focus {
+  border-color: var(--dark-color);
+  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0) inset,
+    0px 0px 8px var(--dark-color);
+}
+
+/* Circle color: focus & inactive & unchecked */
+.form-check-input:focus:not(:active):not(:checked) {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23663926'/%3e%3c/svg%3e");
+}
+
+/* Circle color: focus & active & unchecked */
+.form-check-input:focus:active:not(:checked) {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23663926'/%3e%3c/svg%3e");
+}
+
+/* Background color: checked (focused, unfocused) */
+.form-check-input:checked {
+  background-color: var(--dark-color);
+}

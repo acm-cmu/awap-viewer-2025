@@ -1,28 +1,66 @@
-/* Grid Square */
-.grid-square {
-  border-style: solid;
-  /* width: var(--tile-size);
-  height: var(--tile-size); */
-  width: var(--tile-size);
-  height: var(--tile-size);
-  border-width: var(--border-width);
-  background-color: rgb(255, 255, 255);
-}
-
-.color-0 {
-  background-color: rgb(100, 0, 100);
-}
-
-.color-1 {
-  background-color: rgb(0, 0, 255);
-}
-
-.grid-board {
+.board {
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--tile-size));
   grid-gap: 0;
   align-items: center;
-  flex-grow: 1;
-  margin-left: 20vw;
-  padding: 5vmin;
+  padding: 5vmin 15vw 5vmin 15vw;
+}
+
+.board.grid {
+  position: relative;
+}
+
+.board.robot {
+  position: absolute;
+  z-index: 1;
+}
+
+.board.visibility {
+  position: absolute;
+  z-index: 2;
+}
+
+.grid-square {
+  border-style: solid;
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border-width: var(--border-width);
+}
+
+.grid-square.p1tint {
+  background-color: rgba(249, 60, 60, 0.4);
+}
+
+.grid-square.p2tint {
+  background-color: rgba(45, 45, 245, 0.4);
+}
+
+img {
+  width: var(--tile-size);
+  height: var(--tile-size);
+}
+
+/* empty tile */
+.color-0 {
+  background-color: #c67b5c;
+}
+
+/* impassable tile */
+.color-1 {
+  background-color: rgb(77, 75, 71);
+}
+
+/* metal tile */
+.color-2 {
+  background-color: rgb(219, 93, 20);
+}
+
+/* terraformed tile red */
+.color-3 {
+  background-color: var(--p1-color);
+}
+
+/* terraformed tile blue */
+.color-4 {
+  background-color: var(--p2-color);
 }

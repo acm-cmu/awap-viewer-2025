@@ -1,8 +1,11 @@
-import React, {useState} from 'react'
-import './SidePanel.css'
-import Button from 'react-bootstrap/Button'
+import React, { useState, useEffect, useCallback } from "react"
+import "./SidePanel.css"
+import Button from "react-bootstrap/Button"
+import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
+  const disablePlay = props.disablePlay
+  const onPlayData = props.onPlayData
   const [framePlaying, setframePlaying] = useState(false)
 
   const changePlay = () => {
@@ -14,33 +17,85 @@ export default function SidePanel(props) {
     } else {
       playButton.innerHTML = "Play"
     }
-    props.onPlayData(newFramePlaying)
+    onPlayData(newFramePlaying)
   }
+  const resetPlaybutton = useCallback(() => {
+    let playButton = document.getElementById("play-button")
+    playButton.innerHTML = "Play"
+    setframePlaying(false)
+    onPlayData(false)
+  }, [onPlayData])
 
   const showFile = async (event) => {
     // object.preventDefault()
     const reader = new FileReader()
-    reader.onload = async (e) => { 
+    reader.onload = async (e) => {
       const replay_text = e.target.result
       try {
-          var replay_object = JSON.parse(props.replayData)
-      }
-      catch(err) {
-          console.log(err.message)
+        var replay_object = JSON.parse(replay_text)
+        resetPlaybutton()
+      } catch (err) {
+        console.log(err.message)
       }
       props.onFileData(replay_object)
-      alert(replay_text)
-    };
+    }
     reader.readAsText(event.target.files[0])
   }
 
+  useEffect(() => {
+    if (disablePlay) {
+      resetPlaybutton()
+    }
+  }, [disablePlay, resetPlaybutton])
+
+  const handleToggleP1Vis = () => {
+    let checkbox = document.getElementById("p1vis")
+    props.onP1VisToggled(checkbox.checked)
+  }
+
+  const handleToggleP2Vis = () => {
+    let checkbox = document.getElementById("p2vis")
+    props.onP2VisToggled(checkbox.checked)
+  }
+
   return (
-      <div className="side-panel">
-        <h1>
-          <font face="Impact" size="5">AWAP 2023 Viewer</font><br />
-        </h1>
-        <input type="file" onChange={showFile} /><br /><br />
-        <Button id="play-button" onClick={changePlay}>Play</Button>
+    <div className="side-panel">
+      <h1>AWAP 2023 Viewer</h1>
+      <input type="file" className="file-upload" onChange={showFile} />
+      <br />
+      <br />
+      <Button
+        id="play-button"
+        variant="custom"
+        disabled={props.disablePlay}
+        onClick={changePlay}
+      >
+        Play
+      </Button>
+      <ToggleSwitch onToggle={handleToggleP1Vis} useID="p1vis">
+        Player 1 Visibility
+      </ToggleSwitch>
+      <ToggleSwitch onToggle={handleToggleP2Vis} useID="p2vis">
+        Player 2 Visibility
+      </ToggleSwitch>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6 graph">
+            <p>
+              Metal Graph placeholder placeholder placeholder placeholder
+              placeholder placeholder placeholder placeholder placeholder
+              placeholder
+            </p>
+          </div>
+          <div className="col-lg-6 graph">
+            <p>
+              Terraform Graph placeholder placeholder placeholder placeholder
+              placeholder placeholder placeholder placeholder placeholder
+              placeholder
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
   )
 }
