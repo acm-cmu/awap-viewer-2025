@@ -107,8 +107,8 @@ export default function GridBoard(props) {
         let y = terr_tile[1]
         let terrNum = terr_tile[2]
         if (
-          (player == "p1" && terrNum > 0) ||
-          (player == "p2" && terrNum < 0)
+          (player === "p1" && terrNum > 0) ||
+          (player === "p2" && terrNum < 0)
         ) {
           tempArr[y][x] = <div key={`${x}${y}`} className="grid-square"></div>
         }
