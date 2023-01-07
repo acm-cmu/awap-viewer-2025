@@ -3,6 +3,8 @@
   flex-grow: 0;
   width: 30vw;
   height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 h1 {
@@ -10,6 +12,12 @@ h1 {
   color: var(--dark-color);
   font-size: 4.5vmin;
   padding: 3vmin;
+}
+
+.graph {
+  margin-top: 5vmin;
+  margin-bottom: 5vmin;
+  overflow-wrap: break-word;
 }
 
 .file-upload {
@@ -37,6 +45,7 @@ h1 {
 }
 
 .btn-custom {
+  font-size: 2.5vmin;
   background: var(--dark-color);
   color: var(--light-color);
 }
