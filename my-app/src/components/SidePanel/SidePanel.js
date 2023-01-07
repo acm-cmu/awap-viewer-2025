@@ -38,6 +38,8 @@ export default function SidePanel(props) {
     if (disablePlay) {
       let playButton = document.getElementById("play-button")
       playButton.innerHTML = "Play"
+      setframePlaying(false)
+      props.onPlayData(false)
     }
   }, [disablePlay])
 
@@ -71,6 +73,24 @@ export default function SidePanel(props) {
       <ToggleSwitch onToggle={handleToggleP2Vis} useID="p2vis">
         Player 2 Visibility
       </ToggleSwitch>
+      <div className="container">
+        <div className="row">
+          <div className="col-lg-6 graph">
+            <p>
+              Metal Graph placeholder placeholder placeholder placeholder
+              placeholder placeholder placeholder placeholder placeholder
+              placeholder
+            </p>
+          </div>
+          <div className="col-lg-6 graph">
+            <p>
+              Terraform Graph placeholder placeholder placeholder placeholder
+              placeholder placeholder placeholder placeholder placeholder
+              placeholder
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
