@@ -196,7 +196,7 @@ export default function GridBoard(props) {
         else robotImg = MinerImg
         nextRobots[y][x] = (
           <div key={`${x}${y}`} className="grid-square">
-            <img src={robotImg} alt="" />
+            <img src={robotImg} alt="" className="robot-square" />
           </div>
         )
         // Store robot coordinates

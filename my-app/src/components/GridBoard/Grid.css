@@ -3,7 +3,7 @@
   grid-template-columns: repeat(var(--cols), var(--tile-size));
   grid-gap: 0;
   align-items: center;
-  padding: 5vmin 15vw 5vmin 15vw;
+  padding: 3.5vmin 12vw 3.5vmin 12vw;
 }
 
 .board.grid {
@@ -24,6 +24,13 @@
   border-style: solid;
   width: var(--tile-size);
   height: var(--tile-size);
+  border-width: var(--border-width);
+}
+
+.robot-square {
+  width: calc(var(--tile-size) - 2 * var(--border-width));
+  height: calc(var(--tile-size) - 2 * var(--border-width));
+  border-style: none;
   border-width: var(--border-width);
 }
 
