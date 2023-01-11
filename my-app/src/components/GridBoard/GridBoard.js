@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, useRef } from "react"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
-import ExplorerImg from "../../img/explorer.png"
-import TerraformerImg from "../../img/terraformer.png"
-import MinerImg from "../../img/miner.png"
+import ExplorerImg from "../../img/ex.png"
+import TerraformerImg from "../../img/te.png"
+import MinerImg from "../../img/mi.png"
 
 export default function GridBoard(props) {
   const isPlay = props.isPlay
@@ -209,11 +209,11 @@ export default function GridBoard(props) {
     // eslint-disable-next-line
   }, [index, gameTurns, disablePlay])
 
-  const iterateFrames = () => {
-    setIndex((index) => index + 1)
-  }
-
   useEffect(() => {
+    const iterateFrames = () => {
+      setIndex((index) => index + 1)
+    }
+
     const runAnimation = () => {
       if (!intervalID.current) {
         intervalID.current = setInterval(iterateFrames, 200)
