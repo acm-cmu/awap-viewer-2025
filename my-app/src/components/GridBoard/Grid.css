@@ -21,16 +21,9 @@
 }
 
 .grid-square {
-  border-style: solid;
   width: var(--tile-size);
   height: var(--tile-size);
-  border-width: var(--border-width);
-}
-
-.robot-square {
-  width: calc(var(--tile-size) - 2 * var(--border-width));
-  height: calc(var(--tile-size) - 2 * var(--border-width));
-  border-style: none;
+  border-style: solid;
   border-width: var(--border-width);
 }
 

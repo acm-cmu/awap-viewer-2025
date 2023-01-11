@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, useRef } from "react"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
-import ExplorerImg from "../../img/circle.png"
-import TerraformerImg from "../../img/square.png"
-import MinerImg from "../../img/triangle.png"
+import ExplorerImg from "../../img/explorer.png"
+import TerraformerImg from "../../img/terraformer.png"
+import MinerImg from "../../img/miner.png"
 
 export default function GridBoard(props) {
   const isPlay = props.isPlay
@@ -195,9 +195,7 @@ export default function GridBoard(props) {
         else if (robotType === "t") robotImg = TerraformerImg
         else robotImg = MinerImg
         nextRobots[y][x] = (
-          <div key={`${x}${y}`} className="grid-square">
-            <img src={robotImg} alt="" className="robot-square" />
-          </div>
+          <img src={robotImg} alt="" key={`${x}${y}`} className="grid-square" />
         )
         // Store robot coordinates
         setPrevRobots((prevRobots) => ({ ...prevRobots, [robotID]: [x, y] }))
