@@ -20,18 +20,20 @@ h1 {
   overflow-wrap: break-word;
 }
 
+/* File upload button */
+
 .file-upload {
   width: 25vw;
   margin: 0 2vw 0 2vw;
   background: var(--light-color);
   border-radius: 5px;
   border: 2px solid var(--dark-color);
-  font-family: "Helveltica Nue", sans-serif;
+  font-family: "Roboto", "Helveltica Nue", sans-serif;
   font-size: 2vmin;
 }
 
 .file-upload::file-selector-button {
-  font-weight: bold;
+  font-weight: normal;
   color: var(--light-color);
   background: var(--dark-color);
   border: 1px solid var(--dark-color);
@@ -44,10 +46,12 @@ h1 {
   background: var(--dark-accent-color);
 }
 
+/* Play button */
 .btn-custom {
   font-size: 2.5vmin;
   background: var(--dark-color);
   color: var(--light-color);
+  margin: 1vw;
 }
 
 .btn-custom:focus {
