@@ -11,7 +11,7 @@ h1 {
   font-family: "Earth Orbiter", sans-serif;
   color: var(--dark-color);
   font-size: 4.5vmin;
-  padding: 3vmin;
+  padding: 3vmin 2vmin 2vmin 2vmin;
 }
 
 .graph {
@@ -21,7 +21,6 @@ h1 {
 }
 
 /* File upload button */
-
 .file-upload {
   width: 25vw;
   margin: 0 2vw 0 2vw;
@@ -44,6 +43,22 @@ h1 {
 .file-upload::file-selector-button:hover {
   color: var(--light-color);
   background: var(--dark-accent-color);
+}
+
+/* Slider */
+.slider {
+  color: #20b2aa;
+  width: 25vw;
+}
+
+.MuiSlider-thumb {
+  height: 3vmin;
+  width: 3vmin;
+  background: #8b2e86;
+}
+
+.slider:hover {
+  color: #2e8b57;
 }
 
 /* Play button */

@@ -2,10 +2,14 @@ import "./App.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import GridBoard from "./components/GridBoard/GridBoard"
 import SidePanel from "./components/SidePanel/SidePanel"
-import React, { useState } from "react"
+import React, { useState, createContext } from "react"
+
+const AppContext = createContext()
 
 function App() {
   const [replay, setReplay] = useState(null)
+  const [sliderValue, setSliderValue] = useState(0)
+
   const [isPlay, setIsPlay] = useState(false)
   const [isPlayDisabled, setIsPlayDisabled] = useState(true)
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
@@ -13,7 +17,6 @@ function App() {
 
   const handleFileData = (replayData) => {
     setIsPlayDisabled(false)
-    setReplay(replayData)
     let root = document.documentElement
     try {
       root.style.setProperty("--cols", replayData.metadata.map_col)
@@ -40,27 +43,31 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="row-structure">
-        <SidePanel
-          onFileData={handleFileData}
-          onPlayData={handlePlayData}
-          disablePlay={isPlayDisabled}
-          onP1VisToggled={handleP1VisToggled}
-          onP2VisToggled={handleP2VisToggled}
-        />
-        {replay != null ? (
-          <GridBoard
-            replayData={replay}
-            isPlay={isPlay}
-            onPlayDisabled={handlePlayDisabled}
-            isP1VisToggled={isP1VisToggled}
-            isP2VisToggled={isP2VisToggled}
+    <AppContext.Provider
+      value={{ replay, setReplay, sliderValue, setSliderValue }}
+    >
+      <div className="App">
+        <div className="row-structure">
+          <SidePanel
+            onFileData={handleFileData}
+            onPlayData={handlePlayData}
+            disablePlay={isPlayDisabled}
+            onP1VisToggled={handleP1VisToggled}
+            onP2VisToggled={handleP2VisToggled}
           />
-        ) : null}
+          {replay != null ? (
+            <GridBoard
+              isPlay={isPlay}
+              onPlayDisabled={handlePlayDisabled}
+              isP1VisToggled={isP1VisToggled}
+              isP2VisToggled={isP2VisToggled}
+            />
+          ) : null}
+        </div>
       </div>
-    </div>
+    </AppContext.Provider>
   )
 }
 
 export default App
+export { AppContext }

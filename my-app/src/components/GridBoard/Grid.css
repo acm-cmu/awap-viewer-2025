@@ -42,7 +42,7 @@ img {
 
 /* empty tile */
 .color-0 {
-  background-color: #c67b5c;
+  background-color: var(--mid-color);
 }
 
 /* impassable tile */

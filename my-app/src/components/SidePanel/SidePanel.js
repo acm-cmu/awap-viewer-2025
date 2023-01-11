@@ -1,12 +1,23 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect, useCallback, useContext } from "react"
+import { AppContext } from "../../App"
 import "./SidePanel.css"
 import Button from "react-bootstrap/Button"
+import Slider from "@mui/material/Slider"
+import { StyledEngineProvider } from "@mui/material/styles"
 import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
   const disablePlay = props.disablePlay
   const onPlayData = props.onPlayData
+  const { setReplay, setSliderValue } = useContext(AppContext)
+
   const [framePlaying, setframePlaying] = useState(false)
+  // const [replayData, setReplayData] = useState(null)
+
+  const handleFrameChange = (event, newVal) => {
+    console.log(newVal)
+    setSliderValue(newVal)
+  }
 
   const changePlay = () => {
     let playButton = document.getElementById("play-button")
@@ -37,6 +48,7 @@ export default function SidePanel(props) {
       } catch (err) {
         console.log(err.message)
       }
+      setReplay(replay_object)
       props.onFileData(replay_object)
     }
     reader.readAsText(event.target.files[0])
@@ -62,8 +74,20 @@ export default function SidePanel(props) {
     <div className="side-panel">
       <h1>AWAP 2023 Viewer</h1>
       <input type="file" className="file-upload" onChange={showFile} />
-      <br />
-      <br />
+      <StyledEngineProvider injectFirst>
+        <Slider
+          aria-label="Frame No."
+          defaultValue={0}
+          valueLabelDisplay="auto"
+          step={10}
+          marks
+          min={0}
+          max={100}
+          className="slider"
+          onChangeCommitted={handleFrameChange}
+        />
+      </StyledEngineProvider>
+      <br></br>
       <Button
         id="play-button"
         variant="custom"

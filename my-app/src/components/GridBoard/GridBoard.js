@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useMemo, useRef } from "react"
+import React, { useState, useEffect, useMemo, useRef, useContext } from "react"
+import { AppContext } from "../../App"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
 import ExplorerImg from "../../img/ex.png"
@@ -10,14 +11,14 @@ export default function GridBoard(props) {
   const disablePlay = props.onPlayDisabled
   const isP1Vis = props.isP1VisToggled
   const isP2Vis = props.isP2VisToggled
+  const { replay, sliderValue, setSliderValue } = useContext(AppContext)
 
-  const replay_object = props.replayData
-  const nrows = replay_object.metadata.map_row
-  const ncols = replay_object.metadata.map_col
-  const initImpass = replay_object.initial_map_passability
-  const initMetal = replay_object.initial_map_metal
-  const initTerr = replay_object.initial_map_terraformed
-  const gameTurns = replay_object.turns
+  const nrows = replay.metadata.map_row
+  const ncols = replay.metadata.map_col
+  const initImpass = replay.initial_map_passability
+  const initMetal = replay.initial_map_metal
+  const initTerr = replay.initial_map_terraformed
+  const gameTurns = replay.turns
 
   const [index, setIndex] = useState(-1)
   const intervalID = useRef(null)
@@ -83,7 +84,7 @@ export default function GridBoard(props) {
     setPrevRobots({})
     return tempArr
     // eslint-disable-next-line
-  }, [nrows, ncols, replay_object])
+  }, [nrows, ncols, replay])
 
   // Initializes visibility grid
   // eslint-disable-next-line
@@ -122,7 +123,7 @@ export default function GridBoard(props) {
     setVisibilityP1(p1TempArr)
     setVisibilityP2(p2TempArr)
     // eslint-disable-next-line
-  }, [nrows, ncols, replay_object])
+  }, [nrows, ncols, replay])
 
   const makeDeepCopy = (arr) => {
     const arrCopy = arr.map((row, i) => {
@@ -135,6 +136,7 @@ export default function GridBoard(props) {
 
   // animates grid when index changes
   useEffect(() => {
+    console.log("sliderValue, index= " + sliderValue + ", " + index)
     if (index >= gameTurns.length) {
       clearInterval(intervalID.current)
       intervalID.current = null
@@ -212,11 +214,12 @@ export default function GridBoard(props) {
   useEffect(() => {
     const iterateFrames = () => {
       setIndex((index) => index + 1)
+      setSliderValue((s) => s + 1)
     }
 
     const runAnimation = () => {
       if (!intervalID.current) {
-        intervalID.current = setInterval(iterateFrames, 200)
+        intervalID.current = setInterval(iterateFrames, 500)
       }
     }
     if (isPlay) {
@@ -225,7 +228,7 @@ export default function GridBoard(props) {
       clearInterval(intervalID.current)
       intervalID.current = null
     }
-  }, [isPlay])
+  }, [isPlay, setSliderValue])
 
   return (
     <div>
