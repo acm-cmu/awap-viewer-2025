@@ -14,11 +14,17 @@ import TerraformerImg from "../../img/te.png"
 import MinerImg from "../../img/mi.png"
 
 export default function GridBoard(props) {
-  // const isPlay = props.isPlay
   const disablePlay = props.onPlayDisabled
   const isP1Vis = props.isP1VisToggled
   const isP2Vis = props.isP2VisToggled
-  const { replay, sliderValue, setSliderValue, isPlay } = useContext(AppContext)
+  const {
+    replay,
+    sliderValue,
+    setSliderValue,
+    isPlay,
+    setIsPlay,
+    framePlaying,
+  } = useContext(AppContext)
 
   const nrows = replay.metadata.map_row
   const ncols = replay.metadata.map_col
@@ -150,7 +156,6 @@ export default function GridBoard(props) {
 
   // animates grid when index changes
   useEffect(() => {
-    console.log("sliderValue, index= " + sliderValue + ", " + index)
     if (index >= gameTurns.length) {
       clearInterval(intervalID.current)
       intervalID.current = null
@@ -250,6 +255,7 @@ export default function GridBoard(props) {
         setRobots(newRobots)
       }
       setIndex(idx - 1)
+      if (!framePlaying) setIsPlay(false)
     }
     // eslint-disable-next-line
   }, [sliderValue, gameTurns, disablePlay])

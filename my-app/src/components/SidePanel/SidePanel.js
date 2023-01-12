@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext } from "react"
+import React, { useEffect, useCallback, useContext } from "react"
 import { AppContext } from "../../App"
 import "./SidePanel.css"
 import Button from "react-bootstrap/Button"
@@ -8,12 +8,24 @@ import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
   const disablePlay = props.disablePlay
-  const { replay, setReplay, sliderValue, setSliderValue, isPlay, setIsPlay } =
-    useContext(AppContext)
-
-  const [framePlaying, setFramePlaying] = useState(false)
+  const {
+    replay,
+    setReplay,
+    sliderValue,
+    setSliderValue,
+    setIsPlay,
+    framePlaying,
+    setFramePlaying,
+  } = useContext(AppContext)
 
   const handleFrameChange = (event, newVal) => {
+    /*
+    Note: If framePlaying == true, then the viewer is playing, so setIsPlay(true)  
+    has no effect since isPlay == true anyway. If framePlaying == false, then  
+    only changing isPlay and not framePlaying will only render the next frame and 
+    not future frames, which is the desired behavior.
+    */
+    setIsPlay(true)
     setSliderValue(newVal)
   }
 
@@ -28,15 +40,15 @@ export default function SidePanel(props) {
     }
     setIsPlay(newFramePlaying)
   }
+
   const resetPlaybutton = useCallback(() => {
     let playButton = document.getElementById("play-button")
     playButton.innerHTML = "Play"
     setFramePlaying(false)
     setIsPlay(false)
-  }, [setIsPlay])
+  }, [setFramePlaying, setIsPlay])
 
   const showFile = async (event) => {
-    // object.preventDefault()
     const reader = new FileReader()
     reader.onload = async (e) => {
       const replay_text = e.target.result
@@ -84,7 +96,7 @@ export default function SidePanel(props) {
           min={0}
           max={replay != null ? replay.turns.length - 1 : 250}
           className="slider"
-          onChangeCommitted={handleFrameChange}
+          onChange={handleFrameChange}
         />
       </StyledEngineProvider>
       <br></br>

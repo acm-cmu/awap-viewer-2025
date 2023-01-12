@@ -9,8 +9,9 @@ const AppContext = createContext()
 function App() {
   const [replay, setReplay] = useState(null)
   const [sliderValue, setSliderValue] = useState(-1)
-
   const [isPlay, setIsPlay] = useState(false)
+  const [framePlaying, setFramePlaying] = useState(false)
+
   const [isPlayDisabled, setIsPlayDisabled] = useState(true)
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
@@ -47,6 +48,8 @@ function App() {
         setSliderValue,
         isPlay,
         setIsPlay,
+        framePlaying,
+        setFramePlaying,
       }}
     >
       <div className="App">
