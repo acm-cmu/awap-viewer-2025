@@ -8,34 +8,32 @@ import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
   const disablePlay = props.disablePlay
-  const onPlayData = props.onPlayData
-  const { setReplay, setSliderValue } = useContext(AppContext)
+  const { replay, setReplay, sliderValue, setSliderValue, isPlay, setIsPlay } =
+    useContext(AppContext)
 
-  const [framePlaying, setframePlaying] = useState(false)
-  // const [replayData, setReplayData] = useState(null)
+  const [framePlaying, setFramePlaying] = useState(false)
 
   const handleFrameChange = (event, newVal) => {
-    console.log(newVal)
     setSliderValue(newVal)
   }
 
   const changePlay = () => {
     let playButton = document.getElementById("play-button")
     const newFramePlaying = !framePlaying
-    setframePlaying(newFramePlaying)
+    setFramePlaying(newFramePlaying)
     if (newFramePlaying) {
       playButton.innerHTML = "Pause"
     } else {
       playButton.innerHTML = "Play"
     }
-    onPlayData(newFramePlaying)
+    setIsPlay(newFramePlaying)
   }
   const resetPlaybutton = useCallback(() => {
     let playButton = document.getElementById("play-button")
     playButton.innerHTML = "Play"
-    setframePlaying(false)
-    onPlayData(false)
-  }, [onPlayData])
+    setFramePlaying(false)
+    setIsPlay(false)
+  }, [setIsPlay])
 
   const showFile = async (event) => {
     // object.preventDefault()
@@ -50,6 +48,7 @@ export default function SidePanel(props) {
       }
       setReplay(replay_object)
       props.onFileData(replay_object)
+      setSliderValue(-1)
     }
     reader.readAsText(event.target.files[0])
   }
@@ -78,11 +77,12 @@ export default function SidePanel(props) {
         <Slider
           aria-label="Frame No."
           defaultValue={0}
+          value={sliderValue}
           valueLabelDisplay="auto"
-          step={10}
+          step={1}
           marks
           min={0}
-          max={100}
+          max={replay != null ? replay.turns.length - 1 : 250}
           className="slider"
           onChangeCommitted={handleFrameChange}
         />

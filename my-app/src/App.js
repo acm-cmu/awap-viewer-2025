@@ -8,7 +8,7 @@ const AppContext = createContext()
 
 function App() {
   const [replay, setReplay] = useState(null)
-  const [sliderValue, setSliderValue] = useState(0)
+  const [sliderValue, setSliderValue] = useState(-1)
 
   const [isPlay, setIsPlay] = useState(false)
   const [isPlayDisabled, setIsPlayDisabled] = useState(true)
@@ -26,10 +26,6 @@ function App() {
     }
   }
 
-  const handlePlayData = (playStatus) => {
-    setIsPlay(playStatus)
-  }
-
   const handlePlayDisabled = () => {
     setIsPlayDisabled(true)
   }
@@ -44,20 +40,25 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={{ replay, setReplay, sliderValue, setSliderValue }}
+      value={{
+        replay,
+        setReplay,
+        sliderValue,
+        setSliderValue,
+        isPlay,
+        setIsPlay,
+      }}
     >
       <div className="App">
         <div className="row-structure">
           <SidePanel
             onFileData={handleFileData}
-            onPlayData={handlePlayData}
             disablePlay={isPlayDisabled}
             onP1VisToggled={handleP1VisToggled}
             onP2VisToggled={handleP2VisToggled}
           />
           {replay != null ? (
             <GridBoard
-              isPlay={isPlay}
               onPlayDisabled={handlePlayDisabled}
               isP1VisToggled={isP1VisToggled}
               isP2VisToggled={isP2VisToggled}

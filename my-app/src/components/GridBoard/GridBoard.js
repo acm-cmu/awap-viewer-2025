@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useMemo, useRef, useContext } from "react"
+import React, {
+  useState,
+  useEffect,
+  useMemo,
+  useRef,
+  useContext,
+  useCallback,
+} from "react"
 import { AppContext } from "../../App"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
@@ -7,11 +14,11 @@ import TerraformerImg from "../../img/te.png"
 import MinerImg from "../../img/mi.png"
 
 export default function GridBoard(props) {
-  const isPlay = props.isPlay
+  // const isPlay = props.isPlay
   const disablePlay = props.onPlayDisabled
   const isP1Vis = props.isP1VisToggled
   const isP2Vis = props.isP2VisToggled
-  const { replay, sliderValue, setSliderValue } = useContext(AppContext)
+  const { replay, sliderValue, setSliderValue, isPlay } = useContext(AppContext)
 
   const nrows = replay.metadata.map_row
   const ncols = replay.metadata.map_col
@@ -26,7 +33,7 @@ export default function GridBoard(props) {
   // States for displaying various elements
   const [grid, setGrid] = useState(null)
   const [robots, setRobots] = useState(null)
-  const [prevRobots, setPrevRobots] = useState({}) // dictionary mapping robot ids to coordinates
+  const prevRobots = useRef({}) // dictionary mapping robot ids to coordinates
   const [visibilityP1, setVisibilityP1] = useState(null)
   const [visibilityP2, setVisibilityP2] = useState(null)
 
@@ -81,15 +88,14 @@ export default function GridBoard(props) {
       }
     }
     setRobots(tempArr)
-    setPrevRobots({})
+    prevRobots.current = {}
     return tempArr
     // eslint-disable-next-line
   }, [nrows, ncols, replay])
 
   // Initializes visibility grid
-  // eslint-disable-next-line
-  const initialVis = useMemo(() => {
-    const makeVisGrid = (player) => {
+  const makeVisGrid = useCallback(
+    (player) => {
       let tempArr = []
       for (let row = 0; row < nrows; row++) {
         tempArr.push([])
@@ -115,15 +121,23 @@ export default function GridBoard(props) {
         }
       }
       return tempArr
-    }
+    },
+    [nrows, ncols, initTerr]
+  )
 
+  // eslint-disable-next-line
+  const p1InitialVis = useMemo(() => {
     let p1TempArr = makeVisGrid("p1")
-    let p2TempArr = makeVisGrid("p2")
-
     setVisibilityP1(p1TempArr)
-    setVisibilityP2(p2TempArr)
+    return p1TempArr
     // eslint-disable-next-line
-  }, [nrows, ncols, replay])
+  }, [makeVisGrid])
+
+  const p2InitialVis = useMemo(() => {
+    let p2TempArr = makeVisGrid("p2")
+    setVisibilityP2(p2TempArr)
+    return p2TempArr
+  }, [makeVisGrid])
 
   const makeDeepCopy = (arr) => {
     const arrCopy = arr.map((row, i) => {
@@ -144,72 +158,101 @@ export default function GridBoard(props) {
       return
     } else if (index === -1) {
     } else {
-      let turn = gameTurns[index]
+      // Updates input arrays in place
+      const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots) => {
+        let turn = gameTurns[i]
 
-      // Modify grid
-      const nextGrid = makeDeepCopy(grid)
-      const nextVisP1 = makeDeepCopy(visibilityP1)
-      const nextVisP2 = makeDeepCopy(visibilityP2)
+        // Modify grid
+        for (let gridCh of turn.grid_changes) {
+          let x = gridCh[0]
+          let y = gridCh[1]
+          // Update visibility
+          let visClassP1 = "grid-square p1tint"
+          if (gridCh[5] === 1) visClassP1 = "grid-square"
+          nextVisP1[y][x] = <div key={`${x}${y}`} className={visClassP1}></div>
 
-      for (let gridCh of turn.grid_changes) {
-        let x = gridCh[0]
-        let y = gridCh[1]
-        // Update visibility
-        let visClassP1 = "grid-square p1tint"
-        if (gridCh[5] === 1) visClassP1 = "grid-square"
-        nextVisP1[y][x] = <div key={`${x}${y}`} className={visClassP1}></div>
+          let visClassP2 = "grid-square p2tint"
+          if (gridCh[4] === 1) visClassP2 = "grid-square"
+          nextVisP2[y][x] = <div key={`${x}${y}`} className={visClassP2}></div>
 
-        let visClassP2 = "grid-square p2tint"
-        if (gridCh[4] === 1) visClassP2 = "grid-square"
-        nextVisP2[y][x] = <div key={`${x}${y}`} className={visClassP2}></div>
-
-        // Update terrformedness
-        let terrNum = gridCh[6]
-        let terrCol = 0
-        if (terrNum > 0) {
-          terrCol = 3
-        } else if (terrNum < 0) {
-          terrCol = 4
+          // Update terrformedness
+          let terrNum = gridCh[6]
+          let terrCol = 0
+          if (terrNum > 0) {
+            terrCol = 3
+          } else if (terrNum < 0) {
+            terrCol = 4
+          }
+          nextGrid[y][x] = <GridSquare key={`${x}${y}`} color={terrCol} />
         }
-        nextGrid[y][x] = <GridSquare key={`${x}${y}`} color={terrCol} />
-      }
 
-      // Modify robots
-      const nextRobots = makeDeepCopy(robots)
+        // Modify robots
+        for (let robotCh of turn.robot_changes) {
+          // Remove robot at prev position if it exists
+          let robotID = robotCh[0]
+          if (robotID in prevRobots.current) {
+            let xPrev = prevRobots.current[robotID][0]
+            let yPrev = prevRobots.current[robotID][1]
+            nextRobots[yPrev][xPrev] = (
+              <div key={`${xPrev}${yPrev}`} className="grid-square"></div>
+            )
+          }
 
-      for (let robotCh of turn.robot_changes) {
-        // Remove robot at prev position if it exists
-        let robotID = robotCh[0]
-        if (robotID in prevRobots) {
-          let xPrev = prevRobots[robotID][0]
-          let yPrev = prevRobots[robotID][1]
-          nextRobots[yPrev][xPrev] = (
-            <div key={`${xPrev}${yPrev}`} className="grid-square"></div>
+          // Add robot at new position
+          let x = robotCh[1]
+          let y = robotCh[2]
+          let robotType = robotCh[3]
+          let robotImg
+          if (robotType === "e") robotImg = ExplorerImg
+          else if (robotType === "t") robotImg = TerraformerImg
+          else robotImg = MinerImg
+          nextRobots[y][x] = (
+            <img
+              src={robotImg}
+              alt=""
+              key={`${x}${y}`}
+              className="grid-square"
+            />
           )
+          // Store robot coordinates
+          prevRobots.current[robotID] = [x, y]
         }
-
-        // Add robot at new position
-        let x = robotCh[1]
-        let y = robotCh[2]
-        let robotType = robotCh[3]
-        let robotImg
-        if (robotType === "e") robotImg = ExplorerImg
-        else if (robotType === "t") robotImg = TerraformerImg
-        else robotImg = MinerImg
-        nextRobots[y][x] = (
-          <img src={robotImg} alt="" key={`${x}${y}`} className="grid-square" />
-        )
-        // Store robot coordinates
-        setPrevRobots((prevRobots) => ({ ...prevRobots, [robotID]: [x, y] }))
       }
 
-      setGrid(nextGrid)
-      setVisibilityP1(nextVisP1)
-      setVisibilityP2(nextVisP2)
-      setRobots(nextRobots)
+      var idx
+      if (sliderValue >= index) {
+        idx = index
+        const newGrid = makeDeepCopy(grid)
+        const newVisP1 = makeDeepCopy(visibilityP1)
+        const newVisP2 = makeDeepCopy(visibilityP2)
+        const newRobots = makeDeepCopy(robots)
+        while (idx <= sliderValue) {
+          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots)
+          idx += 1
+        }
+        setGrid(newGrid)
+        setVisibilityP1(newVisP1)
+        setVisibilityP2(newVisP2)
+        setRobots(newRobots)
+      } else {
+        const newGrid = makeDeepCopy(initialGrid)
+        const newVisP1 = makeDeepCopy(p1InitialVis)
+        const newVisP2 = makeDeepCopy(p2InitialVis)
+        const newRobots = makeDeepCopy(initialRobots)
+        idx = 0
+        while (idx <= sliderValue) {
+          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots)
+          idx += 1
+        }
+        setGrid(newGrid)
+        setVisibilityP1(newVisP1)
+        setVisibilityP2(newVisP2)
+        setRobots(newRobots)
+      }
+      setIndex(idx - 1)
     }
     // eslint-disable-next-line
-  }, [index, gameTurns, disablePlay])
+  }, [sliderValue, gameTurns, disablePlay])
 
   useEffect(() => {
     const iterateFrames = () => {
@@ -219,7 +262,7 @@ export default function GridBoard(props) {
 
     const runAnimation = () => {
       if (!intervalID.current) {
-        intervalID.current = setInterval(iterateFrames, 500)
+        intervalID.current = setInterval(iterateFrames, 1000)
       }
     }
     if (isPlay) {
