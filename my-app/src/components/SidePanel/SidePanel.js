@@ -48,6 +48,15 @@ export default function SidePanel(props) {
     setSliderValue(newVal)
   }
 
+  const handleFrameStep = (step) => {
+    if (step <= 0 && sliderValue < 0) {
+      return
+    }
+    setFramePlaying(false)
+    setIsPlay(true)
+    setSliderValue((sliderValue) => sliderValue + step)
+  }
+
   const changePlay = () => {
     const newFramePlaying = !framePlaying
     setFramePlaying(newFramePlaying)
@@ -103,7 +112,11 @@ export default function SidePanel(props) {
         alignItems="center"
         justifyContent="center"
       >
-        <button className="arrow" disabled={isDisabled}>
+        <button
+          className="arrow"
+          disabled={isDisabled}
+          onClick={() => handleFrameStep(-1)}
+        >
           &#8249;
         </button>
         <IconButton
@@ -119,7 +132,11 @@ export default function SidePanel(props) {
             <PlayArrowIcon className="play-icon" />
           )}
         </IconButton>
-        <button className="arrow" disabled={isDisabled}>
+        <button
+          className="arrow"
+          disabled={isDisabled}
+          onClick={() => handleFrameStep(1)}
+        >
           &#8250;
         </button>
       </Grid>

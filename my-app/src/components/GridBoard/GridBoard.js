@@ -23,7 +23,6 @@ export default function GridBoard(props) {
     isPlay,
     setIsPlay,
     framePlaying,
-    isFinished,
     setIsFinished,
   } = useContext(AppContext)
 
@@ -162,7 +161,7 @@ export default function GridBoard(props) {
       intervalID.current = null
       setIsFinished(true)
       return
-    } else if (sliderValue === -1) {
+    } else if (sliderValue <= -1) {
     } else {
       // Updates input arrays in place
       const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots) => {
