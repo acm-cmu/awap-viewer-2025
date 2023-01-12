@@ -47,18 +47,36 @@ h1 {
 
 /* Slider */
 .slider {
-  color: #20b2aa;
+  color: var(--dark-color);
   width: 25vw;
+  height: 3vmin;
+  border-radius: 3px;
+  padding: 0;
+  margin: 3vmin 0 0 0;
+}
+
+.slider:hover {
+  color: var(--dark-color);
+}
+
+.MuiSlider-rail {
+  color: var(--dark-color);
+}
+
+.MuiSlider-mark {
+  color: var(--dark-color);
 }
 
 .MuiSlider-thumb {
   height: 3vmin;
-  width: 3vmin;
-  background: #8b2e86;
+  width: 1vmin;
+  border-radius: 1px;
+  /* border: 1px solid var(--dark-color); */
+  background: var(--light-color);
 }
 
-.slider:hover {
-  color: #2e8b57;
+.MuiSlider-thumb:hover {
+  box-shadow: 0 0 0 6px #6639263b;
 }
 
 /* Play button */
@@ -66,7 +84,7 @@ h1 {
   font-size: 2.5vmin;
   background: var(--dark-color);
   color: var(--light-color);
-  margin: 1vw;
+  /* margin: 1vmin; */
 }
 
 .btn-custom:focus {

@@ -9,10 +9,8 @@ import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 export default function SidePanel(props) {
   const {
     replay,
-    setReplay,
     sliderValue,
     setSliderValue,
-    isPlay,
     setIsPlay,
     framePlaying,
     setFramePlaying,
@@ -72,7 +70,7 @@ export default function SidePanel(props) {
       setSliderValue(-1)
       setIsFinished(false)
     }
-  }, [isFinished, resetPlaybutton])
+  }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished])
 
   const handleToggleP1Vis = () => {
     let checkbox = document.getElementById("p1vis")
