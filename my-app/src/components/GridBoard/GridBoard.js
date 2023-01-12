@@ -14,7 +14,6 @@ import TerraformerImg from "../../img/te.png"
 import MinerImg from "../../img/mi.png"
 
 export default function GridBoard(props) {
-  const disablePlay = props.onPlayDisabled
   const isP1Vis = props.isP1VisToggled
   const isP2Vis = props.isP2VisToggled
   const {
@@ -24,6 +23,8 @@ export default function GridBoard(props) {
     isPlay,
     setIsPlay,
     framePlaying,
+    isFinished,
+    setIsFinished,
   } = useContext(AppContext)
 
   const nrows = replay.metadata.map_row
@@ -156,15 +157,16 @@ export default function GridBoard(props) {
 
   // animates grid when index changes
   useEffect(() => {
-    if (index >= gameTurns.length) {
+    if (sliderValue >= gameTurns.length) {
       clearInterval(intervalID.current)
       intervalID.current = null
-      disablePlay()
+      setIsFinished(true)
       return
-    } else if (index === -1) {
+    } else if (sliderValue === -1) {
     } else {
       // Updates input arrays in place
       const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots) => {
+        if (i < 0) return
         let turn = gameTurns[i]
 
         // Modify grid
@@ -255,10 +257,12 @@ export default function GridBoard(props) {
         setRobots(newRobots)
       }
       setIndex(idx - 1)
-      if (!framePlaying) setIsPlay(false)
+      if (!framePlaying) {
+        setIsPlay(false)
+      }
     }
     // eslint-disable-next-line
-  }, [sliderValue, gameTurns, disablePlay])
+  }, [sliderValue, gameTurns])
 
   useEffect(() => {
     const iterateFrames = () => {
@@ -268,7 +272,7 @@ export default function GridBoard(props) {
 
     const runAnimation = () => {
       if (!intervalID.current) {
-        intervalID.current = setInterval(iterateFrames, 1000)
+        intervalID.current = setInterval(iterateFrames, 500)
       }
     }
     if (isPlay) {

@@ -11,13 +11,14 @@ function App() {
   const [sliderValue, setSliderValue] = useState(-1)
   const [isPlay, setIsPlay] = useState(false)
   const [framePlaying, setFramePlaying] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(true)
+  const [isFinished, setIsFinished] = useState(false)
 
-  const [isPlayDisabled, setIsPlayDisabled] = useState(true)
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
 
   const handleFileData = (replayData) => {
-    setIsPlayDisabled(false)
+    setIsDisabled(false)
     let root = document.documentElement
     try {
       root.style.setProperty("--cols", replayData.metadata.map_col)
@@ -25,10 +26,6 @@ function App() {
     } catch (err) {
       console.log(err.message)
     }
-  }
-
-  const handlePlayDisabled = () => {
-    setIsPlayDisabled(true)
   }
 
   const handleP1VisToggled = (toggleStatus) => {
@@ -50,19 +47,21 @@ function App() {
         setIsPlay,
         framePlaying,
         setFramePlaying,
+        isDisabled,
+        setIsDisabled,
+        isFinished,
+        setIsFinished,
       }}
     >
       <div className="App">
         <div className="row-structure">
           <SidePanel
             onFileData={handleFileData}
-            disablePlay={isPlayDisabled}
             onP1VisToggled={handleP1VisToggled}
             onP2VisToggled={handleP2VisToggled}
           />
           {replay != null ? (
             <GridBoard
-              onPlayDisabled={handlePlayDisabled}
               isP1VisToggled={isP1VisToggled}
               isP2VisToggled={isP2VisToggled}
             />

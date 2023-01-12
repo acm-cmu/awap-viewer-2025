@@ -7,16 +7,36 @@ import { StyledEngineProvider } from "@mui/material/styles"
 import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
-  const disablePlay = props.disablePlay
   const {
     replay,
     setReplay,
     sliderValue,
     setSliderValue,
+    isPlay,
     setIsPlay,
     framePlaying,
     setFramePlaying,
+    isDisabled,
+    isFinished,
+    setIsFinished,
   } = useContext(AppContext)
+
+  const showFile = async (event) => {
+    const reader = new FileReader()
+    reader.onload = async (e) => {
+      const replay_text = e.target.result
+      try {
+        var replay_object = JSON.parse(replay_text)
+        resetPlaybutton()
+      } catch (err) {
+        console.log(err.message)
+      }
+      setReplay(replay_object)
+      props.onFileData(replay_object)
+      setSliderValue(-1)
+    }
+    reader.readAsText(event.target.files[0])
+  }
 
   const handleFrameChange = (event, newVal) => {
     /*
@@ -48,28 +68,13 @@ export default function SidePanel(props) {
     setIsPlay(false)
   }, [setFramePlaying, setIsPlay])
 
-  const showFile = async (event) => {
-    const reader = new FileReader()
-    reader.onload = async (e) => {
-      const replay_text = e.target.result
-      try {
-        var replay_object = JSON.parse(replay_text)
-        resetPlaybutton()
-      } catch (err) {
-        console.log(err.message)
-      }
-      setReplay(replay_object)
-      props.onFileData(replay_object)
-      setSliderValue(-1)
-    }
-    reader.readAsText(event.target.files[0])
-  }
-
   useEffect(() => {
-    if (disablePlay) {
+    if (isFinished) {
       resetPlaybutton()
+      setSliderValue(-1)
+      setIsFinished(false)
     }
-  }, [disablePlay, resetPlaybutton])
+  }, [isFinished, resetPlaybutton])
 
   const handleToggleP1Vis = () => {
     let checkbox = document.getElementById("p1vis")
@@ -103,7 +108,7 @@ export default function SidePanel(props) {
       <Button
         id="play-button"
         variant="custom"
-        disabled={props.disablePlay}
+        disabled={isDisabled}
         onClick={changePlay}
       >
         Play
