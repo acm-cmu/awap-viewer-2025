@@ -1,9 +1,12 @@
 import React, { useEffect, useCallback, useContext } from "react"
 import { AppContext } from "../../App"
 import "./SidePanel.css"
-import Button from "react-bootstrap/Button"
 import Slider from "@mui/material/Slider"
 import { StyledEngineProvider } from "@mui/material/styles"
+import Grid from "@mui/material/Grid"
+import { IconButton } from "@mui/material"
+import PlayArrowIcon from "@mui/icons-material/PlayArrow"
+import PauseIcon from "@mui/icons-material/Pause"
 import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
@@ -46,20 +49,12 @@ export default function SidePanel(props) {
   }
 
   const changePlay = () => {
-    let playButton = document.getElementById("play-button")
     const newFramePlaying = !framePlaying
     setFramePlaying(newFramePlaying)
-    if (newFramePlaying) {
-      playButton.innerHTML = "Pause"
-    } else {
-      playButton.innerHTML = "Play"
-    }
     setIsPlay(newFramePlaying)
   }
 
   const resetPlaybutton = useCallback(() => {
-    let playButton = document.getElementById("play-button")
-    playButton.innerHTML = "Play"
     setFramePlaying(false)
     setIsPlay(false)
   }, [setFramePlaying, setIsPlay])
@@ -95,21 +90,41 @@ export default function SidePanel(props) {
           step={1}
           marks
           min={0}
-          max={replay != null ? replay.turns.length - 1 : 250}
+          max={replay != null ? replay.turns.length - 1 : 1}
           className="slider"
           onChange={handleFrameChange}
           disabled={isDisabled}
         />
       </StyledEngineProvider>
       <br></br>
-      <Button
-        id="play-button"
-        variant="custom"
-        disabled={isDisabled}
-        onClick={changePlay}
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
       >
-        Play
-      </Button>
+        <button className="arrow" disabled={isDisabled}>
+          &#8249;
+        </button>
+        <IconButton
+          id="play-button"
+          aria-label="play/pause"
+          className="play-control"
+          disabled={isDisabled}
+          onClick={changePlay}
+        >
+          {framePlaying ? (
+            <PauseIcon className="play-icon" />
+          ) : (
+            <PlayArrowIcon className="play-icon" />
+          )}
+        </IconButton>
+        <button className="arrow" disabled={isDisabled}>
+          &#8250;
+        </button>
+      </Grid>
+      <br></br>
+
       <ToggleSwitch
         onToggle={handleToggleP1Vis}
         useID="p1vis"
