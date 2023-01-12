@@ -31,9 +31,7 @@ export default function SidePanel(props) {
       } catch (err) {
         console.log(err.message)
       }
-      setReplay(replay_object)
       props.onFileData(replay_object)
-      setSliderValue(-1)
     }
     reader.readAsText(event.target.files[0])
   }
@@ -102,6 +100,7 @@ export default function SidePanel(props) {
           max={replay != null ? replay.turns.length - 1 : 250}
           className="slider"
           onChange={handleFrameChange}
+          disabled={isDisabled}
         />
       </StyledEngineProvider>
       <br></br>
@@ -113,10 +112,18 @@ export default function SidePanel(props) {
       >
         Play
       </Button>
-      <ToggleSwitch onToggle={handleToggleP1Vis} useID="p1vis">
+      <ToggleSwitch
+        onToggle={handleToggleP1Vis}
+        useID="p1vis"
+        disabled={isDisabled}
+      >
         Player 1 Visibility
       </ToggleSwitch>
-      <ToggleSwitch onToggle={handleToggleP2Vis} useID="p2vis">
+      <ToggleSwitch
+        onToggle={handleToggleP2Vis}
+        useID="p2vis"
+        disabled={isDisabled}
+      >
         Player 2 Visibility
       </ToggleSwitch>
       <div className="container">

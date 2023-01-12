@@ -18,6 +18,8 @@ function App() {
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
 
   const handleFileData = (replayData) => {
+    setReplay(replayData)
+    setSliderValue(-1)
     setIsDisabled(false)
     let root = document.documentElement
     try {
