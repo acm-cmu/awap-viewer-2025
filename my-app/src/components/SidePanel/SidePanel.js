@@ -178,40 +178,6 @@ export default function SidePanel(props) {
                 disabled={isDisabled}
                 onChange={handleSpeedChange}
                 className="speed-select"
-                /*
-                sx={{
-                  color: "#f9b697",
-                  backgroundColor: "#663926",
-                  width: "10vh",
-                  height: "6vh",
-                  fontSize: "2vmin",
-                  ".MuiSelect-select": {
-                    padding: 1,
-                    width: "10vh",
-                    height: "6vh",
-                  },
-                  "&.Mui-disabled": {
-                    background: "#663926",
-                    border: "1px solid #f9b697",
-                    opacity: "70%",
-                  },
-                  "&.Mui-disabled:hover .MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                  },
-                  ".MuiOutlinedInput-notchedOutline": {
-                    border: "none",
-                  },
-                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #f9b697",
-                  },
-                  "&:hover .MuiOutlinedInput-notchedOutline": {
-                    border: "1px solid #f9b697",
-                  },
-                  ".MuiSvgIcon-root ": {
-                    fill: "#f9b697 !important",
-                  },
-                }}
-                */
               >
                 <MenuItem value={0.5}>0.5</MenuItem>
                 <MenuItem value={1}>1.0</MenuItem>

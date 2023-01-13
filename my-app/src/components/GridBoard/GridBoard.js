@@ -24,6 +24,7 @@ export default function GridBoard(props) {
     setIsPlay,
     framePlaying,
     setIsFinished,
+    speed,
   } = useContext(AppContext)
 
   const nrows = replay.metadata.map_row
@@ -89,7 +90,11 @@ export default function GridBoard(props) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <div key={`${col}${row}`} className="grid-square"></div>
+          <div
+            key={`${col}${row}`}
+            id={`${col}${row}`}
+            className="grid-square"
+          ></div>
         )
       }
     }
@@ -200,7 +205,11 @@ export default function GridBoard(props) {
             let xPrev = prevRobots.current[robotID][0]
             let yPrev = prevRobots.current[robotID][1]
             nextRobots[yPrev][xPrev] = (
-              <div key={`${xPrev}${yPrev}`} className="grid-square"></div>
+              <div
+                id={`${xPrev}${yPrev}`}
+                key={`${xPrev}${yPrev}`}
+                className="grid-square"
+              ></div>
             )
           }
 
@@ -216,6 +225,7 @@ export default function GridBoard(props) {
             <img
               src={robotImg}
               alt=""
+              id={`${x}${y}`}
               key={`${x}${y}`}
               className="grid-square"
             />
@@ -263,24 +273,25 @@ export default function GridBoard(props) {
     // eslint-disable-next-line
   }, [sliderValue, gameTurns])
 
-  useEffect(() => {
-    const iterateFrames = () => {
-      setIndex((index) => index + 1)
-      setSliderValue((s) => s + 1)
-    }
+  const iterateFrames = useCallback(() => {
+    setIndex((index) => index + 1)
+    setSliderValue((s) => s + 1)
+  }, [setSliderValue])
 
-    const runAnimation = () => {
-      if (!intervalID.current) {
-        intervalID.current = setInterval(iterateFrames, 500)
-      }
-    }
+  const runAnimation = useCallback(() => {
+    clearInterval(intervalID.current)
+    intervalID.current = null
+    intervalID.current = setInterval(iterateFrames, (500 / speed) >> 0)
+  }, [speed, iterateFrames])
+
+  useEffect(() => {
     if (isPlay) {
       runAnimation()
     } else {
       clearInterval(intervalID.current)
       intervalID.current = null
     }
-  }, [isPlay, setSliderValue])
+  }, [isPlay, setSliderValue, runAnimation])
 
   return (
     <div>
