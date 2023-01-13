@@ -13,6 +13,7 @@ function App() {
   const [framePlaying, setFramePlaying] = useState(false)
   const [isDisabled, setIsDisabled] = useState(true)
   const [isFinished, setIsFinished] = useState(false)
+  const [speed, setSpeed] = useState(1)
 
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
@@ -53,6 +54,8 @@ function App() {
         setIsDisabled,
         isFinished,
         setIsFinished,
+        speed,
+        setSpeed,
       }}
     >
       <div className="App">

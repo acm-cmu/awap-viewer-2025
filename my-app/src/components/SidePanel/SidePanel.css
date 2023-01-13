@@ -126,6 +126,7 @@ h1 {
 }
 
 .arrow:hover {
+  background: var(--dark-accent-color);
   transform: scale(1);
 }
 
@@ -137,4 +138,50 @@ h1 {
   background-color: var(--dark-color);
   border: 1px solid var(--light-color);
   opacity: 70%;
+}
+
+.arrow:disabled:hover {
+  transform: scale(0.9);
+}
+
+/* Speed Selector */
+.speed-select.MuiOutlinedInput-root {
+  color: var(--light-color);
+  background: var(--dark-color);
+  width: 10vh;
+  height: 6vh;
+  font-size: 2vmin;
+}
+
+.speed-select.MuiOutlinedInput-root:hover,
+.speed-select.MuiOutlinedInput-root.Mui-focused {
+  background: var(--dark-accent-color);
+}
+
+.speed-select.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--dark-color);
+}
+
+.speed-select.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--dark-color);
+}
+
+.speed-select.MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--dark-color);
+}
+
+.speed-select.MuiOutlinedInput-root.Mui-disabled {
+  background: var(--dark-color);
+  border: none;
+  opacity: 70%;
+}
+
+.MuiSvgIcon-root.Mui-disabled {
+  color: var(--light-color);
+  opacity: 70%;
+}
+
+.MuiSvgIcon-root {
+  color: var(--light-color);
 }

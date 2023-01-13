@@ -7,6 +7,9 @@ import Grid from "@mui/material/Grid"
 import { IconButton } from "@mui/material"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import PauseIcon from "@mui/icons-material/Pause"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
@@ -20,6 +23,8 @@ export default function SidePanel(props) {
     isDisabled,
     isFinished,
     setIsFinished,
+    speed,
+    setSpeed,
   } = useContext(AppContext)
 
   const showFile = async (event) => {
@@ -76,6 +81,10 @@ export default function SidePanel(props) {
     }
   }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished])
 
+  const handleSpeedChange = (event) => {
+    setSpeed(event.target.value)
+  }
+
   const handleToggleP1Vis = () => {
     let checkbox = document.getElementById("p1vis")
     props.onP1VisToggled(checkbox.checked)
@@ -109,38 +118,109 @@ export default function SidePanel(props) {
       <Grid
         container
         direction="row"
-        alignItems="center"
-        justifyContent="center"
+        sx={{
+          width: "25vw",
+          margin: "0 2vw 0 2vw",
+        }}
       >
-        <button
-          className="arrow"
-          disabled={isDisabled}
-          onClick={() => handleFrameStep(-1)}
+        <Grid
+          item
+          xs={9}
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
         >
-          &#8249;
-        </button>
-        <IconButton
-          id="play-button"
-          aria-label="play/pause"
-          className="play-control"
-          disabled={isDisabled}
-          onClick={changePlay}
+          <button
+            className="arrow"
+            disabled={isDisabled}
+            onClick={() => handleFrameStep(-1)}
+          >
+            &#8249;
+          </button>
+          <IconButton
+            id="play-button"
+            aria-label="play/pause"
+            className="play-control"
+            disabled={isDisabled}
+            onClick={changePlay}
+          >
+            {framePlaying ? (
+              <PauseIcon className="play-icon" />
+            ) : (
+              <PlayArrowIcon className="play-icon" />
+            )}
+          </IconButton>
+          <button
+            className="arrow"
+            disabled={isDisabled}
+            onClick={() => handleFrameStep(1)}
+          >
+            &#8250;
+          </button>
+        </Grid>
+
+        <Grid
+          item
+          xs={3}
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+          }}
         >
-          {framePlaying ? (
-            <PauseIcon className="play-icon" />
-          ) : (
-            <PlayArrowIcon className="play-icon" />
-          )}
-        </IconButton>
-        <button
-          className="arrow"
-          disabled={isDisabled}
-          onClick={() => handleFrameStep(1)}
-        >
-          &#8250;
-        </button>
+          <StyledEngineProvider injectFirst>
+            <FormControl variant="outlined">
+              <Select
+                id="speed-toggle"
+                value={speed}
+                disabled={isDisabled}
+                onChange={handleSpeedChange}
+                className="speed-select"
+                /*
+                sx={{
+                  color: "#f9b697",
+                  backgroundColor: "#663926",
+                  width: "10vh",
+                  height: "6vh",
+                  fontSize: "2vmin",
+                  ".MuiSelect-select": {
+                    padding: 1,
+                    width: "10vh",
+                    height: "6vh",
+                  },
+                  "&.Mui-disabled": {
+                    background: "#663926",
+                    border: "1px solid #f9b697",
+                    opacity: "70%",
+                  },
+                  "&.Mui-disabled:hover .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  ".MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #f9b697",
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    border: "1px solid #f9b697",
+                  },
+                  ".MuiSvgIcon-root ": {
+                    fill: "#f9b697 !important",
+                  },
+                }}
+                */
+              >
+                <MenuItem value={0.5}>0.5</MenuItem>
+                <MenuItem value={1}>1.0</MenuItem>
+                <MenuItem value={2.0}>2.0</MenuItem>
+              </Select>
+            </FormControl>
+          </StyledEngineProvider>
+        </Grid>
       </Grid>
-      <br></br>
 
       <ToggleSwitch
         onToggle={handleToggleP1Vis}
