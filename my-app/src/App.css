@@ -49,7 +49,17 @@
   --tile-size: 20px for example will set size of the grid squares. */
   --cols: 32;
   --rows: 32;
-  --tile-size: calc(92vmin / max(var(--rows), var(--cols)));
+  --grid-margin: 8vmin;
+  --tile-size: calc(
+    min(
+      (100vh - var(--grid-margin)) / var(--rows),
+      (70vw - var(--grid-margin)) / var(--cols)
+    )
+  );
+  --grid-size-hori: calc(var(--cols) * var(--tile-size));
+  --grid-size-vert: calc(var(--rows) * var(--tile-size));
+  --grid-padding-hori: calc((70vw - var(--grid-size-hori)) / 2);
+  --grid-padding-vert: calc((100vh - var(--grid-size-vert)) / 2);
   --border-width: 0.2vmin;
 }
 

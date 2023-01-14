@@ -3,7 +3,9 @@
   grid-template-columns: repeat(var(--cols), var(--tile-size));
   grid-gap: 0;
   align-items: center;
-  padding: 3.5vmin 12vw 3.5vmin 12vw;
+  border: calc(2 * var(--border-width)) solid var(--dark-color);
+  margin: var(--grid-padding-vert) var(--grid-padding-hori)
+    var(--grid-padding-vert) var(--grid-padding-hori);
 }
 
 .board.grid {
@@ -23,8 +25,7 @@
 .grid-square {
   width: var(--tile-size);
   height: var(--tile-size);
-  border-style: solid;
-  border-width: var(--border-width);
+  border: var(--border-width) solid var(--dark-color);
 }
 
 .robot-div {
@@ -38,8 +39,7 @@
 .robot-img {
   width: var(--tile-size);
   height: var(--tile-size);
-  border-style: solid;
-  border-width: var(--border-width);
+  border: var(--border-width) solid var(--dark-color);
 }
 
 .grid-square.p1tint {
