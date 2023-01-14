@@ -10,12 +10,13 @@ import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
 import "./Grid.css"
-import ExplorerImgRed from "../../img/ex_red.jpg"
-import TerraformerImgRed from "../../img/te_red.jpg"
-import MinerImgRed from "../../img/mi_red.jpg"
+import ExplorerImgRed from "../../img/ex_red.png"
+import TerraformerImgRed from "../../img/te_red.png"
+import MinerImgRed from "../../img/mi_red.png"
 import ExplorerImgBlue from "../../img/ex_blue.png"
 import TerraformerImgBlue from "../../img/te_blue.png"
 import MinerImgBlue from "../../img/mi_blue.png"
+import MetalImg from "../../img/metal.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -56,26 +57,34 @@ export default function GridBoard(props) {
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
-        tempArr[row].push(<GridSquare key={`${col}${row}`} color="0" />)
+        tempArr[row].push(
+          <GridSquare key={`${col}${row}`} color="0" useImg={null} />
+        )
       }
     }
 
-    const populateTiles = (tileArr, colorID) => {
+    const populateTiles = (tileArr, colorID, useImg) => {
       for (let tile of tileArr) {
         let c = tile[0]
         let r = tile[1]
-        tempArr[r][c] = <GridSquare key={`${c}${r}`} color={colorID} />
+        tempArr[r][c] = (
+          <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
+        )
       }
     }
 
-    populateTiles(initImpass, 1)
-    populateTiles(initMetal, 2)
+    populateTiles(initImpass, 1, null)
+    populateTiles(initMetal, 2, MetalImg)
     for (let terr_tile of initTerr) {
       let c = terr_tile[0]
       let r = terr_tile[1]
       let terrNum = terr_tile[2]
       tempArr[r][c] = (
-        <GridSquare key={`${c}${r}`} color={terrNum > 0 ? 3 : 4} />
+        <GridSquare
+          key={`${c}${r}`}
+          color={terrNum > 0 ? 3 : 4}
+          useImg={null}
+        />
       )
     }
 
@@ -120,6 +129,7 @@ export default function GridBoard(props) {
         }
       }
       // Make initial terraformed tiles visible
+      // TODO
       for (let terr_tile of initTerr) {
         let x = terr_tile[0]
         let y = terr_tile[1]
@@ -195,7 +205,9 @@ export default function GridBoard(props) {
           } else if (terrNum < 0) {
             terrCol = 4
           }
-          nextGrid[y][x] = <GridSquare key={`${x}${y}`} color={terrCol} />
+          nextGrid[y][x] = (
+            <GridSquare key={`${x}${y}`} color={terrCol} useImg={null} />
+          )
         }
 
         // Modify robots
