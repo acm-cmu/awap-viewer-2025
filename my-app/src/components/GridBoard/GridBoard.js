@@ -90,7 +90,9 @@ export default function GridBoard(props) {
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
-        tempArr[row].push(<RobotSquare x={col} y={row} hasRobot={false} />)
+        tempArr[row].push(
+          <RobotSquare key={`${col}${row}`} x={col} y={row} hasRobot={false} />
+        )
       }
     }
     setRobots(tempArr)
@@ -200,7 +202,12 @@ export default function GridBoard(props) {
             let xPrev = prevRobots.current[robotID][0]
             let yPrev = prevRobots.current[robotID][1]
             nextRobots[yPrev][xPrev] = (
-              <RobotSquare x={xPrev} y={yPrev} hasRobot={false} />
+              <RobotSquare
+                key={`${xPrev}${yPrev}`}
+                x={xPrev}
+                y={yPrev}
+                hasRobot={false}
+              />
             )
           }
 
@@ -213,7 +220,13 @@ export default function GridBoard(props) {
           else if (robotType === "t") robotImg = TerraformerImg
           else robotImg = MinerImg
           nextRobots[y][x] = (
-            <RobotSquare srcImg={robotImg} x={x} y={y} hasRobot={true} />
+            <RobotSquare
+              key={`${x}${y}`}
+              srcImg={robotImg}
+              x={x}
+              y={y}
+              hasRobot={true}
+            />
           )
           // Store robot coordinates
           prevRobots.current[robotID] = [x, y]
