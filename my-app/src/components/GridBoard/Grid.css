@@ -28,18 +28,12 @@
   border: var(--border-width) solid var(--dark-color);
 }
 
-.robot-div {
+.tile-div {
   width: var(--tile-size);
   height: var(--tile-size);
   border-style: none;
   display: flex;
   justify-content: center;
-}
-
-.robot-img {
-  width: var(--tile-size);
-  height: var(--tile-size);
-  border: var(--border-width) solid var(--dark-color);
 }
 
 .grid-square.p1tint {
@@ -50,11 +44,6 @@
 .grid-square.p2tint {
   /* background-color: rgba(45, 45, 245, 0.4); */
   background-color: var(--vis-tint);
-}
-
-img {
-  width: var(--tile-size);
-  height: var(--tile-size);
 }
 
 /* empty tile */

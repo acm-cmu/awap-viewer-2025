@@ -11,13 +11,13 @@ export default function RobotSquare(props) {
     setYCoord(yVal)
   }
   return (
-    <div className="robot-div">
+    <div className="tile-div">
       {hasRobot ? (
         <img
           id={`robot${x}${y}`}
           src={srcImg}
           alt=""
-          className="robot-img"
+          className="grid-square"
           onMouseOver={() => {
             handleHover(x, y)
           }}
