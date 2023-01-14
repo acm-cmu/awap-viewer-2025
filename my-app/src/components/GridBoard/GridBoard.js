@@ -10,9 +10,12 @@ import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
 import "./Grid.css"
-import ExplorerImg from "../../img/ex.jpg"
-import TerraformerImg from "../../img/te.jpg"
-import MinerImg from "../../img/mi.jpg"
+import ExplorerImgRed from "../../img/ex_red.jpg"
+import TerraformerImgRed from "../../img/te_red.jpg"
+import MinerImgRed from "../../img/mi_red.jpg"
+import ExplorerImgBlue from "../../img/ex_blue.png"
+import TerraformerImgBlue from "../../img/te_blue.png"
+import MinerImgBlue from "../../img/mi_blue.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -169,6 +172,7 @@ export default function GridBoard(props) {
       const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots) => {
         if (i < 0) return
         let turn = gameTurns[i]
+        let player = turn.metadata.turn
 
         // Modify grid
         for (let gridCh of turn.grid_changes) {
@@ -216,9 +220,16 @@ export default function GridBoard(props) {
           let y = robotCh[2]
           let robotType = robotCh[3]
           let robotImg
-          if (robotType === "e") robotImg = ExplorerImg
-          else if (robotType === "t") robotImg = TerraformerImg
-          else robotImg = MinerImg
+          if (player === "player1") {
+            if (robotType === "e") robotImg = ExplorerImgBlue
+            else if (robotType === "t") robotImg = TerraformerImgBlue
+            else robotImg = MinerImgBlue
+          } else {
+            if (robotType === "e") robotImg = ExplorerImgRed
+            else if (robotType === "t") robotImg = TerraformerImgRed
+            else robotImg = MinerImgRed
+          }
+
           nextRobots[y][x] = (
             <RobotSquare
               key={`${x}${y}`}
