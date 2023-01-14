@@ -12,6 +12,7 @@ export default function ToggleSwitch(props) {
           role="switch"
           id={props.useID}
           onClick={props.onToggle}
+          disabled={props.disabled}
         />{" "}
         {props.children}
       </label>

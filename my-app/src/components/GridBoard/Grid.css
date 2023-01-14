@@ -3,7 +3,7 @@
   grid-template-columns: repeat(var(--cols), var(--tile-size));
   grid-gap: 0;
   align-items: center;
-  padding: 5vmin 15vw 5vmin 15vw;
+  padding: 3.5vmin 12vw 3.5vmin 12vw;
 }
 
 .board.grid {
@@ -21,9 +21,9 @@
 }
 
 .grid-square {
-  border-style: solid;
   width: var(--tile-size);
   height: var(--tile-size);
+  border-style: solid;
   border-width: var(--border-width);
 }
 
@@ -42,7 +42,7 @@ img {
 
 /* empty tile */
 .color-0 {
-  background-color: #c67b5c;
+  background-color: var(--mid-color);
 }
 
 /* impassable tile */

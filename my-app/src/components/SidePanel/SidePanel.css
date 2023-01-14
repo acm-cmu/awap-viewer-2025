@@ -11,7 +11,7 @@ h1 {
   font-family: "Earth Orbiter", sans-serif;
   color: var(--dark-color);
   font-size: 4.5vmin;
-  padding: 3vmin;
+  padding: 3vmin 2vmin 2vmin 2vmin;
 }
 
 .graph {
@@ -20,18 +20,19 @@ h1 {
   overflow-wrap: break-word;
 }
 
+/* File upload button */
 .file-upload {
   width: 25vw;
   margin: 0 2vw 0 2vw;
   background: var(--light-color);
   border-radius: 5px;
   border: 2px solid var(--dark-color);
-  font-family: "Helveltica Nue", sans-serif;
+  font-family: "Roboto", "Helveltica Nue", sans-serif;
   font-size: 2vmin;
 }
 
 .file-upload::file-selector-button {
-  font-weight: bold;
+  font-weight: normal;
   color: var(--light-color);
   background: var(--dark-color);
   border: 1px solid var(--dark-color);
@@ -44,23 +45,143 @@ h1 {
   background: var(--dark-accent-color);
 }
 
-.btn-custom {
-  font-size: 2.5vmin;
-  background: var(--dark-color);
-  color: var(--light-color);
+/* Slider */
+.slider {
+  color: var(--dark-color);
+  width: 25vw;
+  height: 3vmin;
+  border-radius: 3px;
+  padding: 0;
+  margin: 3vmin 0 0 0;
 }
 
-.btn-custom:focus {
-  background: var(--dark-color);
-  color: var(--light-color);
+.slider:hover {
+  color: var(--dark-color);
 }
 
-.btn-custom:hover {
+.MuiSlider-rail {
+  color: var(--dark-color);
+}
+
+.MuiSlider-mark {
+  color: var(--dark-color);
+}
+
+.MuiSlider-thumb {
+  height: 3vmin;
+  width: 1vmin;
+  border-radius: 1px;
+  /* border: 1px solid var(--dark-color); */
+  background: var(--light-color);
+}
+
+.MuiSlider-thumb:hover {
+  box-shadow: 0 0 0 6px #6639263b;
+}
+
+/* Icon play button */
+.play-icon.MuiSvgIcon-root {
+  color: var(--light-color);
+  width: 4vmin;
+  height: 4vmin;
+}
+
+.play-control.MuiButtonBase-root {
+  background: var(--dark-color);
+  transform: scale(0.9);
+  width: 8vmin;
+  height: 8vmin;
+}
+
+.play-control.MuiButtonBase-root:hover {
   background: var(--dark-accent-color);
-  color: var(--light-color);
+  transform: scale(1);
 }
 
-.btn-custom:disabled {
+.play-control.MuiButtonBase-root:active {
+  background: none;
+}
+
+.play-control.MuiButtonBase-root:disabled {
   background: var(--dark-color);
+  border: 1px solid var(--light-color);
+  opacity: 70%;
+}
+
+/* Next and Previous Buttons */
+.arrow {
+  width: 4vmin;
+  height: 4vmin;
+  border-radius: 50%;
+  border: none;
+  margin: 1vmin;
+
+  font-size: 2vmin;
+  background-color: var(--dark-color);
+  color: var(--light-color);
+
+  transform: scale(0.9);
+  transition-duration: 200ms;
+  transition-property: background-color;
+}
+
+.arrow:hover {
+  background: var(--dark-accent-color);
+  transform: scale(1);
+}
+
+.arrow:active {
+  background-color: var(--mid-color);
+}
+
+.arrow:disabled {
+  background-color: var(--dark-color);
+  border: 1px solid var(--light-color);
+  opacity: 70%;
+}
+
+.arrow:disabled:hover {
+  transform: scale(0.9);
+}
+
+/* Speed Selector */
+.speed-select.MuiOutlinedInput-root {
+  color: var(--light-color);
+  background: var(--dark-color);
+  width: 10vh;
+  height: 6vh;
+  font-size: 2vmin;
+}
+
+.speed-select.MuiOutlinedInput-root:hover,
+.speed-select.MuiOutlinedInput-root.Mui-focused {
+  background: var(--dark-accent-color);
+}
+
+.speed-select.MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--dark-color);
+}
+
+.speed-select.MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--dark-color);
+}
+
+.speed-select.MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border: 2px solid var(--dark-color);
+}
+
+.speed-select.MuiOutlinedInput-root.Mui-disabled {
+  background: var(--dark-color);
+  border: none;
+  opacity: 70%;
+}
+
+.MuiSvgIcon-root.Mui-disabled {
+  color: var(--light-color);
+  opacity: 70%;
+}
+
+.MuiSvgIcon-root {
   color: var(--light-color);
 }
