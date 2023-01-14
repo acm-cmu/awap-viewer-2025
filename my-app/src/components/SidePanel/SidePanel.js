@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useContext } from "react"
-import { AppContext } from "../../App"
+import { ViewerContext } from "../../pages/Viewer"
 import "./SidePanel.css"
 import Slider from "@mui/material/Slider"
 import { StyledEngineProvider } from "@mui/material/styles"
@@ -10,7 +10,7 @@ import PauseIcon from "@mui/icons-material/Pause"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
-import ToggleSwitch from "./ToggleSwitch/ToggleSwitch"
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 
 export default function SidePanel(props) {
   const {
@@ -25,7 +25,7 @@ export default function SidePanel(props) {
     setIsFinished,
     speed,
     setSpeed,
-  } = useContext(AppContext)
+  } = useContext(ViewerContext)
 
   const showFile = async (event) => {
     const reader = new FileReader()

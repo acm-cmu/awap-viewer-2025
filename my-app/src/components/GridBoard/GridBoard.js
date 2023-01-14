@@ -6,7 +6,7 @@ import React, {
   useContext,
   useCallback,
 } from "react"
-import { AppContext } from "../../App"
+import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import "./Grid.css"
 import ExplorerImg from "../../img/ex.png"
@@ -25,7 +25,7 @@ export default function GridBoard(props) {
     framePlaying,
     setIsFinished,
     speed,
-  } = useContext(AppContext)
+  } = useContext(ViewerContext)
 
   const nrows = replay.metadata.map_row
   const ncols = replay.metadata.map_col
