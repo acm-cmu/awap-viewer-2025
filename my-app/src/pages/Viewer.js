@@ -1,4 +1,4 @@
-import "./Viewer.css"
+import "./MainPage.css"
 import "bootstrap/dist/css/bootstrap.min.css"
 import GridBoard from "../components/GridBoard/GridBoard"
 import SidePanel from "../components/SidePanel/SidePanel"
@@ -58,7 +58,7 @@ function Viewer() {
         setSpeed,
       }}
     >
-      <div className="Viewer">
+      <div className="MainPage">
         <div className="row-structure">
           <SidePanel
             onFileData={handleFileData}
