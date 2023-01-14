@@ -27,6 +27,21 @@
   border-width: var(--border-width);
 }
 
+.robot-div {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.robot-img {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  border-style: solid;
+  border-width: var(--border-width);
+}
+
 .grid-square.p1tint {
   /* background-color: rgba(249, 60, 60, 0.4); */
   background-color: rgba(42, 40, 40, 0.4);
