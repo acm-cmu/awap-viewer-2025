@@ -36,12 +36,12 @@
   justify-content: center;
 }
 
-.grid-square.p1tint {
+.grid-square.REDtint {
   /* background-color: rgba(249, 60, 60, 0.4); */
   background-color: var(--vis-tint);
 }
 
-.grid-square.p2tint {
+.grid-square.BLUEtint {
   /* background-color: rgba(45, 45, 245, 0.4); */
   background-color: var(--vis-tint);
 }
@@ -63,10 +63,10 @@
 
 /* terraformed tile red */
 .color-3 {
-  background-color: var(--p1-color);
+  background-color: var(--red-color);
 }
 
 /* terraformed tile blue */
 .color-4 {
-  background-color: var(--p2-color);
+  background-color: var(--blue-color);
 }
