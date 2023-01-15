@@ -10,8 +10,12 @@
 h1 {
   font-family: "Earth Orbiter", sans-serif;
   color: var(--dark-color);
-  font-size: 4.5vmin;
-  padding: 3vmin 2vmin 2vmin 2vmin;
+  font-size: 5vmin;
+  margin: 5vh 1vw 3vh 1vw;
+}
+
+p {
+  margin: 0;
 }
 
 .graph {
@@ -49,10 +53,10 @@ h1 {
 .slider {
   color: var(--dark-color);
   width: 25vw;
-  height: 3vmin;
+  height: 3vh;
   border-radius: 3px;
   padding: 0;
-  margin: 3vmin 0 0 0;
+  margin: 4vh 0 1vh 0;
 }
 
 .slider:hover {
@@ -71,7 +75,6 @@ h1 {
   height: 3vmin;
   width: 1vmin;
   border-radius: 1px;
-  /* border: 1px solid var(--dark-color); */
   background: var(--light-color);
 }
 
