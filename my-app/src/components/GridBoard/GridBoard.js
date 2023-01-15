@@ -10,9 +10,13 @@ import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
 import "./Grid.css"
-import ExplorerImg from "../../img/ex.jpg"
-import TerraformerImg from "../../img/te.jpg"
-import MinerImg from "../../img/mi.jpg"
+import ExplorerImgRed from "../../img/ex_red.png"
+import TerraformerImgRed from "../../img/te_red.png"
+import MinerImgRed from "../../img/mi_red.png"
+import ExplorerImgBlue from "../../img/ex_blue.png"
+import TerraformerImgBlue from "../../img/te_blue.png"
+import MinerImgBlue from "../../img/mi_blue.png"
+import MetalImg from "../../img/metal.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -33,6 +37,7 @@ export default function GridBoard(props) {
   const initImpass = replay.initial_map_passability
   const initMetal = replay.initial_map_metal
   const initTerr = replay.initial_map_terraformed
+  const initVis = replay.initial_map_visible
   const gameTurns = replay.turns
 
   const [index, setIndex] = useState(-1)
@@ -53,26 +58,34 @@ export default function GridBoard(props) {
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
-        tempArr[row].push(<GridSquare key={`${col}${row}`} color="0" />)
+        tempArr[row].push(
+          <GridSquare key={`${col}${row}`} color="0" useImg={null} />
+        )
       }
     }
 
-    const populateTiles = (tileArr, colorID) => {
+    const populateTiles = (tileArr, colorID, useImg) => {
       for (let tile of tileArr) {
         let c = tile[0]
         let r = tile[1]
-        tempArr[r][c] = <GridSquare key={`${c}${r}`} color={colorID} />
+        tempArr[r][c] = (
+          <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
+        )
       }
     }
 
-    populateTiles(initImpass, 1)
-    populateTiles(initMetal, 2)
+    populateTiles(initImpass, 1, null)
+    populateTiles(initMetal, 2, MetalImg)
     for (let terr_tile of initTerr) {
       let c = terr_tile[0]
       let r = terr_tile[1]
       let terrNum = terr_tile[2]
       tempArr[r][c] = (
-        <GridSquare key={`${c}${r}`} color={terrNum > 0 ? 3 : 4} />
+        <GridSquare
+          key={`${c}${r}`}
+          color={terrNum > 0 ? 3 : 4}
+          useImg={null}
+        />
       )
     }
 
@@ -116,33 +129,30 @@ export default function GridBoard(props) {
           )
         }
       }
-      // Make initial terraformed tiles visible
-      for (let terr_tile of initTerr) {
-        let x = terr_tile[0]
-        let y = terr_tile[1]
-        let terrNum = terr_tile[2]
-        if (
-          (player === "p1" && terrNum > 0) ||
-          (player === "p2" && terrNum < 0)
-        ) {
+
+      for (let vis_tile of initVis) {
+        let x = vis_tile[0]
+        let y = vis_tile[1]
+        let pl = vis_tile[2]
+        if ((player === "RED" && pl === 1) || (player === "BLUE" && pl === 2)) {
           tempArr[y][x] = <div key={`${x}${y}`} className="grid-square"></div>
         }
       }
       return tempArr
     },
-    [nrows, ncols, initTerr]
+    [nrows, ncols, initVis]
   )
 
   // eslint-disable-next-line
   const p1InitialVis = useMemo(() => {
-    let p1TempArr = makeVisGrid("p1")
+    let p1TempArr = makeVisGrid("RED")
     setVisibilityP1(p1TempArr)
     return p1TempArr
     // eslint-disable-next-line
   }, [makeVisGrid])
 
   const p2InitialVis = useMemo(() => {
-    let p2TempArr = makeVisGrid("p2")
+    let p2TempArr = makeVisGrid("BLUE")
     setVisibilityP2(p2TempArr)
     return p2TempArr
   }, [makeVisGrid])
@@ -169,29 +179,39 @@ export default function GridBoard(props) {
       const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots) => {
         if (i < 0) return
         let turn = gameTurns[i]
+        let player = turn.metadata.turn
 
-        // Modify grid
-        for (let gridCh of turn.grid_changes) {
-          let x = gridCh[0]
-          let y = gridCh[1]
-          // Update visibility
-          let visClassP1 = "grid-square p1tint"
-          if (gridCh[5] === 1) visClassP1 = "grid-square"
-          nextVisP1[y][x] = <div key={`${x}${y}`} className={visClassP1}></div>
+        // Update visibility
+        for (let visCh of turn.tiles_made_visible) {
+          let x = visCh[0]
+          let y = visCh[1]
 
-          let visClassP2 = "grid-square p2tint"
-          if (gridCh[4] === 1) visClassP2 = "grid-square"
-          nextVisP2[y][x] = <div key={`${x}${y}`} className={visClassP2}></div>
+          if (player === "RED") {
+            nextVisP1[y][x] = (
+              <div key={`${x}${y}`} className="grid-square"></div>
+            )
+          } else {
+            nextVisP2[y][x] = (
+              <div key={`${x}${y}`} className="grid-square"></div>
+            )
+          }
+        }
 
-          // Update terrformedness
-          let terrNum = gridCh[6]
+        // Update terrformedness
+        for (let terrCh of turn.tiles_terraformed) {
+          let x = terrCh[0]
+          let y = terrCh[1]
+
+          let terrNum = terrCh[2]
           let terrCol = 0
           if (terrNum > 0) {
             terrCol = 3
           } else if (terrNum < 0) {
             terrCol = 4
           }
-          nextGrid[y][x] = <GridSquare key={`${x}${y}`} color={terrCol} />
+          nextGrid[y][x] = (
+            <GridSquare key={`${x}${y}`} color={terrCol} useImg={null} />
+          )
         }
 
         // Modify robots
@@ -216,9 +236,16 @@ export default function GridBoard(props) {
           let y = robotCh[2]
           let robotType = robotCh[3]
           let robotImg
-          if (robotType === "e") robotImg = ExplorerImg
-          else if (robotType === "t") robotImg = TerraformerImg
-          else robotImg = MinerImg
+          if (player === "RED") {
+            if (robotType === "EXPLORER") robotImg = ExplorerImgBlue
+            else if (robotType === "TERRAFORMER") robotImg = TerraformerImgBlue
+            else robotImg = MinerImgBlue
+          } else {
+            if (robotType === "EXPLORER") robotImg = ExplorerImgRed
+            else if (robotType === "TERRAFORMER") robotImg = TerraformerImgRed
+            else robotImg = MinerImgRed
+          }
+
           nextRobots[y][x] = (
             <RobotSquare
               key={`${x}${y}`}

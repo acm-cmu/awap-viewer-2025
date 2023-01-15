@@ -9,11 +9,6 @@
     "initial_metal": 5,
     "start_time_bank": 30
   },
-  "asset_ids": {
-    "e": "Explorer",
-    "m": "Miner",
-    "t": "Terraformer"
-  },
   // array of impassable tile coordinates
   "initial_map_passability": [
     [0, 0],
@@ -30,10 +25,16 @@
     [1, 0, -10],
     [6, 7, 10]
   ],
+  // array of visible tiles, (red = 1, blue = 2)
+  // [x-coord, y-coord, player], ...]
+  "initial_map_visible": [
+    [1, 0, 2],
+    [6, 7, 1]
+  ],
   "turns": [
     {
       "metadata": {
-        "turn": "player1",
+        "turn": "RED",
         "number": 0,
         "metal": 5
       },
@@ -44,14 +45,14 @@
       ],
       "robot_changes": [
         // id, x-coord, y-coord, robot type, robot battery level
-        ["id1", 2, 1, "e", 100],
-        ["id2", 2, 2, "m", 100],
-        ["id3", 2, 3, "t", 100]
+        ["id1", 2, 1, "EXPLORER", 100],
+        ["id2", 2, 2, "MINER", 100],
+        ["id3", 2, 3, "TERRAFORMER", 100]
       ]
     },
     {
       "metadata": {
-        "turn": "player2",
+        "turn": "BLUE",
         "number": 0,
         "metal": 5
       },
@@ -61,9 +62,9 @@
       ],
       "robot_changes": [
         // id, x-coord, y-coord, robot type, robot battery level
-        ["id4", 6, 7, "e", 100],
-        ["id5", 5, 7, "m", 100],
-        ["id6", 4, 7, "t", 100]
+        ["id4", 6, 7, "EXPLORER", 100],
+        ["id5", 5, 7, "MINER", 100],
+        ["id6", 4, 7, "TERRAFORMER", 100]
       ]
     }
   ]
