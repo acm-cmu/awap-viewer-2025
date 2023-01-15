@@ -3,7 +3,6 @@ import "./Grid.css"
 
 export default function GridSquare(props) {
   const { color, useImg } = props
-  console.log(color, useImg)
   const classes = `grid-square color-${color}`
   return (
     <div className={`tile-div ${classes}`}>
