@@ -120,7 +120,7 @@ export default function SidePanel(props) {
         direction="row"
         sx={{
           width: "25vw",
-          margin: "0 2vw 0 2vw",
+          margin: "0 2vw 3vh 2vw",
         }}
       >
         <Grid
@@ -193,14 +193,14 @@ export default function SidePanel(props) {
         useID="p1vis"
         disabled={isDisabled}
       >
-        Player 1 Visibility
+        <p>Player 1 Visibility</p>
       </ToggleSwitch>
       <ToggleSwitch
         onToggle={handleToggleP2Vis}
         useID="p2vis"
         disabled={isDisabled}
       >
-        Player 2 Visibility
+        <p>Player 2 Visibility</p>
       </ToggleSwitch>
       <div className="container">
         <div className="row">
