@@ -6,12 +6,13 @@ import React, {
   useContext,
   useCallback,
 } from "react"
-import { AppContext } from "../../App"
+import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
+import RobotSquare from "./RobotSquare"
 import "./Grid.css"
-import ExplorerImg from "../../img/ex.png"
-import TerraformerImg from "../../img/te.png"
-import MinerImg from "../../img/mi.png"
+import ExplorerImg from "../../img/ex.jpg"
+import TerraformerImg from "../../img/te.jpg"
+import MinerImg from "../../img/mi.jpg"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -25,7 +26,7 @@ export default function GridBoard(props) {
     framePlaying,
     setIsFinished,
     speed,
-  } = useContext(AppContext)
+  } = useContext(ViewerContext)
 
   const nrows = replay.metadata.map_row
   const ncols = replay.metadata.map_col
@@ -90,11 +91,7 @@ export default function GridBoard(props) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <div
-            key={`${col}${row}`}
-            id={`${col}${row}`}
-            className="grid-square"
-          ></div>
+          <RobotSquare key={`${col}${row}`} x={col} y={row} hasRobot={false} />
         )
       }
     }
@@ -205,11 +202,12 @@ export default function GridBoard(props) {
             let xPrev = prevRobots.current[robotID][0]
             let yPrev = prevRobots.current[robotID][1]
             nextRobots[yPrev][xPrev] = (
-              <div
-                id={`${xPrev}${yPrev}`}
+              <RobotSquare
                 key={`${xPrev}${yPrev}`}
-                className="grid-square"
-              ></div>
+                x={xPrev}
+                y={yPrev}
+                hasRobot={false}
+              />
             )
           }
 
@@ -222,12 +220,12 @@ export default function GridBoard(props) {
           else if (robotType === "t") robotImg = TerraformerImg
           else robotImg = MinerImg
           nextRobots[y][x] = (
-            <img
-              src={robotImg}
-              alt=""
-              id={`${x}${y}`}
+            <RobotSquare
               key={`${x}${y}`}
-              className="grid-square"
+              srcImg={robotImg}
+              x={x}
+              y={y}
+              hasRobot={true}
             />
           )
           // Store robot coordinates
