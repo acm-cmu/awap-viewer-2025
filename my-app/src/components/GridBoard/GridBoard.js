@@ -237,13 +237,13 @@ export default function GridBoard(props) {
           let robotType = robotCh[3]
           let robotImg
           if (player === "RED") {
-            if (robotType === "EXPLORER") robotImg = ExplorerImgBlue
-            else if (robotType === "TERRAFORMER") robotImg = TerraformerImgBlue
-            else robotImg = MinerImgBlue
-          } else {
             if (robotType === "EXPLORER") robotImg = ExplorerImgRed
             else if (robotType === "TERRAFORMER") robotImg = TerraformerImgRed
             else robotImg = MinerImgRed
+          } else {
+            if (robotType === "EXPLORER") robotImg = ExplorerImgBlue
+            else if (robotType === "TERRAFORMER") robotImg = TerraformerImgBlue
+            else robotImg = MinerImgBlue
           }
 
           nextRobots[y][x] = (
