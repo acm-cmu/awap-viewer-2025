@@ -11,6 +11,8 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
+import LineChart from './LineChart.js';
+
 
 export default function SidePanel(props) {
   const {
@@ -206,6 +208,9 @@ export default function SidePanel(props) {
         <div className="row">
           <div className="col-lg-6 graph">
             <p>
+            <h1>
+            <LineChart />
+          </h1>
               Metal Graph placeholder placeholder placeholder placeholder
               placeholder placeholder placeholder placeholder placeholder
               placeholder
