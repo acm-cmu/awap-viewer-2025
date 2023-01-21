@@ -10,12 +10,12 @@ import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
 import "./Grid.css"
-import ExplorerImgRed from "../../img/ex_red.png"
-import TerraformerImgRed from "../../img/te_red.png"
-import MinerImgRed from "../../img/mi_red.png"
-import ExplorerImgBlue from "../../img/ex_blue.png"
-import TerraformerImgBlue from "../../img/te_blue.png"
-import MinerImgBlue from "../../img/mi_blue.png"
+import ExplorerImgRed from "../../new-img/light-outline-red.PNG"
+import TerraformerImgRed from "../../new-img/shovel-outline-red.PNG"
+import MinerImgRed from "../../new-img/pick-outline-red.PNG"
+import ExplorerImgBlue from "../../new-img/light-outline-blue.PNG"
+import TerraformerImgBlue from "../../new-img/shovel-outline-blue.PNG"
+import MinerImgBlue from "../../new-img/pick-outline-red.PNG"
 import MetalImg from "../../img/metal_outline.png"
 
 export default function GridBoard(props) {
@@ -68,7 +68,6 @@ export default function GridBoard(props) {
         tileInfo[row].push([0, 0])
       }
     }
-    console.log(tileInfo[1][1])
 
     const populateTiles = (tileArr, colorID, useImg) => {
       for (let tile of tileArr) {
@@ -250,7 +249,6 @@ export default function GridBoard(props) {
           )
           nextTileInfo[y][x][0] = terrNum
           if (y === 1 && x === 1) {
-            // console.log(nextTileInfo[1][1][0])
           }
         }
 
