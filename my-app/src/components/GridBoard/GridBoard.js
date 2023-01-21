@@ -30,6 +30,8 @@ export default function GridBoard(props) {
     framePlaying,
     setIsFinished,
     speed,
+    setTiles,
+    tiles
   } = useContext(ViewerContext)
 
   const nrows = replay.metadata.map_row
@@ -54,15 +56,19 @@ export default function GridBoard(props) {
   // eslint-disable-next-line
   const initialGrid = useMemo(() => {
     let tempArr = []
+    let tileInfo = []
     // Passable tiles
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
+      tileInfo.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
           <GridSquare key={`${col}${row}`} color="0" useImg={null} />
         )
+        tileInfo[row].push([0, 0])
       }
     }
+    console.log(tileInfo[1][1])
 
     const populateTiles = (tileArr, colorID, useImg) => {
       for (let tile of tileArr) {
@@ -71,6 +77,12 @@ export default function GridBoard(props) {
         tempArr[r][c] = (
           <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
         )
+        if (colorID === 1) {
+          tileInfo[r][c][0] = 'I'
+        } else if (colorID === 2) {
+          tileInfo[r][c][0] = 'M'
+        }
+
       }
     }
 
@@ -87,14 +99,17 @@ export default function GridBoard(props) {
           useImg={null}
         />
       )
+      tileInfo[r][c][0] = terrNum
+      tileInfo[r][c][1] = terrNum > 0 ? 1 : 2
     }
 
     setGrid(tempArr)
+    setTiles(tileInfo)
     setIndex(-1)
     clearInterval(intervalID.current)
     intervalID.current = null
-    return tempArr
-  }, [nrows, ncols, initImpass, initMetal, initTerr])
+    return [tempArr, tileInfo]
+  }, [nrows, ncols, initImpass, initMetal, initTerr, setTiles])
 
   // Initializes robot grid
   // eslint-disable-next-line
@@ -104,7 +119,7 @@ export default function GridBoard(props) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <RobotSquare key={`${col}${row}`} x={col} y={row} hasRobot={false} />
+          <RobotSquare key={`${col}${row}`} x={col} y={row} hasRobot={false} battery={0}/>
         )
       }
     }
@@ -166,6 +181,17 @@ export default function GridBoard(props) {
     return arrCopy
   }
 
+  const makeDeepCopy3D = (arr) => {
+    const arrCopy = arr.map((row, i) => {
+      return row.map((elemArr, j) => {
+        return elemArr.map((elem, k) => {
+          return elem
+        })
+      })
+    })
+    return arrCopy
+  }
+
   // animates grid when index changes
   useEffect(() => {
     if (sliderValue >= gameTurns.length) {
@@ -176,7 +202,7 @@ export default function GridBoard(props) {
     } else if (sliderValue <= -1) {
     } else {
       // Updates input arrays in place
-      const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots) => {
+      const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots, nextTileInfo) => {
         if (i < 0) return
         let turn = gameTurns[i]
         let player = turn.metadata.turn
@@ -190,10 +216,20 @@ export default function GridBoard(props) {
             nextVisP1[y][x] = (
               <div key={`${x}${y}`} className="grid-square"></div>
             )
+            if (nextTileInfo[y][x][1] === 1 || nextTileInfo[y][x][1] === 0) {
+              nextTileInfo[y][x][1] = 1
+            } else {
+              nextTileInfo[y][x][1] = 3
+            }
           } else {
             nextVisP2[y][x] = (
               <div key={`${x}${y}`} className="grid-square"></div>
             )
+            if (nextTileInfo[y][x][1] === 2 || nextTileInfo[y][x][1] === 0) {
+              nextTileInfo[y][x][1] = 2
+            } else {
+              nextTileInfo[y][x][1] = 3
+            }
           }
         }
 
@@ -212,6 +248,10 @@ export default function GridBoard(props) {
           nextGrid[y][x] = (
             <GridSquare key={`${x}${y}`} color={terrCol} useImg={null} />
           )
+          nextTileInfo[y][x][0] = terrNum
+          if (y === 1 && x === 1) {
+            // console.log(nextTileInfo[1][1][0])
+          }
         }
 
         // Modify robots
@@ -235,6 +275,7 @@ export default function GridBoard(props) {
           let x = robotCh[1]
           let y = robotCh[2]
           let robotType = robotCh[3]
+          let battery = robotCh[4]
           let robotImg
           if (player === "RED") {
             if (robotType === "EXPLORER") robotImg = ExplorerImgRed
@@ -253,6 +294,8 @@ export default function GridBoard(props) {
               x={x}
               y={y}
               hasRobot={true}
+              type={robotType}
+              battery={battery}
             />
           )
           // Store robot coordinates
@@ -267,28 +310,33 @@ export default function GridBoard(props) {
         const newVisP1 = makeDeepCopy(visibilityP1)
         const newVisP2 = makeDeepCopy(visibilityP2)
         const newRobots = makeDeepCopy(robots)
+        const newTileInfo = makeDeepCopy3D(tiles)
         while (idx <= sliderValue) {
-          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots)
+          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots, newTileInfo)
           idx += 1
         }
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
         setRobots(newRobots)
+        setTiles(newTileInfo)
       } else {
-        const newGrid = makeDeepCopy(initialGrid)
+        const arr = initialGrid
+        const newGrid = makeDeepCopy(arr[0])
         const newVisP1 = makeDeepCopy(p1InitialVis)
         const newVisP2 = makeDeepCopy(p2InitialVis)
         const newRobots = makeDeepCopy(initialRobots)
+        const newTileInfo = makeDeepCopy3D(arr[1])
         idx = 0
         while (idx <= sliderValue) {
-          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots)
+          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots, newTileInfo)
           idx += 1
         }
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
         setRobots(newRobots)
+        setTiles(newTileInfo)
       }
       setIndex(idx - 1)
       if (!framePlaying) {
@@ -325,5 +373,6 @@ export default function GridBoard(props) {
       <div className="board robot">{robots}</div>
       <div className="board grid">{grid}</div>
     </div>
+    
   )
 }

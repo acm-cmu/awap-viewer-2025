@@ -14,8 +14,10 @@ function Viewer() {
   const [isDisabled, setIsDisabled] = useState(true)
   const [isFinished, setIsFinished] = useState(false)
   const [speed, setSpeed] = useState(1)
-  const [xCoord, setXCoord] = useState(null)
-  const [yCoord, setYCoord] = useState(null)
+  const [row, setRow] = useState(null)
+  const [col, setCol] = useState(null)
+  const [tiles, setTiles] = useState(null)
+
 
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
@@ -58,10 +60,12 @@ function Viewer() {
         setIsFinished,
         speed,
         setSpeed,
-        xCoord,
-        setXCoord,
-        yCoord,
-        setYCoord,
+        row,
+        setRow,
+        col,
+        setCol,
+        tiles, 
+        setTiles
       }}
     >
       <div className="MainPage">
