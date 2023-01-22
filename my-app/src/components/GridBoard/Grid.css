@@ -58,7 +58,7 @@
 
 /* metal tile */
 .color-2 {
-  background-color: rgb(219, 93, 20);
+  background-color: #f9b697;
 }
 
 /* terraformed tile red */
@@ -69,4 +69,23 @@
 /* terraformed tile blue */
 .color-4 {
   background-color: var(--blue-color);
+}
+
+.grid-square .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 5px 0;
+  top: 0%;
+
+  /* Position the tooltip */
+  position: relative;
+  z-index: 1;
+}
+
+.grid-square:hover .tooltiptext {
+  visibility: visible;
 }
