@@ -18,6 +18,10 @@ function Viewer() {
   const [col, setCol] = useState(null)
   const [tiles, setTiles] = useState(null)
 
+  const [frame, setFrame] = useState(null)
+  const [redMetal, setRedMetal] = useState([])
+  const [blueMetal, setBlueMetal] = useState([])
+
 
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
@@ -46,6 +50,12 @@ function Viewer() {
   return (
     <ViewerContext.Provider
       value={{
+        redMetal,
+        setRedMetal,
+        blueMetal,
+        setBlueMetal,
+        frame,
+        setFrame,
         replay,
         setReplay,
         sliderValue,

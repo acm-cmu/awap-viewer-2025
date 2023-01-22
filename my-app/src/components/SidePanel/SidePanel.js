@@ -211,14 +211,14 @@ export default function SidePanel(props) {
             <h1>
             <LineChart />
           </h1>
-              Metal Graph placeholder placeholder placeholder placeholder
+              Metal Graph awa placeholder placeholder placeholder
               placeholder placeholder placeholder placeholder placeholder
               placeholder
             </p>
           </div>
           <div className="col-lg-6 graph">
             <p>
-              Terraform Graph placeholder placeholder placeholder placeholder
+              Terraform Graph nya placeholder placeholder placeholder
               placeholder placeholder placeholder placeholder placeholder
               placeholder
             </p>

@@ -31,7 +31,12 @@ export default function GridBoard(props) {
     setIsFinished,
     speed,
     setTiles,
-    tiles
+    tiles,
+    setFrame,
+    redMetal,
+    blueMetal,
+    setRedMetal,
+    setBlueMetal
   } = useContext(ViewerContext)
 
   const nrows = replay.metadata.map_row
@@ -205,6 +210,20 @@ export default function GridBoard(props) {
         if (i < 0) return
         let turn = gameTurns[i]
         let player = turn.metadata.turn
+
+        if(player === "RED"){
+          //Setting Red Metal Array
+          const temp = redMetal
+          temp.push(turn.metadata.metal)
+          setRedMetal(temp)
+          setFrame(sliderValue)
+        } else {
+            //Setting Blue Metal Array
+            //const temp = blueMetal
+            //temp.push(turn.metadata.metal)
+            //setBlueMetal(temp)
+            //setFrame(sliderValue)
+        }
 
         // Update visibility
         for (let visCh of turn.tiles_made_visible) {

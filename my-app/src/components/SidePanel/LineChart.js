@@ -1,5 +1,11 @@
-import React, { Component } from 'react'
+import React, {
+  useContext,
+} from "react"
+
 import Chart from 'react-google-charts'
+import { ViewerContext } from '../../pages/Viewer'
+
+
 const LineData = [
   ['Frame', 'Blue Team', 'Red Team'],
   [0, 0, 0],
@@ -13,46 +19,83 @@ const LineData = [
   [8, 27, 200],
 ]
 
+
+
 const LineChartOptions = {
-    //title: "Metal Reserves",
-    titleTextStyle:{
-        fontName: "Impact",
-        fontSize: 20,
-    },
-    hAxis: {
-        title: 'Frame',
-        titleTextStyle:
-        {
-         fontName: "Impact",
-         fontStyle: "normal", //or bold, italic, etc.
-         italic: false,
-         fontSize: 14,
-         //color: '#ff0000'
-        },
-    },
-  vAxis: {
-    title: 'Metal',
-    titleTextStyle:
-    {
-     fontName: "Impact",
-     fontStyle: "normal", //or bold, italic, etc.
-     italic: false,
-     fontSize: 14,
-     //color: '#ff0000'
-    },
+  //title: "Metal Reserves",
+  //backgroundColor: '#F9B697',
+  //title: 'Company Performance',
+  //subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+
+  'chartArea': {
+      'backgroundColor': {
+          'fill': '#F4F4F4',
+          'opacity': 100,
+      },
   },
-  series: {
-    1: { curveType: 'function' },
+
+  titleTextStyle:{
+      fontName: "Impact",
+      fontSize: 20,
   },
+  hAxis: {
+      title: 'Frame',
+      titleTextStyle:
+      {
+       fontName: "Roboto",
+       fontStyle: "bold", //or bold, italic, etc.
+       italic: false,
+       fontSize: 12,
+       //color: '#ff0000'
+      },
+  },
+vAxis: {
+  title: 'Metal',
+  titleTextStyle:
+  {
+   fontName: "Roboto",
+   fontStyle: "bold", //or bold, italic, etc.
+   italic: false,
+   fontSize: 12,
+   //color: '#ff0000'
+  },
+},
+series: {
+  1: { curveType: 'function' },
+},
 }
-class LineChart extends Component {
-  render() {
+
+
+function LineChart (){
+    const {
+      frame,
+      setFrame,
+      redMetal,
+      blueMetal,
+      setRedMetal,
+      setBlueMetal
+    } = useContext(ViewerContext)
+
+    console.log("Turn:" + frame)
+    console.log("Red Array:" + redMetal)
+    console.log("Blue Array:" + blueMetal)
+
+    var i = 0
+    for(let redval of redMetal){
+      if (i == frame) {
+        console.log("nya")
+        break
+      }
+      console.log(redMetal[i])
+      console.log(blueMetal[i])
+    }
+
     return (
       <div className="container mt-5">
-        <h1>Metal Graph</h1>
+        <h1>{redMetal}</h1>
         <Chart
-          width={'300px'}
-          height={'200px'}
+          width={'500px'}
+          height={'250px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={LineData}
@@ -61,6 +104,9 @@ class LineChart extends Component {
         />
       </div>
     )
-  }
+  
 }
 export default LineChart
+
+//<h1>{redMetal}</h1>
+        
