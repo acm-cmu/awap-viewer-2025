@@ -26,6 +26,8 @@ export default function SidePanel(props) {
     isFinished,
     setIsFinished,
     speed,
+    setRedMetal,
+    setBlueMetal,
     setSpeed,
   } = useContext(ViewerContext)
 
@@ -71,6 +73,10 @@ export default function SidePanel(props) {
   }
 
   const resetPlaybutton = useCallback(() => {
+    console.log("nya")
+    setRedMetal([])
+    setBlueMetal([])
+
     setFramePlaying(false)
     setIsPlay(false)
   }, [setFramePlaying, setIsPlay])
@@ -206,21 +212,18 @@ export default function SidePanel(props) {
       </ToggleSwitch>
       <div className="container">
         <div className="row">
+          
+        <LineChart />
           <div className="col-lg-6 graph">
             <p>
             <h1>
-            <LineChart />
           </h1>
-              Metal Graph awa placeholder placeholder placeholder
-              placeholder placeholder placeholder placeholder placeholder
-              placeholder
+              
             </p>
           </div>
           <div className="col-lg-6 graph">
             <p>
-              Terraform Graph nya placeholder placeholder placeholder
-              placeholder placeholder placeholder placeholder placeholder
-              placeholder
+
             </p>
           </div>
         </div>

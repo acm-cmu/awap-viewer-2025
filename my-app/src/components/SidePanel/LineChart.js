@@ -6,8 +6,8 @@ import Chart from 'react-google-charts'
 import { ViewerContext } from '../../pages/Viewer'
 
 
-const LineData = [
-  ['Frame', 'Blue Team', 'Red Team'],
+
+/*
   [0, 0, 0],
   [1, 10, 5],
   [2, 23, 15],
@@ -17,8 +17,7 @@ const LineData = [
   [6, 11, 3],
   [7, 27, 19],
   [8, 27, 200],
-]
-
+*/ 
 
 
 const LineChartOptions = {
@@ -59,6 +58,9 @@ vAxis: {
    fontSize: 12,
    //color: '#ff0000'
   },
+  viewWindow: {
+    min: 0
+  }
 },
 series: {
   1: { curveType: 'function' },
@@ -76,25 +78,38 @@ function LineChart (){
       setBlueMetal
     } = useContext(ViewerContext)
 
-    console.log("Turn:" + frame)
-    console.log("Red Array:" + redMetal)
-    console.log("Blue Array:" + blueMetal)
 
     var i = 0
+    //console.log("frame " + frame)
+
+    const LineData = [
+      ['Frame', 'Blue Team', 'Red Team'],
+      [0, 0, 0]
+    ]
+
+
+    //LineData.push(['Frame', 'Blue Team', 'Red Team'])
+    //LineData.push([0,0,0])
     for(let redval of redMetal){
       if (i == frame) {
-        console.log("nya")
-        break
+        break;
       }
-      console.log(redMetal[i])
-      console.log(blueMetal[i])
+      //console.log(i)
+      const temp = []
+      temp.push(i)
+      temp.push(blueMetal[i])
+      temp.push(redMetal[i])
+      LineData.push(temp)
+      i+=1
     }
+
+    console.log("LineChart: " + LineData)
 
     return (
       <div className="container mt-5">
-        <h1>{redMetal}</h1>
+        <h1>Metal Graph</h1>
         <Chart
-          width={'500px'}
+          width={'350px'}
           height={'250px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}

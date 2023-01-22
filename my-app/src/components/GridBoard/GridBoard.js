@@ -216,13 +216,13 @@ export default function GridBoard(props) {
           const temp = redMetal
           temp.push(turn.metadata.metal)
           setRedMetal(temp)
-          setFrame(sliderValue)
+          setFrame(sliderValue/2)
         } else {
             //Setting Blue Metal Array
-            //const temp = blueMetal
-            //temp.push(turn.metadata.metal)
-            //setBlueMetal(temp)
-            //setFrame(sliderValue)
+            const temp = blueMetal
+            temp.push(turn.metadata.metal)
+            setBlueMetal(temp)
+            setFrame((sliderValue-1)/2)
         }
 
         // Update visibility
