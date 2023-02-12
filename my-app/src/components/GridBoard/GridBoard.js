@@ -70,7 +70,7 @@ export default function GridBoard(props) {
         tempArr[row].push(
           <GridSquare key={`${col}${row}`} color="0" useImg={null} />
         )
-        tileInfo[row].push([0, 0])
+        tileInfo[row].push([0, 0, 0])
       }
     }
 
@@ -78,6 +78,7 @@ export default function GridBoard(props) {
       for (let tile of tileArr) {
         let c = tile[0]
         let r = tile[1]
+        let metalvalue = tile[2]
         tempArr[r][c] = (
           <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
         )
@@ -85,6 +86,7 @@ export default function GridBoard(props) {
           tileInfo[r][c][0] = 'I'
         } else if (colorID === 2) {
           tileInfo[r][c][0] = 'M'
+          tileInfo[r][c][2] = metalvalue
         }
 
       }
@@ -124,7 +126,7 @@ export default function GridBoard(props) {
     clearInterval(intervalID.current)
     intervalID.current = null
     return [tempArr, tileInfo]
-  }, [nrows, ncols, initImpass, initMetal, initTerr, setTiles])
+  }, [nrows, ncols, initImpass, initMetal, initTerr, setTiles, initVis])
 
   // Initializes robot grid
   // eslint-disable-next-line
@@ -313,6 +315,7 @@ export default function GridBoard(props) {
           if (x !== -1 && y !== -1) {
             let robotType = robotCh[3]
             let battery = robotCh[4]
+            let robotTeam = robotCh[5]
             let robotImg
             if (player === "red") {
               if (robotType === "e") robotImg = ExplorerImgRed
@@ -334,6 +337,7 @@ export default function GridBoard(props) {
                 type={robotType}
                 battery={battery}
                 id={robotID}
+                team={robotTeam}
               />
             )
             // Store robot coordinates

@@ -3,7 +3,7 @@ import { ViewerContext } from "../../pages/Viewer"
 import "./Grid.css"
 
 export default function RobotSquare(props) {
-  const { srcImg, x, y, type, hasRobot, battery, id} = props
+  const { srcImg, x, y, type, hasRobot, battery, id, team} = props
   const { setCol, setRow, tiles} = useContext(ViewerContext)
 
   const [tiletype, setTileType] = useState(null)
@@ -21,7 +21,7 @@ export default function RobotSquare(props) {
           setBoldTileType("Type: ")
           break;
         case "M":
-          setTileType("Metal")
+          setTileType("Metal " + (tiles[row][col][2]))
           setBoldTileType("Type: ")
           break;
         default:
@@ -72,10 +72,10 @@ export default function RobotSquare(props) {
           }}
         />
         <p className="tooltiptext"> 
-        <strong> Position: </strong> {x}, {y} <br></br>
+        <strong> Position: </strong> ({x}, {y}) <br></br>
         <strong> {boldtiletype} </strong> {tiletype} <br></br>
         <strong> Visibility: </strong> {tilevisib} <br></br>
-        <strong> Robot: </strong>{id}, {robottype}, {battery} <br></br>
+        <strong> Robot: </strong>{id}, {robottype}, {team}, {battery} <br></br>
         </p>
         </div>
       ) : (
@@ -89,11 +89,14 @@ export default function RobotSquare(props) {
             handleHover(null, null)
           }}
         >
+          
         <p className="tooltiptext"> 
         <strong> Position: </strong> ({x}, {y}) <br></br>
         <strong> {boldtiletype} </strong> {tiletype} <br></br>
         <strong> Visibility: </strong> {tilevisib} <br></br>
-        </p></div>
+        </p>
+        
+        </div>
       )}
     </div>
   )

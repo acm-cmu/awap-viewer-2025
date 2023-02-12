@@ -81,6 +81,7 @@
   border-radius: 6px;
   padding: 5px 0;
   top: 0%;
+  /* margin-left: calc(var(--tile-size)/2); */
 
   /* Position the tooltip */
   position: relative;
