@@ -104,7 +104,18 @@ export default function GridBoard(props) {
         />
       )
       tileInfo[r][c][0] = terrNum
-      tileInfo[r][c][1] = terrNum > 0 ? 1 : 2
+      // tileInfo[r][c][1] = terrNum > 0 ? 1 : 2
+    }
+
+    for (let vis_tile of initVis) {
+        let x = vis_tile[0]
+        let y = vis_tile[1]
+        let pl = vis_tile[2]
+        if (tileInfo[y][x][1] === 0) {
+          tileInfo[y][x][1] = pl
+        } else if ((tileInfo[y][x][1] === 1 && pl === 2) || (tileInfo[y][x][1] === 2 && pl === 1)) {
+          tileInfo[y][x][1] = 4
+        }
     }
 
     setGrid(tempArr)
@@ -136,6 +147,7 @@ export default function GridBoard(props) {
   // Initializes visibility grid
   const makeVisGrid = useCallback(
     (player) => {
+
       let tempArr = []
       for (let row = 0; row < nrows; row++) {
         tempArr.push([])
@@ -157,6 +169,7 @@ export default function GridBoard(props) {
           tempArr[y][x] = <div key={`${x}${y}`} className="grid-square"></div>
         }
       }
+
       return tempArr
     },
     [nrows, ncols, initVis]

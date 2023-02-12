@@ -26,6 +26,7 @@
   width: var(--tile-size);
   height: var(--tile-size);
   border: var(--border-width) solid var(--dark-color);
+  display: block;
 }
 
 .tile-div {
@@ -73,7 +74,7 @@
 
 .grid-square .tooltiptext {
   visibility: hidden;
-  width: 120px;
+  width: 150px;
   background-color: black;
   color: #fff;
   text-align: left;
