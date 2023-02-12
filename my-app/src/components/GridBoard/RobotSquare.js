@@ -3,11 +3,13 @@ import { ViewerContext } from "../../pages/Viewer"
 import "./Grid.css"
 
 export default function RobotSquare(props) {
-  const { srcImg, x, y, type, hasRobot, battery} = props
+  const { srcImg, x, y, type, hasRobot, battery, id} = props
   const { setCol, setRow, tiles} = useContext(ViewerContext)
 
   const [tiletype, setTileType] = useState(null)
+  const [boldtiletype, setBoldTileType] = useState(null)
   const [tilevisib, setTileVisib] = useState(null)
+  const [robottype, setRobotType] = useState(null)
 
   const handleHover = (col, row) => {
     setCol(col)
@@ -15,13 +17,16 @@ export default function RobotSquare(props) {
     if (col != null && row != null) {
       switch(tiles[row][col][0]) {
         case "I":
-          setTileType("Type: Impassable")
+          setTileType("Impassable")
+          setBoldTileType("Type: ")
           break;
         case "M":
-          setTileType("Type: Metal")
+          setTileType("Metal")
+          setBoldTileType("Type: ")
           break;
         default:
-          setTileType("Terr. No.: " + tiles[row][col][0])
+          setTileType(tiles[row][col][0])
+          setBoldTileType("Terr. Level: ")
       }
       switch(tiles[row][col][1]) {
         case 0:
@@ -36,6 +41,17 @@ export default function RobotSquare(props) {
         default:
           setTileVisib("Both")
       }
+    }
+    switch(type) {
+      case "e":
+        setRobotType("Explorer")
+        break;
+      case "m":
+        setRobotType("Miner")
+        break;
+      default:
+        setRobotType("Terraformer")
+        break;
     }
   }
 
@@ -56,10 +72,10 @@ export default function RobotSquare(props) {
           }}
         />
         <p className="tooltiptext"> 
-        Position: {x}, {y} <br></br>
-        {tiletype} <br></br>
-        Visibility: {tilevisib} <br></br>
-        Robot: {type}, {battery} <br></br>
+        <strong> Position: </strong> {x}, {y} <br></br>
+        <strong> {boldtiletype} </strong> {tiletype} <br></br>
+        <strong> Visibility: </strong> {tilevisib} <br></br>
+        <strong> Robot: </strong>{id}, {robottype}, {battery} <br></br>
         </p>
         </div>
       ) : (
@@ -74,9 +90,9 @@ export default function RobotSquare(props) {
           }}
         >
         <p className="tooltiptext"> 
-        Position: ({x}, {y}) <br></br>
-        {tiletype} <br></br>
-        Visibility: {tilevisib} <br></br>
+        <strong> Position: </strong> ({x}, {y}) <br></br>
+        <strong> {boldtiletype} </strong> {tiletype} <br></br>
+        <strong> Visibility: </strong> {tilevisib} <br></br>
         </p></div>
       )}
     </div>

@@ -32,8 +32,8 @@ function Viewer() {
     setIsDisabled(false)
     let root = document.documentElement
     try {
-      root.style.setProperty("--cols", replayData.metadata.map_col)
-      root.style.setProperty("--rows", replayData.metadata.map_row)
+      root.style.setProperty("--cols", replayData.map_width)
+      root.style.setProperty("--rows", replayData.map_height)
     } catch (err) {
       console.log(err.message)
     }
