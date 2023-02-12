@@ -15,7 +15,7 @@ import TerraformerImgRed from "../../new-img/shovel-outline-red.PNG"
 import MinerImgRed from "../../new-img/pick-outline-red.PNG"
 import ExplorerImgBlue from "../../new-img/light-outline-blue.PNG"
 import TerraformerImgBlue from "../../new-img/shovel-outline-blue.PNG"
-import MinerImgBlue from "../../new-img/pick-outline-red.PNG"
+import MinerImgBlue from "../../new-img/pick-outline-blue.PNG"
 import MetalImg from "../../img/metal_outline.png"
 
 export default function GridBoard(props) {
@@ -39,8 +39,8 @@ export default function GridBoard(props) {
     setBlueMetal
   } = useContext(ViewerContext)
 
-  const nrows = replay.metadata.map_row
-  const ncols = replay.metadata.map_col
+  const nrows = replay.map_height
+  const ncols = replay.map_width
   const initImpass = replay.initial_map_passability
   const initMetal = replay.initial_map_metal
   const initTerr = replay.initial_map_terraformed
@@ -209,28 +209,28 @@ export default function GridBoard(props) {
       const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots, nextTileInfo) => {
         if (i < 0) return
         let turn = gameTurns[i]
-        let player = turn.metadata.turn
+        let player = turn.team
 
-        if(player === "RED"){
+        if(player === "red"){
           //Setting Red Metal Array
           const temp = redMetal
-          temp.push(turn.metadata.metal)
+          temp.push(turn.metal)
           setRedMetal(temp)
           setFrame(sliderValue/2)
         } else {
-            //Setting Blue Metal Array
-            const temp = blueMetal
-            temp.push(turn.metadata.metal)
-            setBlueMetal(temp)
-            setFrame((sliderValue-1)/2)
+          //Setting Blue Metal Array
+          const temp = blueMetal
+          temp.push(turn.metal)
+          setBlueMetal(temp)
+          setFrame((sliderValue-1)/2)
         }
 
         // Update visibility
-        for (let visCh of turn.tiles_made_visible) {
+        for (let visCh of turn.tiles_explored) {
           let x = visCh[0]
           let y = visCh[1]
 
-          if (player === "RED") {
+          if (player === "red") {
             nextVisP1[y][x] = (
               <div key={`${x}${y}`} className="grid-square"></div>
             )
@@ -256,13 +256,19 @@ export default function GridBoard(props) {
           let x = terrCh[0]
           let y = terrCh[1]
 
-          let terrNum = terrCh[2]
+          let terrNum = -1
+          if (player === "red") {
+            terrNum = 1
+          }
+          terrNum = terrNum + nextTileInfo[y][x][0]
+
           let terrCol = 0
           if (terrNum > 0) {
             terrCol = 3
           } else if (terrNum < 0) {
             terrCol = 4
           }
+
           nextGrid[y][x] = (
             <GridSquare key={`${x}${y}`} color={terrCol} useImg={null} />
           )
@@ -291,32 +297,35 @@ export default function GridBoard(props) {
           // Add robot at new position
           let x = robotCh[1]
           let y = robotCh[2]
-          let robotType = robotCh[3]
-          let battery = robotCh[4]
-          let robotImg
-          if (player === "RED") {
-            if (robotType === "EXPLORER") robotImg = ExplorerImgRed
-            else if (robotType === "TERRAFORMER") robotImg = TerraformerImgRed
-            else robotImg = MinerImgRed
-          } else {
-            if (robotType === "EXPLORER") robotImg = ExplorerImgBlue
-            else if (robotType === "TERRAFORMER") robotImg = TerraformerImgBlue
-            else robotImg = MinerImgBlue
-          }
+          if (x !== -1 && y !== -1) {
+            let robotType = robotCh[3]
+            let battery = robotCh[4]
+            let robotImg
+            if (player === "red") {
+              if (robotType === "e") robotImg = ExplorerImgRed
+              else if (robotType === "t") robotImg = TerraformerImgRed
+              else robotImg = MinerImgRed
+            } else {
+              if (robotType === "e") robotImg = ExplorerImgBlue
+              else if (robotType === "t") robotImg = TerraformerImgBlue
+              else robotImg = MinerImgBlue
+            }
 
-          nextRobots[y][x] = (
-            <RobotSquare
-              key={`${x}${y}`}
-              srcImg={robotImg}
-              x={x}
-              y={y}
-              hasRobot={true}
-              type={robotType}
-              battery={battery}
-            />
-          )
-          // Store robot coordinates
-          prevRobots.current[robotID] = [x, y]
+            nextRobots[y][x] = (
+              <RobotSquare
+                key={`${x}${y}`}
+                srcImg={robotImg}
+                x={x}
+                y={y}
+                hasRobot={true}
+                type={robotType}
+                battery={battery}
+                id={robotID}
+              />
+            )
+            // Store robot coordinates
+            prevRobots.current[robotID] = [x, y]
+          }
         }
       }
 
