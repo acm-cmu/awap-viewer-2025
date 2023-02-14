@@ -35,7 +35,7 @@ export default function MapMakerGrid(props) {
           <MapMakerGridSquare key={`${col}${row}`} x={row} y={col} color="0" useImg={null} />
         )
         tileInfo[row].push([0, 0])
-        tempMapObj[row].push(['T', true, true, 0, 0])
+        tempMapObj[row].push(['T', 0, 0])
       }
     }
 

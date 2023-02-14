@@ -1,6 +1,8 @@
 import React, { useContext } from "react"
 import { ViewerContext } from "../../pages/MapMaker"
-import "../SidePanel/SidePanel.css"
+import "./MapMakerPanel.css"
+import Grid from "@mui/material/Grid"
+
 
 export default function MapMakerPanel(props) {
   const {
@@ -27,7 +29,7 @@ export default function MapMakerPanel(props) {
 
   const downloadMap = () => {
     if (mapObj && showMap) {
-      const fileName = "map.json";
+      const fileName = "map.awap23m";
       const data = new Blob([JSON.stringify(mapObj)], { type: "text/json" });
       const jsonURL = window.URL.createObjectURL(data);
       const link = document.createElement("a");
@@ -51,51 +53,54 @@ export default function MapMakerPanel(props) {
     <div className="side-panel">
       <h1>AWAP 2023 Map Maker</h1>
       <form onSubmit={handleSubmit}>
-        <label>Rows:
-          <input type="number" value={rows} onChange={(e)=>setRows(e.target.value)}/>
-        </label>
-        <label>Cols:
-          <input type="number" value={cols} onChange={(e)=>setCols(e.target.value)}/>
-        </label>
-        <input type="submit" />
+        <Grid container direction="column" alignItems="center">
+          <Grid container direction="row" justifyContent="center">
+            <label>Rows:
+              <input type="number" value={rows} onChange={(e)=>setRows(e.target.value)}/>
+            </label>
+            <label>Cols:
+              <input type="number" value={cols} onChange={(e)=>setCols(e.target.value)}/>
+            </label>
+          </Grid>
+          <input type="submit" value="Init Grid" />
+        </Grid>
       </form>
 
+      <button onClick={resetMap}>Reset Grid</button>
+
       <br></br>
+      <br></br>
+      <p>Brush Settings:</p>
+      <Grid container class="radio-container" direction="column">
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="T" name="brush" onChange={handleBrushRadio}/>
+          <label>Terraformable</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="I" name="brush" onChange={handleBrushRadio}/>
+          <label>Impassible</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="M" name="brush" onChange={handleBrushRadio}/>
+          <label>Mining</label>
+          <input class="num-input" type="number" placeholder="5"
+            onChange={(e)=>setMnum(parseInt(e.target.value))}/>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="R" name="brush" onChange={handleBrushRadio}/>
+          <label>Red Tile</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="B" name="brush" onChange={handleBrushRadio}/>
+          <label>Blue Tile</label>
+        </Grid>
+      </Grid>
 
       <button onClick={downloadMap}>Download Map</button>
-
-      <br></br>
-
-      <button onClick={resetMap}>Reset</button>
-
-      <br></br>
-
-      <input type="radio" value="T" name="brush" onChange={handleBrushRadio}/>
-      <label>Terraformable</label>
-
-      <input type="radio" value="I" name="brush" onChange={handleBrushRadio}/>
-      <label>Impassible</label>
-
-      <input type="radio" value="M" name="brush" onChange={handleBrushRadio}/>
-      <label>Mining</label>
-
-      <input type="radio" value="redFog" name="brush" onChange={handleBrushRadio}/>
-      <label>Red Fog</label>
-
-      <input type="radio" value="blueFog" name="brush" onChange={handleBrushRadio}/>
-      <label>Blue Fog</label>
-
-      <label>
-        <input type="radio" value="Tnum" name="brush" onChange={handleBrushRadio}/>
-        Terraform Number
-        <input type="number" onChange={(e)=>setTnum(e.target.value)}/>
-      </label>
-
-      <label>
-        <input type="radio" value="Mnum" name="brush" onChange={handleBrushRadio}/>
-        Mining Number
-        <input type="number" onChange={(e)=>setMnum(e.target.value)}/>
-      </label>
 
     </div>
   )
