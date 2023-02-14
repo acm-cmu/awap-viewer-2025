@@ -12,7 +12,6 @@ function MapMaker() {
   const [showMap, setShowMap] = useState(null)
   const [mapObj, setMapObj] = useState(null)
   const [brushPreset, setBrushPreset] = useState(null)
-  const [Tnum, setTnum] = useState(null)
   const [Mnum, setMnum] = useState(null)
 
   return (
@@ -26,8 +25,6 @@ function MapMaker() {
         setShowMap,
         mapObj,
         setMapObj,
-        Tnum,
-        setTnum,
         Mnum,
         setMnum,
         brushPreset,

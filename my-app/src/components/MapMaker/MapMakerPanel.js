@@ -14,8 +14,6 @@ export default function MapMakerPanel(props) {
     setShowMap,
     mapObj,
     setMapObj,
-    Tnum,
-    setTnum,
     Mnum,
     setMnum,
     brushPreset,
@@ -70,7 +68,7 @@ export default function MapMakerPanel(props) {
 
       <br></br>
       <br></br>
-      <p>Brush Settings:</p>
+      <h2>Brush Settings:</h2>
       <Grid container class="radio-container" direction="column">
         <Grid container direction="row" alignItems="center">
           <input type="radio" value="T" name="brush" onChange={handleBrushRadio}/>

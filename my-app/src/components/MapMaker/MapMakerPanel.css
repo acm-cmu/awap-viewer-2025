@@ -14,7 +14,7 @@
     margin: 5vh 1vw 2vh 1vw;
   }
   
-  p {
+  h2 {
     font-family: "Earth Orbiter", sans-serif;
     color: var(--dark-color);
     font-size: 3.2vmin;
@@ -196,16 +196,13 @@
       margin: 0.5em
   }
 
-  input {
-    background-color: var(--light-color);
-    border: 1px solid var(--dark-color);
-    border-radius: 0.3em;
-    height: 2em;
-  }
   input[type="number"] {
       width: 2.7em;
       height: 1.8em;
       margin: 0.3em;
+      background-color: var(--light-color);
+      border: 1px solid var(--dark-color);
+      border-radius: 0.3em;
   }
   input[type="radio"] {
     accent-color: var(--dark-color);
