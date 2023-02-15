@@ -32,18 +32,25 @@ Last year's game viewer can be found [here](https://github.com/rzhan11/awap2022-
    ```sh
    git clone https://github.com/ACM-CMU/awap-viewer-2023.git
    ```
-2. Navigate to the `my-app` folder and install NPM packages
+2. Install NPM packages
    ```sh
-   cd my-app
-   npm install
-   ```
-
-## Running The Viewer
-1. Navigate to the `my-app` folder
-2. Starts the local server (if not running yet)
+    npm install
+    ```
+## Running The Viewer (locally)
+1. Run the viewer
    ```sh
    npm start
    ```
-3. Open http://localhost:3000/
-4. Upload a replay file using the upload button (match replays are saved in the `replays/` folder of the game engine repo)
+2. Open the viewer in your browser
+   ```sh
+    http://localhost:3000
+    ```
+
+## Deployment 
+1. Push the changes to the `main` branch
+2. Run the deploy script
+   ```sh
+   npm run deploy
+   ```
+3. The viewer will be deployed to https://view.awap.acmatcmu.com  
 
