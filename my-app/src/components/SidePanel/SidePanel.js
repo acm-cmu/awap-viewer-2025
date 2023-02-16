@@ -11,8 +11,7 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
-import LineChart from './LineChart.js';
-
+import LineChart from "./LineChart.js"
 
 export default function SidePanel(props) {
   const {
@@ -73,7 +72,6 @@ export default function SidePanel(props) {
   }
 
   const resetPlaybutton = useCallback(() => {
-    console.log("nya")
     setRedMetal([])
     setBlueMetal([])
 
@@ -212,19 +210,12 @@ export default function SidePanel(props) {
       </ToggleSwitch>
       <div className="container">
         <div className="row">
-          
-        <LineChart />
+          <LineChart />
           <div className="col-lg-6 graph">
-            <p>
-            <h1>
-          </h1>
-              
-            </p>
+            <p></p>
           </div>
           <div className="col-lg-6 graph">
-            <p>
-
-            </p>
+            <p></p>
           </div>
         </div>
       </div>
