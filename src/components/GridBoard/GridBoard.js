@@ -16,7 +16,7 @@ import MinerImgRed from "../../better-img/pick-outline-red.PNG"
 import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
 import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
 import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
-import MetalImg from "../../img/metal_outline.png"
+import MetalImg from "../../img/metal.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
