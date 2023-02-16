@@ -54,12 +54,12 @@
   }
   
   /* terraformed tile red */
-  .color-3 {
+  .color-4 {
     background-color: var(--red-color);
   }
   
   /* terraformed tile blue */
-  .color-4 {
+  .color-3 {
     background-color: var(--blue-color);
   }
   

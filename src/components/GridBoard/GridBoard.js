@@ -272,7 +272,7 @@ export default function GridBoard(props) {
           let y = terrCh[1]
 
           let terrNum = -1
-          if (player === "red") {
+          if (player === "blue") {
             terrNum = 1
           }
           terrNum = terrNum + nextTileInfo[y][x][0]
