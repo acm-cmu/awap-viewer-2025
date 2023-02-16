@@ -36,7 +36,11 @@ export default function GridBoard(props) {
     redMetal,
     blueMetal,
     setRedMetal,
-    setBlueMetal
+    setBlueMetal,
+    redTerraform,
+    setRedTerraform,
+    blueTerraform,
+    setBlueTerraform
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -232,12 +236,22 @@ export default function GridBoard(props) {
           temp.push(turn.metal)
           setRedMetal(temp)
           setFrame(sliderValue/2)
+
+          const temp2 = redTerraform
+          // console.log("temp2: " + temp2)
+          // console.log("length: " + (temp2.length))
+          temp2.push((turn.tiles_terraformed).length)
+          setRedTerraform(temp2)
         } else {
           //Setting Blue Metal Array
           const temp = blueMetal
           temp.push(turn.metal)
           setBlueMetal(temp)
           setFrame((sliderValue-1)/2)
+
+          const temp2 = blueTerraform
+          temp2.push((turn.tiles_terraformed).length)
+          setBlueTerraform(temp2)
         }
 
         // Update visibility
