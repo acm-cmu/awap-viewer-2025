@@ -2,8 +2,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/ACM-CMU/awap-viewer-2023">
-    <!-- <img src="images/logo.png" alt="Logo" width="80" height="80"> -->
-    LOGO PLACEHOLDER
+    <img src="public/banner.png" alt="Logo" width="800" height="222">
   </a>
 
   <h3 align="center">AWAP 2023 Game Viewer</h3>
