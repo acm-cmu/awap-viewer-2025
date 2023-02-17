@@ -82,7 +82,14 @@ export default function SidePanel(props) {
     setBlueTerraform([])
     setFramePlaying(false)
     setIsPlay(false)
-  }, [setFramePlaying, setIsPlay])
+  }, [
+    setRedMetal,
+    setBlueMetal,
+    setRedTerraform,
+    setBlueTerraform,
+    setFramePlaying,
+    setIsPlay,
+  ])
 
   useEffect(() => {
     if (isFinished) {
