@@ -212,7 +212,11 @@
   .radio-container {
       margin-top: 1vh;
       margin-left: 8vw;
-      margin-bottom: 5vh;
+      margin-bottom: 1vh;
+  }
+  .switches {
+    margin-left: 8vw;
+    margin-bottom: 2vh;
   }
 
   input[type="submit"]{

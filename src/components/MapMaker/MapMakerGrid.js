@@ -32,7 +32,7 @@ export default function MapMakerGrid(props) {
       tempMapObj.push([])
       for (let col = 0; col < cols; col++) {
         tempArr[row].push(
-          <MapMakerGridSquare key={`${col}${row}`} x={row} y={col} color="0" useImg={null} />
+          <MapMakerGridSquare key={`${col}${row}`} x={row} y={col}/>
         )
         tileInfo[row].push([0, 0])
         tempMapObj[row].push(['T', 0, 0])
