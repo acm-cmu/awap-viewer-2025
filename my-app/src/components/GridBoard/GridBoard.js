@@ -38,6 +38,7 @@ export default function GridBoard(props) {
     blueMetal,
     setRedMetal,
     setBlueMetal,
+    isTrailToggled,
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -475,7 +476,7 @@ export default function GridBoard(props) {
       {isP2Vis && <div className="board visibility">{visibilityP2}</div>}
       {isP1Vis && <div className="board visibility">{visibilityP1}</div>}
       <div className="board robot">{robots}</div>
-      <div className="board trail">{trails}</div>
+      {isTrailToggled && <div className="board trail">{trails}</div>}
       <div className="board grid">{grid}</div>
     </div>
   )

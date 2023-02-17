@@ -28,6 +28,7 @@ export default function SidePanel(props) {
     setRedMetal,
     setBlueMetal,
     setSpeed,
+    setIsTrailToggled,
   } = useContext(ViewerContext)
 
   const showFile = async (event) => {
@@ -193,21 +194,29 @@ export default function SidePanel(props) {
           </StyledEngineProvider>
         </Grid>
       </Grid>
-
-      <ToggleSwitch
-        onToggle={handleToggleP1Vis}
-        useID="p1vis"
-        disabled={isDisabled}
-      >
-        <p>Player 1 Visibility</p>
-      </ToggleSwitch>
-      <ToggleSwitch
-        onToggle={handleToggleP2Vis}
-        useID="p2vis"
-        disabled={isDisabled}
-      >
-        <p>Player 2 Visibility</p>
-      </ToggleSwitch>
+      <div class="toggle-layout">
+        <ToggleSwitch
+          onToggle={handleToggleP1Vis}
+          useID="p1vis"
+          disabled={isDisabled}
+        >
+          <p>Player 1 Visibility</p>
+        </ToggleSwitch>
+        <ToggleSwitch
+          onToggle={handleToggleP2Vis}
+          useID="p2vis"
+          disabled={isDisabled}
+        >
+          <p>Player 2 Visibility</p>
+        </ToggleSwitch>
+        <ToggleSwitch
+          onToggle={() => setIsTrailToggled((value) => !value)}
+          useID="trailtoggle"
+          disabled={isDisabled}
+        >
+          <p>Show Robot Move Trail</p>
+        </ToggleSwitch>
+      </div>
       <div className="container">
         <div className="row">
           <LineChart />

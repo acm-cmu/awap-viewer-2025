@@ -22,9 +22,9 @@ function Viewer() {
   const [redMetal, setRedMetal] = useState([])
   const [blueMetal, setBlueMetal] = useState([])
 
-
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
+  const [isTrailToggled, setIsTrailToggled] = useState(false)
 
   const handleFileData = (replayData) => {
     setReplay(replayData)
@@ -74,8 +74,10 @@ function Viewer() {
         setRow,
         col,
         setCol,
-        tiles, 
-        setTiles
+        tiles,
+        setTiles,
+        isTrailToggled,
+        setIsTrailToggled,
       }}
     >
       <div className="MainPage">
