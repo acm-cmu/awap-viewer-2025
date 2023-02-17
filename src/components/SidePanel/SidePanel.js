@@ -115,7 +115,8 @@ export default function SidePanel(props) {
 
   return (
     <div className="side-panel">
-      <h1>AWAP 2023 Viewer</h1>
+      <button onClick={props.togglePage}> Switch To Map Maker </button>
+      <h1 style={{marginTop:0}}>AWAP 2023 Viewer</h1>
       <input type="file" className="file-upload" onChange={showFile} />
       <StyledEngineProvider injectFirst>
         <Slider
