@@ -194,7 +194,7 @@ export default function SidePanel(props) {
           </StyledEngineProvider>
         </Grid>
       </Grid>
-      <div class="toggle-layout">
+      <div className="toggle-layout">
         <ToggleSwitch
           onToggle={handleToggleP1Vis}
           useID="p1vis"
