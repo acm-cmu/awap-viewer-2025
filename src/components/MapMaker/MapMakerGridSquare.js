@@ -24,7 +24,7 @@ export default function MapMakerGridSquare(props) {
   let mining = mapObj[x][y][0] == "M"
 
   function setI(i, j) {
-    const temp = { ...mapObj };
+    const temp = mapObj.slice();
     temp[i][j][0] = 'I';
     temp[i][j][1] = 0;
     temp[i][j][2] = 0;
@@ -32,35 +32,35 @@ export default function MapMakerGridSquare(props) {
   }
 
   function setT(i, j) {
-    const temp = { ...mapObj };
-    mapObj[i][j][0] = 'T';
-    mapObj[i][j][1] = 0;
-    mapObj[i][j][2] = 0;
+    const temp = mapObj.slice();
+    temp[i][j][0] = 'T';
+    temp[i][j][1] = 0;
+    temp[i][j][2] = 0;
     setMapObj(temp);
   }
 
   function setM(i, j) {
-    const temp = { ...mapObj };
-    mapObj[i][j][0] = 'M';
-    mapObj[i][j][1] = 0;
-    if (Mnum == null) { mapObj[x][y][2] = 5; }
-    else { mapObj[x][y][2] = Mnum; }
+    const temp = mapObj.slice();
+    temp[i][j][0] = 'M';
+    temp[i][j][1] = 0;
+    if (Mnum == null) { temp[x][y][2] = 5; }
+    else { temp[x][y][2] = Mnum; }
     setMapObj(temp);
   }
 
   function setR(i, j) {
-    const temp = { ...mapObj };
-    mapObj[i][j][0] = 'T';
-    mapObj[i][j][1] = -5;
-    mapObj[i][j][2] = 0;
+    const temp = mapObj.slice();
+    temp[i][j][0] = 'T';
+    temp[i][j][1] = -5;
+    temp[i][j][2] = 0;
     setMapObj(temp);
   }
 
   function setB(i, j) {
-    const temp = { ...mapObj };
-    mapObj[i][j][0] = 'T';
-    mapObj[i][j][1] = 5;
-    mapObj[i][j][2] = 0;
+    const temp = mapObj.slice();
+    temp[i][j][0] = 'T';
+    temp[i][j][1] = 5;
+    temp[i][j][2] = 0;
     setMapObj(temp);
   }
 
