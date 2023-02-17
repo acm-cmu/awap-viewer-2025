@@ -42,8 +42,7 @@ function MapMaker({togglePage}) {
     >
       <div className="MainPage">
         <div className="row-structure">
-          <button onClick={togglePage}> Game Viewer </button>
-          <MapMakerPanel/>
+          <MapMakerPanel togglePage={togglePage}/>
           {showMap && rows && cols ? (
             <MapMakerGrid/>
           ) : null}

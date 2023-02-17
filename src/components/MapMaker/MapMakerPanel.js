@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 
 
-export default function MapMakerPanel(props) {
+export default function MapMakerPanel({togglePage}) {
   const {
     rows,
     setRows,
@@ -66,7 +66,8 @@ export default function MapMakerPanel(props) {
 
   return (
     <div className="side-panel">
-      <h1>AWAP 2023 Map Maker</h1>
+      <button onClick={togglePage}> Switch to Game Viewer </button>
+      <h1 style={{marginTop:0}}>AWAP 2023 Map Maker</h1>
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center">
           <Grid container direction="row" justifyContent="center">

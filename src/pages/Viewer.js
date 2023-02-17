@@ -96,11 +96,11 @@ function Viewer({togglePage}) {
     >
       <div className="MainPage">
         <div className="row-structure">
-          <button onClick={togglePage}> MapMaker </button>
           <SidePanel
             onFileData={handleFileData}
             onP1VisToggled={handleP1VisToggled}
             onP2VisToggled={handleP2VisToggled}
+            togglePage={togglePage}
           />
           {replay != null ? (
             <GridBoard
