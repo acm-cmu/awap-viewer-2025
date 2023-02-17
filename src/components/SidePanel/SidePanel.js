@@ -143,7 +143,7 @@ export default function SidePanel(props) {
           </h2>
         </div>
       ) : (
-        <h2 className="info">FRAME 0 OF 250 / TURN 0 RED </h2>
+        <h2 className="info">FRAME 0 OF 250 / TURN 0 OF BLUE </h2>
       )}
       <StyledEngineProvider injectFirst>
         <Slider
