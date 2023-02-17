@@ -76,6 +76,8 @@ import React, {
         setRedTerraform,
         setBlueTerraform,
         framePlaying,
+        redRobots,
+        blueRobots,
         replay,
         sliderValue
       } = useContext(ViewerContext)
@@ -125,7 +127,8 @@ import React, {
       return (
         <div className="container mt-5">
           <h1> Frame: {slideVal} / {totalFrame}</h1>
-          
+          <h1> Red Robots: {redRobots} </h1>
+          <h1> Blue Robots: {blueRobots} </h1>
           <h1>Terraform Graph</h1>
           <Chart
             width={'350px'}

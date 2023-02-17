@@ -40,7 +40,11 @@ export default function GridBoard(props) {
     redTerraform,
     setRedTerraform,
     blueTerraform,
-    setBlueTerraform
+    setBlueTerraform,
+    blueRobots,
+    setBlueRobots,
+    redRobots,
+    setRedRobots
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -232,6 +236,8 @@ export default function GridBoard(props) {
 
         if(player === "red"){
           //Setting Red Metal Array
+          console.log("nya");
+          console.log(turn.num_robots)
           const temp = redMetal
           temp.push(turn.metal)
           setRedMetal(temp)
@@ -242,6 +248,8 @@ export default function GridBoard(props) {
           // console.log("length: " + (temp2.length))
           temp2.push((turn.tiles_terraformed).length)
           setRedTerraform(temp2)
+          setRedRobots(turn.num_robots)
+
         } else {
           //Setting Blue Metal Array
           const temp = blueMetal
@@ -252,6 +260,7 @@ export default function GridBoard(props) {
           const temp2 = blueTerraform
           temp2.push((turn.tiles_terraformed).length)
           setBlueTerraform(temp2)
+          setBlueRobots(turn.num_robots)
         }
 
         // Update visibility
