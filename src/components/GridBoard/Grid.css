@@ -14,12 +14,17 @@
 
 .board.robot {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
 }
 
 .board.visibility {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
+}
+
+.board.trail {
+  position: absolute;
+  z-index: 1;
 }
 
 .grid-square {
@@ -27,6 +32,10 @@
   height: var(--tile-size);
   border: var(--border-width) solid var(--dark-color);
   display: block;
+}
+
+.grid-square.trail {
+  opacity: 0.5;
 }
 
 .tile-div {
@@ -72,6 +81,11 @@
   background-color: var(--blue-color);
 }
 
+/* trail empty color */
+.color-5 {
+  background-color: none;
+}
+
 .grid-square .tooltiptext {
   visibility: hidden;
   width: 150px;
@@ -85,7 +99,7 @@
 
   /* Position the tooltip */
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .grid-square:hover .tooltiptext {

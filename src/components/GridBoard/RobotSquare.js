@@ -1,10 +1,10 @@
-import React, { useContext, useState} from "react"
+import React, { useContext, useState } from "react"
 import { ViewerContext } from "../../pages/Viewer"
 import "./Grid.css"
 
 export default function RobotSquare(props) {
-  const { srcImg, x, y, type, hasRobot, battery, id, team} = props
-  const { setCol, setRow, tiles} = useContext(ViewerContext)
+  const { srcImg, x, y, type, hasRobot, battery, id, team } = props
+  const { setCol, setRow, tiles } = useContext(ViewerContext)
 
   const [tiletype, setTileType] = useState(null)
   const [boldtiletype, setBoldTileType] = useState(null)
@@ -14,44 +14,44 @@ export default function RobotSquare(props) {
   const handleHover = (col, row) => {
     setCol(col)
     setRow(row)
-    if (col != null && row != null) {
-      switch(tiles[row][col][0]) {
+    if (tiles != null && col != null && row != null) {
+      switch (tiles[row][col][0]) {
         case "I":
           setTileType("Impassable")
           setBoldTileType("Type: ")
-          break;
+          break
         case "M":
-          setTileType("Metal " + (tiles[row][col][2]))
+          setTileType("Metal " + tiles[row][col][2])
           setBoldTileType("Type: ")
-          break;
+          break
         default:
           setTileType(tiles[row][col][0])
           setBoldTileType("Terr. Level: ")
       }
-      switch(tiles[row][col][1]) {
+      switch (tiles[row][col][1]) {
         case 0:
           setTileVisib("None")
-          break;
+          break
         case 2:
           setTileVisib("Red")
-          break;
+          break
         case 1:
           setTileVisib("Blue")
-          break;
+          break
         default:
           setTileVisib("Both")
       }
     }
-    switch(type) {
+    switch (type) {
       case "e":
         setRobotType("Explorer")
-        break;
+        break
       case "m":
         setRobotType("Miner")
-        break;
+        break
       default:
         setRobotType("Terraformer")
-        break;
+        break
     }
   }
 
@@ -59,24 +59,25 @@ export default function RobotSquare(props) {
     <div className="tile-div">
       {hasRobot ? (
         <div className="grid-square">
-        <img
-          id={`robot${x}${y}`}
-          src={srcImg}
-          alt=""
-          className="grid-square"
-          onMouseOver={() => {
-            handleHover(x, y)
-          }}
-          onMouseOut={() => {
-            handleHover(null, null)
-          }}
-        />
-        <p className="tooltiptext"> 
-        <strong> Position: </strong> ({x}, {y}) <br></br>
-        <strong> {boldtiletype} </strong> {tiletype} <br></br>
-        <strong> Visibility: </strong> {tilevisib} <br></br>
-        <strong> Robot: </strong>{id}, {robottype}, {team}, {battery} <br></br>
-        </p>
+          <img
+            id={`robot${x}${y}`}
+            src={srcImg}
+            alt=""
+            className="grid-square"
+            onMouseOver={() => {
+              handleHover(x, y)
+            }}
+            onMouseOut={() => {
+              handleHover(null, null)
+            }}
+          />
+          <p className="tooltiptext">
+            <strong> Position: </strong> ({x}, {y}) <br></br>
+            <strong> {boldtiletype} </strong> {tiletype} <br></br>
+            <strong> Visibility: </strong> {tilevisib} <br></br>
+            <strong> Robot: </strong>
+            {id}, {robottype}, {team}, {battery} <br></br>
+          </p>
         </div>
       ) : (
         <div
@@ -89,13 +90,11 @@ export default function RobotSquare(props) {
             handleHover(null, null)
           }}
         >
-          
-        <p className="tooltiptext"> 
-        <strong> Position: </strong> ({x}, {y}) <br></br>
-        <strong> {boldtiletype} </strong> {tiletype} <br></br>
-        <strong> Visibility: </strong> {tilevisib} <br></br>
-        </p>
-        
+          <p className="tooltiptext">
+            <strong> Position: </strong> ({x}, {y}) <br></br>
+            <strong> {boldtiletype} </strong> {tiletype} <br></br>
+            <strong> Visibility: </strong> {tilevisib} <br></br>
+          </p>
         </div>
       )}
     </div>

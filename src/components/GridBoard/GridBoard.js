@@ -9,6 +9,7 @@ import React, {
 import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
+import TrailSquare from "./TrailSquare"
 import "./Grid.css"
 import ExplorerImgRed from "../../better-img/light-outline-red.PNG"
 import TerraformerImgRed from "../../better-img/shovel-outline-red.PNG"
@@ -37,6 +38,7 @@ export default function GridBoard(props) {
     blueMetal,
     setRedMetal,
     setBlueMetal,
+    isTrailToggled,
     redTerraform,
     setRedTerraform,
     blueTerraform,
@@ -44,7 +46,7 @@ export default function GridBoard(props) {
     blueRobots,
     setBlueRobots,
     redRobots,
-    setRedRobots
+    setRedRobots,
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -61,9 +63,28 @@ export default function GridBoard(props) {
   // States for displaying various elements
   const [grid, setGrid] = useState(null)
   const [robots, setRobots] = useState(null)
+  const [trails, setTrails] = useState(null)
   const prevRobots = useRef({}) // dictionary mapping robot ids to coordinates
   const [visibilityP1, setVisibilityP1] = useState(null)
   const [visibilityP2, setVisibilityP2] = useState(null)
+
+  // Initializes trails
+  const initialTrails = useMemo(() => {
+    let tempArr = []
+    for (let row = 0; row < nrows; row++) {
+      tempArr.push([])
+      for (let col = 0; col < ncols; col++) {
+        tempArr[row].push(
+          <GridSquare key={`${col}${row}`} color="5" useImg={null} />
+        )
+      }
+    }
+    return tempArr
+  }, [nrows, ncols])
+
+  useEffect(() => {
+    setTrails(initialTrails)
+  }, [initialTrails, replay])
 
   // Initializes tile grid
   // eslint-disable-next-line
@@ -91,12 +112,11 @@ export default function GridBoard(props) {
           <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
         )
         if (colorID === 1) {
-          tileInfo[r][c][0] = 'I'
+          tileInfo[r][c][0] = "I"
         } else if (colorID === 2) {
-          tileInfo[r][c][0] = 'M'
+          tileInfo[r][c][0] = "M"
           tileInfo[r][c][2] = metalvalue
         }
-
       }
     }
 
@@ -118,14 +138,17 @@ export default function GridBoard(props) {
     }
 
     for (let vis_tile of initVis) {
-        let x = vis_tile[0]
-        let y = vis_tile[1]
-        let pl = vis_tile[2]
-        if (tileInfo[y][x][1] === 0) {
-          tileInfo[y][x][1] = pl
-        } else if ((tileInfo[y][x][1] === 1 && pl === 2) || (tileInfo[y][x][1] === 2 && pl === 1)) {
-          tileInfo[y][x][1] = 4
-        }
+      let x = vis_tile[0]
+      let y = vis_tile[1]
+      let pl = vis_tile[2]
+      if (tileInfo[y][x][1] === 0) {
+        tileInfo[y][x][1] = pl
+      } else if (
+        (tileInfo[y][x][1] === 1 && pl === 2) ||
+        (tileInfo[y][x][1] === 2 && pl === 1)
+      ) {
+        tileInfo[y][x][1] = 4
+      }
     }
 
     setGrid(tempArr)
@@ -144,7 +167,13 @@ export default function GridBoard(props) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <RobotSquare key={`${col}${row}`} x={col} y={row} hasRobot={false} battery={0}/>
+          <RobotSquare
+            key={`${col}${row}`}
+            x={col}
+            y={row}
+            hasRobot={false}
+            battery={0}
+          />
         )
       }
     }
@@ -157,7 +186,6 @@ export default function GridBoard(props) {
   // Initializes visibility grid
   const makeVisGrid = useCallback(
     (player) => {
-
       let tempArr = []
       for (let row = 0; row < nrows; row++) {
         tempArr.push([])
@@ -229,36 +257,42 @@ export default function GridBoard(props) {
     } else if (sliderValue <= -1) {
     } else {
       // Updates input arrays in place
-      const updateFrame = (i, nextGrid, nextVisP1, nextVisP2, nextRobots, nextTileInfo) => {
+      const updateFrame = (
+        i,
+        nextGrid,
+        nextVisP1,
+        nextVisP2,
+        nextRobots,
+        nextTileInfo
+      ) => {
         if (i < 0) return
         let turn = gameTurns[i]
         let player = turn.team
 
-        if(player === "red"){
+        if (player === "red") {
           //Setting Red Metal Array
-          console.log("nya");
+          console.log("nya")
           console.log(turn.num_robots)
           const temp = redMetal
           temp.push(turn.metal)
           setRedMetal(temp)
-          setFrame(sliderValue/2)
+          setFrame(sliderValue / 2)
 
           const temp2 = redTerraform
           // console.log("temp2: " + temp2)
           // console.log("length: " + (temp2.length))
-          temp2.push((turn.tiles_terraformed).length)
+          temp2.push(turn.tiles_terraformed.length)
           setRedTerraform(temp2)
           setRedRobots(turn.num_robots)
-
         } else {
           //Setting Blue Metal Array
           const temp = blueMetal
           temp.push(turn.metal)
           setBlueMetal(temp)
-          setFrame((sliderValue-1)/2)
+          setFrame((sliderValue - 1) / 2)
 
           const temp2 = blueTerraform
-          temp2.push((turn.tiles_terraformed).length)
+          temp2.push(turn.tiles_terraformed.length)
           setBlueTerraform(temp2)
           setBlueRobots(turn.num_robots)
         }
@@ -315,13 +349,14 @@ export default function GridBoard(props) {
           }
         }
 
-        // Modify robots
+        // Modify robots and trails
+        let nextTrails = makeDeepCopy(initialTrails)
         for (let robotCh of turn.robot_changes) {
-          // Remove robot at prev position if it exists
           let robotID = robotCh[0]
           if (robotID in prevRobots.current) {
             let xPrev = prevRobots.current[robotID][0]
             let yPrev = prevRobots.current[robotID][1]
+            // Remove robot at prev position if it exists
             nextRobots[yPrev][xPrev] = (
               <RobotSquare
                 key={`${xPrev}${yPrev}`}
@@ -330,11 +365,22 @@ export default function GridBoard(props) {
                 hasRobot={false}
               />
             )
+            // Add trails for prev position
+            let imgPrev = prevRobots.current[robotID][2]
+            nextTrails[yPrev][xPrev] = (
+              <TrailSquare
+                key={`${xPrev}${yPrev}`}
+                srcImg={imgPrev}
+                x={xPrev}
+                y={yPrev}
+              />
+            )
           }
 
-          // Add robot at new position
+          // Get coordinates of robot at new position
           let x = robotCh[1]
           let y = robotCh[2]
+          // Add robot at new position
           if (x !== -1 && y !== -1) {
             let robotType = robotCh[3]
             let battery = robotCh[4]
@@ -364,23 +410,33 @@ export default function GridBoard(props) {
               />
             )
             // Store robot coordinates
-            prevRobots.current[robotID] = [x, y]
+            prevRobots.current[robotID] = [x, y, robotImg]
           }
         }
+        return nextTrails
       }
 
       var idx
       if (sliderValue >= index) {
         idx = index
+        let newTrails
         const newGrid = makeDeepCopy(grid)
         const newVisP1 = makeDeepCopy(visibilityP1)
         const newVisP2 = makeDeepCopy(visibilityP2)
         const newRobots = makeDeepCopy(robots)
         const newTileInfo = makeDeepCopy3D(tiles)
         while (idx <= sliderValue) {
-          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots, newTileInfo)
+          newTrails = updateFrame(
+            idx,
+            newGrid,
+            newVisP1,
+            newVisP2,
+            newRobots,
+            newTileInfo
+          )
           idx += 1
         }
+        setTrails(newTrails)
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
@@ -388,6 +444,7 @@ export default function GridBoard(props) {
         setTiles(newTileInfo)
       } else {
         const arr = initialGrid
+        let newTrails
         const newGrid = makeDeepCopy(arr[0])
         const newVisP1 = makeDeepCopy(p1InitialVis)
         const newVisP2 = makeDeepCopy(p2InitialVis)
@@ -395,9 +452,17 @@ export default function GridBoard(props) {
         const newTileInfo = makeDeepCopy3D(arr[1])
         idx = 0
         while (idx <= sliderValue) {
-          updateFrame(idx, newGrid, newVisP1, newVisP2, newRobots, newTileInfo)
+          newTrails = updateFrame(
+            idx,
+            newGrid,
+            newVisP1,
+            newVisP2,
+            newRobots,
+            newTileInfo
+          )
           idx += 1
         }
+        setTrails(newTrails)
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
@@ -437,8 +502,8 @@ export default function GridBoard(props) {
       {isP2Vis && <div className="board visibility">{visibilityP2}</div>}
       {isP1Vis && <div className="board visibility">{visibilityP1}</div>}
       <div className="board robot">{robots}</div>
+      {isTrailToggled && <div className="board trail">{trails}</div>}
       <div className="board grid">{grid}</div>
     </div>
-    
   )
 }
