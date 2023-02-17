@@ -21,6 +21,10 @@
     margin: 0;
   }
   
+  p {
+    font-size: 2.3vmin;
+  }
+  
   .graph {
     margin-top: 5vmin;
     margin-bottom: 5vmin;
@@ -215,21 +219,19 @@
       margin-bottom: 1vh;
   }
   .switches {
-    margin-left: 8vw;
-    margin-bottom: 2vh;
-  }
-
-  input[type="submit"]{
-    margin-bottom: 0.5em;
-    margin-top: 0.5em;
+    margin-left: 9vw;
+    margin-bottom: 1vh;
   }
 
   input[type="submit"], button {
-      padding: 0.3em;
-      padding-left: 0.5em;
-      padding-right: 0.5em;
-      border-radius: 0.3em;
-      border: none;
-      background-color: var(--dark-color);
-      color: white;
+    margin-bottom: 1.6em;
+    margin-top: 0.5em;
+    margin-left: 1em;
+    padding: 0.3em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    border-radius: 0.3em;
+    border: none;
+    background-color: var(--dark-color);
+    color: white;
   }

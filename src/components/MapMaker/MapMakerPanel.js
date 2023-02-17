@@ -77,14 +77,13 @@ export default function MapMakerPanel(props) {
               <input type="number" value={cols} onChange={(e)=>setCols(e.target.value)}/>
             </label>
           </Grid>
-          <input type="submit" value="Init Grid" />
+          <Grid container direction="row" justifyContent="center">
+            <input type="submit" value="Init Grid" />
+            <button onClick={resetMap}>Reset Grid</button>
+          </Grid>
         </Grid>
       </form>
 
-      <button onClick={resetMap}>Reset Grid</button>
-
-      <br></br>
-      <br></br>
       <h2>Brush Settings:</h2>
       <Grid container class="radio-container" direction="column">
         <Grid container direction="row" alignItems="center">
