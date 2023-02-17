@@ -22,6 +22,12 @@ function Viewer() {
   const [redMetal, setRedMetal] = useState([])
   const [blueMetal, setBlueMetal] = useState([])
 
+  const [redTerraform, setRedTerraform] = useState([])
+  const [blueTerraform, setBlueTerraform] = useState([])
+
+  const [redRobots, setRedRobots] = useState(null)
+  const [blueRobots, setBlueRobots] = useState(null)
+
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
   const [isTrailToggled, setIsTrailToggled] = useState(false)
@@ -52,8 +58,16 @@ function Viewer() {
       value={{
         redMetal,
         setRedMetal,
+        redRobots,
+        setRedRobots,
+        blueRobots,
+        setBlueRobots,
         blueMetal,
         setBlueMetal,
+        redTerraform,
+        setRedTerraform,
+        blueTerraform,
+        setBlueTerraform,
         frame,
         setFrame,
         replay,

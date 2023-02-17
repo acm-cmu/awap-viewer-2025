@@ -12,6 +12,7 @@ import Select from "@mui/material/Select"
 import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 import LineChart from "./LineChart.js"
+import TerraformChart from "./TerraformChart.js"
 
 export default function SidePanel(props) {
   const {
@@ -27,6 +28,8 @@ export default function SidePanel(props) {
     speed,
     setRedMetal,
     setBlueMetal,
+    setRedTerraform,
+    setBlueTerraform,
     setSpeed,
     setIsTrailToggled,
   } = useContext(ViewerContext)
@@ -75,7 +78,8 @@ export default function SidePanel(props) {
   const resetPlaybutton = useCallback(() => {
     setRedMetal([])
     setBlueMetal([])
-
+    setRedTerraform([])
+    setBlueTerraform([])
     setFramePlaying(false)
     setIsPlay(false)
   }, [setFramePlaying, setIsPlay])
@@ -186,9 +190,12 @@ export default function SidePanel(props) {
                 onChange={handleSpeedChange}
                 className="speed-select"
               >
+                <MenuItem value={0.25}>0.25x</MenuItem>
                 <MenuItem value={0.5}>0.5</MenuItem>
                 <MenuItem value={1}>1.0</MenuItem>
                 <MenuItem value={2.0}>2.0</MenuItem>
+                <MenuItem value={4.0}>4x</MenuItem>
+                <MenuItem value={8.0}>8x</MenuItem>
               </Select>
             </FormControl>
           </StyledEngineProvider>
@@ -219,6 +226,7 @@ export default function SidePanel(props) {
       </div>
       <div className="container">
         <div className="row">
+          <TerraformChart />
           <LineChart />
           <div className="col-lg-6 graph">
             <p></p>

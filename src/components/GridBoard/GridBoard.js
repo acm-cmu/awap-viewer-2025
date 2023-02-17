@@ -11,13 +11,13 @@ import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
 import TrailSquare from "./TrailSquare"
 import "./Grid.css"
-import ExplorerImgRed from "../../new-img/light-outline-red.PNG"
-import TerraformerImgRed from "../../new-img/shovel-outline-red.PNG"
-import MinerImgRed from "../../new-img/pick-outline-red.PNG"
-import ExplorerImgBlue from "../../new-img/light-outline-blue.PNG"
-import TerraformerImgBlue from "../../new-img/shovel-outline-blue.PNG"
-import MinerImgBlue from "../../new-img/pick-outline-blue.PNG"
-import MetalImg from "../../img/metal_outline.png"
+import ExplorerImgRed from "../../better-img/light-outline-red.PNG"
+import TerraformerImgRed from "../../better-img/shovel-outline-red.PNG"
+import MinerImgRed from "../../better-img/pick-outline-red.PNG"
+import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
+import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
+import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
+import MetalImg from "../../img/metal.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -39,6 +39,14 @@ export default function GridBoard(props) {
     setRedMetal,
     setBlueMetal,
     isTrailToggled,
+    redTerraform,
+    setRedTerraform,
+    blueTerraform,
+    setBlueTerraform,
+    blueRobots,
+    setBlueRobots,
+    redRobots,
+    setRedRobots,
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -91,7 +99,7 @@ export default function GridBoard(props) {
         tempArr[row].push(
           <GridSquare key={`${col}${row}`} color="0" useImg={null} />
         )
-        tileInfo[row].push([0, 0])
+        tileInfo[row].push([0, 0, 0])
       }
     }
 
@@ -99,6 +107,7 @@ export default function GridBoard(props) {
       for (let tile of tileArr) {
         let c = tile[0]
         let r = tile[1]
+        let metalvalue = tile[2]
         tempArr[r][c] = (
           <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
         )
@@ -106,6 +115,7 @@ export default function GridBoard(props) {
           tileInfo[r][c][0] = "I"
         } else if (colorID === 2) {
           tileInfo[r][c][0] = "M"
+          tileInfo[r][c][2] = metalvalue
         }
       }
     }
@@ -147,7 +157,7 @@ export default function GridBoard(props) {
     clearInterval(intervalID.current)
     intervalID.current = null
     return [tempArr, tileInfo]
-  }, [nrows, ncols, initImpass, initMetal, initTerr, initVis, setTiles])
+  }, [nrows, ncols, initImpass, initMetal, initTerr, setTiles, initVis])
 
   // Initializes robot grid
   // eslint-disable-next-line
@@ -261,16 +271,30 @@ export default function GridBoard(props) {
 
         if (player === "red") {
           //Setting Red Metal Array
+          console.log("nya")
+          console.log(turn.num_robots)
           const temp = redMetal
           temp.push(turn.metal)
           setRedMetal(temp)
           setFrame(sliderValue / 2)
+
+          const temp2 = redTerraform
+          // console.log("temp2: " + temp2)
+          // console.log("length: " + (temp2.length))
+          temp2.push(turn.tiles_terraformed.length)
+          setRedTerraform(temp2)
+          setRedRobots(turn.num_robots)
         } else {
           //Setting Blue Metal Array
           const temp = blueMetal
           temp.push(turn.metal)
           setBlueMetal(temp)
           setFrame((sliderValue - 1) / 2)
+
+          const temp2 = blueTerraform
+          temp2.push(turn.tiles_terraformed.length)
+          setBlueTerraform(temp2)
+          setBlueRobots(turn.num_robots)
         }
 
         // Update visibility
@@ -305,7 +329,7 @@ export default function GridBoard(props) {
           let y = terrCh[1]
 
           let terrNum = -1
-          if (player === "red") {
+          if (player === "blue") {
             terrNum = 1
           }
           terrNum = terrNum + nextTileInfo[y][x][0]
@@ -360,6 +384,7 @@ export default function GridBoard(props) {
           if (x !== -1 && y !== -1) {
             let robotType = robotCh[3]
             let battery = robotCh[4]
+            let robotTeam = robotCh[5]
             let robotImg
             if (player === "red") {
               if (robotType === "e") robotImg = ExplorerImgRed
@@ -381,6 +406,7 @@ export default function GridBoard(props) {
                 type={robotType}
                 battery={battery}
                 id={robotID}
+                team={robotTeam}
               />
             )
             // Store robot coordinates

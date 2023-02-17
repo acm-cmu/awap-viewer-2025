@@ -1,0 +1,83 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(var(--cols), var(--tile-size));
+    grid-gap: 0;
+    align-items: center;
+    border: calc(2 * var(--border-width)) solid var(--dark-color);
+    margin: var(--grid-padding-vert) var(--grid-padding-hori)
+      var(--grid-padding-vert) var(--grid-padding-hori);
+}
+  
+  .board.grid {
+    position: relative;
+  }
+  
+  .board.robot {
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .board.visibility {
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .grid-square {
+    width: var(--tile-size);
+    height: var(--tile-size);
+    border: var(--border-width) solid var(--dark-color);
+  }
+  
+  .grid-square.REDtint {
+    /* background-color: rgba(249, 60, 60, 0.4); */
+    background-color: var(--vis-tint);
+  }
+  
+  .grid-square.BLUEtint {
+    /* background-color: rgba(45, 45, 245, 0.4); */
+    background-color: var(--vis-tint);
+  }
+  
+  /* empty tile */
+  .color-0 {
+    background-color: var(--mid-color);
+  }
+  
+  /* impassable tile */
+  .color-1 {
+    background-color: rgb(77, 75, 71);
+  }
+  
+  /* metal tile */
+  .color-2 {
+    background-color: #f9b697;
+  }
+  
+  /* terraformed tile red */
+  .color-4 {
+    background-color: var(--red-color);
+  }
+  
+  /* terraformed tile blue */
+  .color-3 {
+    background-color: var(--blue-color);
+  }
+  
+  .grid-square .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: left;
+    border-radius: 6px;
+    padding: 5px 0;
+    top: 0%;
+  
+    /* Position the tooltip */
+    position: relative;
+    z-index: 1;
+  }
+  
+  .grid-square:hover {
+    border: calc(3 * var(--border-width)) solid var(--dark-color);
+  }
