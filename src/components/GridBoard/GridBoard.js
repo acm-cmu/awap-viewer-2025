@@ -129,7 +129,8 @@ export default function GridBoard(props) {
       tempArr[r][c] = (
         <GridSquare
           key={`${c}${r}`}
-          color={terrNum > 0 ? 3 : 4}
+          // color={terrNum > 0 ? 3 : 4}
+          color={terrNum*10}
           useImg={null}
         />
       )
@@ -334,15 +335,15 @@ export default function GridBoard(props) {
           }
           terrNum = terrNum + nextTileInfo[y][x][0]
 
-          let terrCol = 0
-          if (terrNum > 0) {
-            terrCol = 3
-          } else if (terrNum < 0) {
-            terrCol = 4
-          }
+          // let terrCol = 0
+          // if (terrNum > 0) {
+          //   terrCol = 3
+          // } else if (terrNum < 0) {
+          //   terrCol = 4
+          // }
 
           nextGrid[y][x] = (
-            <GridSquare key={`${x}${y}`} color={terrCol} useImg={null} />
+            <GridSquare key={`${x}${y}`} color={terrNum*10} useImg={null} />
           )
           nextTileInfo[y][x][0] = terrNum
           if (y === 1 && x === 1) {
