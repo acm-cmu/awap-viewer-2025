@@ -6,7 +6,7 @@ import React, { useState, createContext } from "react"
 
 const ViewerContext = createContext()
 
-function MapMaker() {
+function MapMaker({togglePage}) {
   const [rows, setRows] = useState(null)
   const [cols, setCols] = useState(null)
   const [showMap, setShowMap] = useState(null)
@@ -42,6 +42,7 @@ function MapMaker() {
     >
       <div className="MainPage">
         <div className="row-structure">
+          <button onClick={togglePage}> Game Viewer </button>
           <MapMakerPanel/>
           {showMap && rows && cols ? (
             <MapMakerGrid/>

@@ -6,7 +6,7 @@ import React, { useState, createContext } from "react"
 
 const ViewerContext = createContext()
 
-function Viewer() {
+function Viewer({togglePage}) {
   const [replay, setReplay] = useState(null)
   const [sliderValue, setSliderValue] = useState(-1)
   const [isPlay, setIsPlay] = useState(false)
@@ -96,6 +96,7 @@ function Viewer() {
     >
       <div className="MainPage">
         <div className="row-structure">
+          <button onClick={togglePage}> MapMaker </button>
           <SidePanel
             onFileData={handleFileData}
             onP1VisToggled={handleP1VisToggled}
