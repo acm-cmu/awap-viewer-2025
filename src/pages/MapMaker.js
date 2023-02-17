@@ -13,6 +13,9 @@ function MapMaker() {
   const [mapObj, setMapObj] = useState(null)
   const [brushPreset, setBrushPreset] = useState(null)
   const [Mnum, setMnum] = useState(null)
+  const [Hsym, setHsym] = useState(null)
+  const [Vsym, setVsym] = useState(null)
+  const [Rsym, setRsym] = useState(null)
 
   return (
     <ViewerContext.Provider
@@ -28,7 +31,13 @@ function MapMaker() {
         Mnum,
         setMnum,
         brushPreset,
-        setBrushPreset
+        setBrushPreset,
+        Hsym,
+        setHsym,
+        Vsym,
+        setVsym,
+        Rsym,
+        setRsym
       }}
     >
       <div className="MainPage">

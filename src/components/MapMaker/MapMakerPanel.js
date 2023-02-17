@@ -2,6 +2,7 @@ import React, { useContext } from "react"
 import { ViewerContext } from "../../pages/MapMaker"
 import "./MapMakerPanel.css"
 import Grid from "@mui/material/Grid"
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 
 
 export default function MapMakerPanel(props) {
@@ -17,7 +18,13 @@ export default function MapMakerPanel(props) {
     Mnum,
     setMnum,
     brushPreset,
-    setBrushPreset
+    setBrushPreset,
+    Hsym,
+    setHsym,
+    Vsym,
+    setVsym,
+    Rsym,
+    setRsym
   } = useContext(ViewerContext)
 
   const handleSubmit = (event) => {
@@ -45,6 +52,16 @@ export default function MapMakerPanel(props) {
 
   const handleBrushRadio = (event) => {
     setBrushPreset(event.target.value);
+  }
+
+  const handleToggleHSym = (event) => {
+    setHsym(!Hsym);
+  }
+  const handleToggleVSym = (event) => {
+    setVsym(!Vsym);
+  }
+  const handleToggleRSym = (event) => {
+    setRsym(!Rsym);
   }
 
   return (
@@ -95,6 +112,36 @@ export default function MapMakerPanel(props) {
         <Grid container direction="row" alignItems="center">
           <input type="radio" value="B" name="brush" onChange={handleBrushRadio}/>
           <label>Blue Tile</label>
+        </Grid>
+      </Grid>
+
+      <Grid container class="switches" direction="column">
+        <Grid container direction="row" alignItems="center">
+          <ToggleSwitch
+            onToggle={handleToggleHSym}
+            useID="hsym"
+            disabled={!showMap}
+          >
+            <p>Horizontal Symmetry</p>
+          </ToggleSwitch>
+        </Grid>
+        <Grid container direction="row" alignItems="center">
+          <ToggleSwitch
+            onToggle={handleToggleVSym}
+            useID="vsym"
+            disabled={!showMap}
+          >
+            <p>Vertical Symmetry</p>
+          </ToggleSwitch>
+        </Grid>
+        <Grid container direction="row" alignItems="center">
+          <ToggleSwitch
+            onToggle={handleToggleRSym}
+            useID="rsym"
+            disabled={!showMap}
+          >
+            <p>Rotational Symmetry</p>
+          </ToggleSwitch>
         </Grid>
       </Grid>
 
