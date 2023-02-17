@@ -10,13 +10,13 @@ import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import RobotSquare from "./RobotSquare"
 import "./Grid.css"
-import ExplorerImgRed from "../../new-img/light-outline-red.PNG"
-import TerraformerImgRed from "../../new-img/shovel-outline-red.PNG"
-import MinerImgRed from "../../new-img/pick-outline-red.PNG"
-import ExplorerImgBlue from "../../new-img/light-outline-blue.PNG"
-import TerraformerImgBlue from "../../new-img/shovel-outline-blue.PNG"
-import MinerImgBlue from "../../new-img/pick-outline-blue.PNG"
-import MetalImg from "../../img/metal_outline.png"
+import ExplorerImgRed from "../../better-img/light-outline-red.PNG"
+import TerraformerImgRed from "../../better-img/shovel-outline-red.PNG"
+import MinerImgRed from "../../better-img/pick-outline-red.PNG"
+import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
+import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
+import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
+import MetalImg from "../../img/metal.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -36,7 +36,15 @@ export default function GridBoard(props) {
     redMetal,
     blueMetal,
     setRedMetal,
-    setBlueMetal
+    setBlueMetal,
+    redTerraform,
+    setRedTerraform,
+    blueTerraform,
+    setBlueTerraform,
+    blueRobots,
+    setBlueRobots,
+    redRobots,
+    setRedRobots
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -228,16 +236,31 @@ export default function GridBoard(props) {
 
         if(player === "red"){
           //Setting Red Metal Array
+          console.log("nya");
+          console.log(turn.num_robots)
           const temp = redMetal
           temp.push(turn.metal)
           setRedMetal(temp)
           setFrame(sliderValue/2)
+
+          const temp2 = redTerraform
+          // console.log("temp2: " + temp2)
+          // console.log("length: " + (temp2.length))
+          temp2.push((turn.tiles_terraformed).length)
+          setRedTerraform(temp2)
+          setRedRobots(turn.num_robots)
+
         } else {
           //Setting Blue Metal Array
           const temp = blueMetal
           temp.push(turn.metal)
           setBlueMetal(temp)
           setFrame((sliderValue-1)/2)
+
+          const temp2 = blueTerraform
+          temp2.push((turn.tiles_terraformed).length)
+          setBlueTerraform(temp2)
+          setBlueRobots(turn.num_robots)
         }
 
         // Update visibility
@@ -272,7 +295,7 @@ export default function GridBoard(props) {
           let y = terrCh[1]
 
           let terrNum = -1
-          if (player === "red") {
+          if (player === "blue") {
             terrNum = 1
           }
           terrNum = terrNum + nextTileInfo[y][x][0]

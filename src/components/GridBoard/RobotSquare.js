@@ -32,10 +32,10 @@ export default function RobotSquare(props) {
         case 0:
           setTileVisib("None")
           break;
-        case 1:
+        case 2:
           setTileVisib("Red")
           break;
-        case 2:
+        case 1:
           setTileVisib("Blue")
           break;
         default:
