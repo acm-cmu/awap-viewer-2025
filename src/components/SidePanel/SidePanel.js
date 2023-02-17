@@ -32,6 +32,9 @@ export default function SidePanel(props) {
     setBlueTerraform,
     setSpeed,
     setIsTrailToggled,
+    metaData,
+    redRobots,
+    blueRobots,
   } = useContext(ViewerContext)
 
   const showFile = async (event) => {
@@ -73,6 +76,9 @@ export default function SidePanel(props) {
     const newFramePlaying = !framePlaying
     setFramePlaying(newFramePlaying)
     setIsPlay(newFramePlaying)
+    if (isFinished && newFramePlaying) {
+      setIsFinished(false)
+    }
   }
 
   const resetPlaybutton = useCallback(() => {
@@ -95,7 +101,6 @@ export default function SidePanel(props) {
     if (isFinished) {
       resetPlaybutton()
       setSliderValue(-1)
-      setIsFinished(false)
     }
   }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished])
 
@@ -116,8 +121,30 @@ export default function SidePanel(props) {
   return (
     <div className="side-panel">
       <button onClick={props.togglePage}> Switch To Map Maker </button>
-      <h1 style={{marginTop:0}}>AWAP 2023 Viewer</h1>
+      <h1 style={{ marginTop: 0 }}>AWAP 2023 Viewer</h1>
       <input type="file" className="file-upload" onChange={showFile} />
+      {replay != null ? (
+        <div>
+          <h2 className="info">
+            {" "}
+            {replay.red_bot} vs {replay.blue_bot}{" "}
+          </h2>
+          {isFinished ? (
+            <h2 className="info">
+              {replay.winner === "blue" ? "BLUE" : "RED"} WINS!
+            </h2>
+          ) : (
+            <div></div>
+          )}
+          <h2 className="info">
+            FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
+            {replay.turns.length - 1} / TURN {metaData[0]} OF{" "}
+            {metaData[1] === "blue" ? "BLUE" : "RED"}
+          </h2>
+        </div>
+      ) : (
+        <h2 className="info">FRAME 0 OF 250 / TURN 0 RED </h2>
+      )}
       <StyledEngineProvider injectFirst>
         <Slider
           aria-label="Frame No."
@@ -215,35 +242,28 @@ export default function SidePanel(props) {
           useID="p1vis"
           disabled={isDisabled}
         >
-          <p>Player 1 Visibility</p>
+          <h2 className="togglelabel">PLAYER 1 (RED) VISIBILITY</h2>
         </ToggleSwitch>
         <ToggleSwitch
           onToggle={handleToggleP2Vis}
           useID="p2vis"
           disabled={isDisabled}
         >
-          <p>Player 2 Visibility</p>
+          <h2 className="togglelabel">PLAYER 2 (BLUE) VISIBILITY</h2>
         </ToggleSwitch>
         <ToggleSwitch
           onToggle={() => setIsTrailToggled((value) => !value)}
           useID="trailtoggle"
           disabled={isDisabled}
         >
-          <p>Show Robot Move Trail</p>
+          <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
         </ToggleSwitch>
       </div>
-      <div className="container">
-        <div className="row">
-          <TerraformChart />
-          <LineChart />
-          <div className="col-lg-6 graph">
-            <p></p>
-          </div>
-          <div className="col-lg-6 graph">
-            <p></p>
-          </div>
-        </div>
-      </div>
+      <br></br>
+      <h2 className="info"> RED ROBOTS: {replay == null ? 0 : redRobots} </h2>
+      <h2 className="info"> BLUE ROBOTS: {replay == null ? 0 : blueRobots} </h2>
+      <TerraformChart />
+      <LineChart />
     </div>
   )
 }

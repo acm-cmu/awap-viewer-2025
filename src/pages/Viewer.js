@@ -6,8 +6,9 @@ import React, { useState, createContext } from "react"
 
 const ViewerContext = createContext()
 
-function Viewer({togglePage}) {
+function Viewer({ togglePage }) {
   const [replay, setReplay] = useState(null)
+  const [metaData, setMetadata] = useState([0, "blue"])
   const [sliderValue, setSliderValue] = useState(-1)
   const [isPlay, setIsPlay] = useState(false)
   const [framePlaying, setFramePlaying] = useState(false)
@@ -92,6 +93,8 @@ function Viewer({togglePage}) {
         setTiles,
         isTrailToggled,
         setIsTrailToggled,
+        metaData,
+        setMetadata,
       }}
     >
       <div className="MainPage">

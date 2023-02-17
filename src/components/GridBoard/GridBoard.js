@@ -47,6 +47,7 @@ export default function GridBoard(props) {
     setBlueRobots,
     redRobots,
     setRedRobots,
+    setMetadata,
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -253,6 +254,7 @@ export default function GridBoard(props) {
       clearInterval(intervalID.current)
       intervalID.current = null
       setIsFinished(true)
+      setMetadata([0, "blue"])
       return
     } else if (sliderValue <= -1) {
     } else {
@@ -268,19 +270,16 @@ export default function GridBoard(props) {
         if (i < 0) return
         let turn = gameTurns[i]
         let player = turn.team
+        setMetadata([turn.turn_number, player])
 
         if (player === "red") {
           //Setting Red Metal Array
-          console.log("nya")
-          console.log(turn.num_robots)
           const temp = redMetal
           temp.push(turn.metal)
           setRedMetal(temp)
           setFrame(sliderValue / 2)
 
           const temp2 = redTerraform
-          // console.log("temp2: " + temp2)
-          // console.log("length: " + (temp2.length))
           temp2.push(turn.tiles_terraformed.length)
           setRedTerraform(temp2)
           setRedRobots(turn.num_robots)

@@ -14,6 +14,21 @@ h1 {
   margin: 5vh 1vw 3vh 1vw;
 }
 
+.info {
+  font-family: "Roboto", "Helveltica Nue", sans-serif;
+  color: var(--dark-color);
+  font-size: 2.5vmin;
+  margin: 1vh 2vw 1vh 3vw;
+  float: left;
+}
+
+.togglelabel {
+  font-family: "Roboto", "Helveltica Nue", sans-serif;
+  color: var(--dark-color);
+  font-size: 2.5vmin;
+  margin: 0;
+}
+
 p {
   margin: 0;
 }
@@ -27,7 +42,7 @@ p {
 /* File upload button */
 .file-upload {
   width: 25vw;
-  margin: 0 2vw 0 2vw;
+  margin: 0 2vw 2vh 2vw;
   background: var(--light-color);
   border-radius: 5px;
   border: 2px solid var(--dark-color);
@@ -56,7 +71,7 @@ p {
   height: 3vh;
   border-radius: 3px;
   padding: 0;
-  margin: 4vh 0 1vh 0;
+  margin: 1vh 0 1vh 0;
 }
 
 .slider:hover {
