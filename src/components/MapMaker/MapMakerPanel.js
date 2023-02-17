@@ -22,7 +22,9 @@ export default function MapMakerPanel(props) {
     Hsym,
     setHsym,
     Vsym,
-    setVsym
+    setVsym,
+    Rsym,
+    setRsym
   } = useContext(ViewerContext)
 
   const handleSubmit = (event) => {
@@ -55,9 +57,11 @@ export default function MapMakerPanel(props) {
   const handleToggleHSym = (event) => {
     setHsym(!Hsym);
   }
-
   const handleToggleVSym = (event) => {
     setVsym(!Vsym);
+  }
+  const handleToggleRSym = (event) => {
+    setRsym(!Rsym);
   }
 
   return (
@@ -128,6 +132,15 @@ export default function MapMakerPanel(props) {
             disabled={!showMap}
           >
             <p>Vertical Symmetry</p>
+          </ToggleSwitch>
+        </Grid>
+        <Grid container direction="row" alignItems="center">
+          <ToggleSwitch
+            onToggle={handleToggleRSym}
+            useID="rsym"
+            disabled={!showMap}
+          >
+            <p>Rotational Symmetry</p>
           </ToggleSwitch>
         </Grid>
       </Grid>

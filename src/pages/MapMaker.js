@@ -15,6 +15,7 @@ function MapMaker() {
   const [Mnum, setMnum] = useState(null)
   const [Hsym, setHsym] = useState(null)
   const [Vsym, setVsym] = useState(null)
+  const [Rsym, setRsym] = useState(null)
 
   return (
     <ViewerContext.Provider
@@ -34,7 +35,9 @@ function MapMaker() {
         Hsym,
         setHsym,
         Vsym,
-        setVsym
+        setVsym,
+        Rsym,
+        setRsym
       }}
     >
       <div className="MainPage">
