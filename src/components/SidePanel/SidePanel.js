@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useContext } from "react"
+import React, { useEffect, useCallback, useContext, useState } from "react"
 import { ViewerContext } from "../../pages/Viewer"
 import "./SidePanel.css"
 import Slider from "@mui/material/Slider"
@@ -37,7 +37,17 @@ export default function SidePanel(props) {
     blueRobots,
   } = useContext(ViewerContext)
 
+  const [wrongFile, setWrongFile] = useState(false)
+
   const showFile = async (event) => {
+    var fileInput = document.getElementById("fileobj")
+    var filePath = fileInput.value
+    let ext = filePath.slice(filePath.length - 7, filePath.length)
+    if (ext !== "awap23r") {
+      setWrongFile(true)
+      return
+    }
+    setWrongFile(false)
     const reader = new FileReader()
     reader.onload = async (e) => {
       const replay_text = e.target.result
@@ -122,7 +132,19 @@ export default function SidePanel(props) {
     <div className="side-panel">
       <button onClick={props.togglePage}> Switch To Map Maker </button>
       <h1 style={{ marginTop: 0 }}>AWAP 2023 Viewer</h1>
-      <input type="file" className="file-upload" onChange={showFile} />
+      <input
+        id="fileobj"
+        type="file"
+        className="file-upload"
+        onChange={showFile}
+      />
+      {wrongFile ? (
+        <h2 className="info">
+          Please upload replay files with .awap23r extensions only.{" "}
+        </h2>
+      ) : (
+        <div></div>
+      )}
       {replay != null ? (
         <div>
           <h2 className="info">
