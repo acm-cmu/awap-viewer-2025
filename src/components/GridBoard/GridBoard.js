@@ -497,7 +497,6 @@ export default function GridBoard(props) {
   }, [sliderValue, gameTurns])
 
   const iterateFrames = useCallback(() => {
-    setIndex((index) => index + 1)
     setSliderValue((s) => s + 1)
   }, [setSliderValue])
 
