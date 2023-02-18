@@ -49,6 +49,9 @@ export default function RobotSquare(props) {
       case "m":
         setRobotType("Miner")
         break
+      case "ex":
+        setRobotType("Exploded")
+        break
       default:
         setRobotType("Terraformer")
         break

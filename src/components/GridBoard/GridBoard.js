@@ -18,6 +18,7 @@ import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
 import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
 import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
 import MetalImg from "../../img/metal.png"
+import ExplosionImg from "../../better-img/explosion.png"
 
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
@@ -68,6 +69,7 @@ export default function GridBoard(props) {
   const prevRobots = useRef({}) // dictionary mapping robot ids to coordinates
   const [visibilityP1, setVisibilityP1] = useState(null)
   const [visibilityP2, setVisibilityP2] = useState(null)
+  const prevExplosions = useRef([])
 
   // Initializes trails
   const initialTrails = useMemo(() => {
@@ -352,7 +354,22 @@ export default function GridBoard(props) {
           }
         }
 
-        // Modify robots and trails
+        // Modify robots, trails, explosions
+        // Remove old explosions
+        for (let oldExp of prevExplosions.current) {
+          let xExp = oldExp[0]
+          let yExp = oldExp[1]
+          nextRobots[yExp][xExp] = (
+            <RobotSquare
+              key={`${xExp}${yExp}`}
+              x={xExp}
+              y={yExp}
+              hasRobot={false}
+            />
+          )
+        }
+        prevExplosions.current = []
+        // Add trails
         let nextTrails = makeDeepCopy(initialTrails)
         for (let robotCh of turn.robot_changes) {
           let robotID = robotCh[0]
@@ -414,6 +431,23 @@ export default function GridBoard(props) {
             )
             // Store robot coordinates
             prevRobots.current[robotID] = [x, y, robotImg]
+          } else {
+            let xPrev = prevRobots.current[robotID][0]
+            let yPrev = prevRobots.current[robotID][1]
+            prevExplosions.current.push([xPrev, yPrev])
+            nextRobots[yPrev][xPrev] = (
+              <RobotSquare
+                key={`${xPrev}${yPrev}`}
+                srcImg={ExplosionImg}
+                x={xPrev}
+                y={yPrev}
+                hasRobot={true}
+                type={"ex"}
+                battery={"None"}
+                id={"None"}
+                team={"None"}
+              />
+            )
           }
         }
         return nextTrails
