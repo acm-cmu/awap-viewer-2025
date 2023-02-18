@@ -76,7 +76,7 @@ export default function GridBoard(props) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <GridSquare key={`${col}${row}`} color="5" useImg={null} />
+          <GridSquare key={`${row}${col}`} color="5" useImg={null} />
         )
       }
     }
@@ -98,7 +98,7 @@ export default function GridBoard(props) {
       tileInfo.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <GridSquare key={`${col}${row}`} color="0" useImg={null} />
+          <GridSquare key={`${row}${col}`} color="0" useImg={null} />
         )
         tileInfo[row].push([0, 0, 0])
       }
@@ -106,17 +106,17 @@ export default function GridBoard(props) {
 
     const populateTiles = (tileArr, colorID, useImg) => {
       for (let tile of tileArr) {
-        let c = tile[0]
-        let r = tile[1]
+        let r = tile[0]
+        let c = tile[1]
         let metalvalue = tile[2]
-        tempArr[c][r] = (
-          <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
+        tempArr[r][c] = (
+          <GridSquare key={`${r}${c}`} color={colorID} useImg={useImg} />
         )
         if (colorID === 1) {
-          tileInfo[c][r][0] = "I"
+          tileInfo[r][c][0] = "I"
         } else if (colorID === 2) {
-          tileInfo[c][r][0] = "M"
-          tileInfo[c][r][2] = metalvalue
+          tileInfo[r][c][0] = "M"
+          tileInfo[r][c][2] = metalvalue
         }
       }
     }
@@ -124,8 +124,8 @@ export default function GridBoard(props) {
     populateTiles(initImpass, 1, null)
     populateTiles(initMetal, 2, MetalImg)
     for (let terr_tile of initTerr) {
-      let c = terr_tile[0]
-      let r = terr_tile[1]
+      let r = terr_tile[0]
+      let c = terr_tile[1]
       let terrNum = terr_tile[2]
       if (terrNum > 10) {
         terrNum = 10
@@ -135,15 +135,10 @@ export default function GridBoard(props) {
         terrNum = ~10
         console.log("Terraform value greater than 10")
       }
-      tempArr[c][r] = (
-        <GridSquare
-          key={`${c}${r}`}
-          // color={terrNum > 0 ? 3 : 4}
-          color={terrNum * 10}
-          useImg={null}
-        />
+      tempArr[r][c] = (
+        <GridSquare key={`${r}${c}`} color={terrNum * 10} useImg={null} />
       )
-      tileInfo[c][r][0] = terrNum
+      tileInfo[r][c][0] = terrNum
       // tileInfo[r][c][1] = terrNum > 0 ? 1 : 2
     }
 
@@ -178,7 +173,7 @@ export default function GridBoard(props) {
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
           <RobotSquare
-            key={`${col}${row}`}
+            key={`${row}${col}`}
             x={col}
             y={row}
             hasRobot={false}
@@ -202,7 +197,7 @@ export default function GridBoard(props) {
         for (let col = 0; col < ncols; col++) {
           tempArr[row].push(
             <div
-              key={`${col}${row}`}
+              key={`${row}${col}`}
               className={`grid-square ${player}tint`}
             ></div>
           )
@@ -330,8 +325,6 @@ export default function GridBoard(props) {
             }
           }
         }
-        console.log(i + player)
-        console.log(turn.tiles_terraformed)
         // Update terrformedness
         for (let terrCh of turn.tiles_terraformed) {
           let x = terrCh[0]
@@ -342,14 +335,6 @@ export default function GridBoard(props) {
             terrNum = 1
           }
           terrNum = terrNum + nextTileInfo[x][y][0]
-          // console.log(player + " " + i + " " + terrNum)
-
-          // let terrCol = 0
-          // if (terrNum > 0) {
-          //   terrCol = 3
-          // } else if (terrNum < 0) {
-          //   terrCol = 4
-          // }
           if (terrNum > 10) {
             terrNum = 10
             console.log("Terraform value greater than 10")

@@ -84,8 +84,6 @@ function LineChart() {
     LineData.push(temp)
   }
 
-  // console.log("LineChart: " + LineData)
-
   return (
     <div className="container mt-5">
       <h1>Metal Graph</h1>
