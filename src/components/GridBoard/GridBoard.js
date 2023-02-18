@@ -131,7 +131,7 @@ export default function GridBoard(props) {
         <GridSquare
           key={`${c}${r}`}
           // color={terrNum > 0 ? 3 : 4}
-          color={terrNum*10}
+          color={terrNum * 10}
           useImg={null}
         />
       )
@@ -342,7 +342,7 @@ export default function GridBoard(props) {
           // }
 
           nextGrid[y][x] = (
-            <GridSquare key={`${x}${y}`} color={terrNum*10} useImg={null} />
+            <GridSquare key={`${x}${y}`} color={terrNum * 10} useImg={null} />
           )
           nextTileInfo[y][x][0] = terrNum
           if (y === 1 && x === 1) {
@@ -417,7 +417,8 @@ export default function GridBoard(props) {
       }
 
       var idx
-      if (sliderValue >= index) {
+      if (sliderValue === index) {
+      } else if (sliderValue > index) {
         idx = index
         let newTrails
         const newGrid = makeDeepCopy(grid)
@@ -425,7 +426,7 @@ export default function GridBoard(props) {
         const newVisP2 = makeDeepCopy(visibilityP2)
         const newRobots = makeDeepCopy(robots)
         const newTileInfo = makeDeepCopy3D(tiles)
-        while (idx <= sliderValue) {
+        while (idx < sliderValue) {
           newTrails = updateFrame(
             idx,
             newGrid,
@@ -451,7 +452,7 @@ export default function GridBoard(props) {
         const newRobots = makeDeepCopy(initialRobots)
         const newTileInfo = makeDeepCopy3D(arr[1])
         idx = 0
-        while (idx <= sliderValue) {
+        while (idx < sliderValue) {
           newTrails = updateFrame(
             idx,
             newGrid,
@@ -469,7 +470,7 @@ export default function GridBoard(props) {
         setRobots(newRobots)
         setTiles(newTileInfo)
       }
-      setIndex(idx - 1)
+      setIndex(idx)
       if (!framePlaying) {
         setIsPlay(false)
       }
@@ -478,7 +479,6 @@ export default function GridBoard(props) {
   }, [sliderValue, gameTurns])
 
   const iterateFrames = useCallback(() => {
-    setIndex((index) => index + 1)
     setSliderValue((s) => s + 1)
   }, [setSliderValue])
 
