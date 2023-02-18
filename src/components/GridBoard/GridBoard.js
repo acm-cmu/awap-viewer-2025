@@ -129,6 +129,14 @@ export default function GridBoard(props) {
       let c = terr_tile[0]
       let r = terr_tile[1]
       let terrNum = terr_tile[2]
+      if (terrNum > 10) {
+        terrNum = 10
+        console.log("Terraform value greater than 10")
+      }
+      if (terrNum < ~10) {
+        terrNum = ~10
+        console.log("Terraform value greater than 10")
+      }
       tempArr[r][c] = (
         <GridSquare
           key={`${c}${r}`}
@@ -324,7 +332,8 @@ export default function GridBoard(props) {
             }
           }
         }
-
+        console.log(i + player)
+        console.log(turn.tiles_terraformed)
         // Update terrformedness
         for (let terrCh of turn.tiles_terraformed) {
           let x = terrCh[0]
@@ -335,6 +344,21 @@ export default function GridBoard(props) {
             terrNum = 1
           }
           terrNum = terrNum + nextTileInfo[y][x][0]
+
+          // let terrCol = 0
+          // if (terrNum > 0) {
+          //   terrCol = 3
+          // } else if (terrNum < 0) {
+          //   terrCol = 4
+          // }
+          if (terrNum > 10) {
+            terrNum = 10
+            console.log("Terraform value greater than 10")
+          }
+          if (terrNum < ~10) {
+            terrNum = ~10
+            console.log("Terraform value greater than 10")
+          }
 
           nextGrid[y][x] = (
             <GridSquare key={`${x}${y}`} color={terrNum * 10} useImg={null} />
@@ -444,7 +468,8 @@ export default function GridBoard(props) {
       }
 
       var idx
-      if (sliderValue >= index) {
+      if (sliderValue === index) {
+      } else if (sliderValue > index) {
         idx = index
         let newTrails
         const newGrid = makeDeepCopy(grid)
@@ -452,7 +477,7 @@ export default function GridBoard(props) {
         const newVisP2 = makeDeepCopy(visibilityP2)
         const newRobots = makeDeepCopy(robots)
         const newTileInfo = makeDeepCopy3D(tiles)
-        while (idx <= sliderValue) {
+        while (idx < sliderValue) {
           newTrails = updateFrame(
             idx,
             newGrid,
@@ -478,7 +503,7 @@ export default function GridBoard(props) {
         const newRobots = makeDeepCopy(initialRobots)
         const newTileInfo = makeDeepCopy3D(arr[1])
         idx = 0
-        while (idx <= sliderValue) {
+        while (idx < sliderValue) {
           newTrails = updateFrame(
             idx,
             newGrid,
@@ -496,7 +521,7 @@ export default function GridBoard(props) {
         setRobots(newRobots)
         setTiles(newTileInfo)
       }
-      setIndex(idx - 1)
+      setIndex(idx)
       if (!framePlaying) {
         setIsPlay(false)
       }
@@ -505,7 +530,6 @@ export default function GridBoard(props) {
   }, [sliderValue, gameTurns])
 
   const iterateFrames = useCallback(() => {
-    setIndex((index) => index + 1)
     setSliderValue((s) => s + 1)
   }, [setSliderValue])
 
