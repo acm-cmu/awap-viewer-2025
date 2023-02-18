@@ -9,6 +9,8 @@ const ViewerContext = createContext()
 function Viewer({ togglePage }) {
   const [replay, setReplay] = useState(null)
   const [metaData, setMetadata] = useState([0, "blue"])
+  const [timeout, setTimeout] = useState([false, null])
+
   const [sliderValue, setSliderValue] = useState(-1)
   const [isPlay, setIsPlay] = useState(false)
   const [framePlaying, setFramePlaying] = useState(false)
@@ -95,6 +97,8 @@ function Viewer({ togglePage }) {
         setIsTrailToggled,
         metaData,
         setMetadata,
+        timeout,
+        setTimeout,
       }}
     >
       <div className="MainPage">
