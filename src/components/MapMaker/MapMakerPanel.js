@@ -100,7 +100,7 @@ export default function MapMakerPanel({togglePage}) {
         <Grid container direction="row" alignItems="center">
           <input type="radio" value="M" name="brush" onChange={handleBrushRadio}/>
           <label>Mining</label>
-          <input class="num-input" type="number" placeholder="5"
+          <input class="num-input" type="number" placeholder="5" min="5" max="25"
             onChange={(e)=>setMnum(parseInt(e.target.value))}/>
         </Grid>
 
