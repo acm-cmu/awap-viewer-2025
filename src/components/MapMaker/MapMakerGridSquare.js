@@ -39,12 +39,11 @@ export default function MapMakerGridSquare(props) {
     setMapObj(temp);
   }
 
-  function setM(i, j) {
+  function setM(i, j, final_mining) {
     const temp = mapObj.slice();
     temp[i][j][0] = 'M';
     temp[i][j][1] = 0;
-    if (Mnum == null) { temp[x][y][2] = 5; }
-    else { temp[x][y][2] = Mnum; }
+    temp[i][j][2] = final_mining;
     setMapObj(temp);
   }
 
@@ -79,10 +78,11 @@ export default function MapMakerGridSquare(props) {
         if (Rsym) { setT(rows - x - 1, cols - y - 1) }
       }
       else if (brushPreset == "M") {
-        setM(x, y);
-        if (Hsym) { setM(x, cols - y - 1) }
-        if (Vsym) { setM(rows - x - 1, y) }
-        if (Rsym) { setM(rows - x - 1, cols - y - 1) }
+        const final_mining = Mnum == null ? 5 : Mnum;
+        setM(x, y, final_mining);
+        if (Hsym) { setM(x, cols - y - 1, final_mining) }
+        if (Vsym) { setM(rows - x - 1, y, final_mining) }
+        if (Rsym) { setM(rows - x - 1, cols - y - 1, final_mining) }
       }
       else if (brushPreset == "R") {
         setR(x, y);
