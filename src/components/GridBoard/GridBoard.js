@@ -44,11 +44,10 @@ export default function GridBoard(props) {
     setRedTerraform,
     blueTerraform,
     setBlueTerraform,
-    blueRobots,
     setBlueRobots,
-    redRobots,
     setRedRobots,
     setMetadata,
+    setTimeout,
   } = useContext(ViewerContext)
 
   const nrows = replay.map_height
@@ -282,6 +281,14 @@ export default function GridBoard(props) {
         let turn = gameTurns[i]
         let player = turn.team
         setMetadata([turn.turn_number, player])
+        if (turn.time_left === -1) {
+          clearInterval(intervalID.current)
+          intervalID.current = null
+          if (player === "red") setTimeout([true, "RED"])
+          else setTimeout([true, "BLUE"])
+          setIsFinished(true)
+          return
+        }
 
         if (player === "red") {
           //Setting Red Metal Array
@@ -332,8 +339,6 @@ export default function GridBoard(props) {
             }
           }
         }
-        console.log(i + player)
-        console.log(turn.tiles_terraformed)
         // Update terrformedness
         for (let terrCh of turn.tiles_terraformed) {
           let x = terrCh[0]

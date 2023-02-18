@@ -35,6 +35,8 @@ export default function SidePanel(props) {
     metaData,
     redRobots,
     blueRobots,
+    setTimeout,
+    timeout,
   } = useContext(ViewerContext)
 
   const [wrongFile, setWrongFile] = useState(false)
@@ -54,6 +56,8 @@ export default function SidePanel(props) {
       try {
         var replay_object = JSON.parse(replay_text)
         resetPlaybutton()
+        setIsFinished(false)
+        setTimeout([false, null])
       } catch (err) {
         console.log(err.message)
       }
@@ -88,6 +92,7 @@ export default function SidePanel(props) {
     setIsPlay(newFramePlaying)
     if (isFinished && newFramePlaying) {
       setIsFinished(false)
+      setTimeout([false, null])
     }
   }
 
@@ -147,17 +152,26 @@ export default function SidePanel(props) {
       )}
       {replay != null ? (
         <div>
-          <h2 className="info">
-            {" "}
-            {replay.red_bot} vs {replay.blue_bot}{" "}
-          </h2>
-          {isFinished ? (
+          <div className="vert-container">
             <h2 className="info">
-              {replay.winner === "blue" ? "BLUE" : "RED"} WINS!
+              {" "}
+              {replay.red_bot} (RED) vs {replay.blue_bot} (BLUE)
             </h2>
-          ) : (
-            <div></div>
-          )}
+            <div className="hori-container">
+              {isFinished ? (
+                <h2 className="info win">
+                  {replay.winner === "blue" ? "BLUE" : "RED"} WINS!
+                </h2>
+              ) : (
+                <div></div>
+              )}
+              {isFinished && timeout[0] ? (
+                <h2 className="info win">{timeout[1]} TIMED OUT</h2>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          </div>
           <h2 className="info">
             FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
             {replay.turns.length - 1} / TURN {metaData[0]} OF{" "}
@@ -281,9 +295,16 @@ export default function SidePanel(props) {
           <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
         </ToggleSwitch>
       </div>
-      <br></br>
-      <h2 className="info"> RED ROBOTS: {replay == null ? 0 : redRobots} </h2>
-      <h2 className="info"> BLUE ROBOTS: {replay == null ? 0 : blueRobots} </h2>
+      <div className="hori-container">
+        <div className="vert-container">
+          <h2 className="info stats">RED ROBOTS</h2>
+          <h2 className="info stats">{redRobots == null ? 0 : redRobots} </h2>
+        </div>
+        <div className="vert-container">
+          <h2 className="info stats">BLUE ROBOTS</h2>
+          <h2 className="info stats">{blueRobots == null ? 0 : blueRobots}</h2>
+        </div>
+      </div>
       <TerraformChart />
       <LineChart />
     </div>
