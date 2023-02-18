@@ -1,75 +1,87 @@
 import React, { useContext } from "react"
-
+import "./SidePanel.css"
+import Stack from "@mui/material/Stack"
 import Chart from "react-google-charts"
 import { ViewerContext } from "../../pages/Viewer"
 
-/*
-  [0, 0, 0],
-  [1, 10, 5],
-  [2, 23, 15],
-  [3, 17, 9],
-  [4, 18, 10],
-  [5, 9, 5],
-  [6, 11, 3],
-  [7, 27, 19],
-  [8, 27, 200],
-*/
-
 const LineChartOptions = {
-  //title: "Metal Reserves",
-  //backgroundColor: '#F9B697',
-  //title: 'Company Performance',
-  //subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-
+  backgroundColor: {
+    fill: "#F9B697",
+    stroke: "#663926",
+    strokeWidth: 2,
+  },
   chartArea: {
     backgroundColor: {
-      fill: "#F4F4F4",
+      fill: "#F9B697",
       opacity: 100,
     },
+    width: "55%",
+    height: "70%",
   },
 
   titleTextStyle: {
     fontName: "Impact",
     fontSize: 20,
   },
+
   hAxis: {
     title: "Frame",
     titleTextStyle: {
       fontName: "Roboto",
-      fontStyle: "bold", //or bold, italic, etc.
+      fontStyle: "bold",
       italic: false,
-      fontSize: 12,
-      //color: '#ff0000'
+      fontSize: "2vmin",
+      color: "#663926",
+    },
+    baselineColor: "#421f0f",
+    gridlines: {
+      color: "#663926",
+    },
+    minorGridlines: {
+      color: "#92624e",
+    },
+    textStyle: {
+      color: "#663926",
     },
   },
   vAxis: {
     title: "Metal",
     titleTextStyle: {
       fontName: "Roboto",
-      fontStyle: "bold", //or bold, italic, etc.
+      fontStyle: "bold",
       italic: false,
-      fontSize: 12,
-      //color: '#ff0000'
+      fontSize: "2vmin",
+      color: "#663926",
     },
     viewWindow: {
       min: 0,
     },
+    baselineColor: "#421f0f",
+    gridlines: {
+      color: "#663926",
+    },
+    minorGridlines: {
+      color: "#92624e",
+    },
+    textStyle: {
+      color: "#663926",
+    },
   },
-  series: {
-    // 1: { curveType: 'function' },
+  legend: {
+    textStyle: {
+      fontName: "Roboto",
+      fontStyle: "bold",
+      fontSize: "1vmin",
+      color: "#663926",
+    },
+    position: "bottom",
   },
+  series: {},
 }
 
 function LineChart() {
   const { frame, setFrame, redMetal, blueMetal, setRedMetal, setBlueMetal } =
     useContext(ViewerContext)
-
-  // console.log("frame " + frame)
-  //LineData.push(['Frame', 'Blue Team', 'Red Team'])
-  //LineData.push([0,0,0])
-  // console.log("newLineData: " + newLineData)
-
-  // console.log("redMetal: " + redMetal)
 
   const LineData = [
     ["Frame", "B", "R"],
@@ -85,18 +97,20 @@ function LineChart() {
   }
 
   return (
-    <div className="container mt-5">
-      <h1>Metal Graph</h1>
-
-      <Chart
-        width={"350px"}
-        height={"250px"}
-        chartType="LineChart"
-        loader={<div>Loading Chart</div>}
-        data={LineData}
-        options={LineChartOptions}
-        rootProps={{ "data-testid": "3" }}
-      />
+    <div>
+      <div className="vert-container graph">
+        <h2 className="info stats">Metal Graph</h2>
+        <Chart
+          width={"13vw"}
+          height={"100%"}
+          chartType="LineChart"
+          loader={<div>Loading Chart</div>}
+          data={LineData}
+          options={LineChartOptions}
+          rootProps={{ "data-testid": "3" }}
+          style={{ paddingBottom: 40 }}
+        />
+      </div>
     </div>
   )
 }

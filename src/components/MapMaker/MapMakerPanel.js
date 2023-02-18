@@ -1,6 +1,7 @@
 import React, { useContext } from "react"
 import { ViewerContext } from "../../pages/MapMaker"
 import "./MapMakerPanel.css"
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz'
 import Grid from "@mui/material/Grid"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 
@@ -66,8 +67,14 @@ export default function MapMakerPanel({togglePage}) {
 
   return (
     <div className="side-panel">
-      <button onClick={togglePage}> Switch to Game Viewer </button>
-      <h1 style={{marginTop:0}}>AWAP 2023 Map Maker</h1>
+      <button
+        style={{ position: "absolute", top: 0, right: 10, zIndex: 10 }} 
+        onClick={togglePage}
+      > 
+        <SwapHorizIcon/>
+      </button>
+      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2023</h1>
+      <h2 style={{ marginTop: 0, marginBottom: 18 }}>Map Maker</h2>
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center">
           <Grid container direction="row" justifyContent="center">

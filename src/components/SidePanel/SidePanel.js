@@ -3,12 +3,15 @@ import { ViewerContext } from "../../pages/Viewer"
 import "./SidePanel.css"
 import Slider from "@mui/material/Slider"
 import { StyledEngineProvider } from "@mui/material/styles"
-import Grid from "@mui/material/Grid"
 import { IconButton } from "@mui/material"
 import PlayArrowIcon from "@mui/icons-material/PlayArrow"
 import PauseIcon from "@mui/icons-material/Pause"
+import SettingsIcon from "@mui/icons-material/Settings"
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz"
+import Collapse from "@mui/material/Collapse"
 import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
+import Stack from "@mui/material/Stack"
 import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 import LineChart from "./LineChart.js"
@@ -40,6 +43,7 @@ export default function SidePanel(props) {
   } = useContext(ViewerContext)
 
   const [wrongFile, setWrongFile] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
 
   const showFile = async (event) => {
     var fileInput = document.getElementById("fileobj")
@@ -133,10 +137,20 @@ export default function SidePanel(props) {
     props.onP2VisToggled(checkbox.checked)
   }
 
+  const handleToggleSettings = () => {
+    setShowSettings(!showSettings)
+  }
+
   return (
     <div className="side-panel">
-      <button onClick={props.togglePage}> Switch To Map Maker </button>
-      <h1 style={{ marginTop: 0 }}>AWAP 2023 Viewer</h1>
+      <button
+        style={{ position: "absolute", top: 0, right: 10, zIndex: 10 }}
+        onClick={props.togglePage}
+      >
+        <SwapHorizIcon />
+      </button>
+      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2023</h1>
+      <h2 style={{ marginTop: 0, marginBottom: 18 }}>Game Viewer</h2>
       <input
         id="fileobj"
         type="file"
@@ -152,14 +166,22 @@ export default function SidePanel(props) {
       )}
       {!wrongFile && replay != null ? (
         <div>
-          <div className="vert-container">
+          <Stack
+            direction="column"
+            alignItems="center"
+            justifyContent="space-between"
+          >
             <h2 className="info">
               {" "}
               {replay.red_bot} (RED) vs {replay.blue_bot} (BLUE)
             </h2>
-            <div className="hori-container">
+            <Stack
+              direction="row"
+              alignItems="center"
+              justifyContent="space-between"
+            >
               {isFinished ? (
-                <h2 className="info win">
+                <h2 className={"info " + replay.winner}>
                   {replay.winner === "blue" ? "BLUE" : "RED"} WINS!
                 </h2>
               ) : (
@@ -170,8 +192,8 @@ export default function SidePanel(props) {
               ) : (
                 <div></div>
               )}
-            </div>
-          </div>
+            </Stack>
+          </Stack>
           <h2 className="info">
             FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
             {replay.turns.length - 1} / TURN {metaData[0]} OF{" "}
@@ -197,23 +219,23 @@ export default function SidePanel(props) {
         />
       </StyledEngineProvider>
       <br></br>
-      <Grid
-        container
+      <Stack
         direction="row"
-        sx={{
-          width: "25vw",
-          margin: "0 2vw 3vh 2vw",
-        }}
+        alignItems="center"
+        justifyContent="space-around"
+        sx={{ flexWrap: "wrap", gap: 1, px: 1 }}
       >
-        <Grid
-          item
-          xs={9}
+        <button
+          onClick={() => handleToggleSettings()}
           style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
+            marginBottom: 0,
+            marginTop: 0,
+            marginLeft: 0,
           }}
         >
+          <SettingsIcon />
+        </button>
+        <Stack direction="row" justifyContent="center" alignItems="center">
           <button
             className="arrow"
             disabled={isDisabled}
@@ -241,70 +263,64 @@ export default function SidePanel(props) {
           >
             &#8250;
           </button>
-        </Grid>
+        </Stack>
 
-        <Grid
-          item
-          xs={3}
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "center",
-          }}
-        >
-          <StyledEngineProvider injectFirst>
-            <FormControl variant="outlined">
-              <Select
-                id="speed-toggle"
-                value={speed}
-                disabled={isDisabled}
-                onChange={handleSpeedChange}
-                className="speed-select"
-              >
-                <MenuItem value={0.25}>0.25x</MenuItem>
-                <MenuItem value={0.5}>0.5</MenuItem>
-                <MenuItem value={1}>1.0</MenuItem>
-                <MenuItem value={2.0}>2.0</MenuItem>
-                <MenuItem value={4.0}>4x</MenuItem>
-                <MenuItem value={8.0}>8x</MenuItem>
-              </Select>
-            </FormControl>
-          </StyledEngineProvider>
-        </Grid>
-      </Grid>
-      <div className="toggle-layout">
-        <ToggleSwitch
-          onToggle={handleToggleP1Vis}
-          useID="p1vis"
-          disabled={isDisabled}
-        >
-          <h2 className="togglelabel">PLAYER 1 (RED) VISIBILITY</h2>
-        </ToggleSwitch>
-        <ToggleSwitch
-          onToggle={handleToggleP2Vis}
-          useID="p2vis"
-          disabled={isDisabled}
-        >
-          <h2 className="togglelabel">PLAYER 2 (BLUE) VISIBILITY</h2>
-        </ToggleSwitch>
-        <ToggleSwitch
-          onToggle={() => setIsTrailToggled((value) => !value)}
-          useID="trailtoggle"
-          disabled={isDisabled}
-        >
-          <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
-        </ToggleSwitch>
-      </div>
+        <StyledEngineProvider injectFirst>
+          <FormControl variant="outlined">
+            <Select
+              id="speed-toggle"
+              value={speed}
+              disabled={isDisabled}
+              onChange={handleSpeedChange}
+              className="speed-select"
+            >
+              <MenuItem value={0.25}>0.25x</MenuItem>
+              <MenuItem value={0.5}>0.5</MenuItem>
+              <MenuItem value={1}>1.0</MenuItem>
+              <MenuItem value={2.0}>2.0</MenuItem>
+              <MenuItem value={4.0}>4x</MenuItem>
+              <MenuItem value={8.0}>8x</MenuItem>
+            </Select>
+          </FormControl>
+        </StyledEngineProvider>
+      </Stack>
+      <Collapse in={showSettings}>
+        <div className="toggle-layout">
+          <ToggleSwitch
+            onToggle={handleToggleP1Vis}
+            useID="p1vis"
+            disabled={isDisabled}
+          >
+            <h2 className="togglelabel">PLAYER 1 (RED) VISIBILITY</h2>
+          </ToggleSwitch>
+          <ToggleSwitch
+            onToggle={handleToggleP2Vis}
+            useID="p2vis"
+            disabled={isDisabled}
+          >
+            <h2 className="togglelabel">PLAYER 2 (BLUE) VISIBILITY</h2>
+          </ToggleSwitch>
+          <ToggleSwitch
+            onToggle={() => setIsTrailToggled((value) => !value)}
+            useID="trailtoggle"
+            disabled={isDisabled}
+          >
+            <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
+          </ToggleSwitch>
+        </div>
+      </Collapse>
+      <br></br>
+      <Stack direction="row" justifyContent="space-around">
+        <h2 className="info"> RED ROBOTS: {replay == null ? 0 : redRobots} </h2>
+        <h2 className="info">
+          {" "}
+          BLUE ROBOTS: {replay == null ? 0 : blueRobots}{" "}
+        </h2>
+      </Stack>
       <div className="hori-container graph">
-        <h2 className="info stats">
-          RED ROBOTS: {redRobots == null ? 0 : redRobots}{" "}
-        </h2>
-        <h2 className="info stats">
-          BLUE ROBOTS: {blueRobots == null ? 0 : blueRobots}
-        </h2>
+        <TerraformChart />
+        <LineChart />
       </div>
-      <TerraformChart />
-      <LineChart />
     </div>
   )
 }

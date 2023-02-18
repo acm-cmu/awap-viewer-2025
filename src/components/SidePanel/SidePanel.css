@@ -27,7 +27,9 @@ h1 {
 }
 
 .info.stats {
-  font-size: 2vmin;
+  font-family: "Earth Orbiter", "Helveltica Nue", sans-serif;
+  font-size: 2.5vmin;
+  margin: 1vmin 0 1vmin 0;
 }
 
 .hori-container {
@@ -42,11 +44,40 @@ h1 {
   justify-content: center;
 }
 
-.toggle-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 9vw;
+.hori-container.graph {
+  margin: 2vmin 0vmin 2vmin 0vmin;
+  justify-content: center;
+  flex-basis: 50%;
+  flex-wrap: wrap;
+}
+
+.vert-container.graph {
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+}
+
+.info.blue {
+  color: var(--light-color);
+  font-weight: bold;
+  border-width: 2px;
+  border-radius: 2px;
+  border-style: solid;
+  border-color: var(--blue-color);
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: var(--blue-color);
+}
+
+.info.red {
+  color: var(--light-color);
+  font-weight: bold;
+  border-width: 2px;
+  border-radius: 2px;
+  border-style: solid;
+  border-color: var(--red-color);
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: var(--red-color);
 }
 
 .togglelabel {
@@ -59,11 +90,6 @@ p {
   margin: 0;
 }
 
-.hori-container.graph {
-  margin-top: 2vmin;
-  margin-bottom: 2vmin;
-}
-
 /* File upload button */
 .file-upload {
   width: 25vw;
@@ -72,7 +98,7 @@ p {
   border-radius: 5px;
   border: 2px solid var(--dark-color);
   font-family: "Roboto", "Helveltica Nue", sans-serif;
-  font-size: 2vmin;
+  font-size: 1.6vmin;
 }
 
 .file-upload::file-selector-button {
@@ -227,4 +253,12 @@ p {
 
 .MuiSvgIcon-root {
   color: var(--light-color);
+}
+
+.toggle-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 7vw;
+  margin-top: 1vh;
 }
