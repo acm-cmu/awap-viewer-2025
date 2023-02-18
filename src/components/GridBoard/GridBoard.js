@@ -348,8 +348,8 @@ export default function GridBoard(props) {
             terrNum = 10
             console.log("Terraform value greater than 10")
           }
-          if (terrNum < ~10) {
-            terrNum = ~10
+          if (terrNum < -10) {
+            terrNum = -10
             console.log("Terraform value greater than 10")
           }
 
@@ -366,7 +366,7 @@ export default function GridBoard(props) {
         for (let oldExp of prevExplosions.current) {
           let xExp = oldExp[0]
           let yExp = oldExp[1]
-          nextRobots[yExp][xExp] = (
+          nextRobots[xExp][yExp] = (
             <RobotSquare
               key={`${xExp}${yExp}`}
               x={xExp}
@@ -442,7 +442,7 @@ export default function GridBoard(props) {
             let xPrev = prevRobots.current[robotID][0]
             let yPrev = prevRobots.current[robotID][1]
             prevExplosions.current.push([xPrev, yPrev])
-            nextRobots[yPrev][xPrev] = (
+            nextRobots[xPrev][yPrev] = (
               <RobotSquare
                 key={`${xPrev}${yPrev}`}
                 srcImg={ExplosionImg}
