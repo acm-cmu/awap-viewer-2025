@@ -115,44 +115,53 @@
 
 /* blue color tiles */
 .color-10 {
-  background-color: rgb(90, 140, 255);
-}
-
-.color-20 {
-  background-color: rgb(80, 130, 255);
-}
-
-.color-30 {
-  background-color: rgb(70, 120, 255);
-}
-
-.color-40 {
+  background-color: rgb(135, 195, 255);
+ }
+ 
+ 
+ .color-20 {
+  background-color: rgb(120, 180, 255);
+ }
+ 
+ 
+ .color-30 {
+  background-color: rgb(105, 165, 255);
+ }
+ 
+ 
+ .color-40 {
+  background-color: rgb(90, 150, 255);
+ }
+ 
+ 
+ .color-50 {
+  background-color: rgb(75, 135, 255);
+ }
+ 
+ 
+ .color-60 {
   background-color: rgb(60, 110, 255);
-}
-
-.color-50 {
-  background-color: rgb(50, 100, 255);
-}
-
-.color-60 {
-  background-color: rgb(40, 90, 255);
-}
-
-.color-70 {
+ }
+ 
+ 
+ .color-70 {
+  background-color: rgb(45, 95, 255);
+ }
+ 
+ 
+ .color-80 {
   background-color: rgb(30, 80, 255);
-}
-
-.color-80 {
-  background-color: rgb(20, 70, 255);
-}
-
-.color-90 {
-  background-color: rgb(10, 60, 255);
-}
-
-.color-100 {
+ }
+ 
+ 
+ .color-90 {
+  background-color: rgb(15, 65, 255);
+ }
+ 
+ 
+ .color-100 {
   background-color: rgb(0, 50, 255);
-}
+ } 
 
 /* terraformed tile red */
 /* .color-4 {
