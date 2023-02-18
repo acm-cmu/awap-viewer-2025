@@ -131,9 +131,9 @@ export default function GridBoard(props) {
         terrNum = 10
         console.log("Terraform value greater than 10")
       }
-      if (terrNum < ~10) {
-        terrNum = ~10
-        console.log("Terraform value greater than 10")
+      if (terrNum < -10) {
+        terrNum = -10
+        console.log("Terraform value less than 10")
       }
       tempArr[r][c] = (
         <GridSquare key={`${r}${c}`} color={terrNum * 10} useImg={null} />
