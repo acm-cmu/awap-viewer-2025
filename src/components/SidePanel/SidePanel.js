@@ -49,12 +49,12 @@ export default function SidePanel(props) {
       setWrongFile(true)
       return
     }
-    setWrongFile(false)
     const reader = new FileReader()
     reader.onload = async (e) => {
       const replay_text = e.target.result
       try {
         var replay_object = JSON.parse(replay_text)
+        setWrongFile(false)
         resetPlaybutton()
         setIsFinished(false)
         setTimeout([false, null])
@@ -150,7 +150,7 @@ export default function SidePanel(props) {
       ) : (
         <div></div>
       )}
-      {replay != null ? (
+      {!wrongFile && replay != null ? (
         <div>
           <div className="vert-container">
             <h2 className="info">
