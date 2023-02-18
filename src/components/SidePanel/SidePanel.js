@@ -295,15 +295,13 @@ export default function SidePanel(props) {
           <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
         </ToggleSwitch>
       </div>
-      <div className="hori-container">
-        <div className="vert-container">
-          <h2 className="info stats">RED ROBOTS</h2>
-          <h2 className="info stats">{redRobots == null ? 0 : redRobots} </h2>
-        </div>
-        <div className="vert-container">
-          <h2 className="info stats">BLUE ROBOTS</h2>
-          <h2 className="info stats">{blueRobots == null ? 0 : blueRobots}</h2>
-        </div>
+      <div className="hori-container graph">
+        <h2 className="info stats">
+          RED ROBOTS: {redRobots == null ? 0 : redRobots}{" "}
+        </h2>
+        <h2 className="info stats">
+          BLUE ROBOTS: {blueRobots == null ? 0 : blueRobots}
+        </h2>
       </div>
       <TerraformChart />
       <LineChart />

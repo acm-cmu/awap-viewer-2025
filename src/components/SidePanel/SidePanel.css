@@ -27,7 +27,7 @@ h1 {
 }
 
 .info.stats {
-  font-size: 3vmin;
+  font-size: 2vmin;
 }
 
 .hori-container {
@@ -59,10 +59,9 @@ p {
   margin: 0;
 }
 
-.graph {
-  margin-top: 5vmin;
-  margin-bottom: 5vmin;
-  overflow-wrap: break-word;
+.hori-container.graph {
+  margin-top: 2vmin;
+  margin-bottom: 2vmin;
 }
 
 /* File upload button */
