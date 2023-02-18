@@ -22,11 +22,37 @@ h1 {
   float: left;
 }
 
+.info.win {
+  margin: 1vh 1vw 1vh 1vw;
+}
+
+.info.stats {
+  font-size: 3vmin;
+}
+
+.hori-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.vert-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.toggle-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 9vw;
+}
+
 .togglelabel {
   font-family: "Roboto", "Helveltica Nue", sans-serif;
   color: var(--dark-color);
-  font-size: 2.5vmin;
-  margin: 0;
+  font-size: 2vmin;
 }
 
 p {
@@ -202,11 +228,4 @@ p {
 
 .MuiSvgIcon-root {
   color: var(--light-color);
-}
-
-.toggle-layout {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 10vw;
 }
