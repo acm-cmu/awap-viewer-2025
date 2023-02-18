@@ -11,7 +11,7 @@ export default function RobotSquare(props) {
   const [tilevisib, setTileVisib] = useState(null)
   const [robottype, setRobotType] = useState(null)
 
-  const handleHover = (col, row) => {
+  const handleHover = (row, col) => {
     setCol(col)
     setRow(row)
     if (tiles != null && col != null && row != null) {
@@ -32,10 +32,10 @@ export default function RobotSquare(props) {
         case 0:
           setTileVisib("None")
           break
-        case 2:
+        case 1:
           setTileVisib("Red")
           break
-        case 1:
+        case 2:
           setTileVisib("Blue")
           break
         default:

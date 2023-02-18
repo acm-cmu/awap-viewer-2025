@@ -109,14 +109,14 @@ export default function GridBoard(props) {
         let c = tile[0]
         let r = tile[1]
         let metalvalue = tile[2]
-        tempArr[r][c] = (
+        tempArr[c][r] = (
           <GridSquare key={`${c}${r}`} color={colorID} useImg={useImg} />
         )
         if (colorID === 1) {
-          tileInfo[r][c][0] = "I"
+          tileInfo[c][r][0] = "I"
         } else if (colorID === 2) {
-          tileInfo[r][c][0] = "M"
-          tileInfo[r][c][2] = metalvalue
+          tileInfo[c][r][0] = "M"
+          tileInfo[c][r][2] = metalvalue
         }
       }
     }
@@ -128,22 +128,22 @@ export default function GridBoard(props) {
       let r = terr_tile[1]
       let terrNum = terr_tile[2]
       if (terrNum > 10) {
-        terrNum = 10 
-        console.log("Terraform value greater than 10")
-      } 
-      if (terrNum < ~10) {
-        terrNum = ~10 
+        terrNum = 10
         console.log("Terraform value greater than 10")
       }
-      tempArr[r][c] = (
+      if (terrNum < ~10) {
+        terrNum = ~10
+        console.log("Terraform value greater than 10")
+      }
+      tempArr[c][r] = (
         <GridSquare
           key={`${c}${r}`}
           // color={terrNum > 0 ? 3 : 4}
-          color={terrNum*10}
+          color={terrNum * 10}
           useImg={null}
         />
       )
-      tileInfo[r][c][0] = terrNum
+      tileInfo[c][r][0] = terrNum
       // tileInfo[r][c][1] = terrNum > 0 ? 1 : 2
     }
 
@@ -151,13 +151,13 @@ export default function GridBoard(props) {
       let x = vis_tile[0]
       let y = vis_tile[1]
       let pl = vis_tile[2]
-      if (tileInfo[y][x][1] === 0) {
-        tileInfo[y][x][1] = pl
+      if (tileInfo[x][y][1] === 0) {
+        tileInfo[x][y][1] = pl
       } else if (
-        (tileInfo[y][x][1] === 1 && pl === 2) ||
-        (tileInfo[y][x][1] === 2 && pl === 1)
+        (tileInfo[x][y][1] === 1 && pl === 2) ||
+        (tileInfo[x][y][1] === 2 && pl === 1)
       ) {
-        tileInfo[y][x][1] = 4
+        tileInfo[x][y][1] = 4
       }
     }
 
@@ -214,7 +214,7 @@ export default function GridBoard(props) {
         let y = vis_tile[1]
         let pl = vis_tile[2]
         if ((player === "RED" && pl === 1) || (player === "BLUE" && pl === 2)) {
-          tempArr[y][x] = <div key={`${x}${y}`} className="grid-square"></div>
+          tempArr[x][y] = <div key={`${x}${y}`} className="grid-square"></div>
         }
       }
 
@@ -311,22 +311,22 @@ export default function GridBoard(props) {
           let y = visCh[1]
 
           if (player === "red") {
-            nextVisP1[y][x] = (
+            nextVisP1[x][y] = (
               <div key={`${x}${y}`} className="grid-square"></div>
             )
-            if (nextTileInfo[y][x][1] === 1 || nextTileInfo[y][x][1] === 0) {
-              nextTileInfo[y][x][1] = 1
+            if (nextTileInfo[x][y][1] === 1 || nextTileInfo[x][y][1] === 0) {
+              nextTileInfo[x][y][1] = 1
             } else {
-              nextTileInfo[y][x][1] = 3
+              nextTileInfo[x][y][1] = 3
             }
           } else {
-            nextVisP2[y][x] = (
+            nextVisP2[x][y] = (
               <div key={`${x}${y}`} className="grid-square"></div>
             )
-            if (nextTileInfo[y][x][1] === 2 || nextTileInfo[y][x][1] === 0) {
-              nextTileInfo[y][x][1] = 2
+            if (nextTileInfo[x][y][1] === 2 || nextTileInfo[x][y][1] === 0) {
+              nextTileInfo[x][y][1] = 2
             } else {
-              nextTileInfo[y][x][1] = 3
+              nextTileInfo[x][y][1] = 3
             }
           }
         }
@@ -341,7 +341,7 @@ export default function GridBoard(props) {
           if (player === "blue") {
             terrNum = 1
           }
-          terrNum = terrNum + nextTileInfo[y][x][0]
+          terrNum = terrNum + nextTileInfo[x][y][0]
           // console.log(player + " " + i + " " + terrNum)
 
           // let terrCol = 0
@@ -351,18 +351,18 @@ export default function GridBoard(props) {
           //   terrCol = 4
           // }
           if (terrNum > 10) {
-            terrNum = 10 
+            terrNum = 10
             console.log("Terraform value greater than 10")
-          } 
+          }
           if (terrNum < ~10) {
-            terrNum = ~10 
+            terrNum = ~10
             console.log("Terraform value greater than 10")
           }
 
-          nextGrid[y][x] = (
-            <GridSquare key={`${x}${y}`} color={terrNum*10} useImg={null} />
+          nextGrid[x][y] = (
+            <GridSquare key={`${x}${y}`} color={terrNum * 10} useImg={null} />
           )
-          nextTileInfo[y][x][0] = terrNum
+          nextTileInfo[x][y][0] = terrNum
           if (y === 1 && x === 1) {
           }
         }
@@ -375,7 +375,7 @@ export default function GridBoard(props) {
             let xPrev = prevRobots.current[robotID][0]
             let yPrev = prevRobots.current[robotID][1]
             // Remove robot at prev position if it exists
-            nextRobots[yPrev][xPrev] = (
+            nextRobots[xPrev][yPrev] = (
               <RobotSquare
                 key={`${xPrev}${yPrev}`}
                 x={xPrev}
@@ -385,7 +385,7 @@ export default function GridBoard(props) {
             )
             // Add trails for prev position
             let imgPrev = prevRobots.current[robotID][2]
-            nextTrails[yPrev][xPrev] = (
+            nextTrails[xPrev][yPrev] = (
               <TrailSquare
                 key={`${xPrev}${yPrev}`}
                 srcImg={imgPrev}
@@ -414,7 +414,7 @@ export default function GridBoard(props) {
               else robotImg = MinerImgBlue
             }
 
-            nextRobots[y][x] = (
+            nextRobots[x][y] = (
               <RobotSquare
                 key={`${x}${y}`}
                 srcImg={robotImg}
@@ -435,15 +435,16 @@ export default function GridBoard(props) {
       }
 
       var idx
-      if (sliderValue >= index) {
-        idx = index + 1
+      if (sliderValue === index) {
+      } else if (sliderValue > index) {
+        idx = index
         let newTrails
         const newGrid = makeDeepCopy(grid)
         const newVisP1 = makeDeepCopy(visibilityP1)
         const newVisP2 = makeDeepCopy(visibilityP2)
         const newRobots = makeDeepCopy(robots)
         const newTileInfo = makeDeepCopy3D(tiles)
-        while (idx <= sliderValue) {
+        while (idx < sliderValue) {
           newTrails = updateFrame(
             idx,
             newGrid,
@@ -469,7 +470,7 @@ export default function GridBoard(props) {
         const newRobots = makeDeepCopy(initialRobots)
         const newTileInfo = makeDeepCopy3D(arr[1])
         idx = 0
-        while (idx <= sliderValue) {
+        while (idx < sliderValue) {
           newTrails = updateFrame(
             idx,
             newGrid,
@@ -487,7 +488,7 @@ export default function GridBoard(props) {
         setRobots(newRobots)
         setTiles(newTileInfo)
       }
-      setIndex(idx - 1)
+      setIndex(idx)
       if (!framePlaying) {
         setIsPlay(false)
       }
