@@ -32,6 +32,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -45,22 +46,19 @@
   --red-color: rgb(250, 60, 60);
   --blue-color: rgb(100, 150, 255);
   --vis-tint: rgba(42, 40, 40, 0.7);
+  --grass-color: #ccd44a;
 
   /* Numbers define values that will be used throughout the CSS.
   --tile-size: 20px for example will set size of the grid squares. */
   --cols: 32;
   --rows: 32;
-  --grid-margin: 8vmin;
-  --tile-size: calc(
-    min(
-      (100vh - var(--grid-margin)) / var(--rows),
-      (70vw - var(--grid-margin)) / var(--cols)
-    )
-  );
+  --grid-margin: 15vh;
+  --tile-size: calc(min((100vh - var(--grid-margin)) / var(--rows),
+        (70vw - var(--grid-margin)) / var(--cols)));
   --grid-size-hori: calc(var(--cols) * var(--tile-size));
   --grid-size-vert: calc(var(--rows) * var(--tile-size));
   --grid-padding-hori: calc((70vw - var(--grid-size-hori)) / 2);
-  --grid-padding-vert: calc((100vh - var(--grid-size-vert)) / 2);
+  --grid-padding-vert: calc((85vh - var(--grid-size-vert)) / 2);
   --border-width: 0.2vmin;
 }
 

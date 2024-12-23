@@ -3,6 +3,23 @@ import "../GridBoard/Grid.css"
 import { ViewerContext } from "../../pages/MapMaker"
 import MetalImg from "../../img/metal.png"
 
+import B1 from "../../assets/MapTiles/TileF1.png";
+import B2 from "../../assets/MapTiles/TileF2.png";
+import B3 from "../../assets/MapTiles/TileF3.png";
+import B4 from "../../assets/MapTiles/TileF4.png";
+import B5 from "../../assets/MapTiles/TileF5.png";
+
+const blockedImgCnt = 5;
+const blockedImgArray = [B1, B2, B3, B4, B5];
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function RandBlockedTile() {
+  return blockedImgArray[randomInt(0, blockedImgCnt - 1)];
+}
+
 export default function MapMakerGridSquare(props) {
   const { x, y } = props
 
@@ -108,6 +125,7 @@ export default function MapMakerGridSquare(props) {
             impassable ? 'tile-div grid-square color-1' :
               'tile-div grid-square color-0'}
       onClick={handleClick} onMouseOver={handleClick}>
+      {impassable ? <img src={RandBlockedTile()} alt="" /> : <div></div>}
       {mining ? <img src={MetalImg} alt="" /> : <div></div>}
     </div>
   )

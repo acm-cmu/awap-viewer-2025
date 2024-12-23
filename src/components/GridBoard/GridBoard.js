@@ -20,6 +20,7 @@ import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
 import MetalImg from "../../img/metal.png"
 import ExplosionImg from "../../better-img/explosion.png"
 
+
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
   const isP2Vis = props.isP2VisToggled
@@ -542,12 +543,12 @@ export default function GridBoard(props) {
   }, [isPlay, setSliderValue, runAnimation])
 
   return (
-    <div>
+    <div className="map">
       {isP2Vis && <div className="board visibility">{visibilityP2}</div>}
       {isP1Vis && <div className="board visibility">{visibilityP1}</div>}
       <div className="board robot">{robots}</div>
       {isTrailToggled && <div className="board trail">{trails}</div>}
-      <div className="board grid">{grid}</div>
+      <div className="board grid">{grid}</div>e
     </div>
   )
 }
