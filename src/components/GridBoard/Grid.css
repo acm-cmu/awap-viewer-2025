@@ -4,6 +4,33 @@
   background-color: var(--grass-color);
 }
 
+.map-info-box {
+  width: 70vw;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 5px;
+  background-color: var(--info-box-color);
+}
+
+.map-info-box div {
+  flex-basis: 50%;
+
+}
+
+.info-badge {
+  margin: 0;
+  aspect-ratio: 1 / 1;
+  width: 7vw;
+}
+
+.info-badge img {
+  object-fit: contain;
+  width: 7vw;
+}
+
 .board {
   display: grid;
   grid-template-columns: repeat(var(--cols), var(--tile-size));

@@ -39,14 +39,15 @@
 }
 
 :root {
-  --dark-accent-color: #47281a;
-  --dark-color: #663926;
-  --mid-color: #e27b58;
-  --light-color: #f9b697;
+  --dark-accent-color: #383529;
+  --dark-color: #B68A03;
+  --mid-color: #FFEAAD;
+  --light-color: #F9EFD1;
   --red-color: rgb(250, 60, 60);
   --blue-color: rgb(100, 150, 255);
   --vis-tint: rgba(42, 40, 40, 0.7);
   --grass-color: #ccd44a;
+  --info-box-color: #393726;
 
   /* Numbers define values that will be used throughout the CSS.
   --tile-size: 20px for example will set size of the grid squares. */

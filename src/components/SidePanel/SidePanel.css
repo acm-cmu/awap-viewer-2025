@@ -33,6 +33,7 @@ h1 {
 }
 
 .hori-container {
+  padding: 5px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -44,7 +45,7 @@ h1 {
   justify-content: center;
 }
 
-.hori-container.graph {
+.hori-container.graph div {
   margin: 2vmin 0vmin 2vmin 0vmin;
   justify-content: center;
   flex-basis: 50%;
@@ -235,8 +236,7 @@ p {
   border: 2px solid var(--dark-color);
 }
 
-.speed-select.MuiOutlinedInput-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
+.speed-select.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border: 2px solid var(--dark-color);
 }
 

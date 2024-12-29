@@ -22,11 +22,11 @@ function Viewer({ togglePage }) {
   const [tiles, setTiles] = useState(null)
 
   const [frame, setFrame] = useState(null)
-  const [redMetal, setRedMetal] = useState([])
-  const [blueMetal, setBlueMetal] = useState([])
+  const [redTroops, setRedTroops] = useState([])
+  const [blueTroops, setBlueTroops] = useState([])
 
-  const [redTerraform, setRedTerraform] = useState([])
-  const [blueTerraform, setBlueTerraform] = useState([])
+  const [redCastles, setRedCastles] = useState([])
+  const [blueCastles, setBlueCastles] = useState([])
 
   const [redRobots, setRedRobots] = useState(null)
   const [blueRobots, setBlueRobots] = useState(null)
@@ -41,8 +41,8 @@ function Viewer({ togglePage }) {
     setIsDisabled(false)
     let root = document.documentElement
     try {
-      root.style.setProperty("--cols", replayData.map_width)
-      root.style.setProperty("--rows", replayData.map_height)
+      root.style.setProperty("--cols", replayData.game_state.map.width)
+      root.style.setProperty("--rows", replayData.game_state.map.height)
     } catch (err) {
       console.log(err.message)
     }
@@ -59,18 +59,18 @@ function Viewer({ togglePage }) {
   return (
     <ViewerContext.Provider
       value={{
-        redMetal,
-        setRedMetal,
+        redTroops,
+        setRedTroops,
         redRobots,
         setRedRobots,
         blueRobots,
         setBlueRobots,
-        blueMetal,
-        setBlueMetal,
-        redTerraform,
-        setRedTerraform,
-        blueTerraform,
-        setBlueTerraform,
+        blueTroops,
+        setBlueTroops,
+        redCastles,
+        setRedCastles,
+        blueCastles,
+        setBlueCastles,
         frame,
         setFrame,
         replay,

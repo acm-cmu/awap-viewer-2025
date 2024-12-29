@@ -16,6 +16,7 @@ import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 import LineChart from "./LineChart.js"
 import TerraformChart from "./TerraformChart.js"
+import CyanT1 from "../../assets/CyanTraining0.png";
 
 export default function SidePanel(props) {
   const {
@@ -149,7 +150,7 @@ export default function SidePanel(props) {
       >
         <SwapHorizIcon />
       </button>
-      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2023</h1>
+      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2024</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Game Viewer</h2>
       <input
         id="fileobj"
@@ -310,16 +311,25 @@ export default function SidePanel(props) {
         </div>
       </Collapse>
       <br></br>
-      <Stack direction="row" justifyContent="space-around">
+      {/* <Stack direction="row" justifyContent="space-around">
         <h2 className="info"> RED ROBOTS: {replay == null ? 0 : redRobots} </h2>
         <h2 className="info">
           {" "}
-          BLUE ROBOTS: {replay == null ? 0 : blueRobots}{" "}
+          BLUE TROO: {replay == null ? 0 : blueRobots}{" "}
         </h2>
-      </Stack>
+      </Stack> */}
+
+      <h2>Expedition Progress</h2>
       <div className="hori-container graph">
-        <TerraformChart />
-        <LineChart />
+        <div>
+          <img src={CyanT1} className="trainingStatCyan" alt="" />
+          <p className="info"> Number of Troops: # </p>
+        </div>
+        <div>
+          <p className="info"> Graph showing number of terms remaing, bar chart </p>
+        </div>
+        {/* <TerraformChart />
+        <LineChart /> */}
       </div>
     </div>
   )

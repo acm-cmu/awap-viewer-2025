@@ -8,8 +8,9 @@ import React, {
 } from "react"
 import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
-import RobotSquare from "./RobotSquare"
+import troopsquare from "./troopsquare"
 import TrailSquare from "./TrailSquare"
+import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
 import ExplorerImgRed from "../../better-img/light-outline-red.PNG"
 import TerraformerImgRed from "../../better-img/shovel-outline-red.PNG"
@@ -17,7 +18,7 @@ import MinerImgRed from "../../better-img/pick-outline-red.PNG"
 import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
 import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
 import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
-import MetalImg from "../../img/metal.png"
+import TroopsImg from "../../img/Troops.png"
 import ExplosionImg from "../../better-img/explosion.png"
 
 
@@ -36,17 +37,17 @@ export default function GridBoard(props) {
     setTiles,
     tiles,
     setFrame,
-    redMetal,
-    blueMetal,
-    setRedMetal,
-    setBlueMetal,
+    redTroops,
+    blueTroops,
+    setRedTroops,
+    setBlueTroops,
     isTrailToggled,
     redTerraform,
     setRedTerraform,
     blueTerraform,
     setBlueTerraform,
-    setBlueRobots,
-    setRedRobots,
+    setBluetroops,
+    setRedtroops,
     setMetadata,
     setTimeout,
   } = useContext(ViewerContext)
@@ -54,7 +55,7 @@ export default function GridBoard(props) {
   const nrows = replay.map_height
   const ncols = replay.map_width
   const initImpass = replay.initial_map_passability
-  const initMetal = replay.initial_map_metal
+  const initTroops = replay.initial_map_Troops
   const initTerr = replay.initial_map_terraformed
   const initVis = replay.initial_map_visible
   const gameTurns = replay.turns
@@ -64,9 +65,9 @@ export default function GridBoard(props) {
 
   // States for displaying various elements
   const [grid, setGrid] = useState(null)
-  const [robots, setRobots] = useState(null)
+  const [troops, setTroops] = useState(null)
   const [trails, setTrails] = useState(null)
-  const prevRobots = useRef({}) // dictionary mapping robot ids to coordinates
+  const prevTroops = useRef({}) // dictionary mapping robot ids to coordinates
   const [visibilityP1, setVisibilityP1] = useState(null)
   const [visibilityP2, setVisibilityP2] = useState(null)
   const prevExplosions = useRef([])
@@ -110,7 +111,7 @@ export default function GridBoard(props) {
       for (let tile of tileArr) {
         let r = tile[0]
         let c = tile[1]
-        let metalvalue = tile[2]
+        let Troopsvalue = tile[2]
         tempArr[r][c] = (
           <GridSquare key={`${r}${c}`} color={colorID} useImg={useImg} />
         )
@@ -118,13 +119,13 @@ export default function GridBoard(props) {
           tileInfo[r][c][0] = "I"
         } else if (colorID === 2) {
           tileInfo[r][c][0] = "M"
-          tileInfo[r][c][2] = metalvalue
+          tileInfo[r][c][2] = Troopsvalue
         }
       }
     }
 
     populateTiles(initImpass, 1, null)
-    populateTiles(initMetal, 2, MetalImg)
+    populateTiles(initTroops, 2, TroopsImg)
     for (let terr_tile of initTerr) {
       let r = terr_tile[0]
       let c = terr_tile[1]
@@ -164,17 +165,17 @@ export default function GridBoard(props) {
     clearInterval(intervalID.current)
     intervalID.current = null
     return [tempArr, tileInfo]
-  }, [nrows, ncols, initImpass, initMetal, initTerr, setTiles, initVis])
+  }, [nrows, ncols, initImpass, initTroops, initTerr, setTiles, initVis])
 
   // Initializes robot grid
   // eslint-disable-next-line
-  const initialRobots = useMemo(() => {
+  const initialtroops = useMemo(() => {
     let tempArr = []
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <RobotSquare
+          <troopsquare
             key={`${row}${col}`}
             x={row}
             y={col}
@@ -184,8 +185,8 @@ export default function GridBoard(props) {
         )
       }
     }
-    setRobots(tempArr)
-    prevRobots.current = {}
+    setTroops(tempArr)
+    prevTroops.current = {}
     return tempArr
     // eslint-disable-next-line
   }, [nrows, ncols, replay])
@@ -270,7 +271,7 @@ export default function GridBoard(props) {
         nextGrid,
         nextVisP1,
         nextVisP2,
-        nextRobots,
+        nexttroops,
         nextTileInfo
       ) => {
         if (i < 0) return
@@ -287,27 +288,27 @@ export default function GridBoard(props) {
         }
 
         if (player === "red") {
-          //Setting Red Metal Array
-          const temp = redMetal
-          temp.push(turn.metal)
-          setRedMetal(temp)
+          //Setting Red Troops Array
+          const temp = redTroops
+          temp.push(turn.Troops)
+          setRedTroops(temp)
           setFrame(sliderValue / 2)
 
           const temp2 = redTerraform
           temp2.push(turn.tiles_terraformed.length)
           setRedTerraform(temp2)
-          setRedRobots(turn.num_robots)
+          setRedtroops(turn.num_troops)
         } else {
-          //Setting Blue Metal Array
-          const temp = blueMetal
-          temp.push(turn.metal)
-          setBlueMetal(temp)
+          //Setting Blue Troops Array
+          const temp = blueTroops
+          temp.push(turn.Troops)
+          setBlueTroops(temp)
           setFrame((sliderValue - 1) / 2)
 
           const temp2 = blueTerraform
           temp2.push(turn.tiles_terraformed.length)
           setBlueTerraform(temp2)
-          setBlueRobots(turn.num_robots)
+          setBluetroops(turn.num_troops)
         }
 
         // Update visibility
@@ -362,13 +363,13 @@ export default function GridBoard(props) {
           }
         }
 
-        // Modify robots, trails, explosions
+        // Modify troops, trails, explosions
         // Remove old explosions
         for (let oldExp of prevExplosions.current) {
           let xExp = oldExp[0]
           let yExp = oldExp[1]
-          nextRobots[xExp][yExp] = (
-            <RobotSquare
+          nexttroops[xExp][yExp] = (
+            <troopsquare
               key={`${xExp}${yExp}`}
               x={xExp}
               y={yExp}
@@ -381,12 +382,12 @@ export default function GridBoard(props) {
         let nextTrails = makeDeepCopy(initialTrails)
         for (let robotCh of turn.robot_changes) {
           let robotID = robotCh[0]
-          if (robotID in prevRobots.current) {
-            let xPrev = prevRobots.current[robotID][0]
-            let yPrev = prevRobots.current[robotID][1]
+          if (robotID in prevTroops.current) {
+            let xPrev = prevTroops.current[robotID][0]
+            let yPrev = prevTroops.current[robotID][1]
             // Remove robot at prev position if it exists
-            nextRobots[xPrev][yPrev] = (
-              <RobotSquare
+            nexttroops[xPrev][yPrev] = (
+              <troopsquare
                 key={`${xPrev}${yPrev}`}
                 x={xPrev}
                 y={yPrev}
@@ -394,7 +395,7 @@ export default function GridBoard(props) {
               />
             )
             // Add trails for prev position
-            let imgPrev = prevRobots.current[robotID][2]
+            let imgPrev = prevTroops.current[robotID][2]
             nextTrails[xPrev][yPrev] = (
               <TrailSquare
                 key={`${xPrev}${yPrev}`}
@@ -424,8 +425,8 @@ export default function GridBoard(props) {
               else robotImg = MinerImgBlue
             }
 
-            nextRobots[x][y] = (
-              <RobotSquare
+            nexttroops[x][y] = (
+              <troopsquare
                 key={`${x}${y}`}
                 srcImg={robotImg}
                 x={x}
@@ -438,13 +439,13 @@ export default function GridBoard(props) {
               />
             )
             // Store robot coordinates
-            prevRobots.current[robotID] = [x, y, robotImg]
+            prevTroops.current[robotID] = [x, y, robotImg]
           } else {
-            let xPrev = prevRobots.current[robotID][0]
-            let yPrev = prevRobots.current[robotID][1]
+            let xPrev = prevTroops.current[robotID][0]
+            let yPrev = prevTroops.current[robotID][1]
             prevExplosions.current.push([xPrev, yPrev])
-            nextRobots[xPrev][yPrev] = (
-              <RobotSquare
+            nexttroops[xPrev][yPrev] = (
+              <troopsquare
                 key={`${xPrev}${yPrev}`}
                 srcImg={ExplosionImg}
                 x={xPrev}
@@ -469,7 +470,7 @@ export default function GridBoard(props) {
         const newGrid = makeDeepCopy(grid)
         const newVisP1 = makeDeepCopy(visibilityP1)
         const newVisP2 = makeDeepCopy(visibilityP2)
-        const newRobots = makeDeepCopy(robots)
+        const newtroops = makeDeepCopy(troops)
         const newTileInfo = makeDeepCopy3D(tiles)
         while (idx < sliderValue) {
           newTrails = updateFrame(
@@ -477,7 +478,7 @@ export default function GridBoard(props) {
             newGrid,
             newVisP1,
             newVisP2,
-            newRobots,
+            newtroops,
             newTileInfo
           )
           idx += 1
@@ -486,7 +487,7 @@ export default function GridBoard(props) {
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
-        setRobots(newRobots)
+        setTroops(newtroops)
         setTiles(newTileInfo)
       } else {
         const arr = initialGrid
@@ -494,7 +495,7 @@ export default function GridBoard(props) {
         const newGrid = makeDeepCopy(arr[0])
         const newVisP1 = makeDeepCopy(p1InitialVis)
         const newVisP2 = makeDeepCopy(p2InitialVis)
-        const newRobots = makeDeepCopy(initialRobots)
+        const newtroops = makeDeepCopy(initialtroops)
         const newTileInfo = makeDeepCopy3D(arr[1])
         idx = 0
         while (idx < sliderValue) {
@@ -503,7 +504,7 @@ export default function GridBoard(props) {
             newGrid,
             newVisP1,
             newVisP2,
-            newRobots,
+            newtroops,
             newTileInfo
           )
           idx += 1
@@ -512,7 +513,7 @@ export default function GridBoard(props) {
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
-        setRobots(newRobots)
+        setTroops(newtroops)
         setTiles(newTileInfo)
       }
       setIndex(idx)
@@ -546,9 +547,10 @@ export default function GridBoard(props) {
     <div className="map">
       {isP2Vis && <div className="board visibility">{visibilityP2}</div>}
       {isP1Vis && <div className="board visibility">{visibilityP1}</div>}
-      <div className="board robot">{robots}</div>
+      <div className="board robot">{troops}</div>
       {isTrailToggled && <div className="board trail">{trails}</div>}
-      <div className="board grid">{grid}</div>e
+      <div className="board grid">{grid}</div>
+      {<MapInfoBox />}
     </div>
   )
 }

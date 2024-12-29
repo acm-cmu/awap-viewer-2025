@@ -3,11 +3,11 @@ import "../GridBoard/Grid.css"
 import { ViewerContext } from "../../pages/MapMaker"
 import MetalImg from "../../img/metal.png"
 
-import B1 from "../../assets/MapTiles/TileF1.png";
-import B2 from "../../assets/MapTiles/TileF2.png";
-import B3 from "../../assets/MapTiles/TileF3.png";
-import B4 from "../../assets/MapTiles/TileF4.png";
-import B5 from "../../assets/MapTiles/TileF5.png";
+import B1 from "../../assets/MapTiles/TileB1.png";
+import B2 from "../../assets/MapTiles/TileB2.png";
+import B3 from "../../assets/MapTiles/TileB3.png";
+import B4 from "../../assets/MapTiles/TileB4.png";
+import B5 from "../../assets/MapTiles/TileB5.png";
 
 const blockedImgCnt = 5;
 const blockedImgArray = [B1, B2, B3, B4, B5];
