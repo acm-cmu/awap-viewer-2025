@@ -8,7 +8,7 @@ import React, {
 } from "react"
 import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
-import troopsquare from "./troopsquare"
+import RobotSquare from "./RobotSquare"
 import TrailSquare from "./TrailSquare"
 import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
@@ -18,8 +18,38 @@ import MinerImgRed from "../../better-img/pick-outline-red.PNG"
 import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
 import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
 import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
-import TroopsImg from "../../img/Troops.png"
+import MetalImg from "../../img/metal.png"
 import ExplosionImg from "../../better-img/explosion.png"
+
+// for randomization of tile choice
+const blockedImgCnt = 5;
+const normalImgCnt = 5;
+const colorKey = { "GRASS": "0" }
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function RandBlockedTile() {
+  return randomInt(0, blockedImgCnt - 1);
+}
+
+function RandNormalTile() {
+  return randomInt(0, normalImgCnt - 1);
+}
+
+function RandTileColor(color) {
+  switch (Number(color)) {
+    case 0:
+      return RandNormalTile();
+
+    case 1:
+      return RandBlockedTile();
+
+    default:
+      return null;
+  }
+}
 
 
 export default function GridBoard(props) {
@@ -37,10 +67,10 @@ export default function GridBoard(props) {
     setTiles,
     tiles,
     setFrame,
-    redTroops,
-    blueTroops,
-    setRedTroops,
-    setBlueTroops,
+    redMetal,
+    blueMetal,
+    setRedMetal,
+    setBlueMetal,
     isTrailToggled,
     redTerraform,
     setRedTerraform,
@@ -52,13 +82,11 @@ export default function GridBoard(props) {
     setTimeout,
   } = useContext(ViewerContext)
 
-  const nrows = replay.map_height
-  const ncols = replay.map_width
-  const initImpass = replay.initial_map_passability
-  const initTroops = replay.initial_map_Troops
-  const initTerr = replay.initial_map_terraformed
-  const initVis = replay.initial_map_visible
-  const gameTurns = replay.turns
+  const nrows = replay[0].game_state.map.height
+  const ncols = replay[0].game_state.map.width
+  const initImpass = replay[0].game_state.building_placeable_map
+  const initColors = replay[0].game_state.map.tiles
+  const gameTurns = replay
 
   const [index, setIndex] = useState(-1)
   const intervalID = useRef(null)
@@ -67,7 +95,7 @@ export default function GridBoard(props) {
   const [grid, setGrid] = useState(null)
   const [troops, setTroops] = useState(null)
   const [trails, setTrails] = useState(null)
-  const prevTroops = useRef({}) // dictionary mapping robot ids to coordinates
+  const prevTroops = useRef({}) // dictionary mapping troop ids to coordinates
   const [visibilityP1, setVisibilityP1] = useState(null)
   const [visibilityP2, setVisibilityP2] = useState(null)
   const prevExplosions = useRef([])
@@ -90,8 +118,9 @@ export default function GridBoard(props) {
     setTrails(initialTrails)
   }, [initialTrails, replay])
 
+  // Initialize fog of war !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
   // Initializes tile grid
-  // eslint-disable-next-line
   const initialGrid = useMemo(() => {
     let tempArr = []
     let tileInfo = []
@@ -100,64 +129,34 @@ export default function GridBoard(props) {
       tempArr.push([])
       tileInfo.push([])
       for (let col = 0; col < ncols; col++) {
+        let color = colorKey[initColors[row][col]];
+        let randChoice = RandTileColor(color)
         tempArr[row].push(
-          <GridSquare key={`${row}${col}`} color="0" useImg={null} />
+          <GridSquare key={`${row}${col}`} color={color} useImg={randChoice} />
         )
         tileInfo[row].push([0, 0, 0])
       }
     }
 
-    const populateTiles = (tileArr, colorID, useImg) => {
-      for (let tile of tileArr) {
-        let r = tile[0]
-        let c = tile[1]
-        let Troopsvalue = tile[2]
-        tempArr[r][c] = (
-          <GridSquare key={`${r}${c}`} color={colorID} useImg={useImg} />
-        )
-        if (colorID === 1) {
-          tileInfo[r][c][0] = "I"
-        } else if (colorID === 2) {
-          tileInfo[r][c][0] = "M"
-          tileInfo[r][c][2] = Troopsvalue
-        }
-      }
-    }
+    // const populateTiles = (tileArr, colorID, useImg) => {
+    //   for (let tile of tileArr) {
+    //     let r = tile[0]
+    //     let c = tile[1]
+    //     let metalvalue = tile[2]
+    //     tempArr[r][c] = (
+    //       <GridSquare key={`${r}${c}`} color={colorID} useImg={useImg} />
+    //     )
+    //     if (colorID === 1) {
+    //       tileInfo[r][c][0] = "I"
+    //     } else if (colorID === 2) {
+    //       tileInfo[r][c][0] = "M"
+    //       tileInfo[r][c][2] = metalvalue
+    //     }
+    //   }
+    // }
 
-    populateTiles(initImpass, 1, null)
-    populateTiles(initTroops, 2, TroopsImg)
-    for (let terr_tile of initTerr) {
-      let r = terr_tile[0]
-      let c = terr_tile[1]
-      let terrNum = terr_tile[2]
-      if (terrNum > 10) {
-        terrNum = 10
-        console.log("Terraform value greater than 10")
-      }
-      if (terrNum < -10) {
-        terrNum = -10
-        console.log("Terraform value less than 10")
-      }
-      tempArr[r][c] = (
-        <GridSquare key={`${r}${c}`} color={terrNum * 10} useImg={null} />
-      )
-      tileInfo[r][c][0] = terrNum
-      // tileInfo[r][c][1] = terrNum > 0 ? 1 : 2
-    }
-
-    for (let vis_tile of initVis) {
-      let x = vis_tile[0]
-      let y = vis_tile[1]
-      let pl = vis_tile[2]
-      if (tileInfo[x][y][1] === 0) {
-        tileInfo[x][y][1] = pl
-      } else if (
-        (tileInfo[x][y][1] === 1 && pl === 2) ||
-        (tileInfo[x][y][1] === 2 && pl === 1)
-      ) {
-        tileInfo[x][y][1] = 4
-      }
-    }
+    // populateTiles(initImpass, 1, null)
+    // populateTiles(initMetal, 2, MetalImg)
 
     setGrid(tempArr)
     setTiles(tileInfo)
@@ -165,17 +164,16 @@ export default function GridBoard(props) {
     clearInterval(intervalID.current)
     intervalID.current = null
     return [tempArr, tileInfo]
-  }, [nrows, ncols, initImpass, initTroops, initTerr, setTiles, initVis])
+  }, [nrows, ncols, setTiles])
 
   // Initializes robot grid
-  // eslint-disable-next-line
   const initialtroops = useMemo(() => {
     let tempArr = []
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <troopsquare
+          <RobotSquare
             key={`${row}${col}`}
             x={row}
             y={col}
@@ -207,18 +205,18 @@ export default function GridBoard(props) {
         }
       }
 
-      for (let vis_tile of initVis) {
-        let x = vis_tile[0]
-        let y = vis_tile[1]
-        let pl = vis_tile[2]
-        if ((player === "RED" && pl === 1) || (player === "BLUE" && pl === 2)) {
-          tempArr[x][y] = <div key={`${x}${y}`} className="grid-square"></div>
-        }
-      }
+      // for (let vis_tile of initVis) {
+      //   let x = vis_tile[0]
+      //   let y = vis_tile[1]
+      //   let pl = vis_tile[2]
+      //   if ((player === "RED" && pl === 1) || (player === "BLUE" && pl === 2)) {
+      //     tempArr[x][y] = <div key={`${x}${y}`} className="grid-square"></div>
+      //   }
+      // }
 
       return tempArr
     },
-    [nrows, ncols, initVis]
+    [nrows, ncols]
   )
 
   // eslint-disable-next-line
@@ -288,10 +286,10 @@ export default function GridBoard(props) {
         }
 
         if (player === "red") {
-          //Setting Red Troops Array
-          const temp = redTroops
-          temp.push(turn.Troops)
-          setRedTroops(temp)
+          //Setting Red Metal Array
+          const temp = redMetal
+          temp.push(turn.metal)
+          setRedMetal(temp)
           setFrame(sliderValue / 2)
 
           const temp2 = redTerraform
@@ -299,10 +297,10 @@ export default function GridBoard(props) {
           setRedTerraform(temp2)
           setRedtroops(turn.num_troops)
         } else {
-          //Setting Blue Troops Array
-          const temp = blueTroops
-          temp.push(turn.Troops)
-          setBlueTroops(temp)
+          //Setting Blue Metal Array
+          const temp = blueMetal
+          temp.push(turn.metal)
+          setBlueMetal(temp)
           setFrame((sliderValue - 1) / 2)
 
           const temp2 = blueTerraform
@@ -369,7 +367,7 @@ export default function GridBoard(props) {
           let xExp = oldExp[0]
           let yExp = oldExp[1]
           nexttroops[xExp][yExp] = (
-            <troopsquare
+            <RobotSquare
               key={`${xExp}${yExp}`}
               x={xExp}
               y={yExp}
@@ -387,7 +385,7 @@ export default function GridBoard(props) {
             let yPrev = prevTroops.current[robotID][1]
             // Remove robot at prev position if it exists
             nexttroops[xPrev][yPrev] = (
-              <troopsquare
+              <RobotSquare
                 key={`${xPrev}${yPrev}`}
                 x={xPrev}
                 y={yPrev}
@@ -426,7 +424,7 @@ export default function GridBoard(props) {
             }
 
             nexttroops[x][y] = (
-              <troopsquare
+              <RobotSquare
                 key={`${x}${y}`}
                 srcImg={robotImg}
                 x={x}
@@ -445,7 +443,7 @@ export default function GridBoard(props) {
             let yPrev = prevTroops.current[robotID][1]
             prevExplosions.current.push([xPrev, yPrev])
             nexttroops[xPrev][yPrev] = (
-              <troopsquare
+              <RobotSquare
                 key={`${xPrev}${yPrev}`}
                 srcImg={ExplosionImg}
                 x={xPrev}

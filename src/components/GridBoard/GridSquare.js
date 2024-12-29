@@ -12,46 +12,33 @@ import N3 from "../../assets/MapTiles/TileN3.png";
 import N4 from "../../assets/MapTiles/TileN4.png";
 import N5 from "../../assets/MapTiles/TileN5.png";
 
-const blockedImgCnt = 5;
-const blockedImgArray = [B1, B2, B3, B4, B5];
 
-const normalImgCnt = 5;
+const blockedImgArray = [B1, B2, B3, B4, B5];
 const normalImgArray = [N1, N2, N3, N4, N5];
 
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function RandBlockedTile() {
-  return blockedImgArray[randomInt(0, blockedImgCnt - 1)];
-}
-
-function RandNormalTile() {
-  console.log("here");
-  return normalImgArray[randomInt(0, normalImgCnt - 1)];
-}
 
 /*
   Color labels:
   0 - empty
   1 - impassable
   2 - metal
+  5 - trail (empty color)
   -#0 red
   #0 blue
 */
 
 export default function GridSquare(props) {
-  const { color, img } = props
+  const { color, imgIdx } = props
   const classes = `grid-square color-${color}`
   let useImg = null;
 
   switch (Number(color)) {
     case 0:
-      useImg = RandNormalTile();
+      useImg = normalImgArray[imgIdx]
       break;
 
     case 1:
-      useImg = RandBlockedTile();
+      useImg = blockedImgArray[imgIdx]
       break;
 
     default:

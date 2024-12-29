@@ -30,10 +30,6 @@ export default function SidePanel(props) {
     isFinished,
     setIsFinished,
     speed,
-    setRedMetal,
-    setBlueMetal,
-    setRedTerraform,
-    setBlueTerraform,
     setSpeed,
     setIsTrailToggled,
     metaData,
@@ -49,8 +45,8 @@ export default function SidePanel(props) {
   const showFile = async (event) => {
     var fileInput = document.getElementById("fileobj")
     var filePath = fileInput.value
-    let ext = filePath.slice(filePath.length - 7, filePath.length)
-    if (ext !== "awap23r") {
+    let ext = filePath.slice(filePath.length - 4, filePath.length)
+    if (ext !== "json") {
       setWrongFile(true)
       return
     }
@@ -102,17 +98,13 @@ export default function SidePanel(props) {
   }
 
   const resetPlaybutton = useCallback(() => {
-    setRedMetal([])
-    setBlueMetal([])
-    setRedTerraform([])
-    setBlueTerraform([])
+    // setRedMetal([])
+    // setBlueMetal([])
+    // setRedTerraform([])
+    // setBlueTerraform([])
     setFramePlaying(false)
     setIsPlay(false)
   }, [
-    setRedMetal,
-    setBlueMetal,
-    setRedTerraform,
-    setBlueTerraform,
     setFramePlaying,
     setIsPlay,
   ])
@@ -150,7 +142,7 @@ export default function SidePanel(props) {
       >
         <SwapHorizIcon />
       </button>
-      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2024</h1>
+      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2025</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Game Viewer</h2>
       <input
         id="fileobj"
@@ -160,7 +152,7 @@ export default function SidePanel(props) {
       />
       {wrongFile ? (
         <h2 className="info">
-          Please upload replay files with .awap23r extensions only.{" "}
+          Please upload replay files with .awap25r extensions only.{" "}
         </h2>
       ) : (
         <div></div>
@@ -174,7 +166,7 @@ export default function SidePanel(props) {
           >
             <h2 className="info">
               {" "}
-              {replay.red_bot} (RED) vs {replay.blue_bot} (BLUE)
+              RED vs BLUE
             </h2>
             <Stack
               direction="row"
@@ -197,7 +189,7 @@ export default function SidePanel(props) {
           </Stack>
           <h2 className="info">
             FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
-            {replay.turns.length - 1} / TURN {metaData[0]} OF{" "}
+            {replay.length - 1} / TURN {metaData[0]} OF{" "}
             {metaData[1] === "blue" ? "BLUE" : "RED"}
           </h2>
         </div>
@@ -213,7 +205,7 @@ export default function SidePanel(props) {
           step={1}
           marks
           min={0}
-          max={replay != null ? replay.turns.length - 1 : 1}
+          max={replay != null ? replay.length - 1 : 1}
           className="slider"
           onChange={handleFrameChange}
           disabled={isDisabled}
@@ -311,13 +303,6 @@ export default function SidePanel(props) {
         </div>
       </Collapse>
       <br></br>
-      {/* <Stack direction="row" justifyContent="space-around">
-        <h2 className="info"> RED ROBOTS: {replay == null ? 0 : redRobots} </h2>
-        <h2 className="info">
-          {" "}
-          BLUE TROO: {replay == null ? 0 : blueRobots}{" "}
-        </h2>
-      </Stack> */}
 
       <h2>Expedition Progress</h2>
       <div className="hori-container graph">
