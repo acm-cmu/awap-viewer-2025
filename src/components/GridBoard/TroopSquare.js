@@ -2,14 +2,14 @@ import React, { useContext, useState } from "react"
 import { ViewerContext } from "../../pages/Viewer"
 import "./Grid.css"
 
-export default function RobotSquare(props) {
-  const { srcImg, x, y, type, hasRobot, battery, id, team } = props
+export default function TroopSquare(props) {
+  const { x, y, type, hasTroop, health, damage, defense, level, attackRange, damageRange } = props
   const { setCol, setRow, tiles } = useContext(ViewerContext)
 
   const [tiletype, setTileType] = useState(null)
   const [boldtiletype, setBoldTileType] = useState(null)
   const [tilevisib, setTileVisib] = useState(null)
-  const [robottype, setRobotType] = useState(null)
+  const [trooptype, setTroopType] = useState(null)
 
   const handleHover = (row, col) => {
     setCol(col)
@@ -44,26 +44,26 @@ export default function RobotSquare(props) {
     }
     switch (type) {
       case "e":
-        setRobotType("Explorer")
+        setTroopType("Explorer")
         break
       case "m":
-        setRobotType("Miner")
+        setTroopType("Miner")
         break
       case "ex":
-        setRobotType("Exploded")
+        setTroopType("Exploded")
         break
       default:
-        setRobotType("Terraformer")
+        setTroopType("Terraformer")
         break
     }
   }
 
   return (
     <div className="tile-div">
-      {hasRobot ? (
+      {hastroop ? (
         <div className="grid-square">
           <img
-            id={`robot${x}${y}`}
+            id={`troop${x}${y}`}
             src={srcImg}
             alt=""
             className="grid-square"
@@ -78,13 +78,13 @@ export default function RobotSquare(props) {
             <strong> Position: </strong> ({x}, {y}) <br></br>
             <strong> {boldtiletype} </strong> {tiletype} <br></br>
             <strong> Visibility: </strong> {tilevisib} <br></br>
-            <strong> Robot: </strong>
-            {id}, {robottype}, {team}, {battery} <br></br>
+            <strong> troop: </strong>
+            {id}, {trooptype}, {team}, {battery} <br></br>
           </p>
         </div>
       ) : (
         <div
-          id={`robot${x}${y}`}
+          id={`troop${x}${y}`}
           className="grid-square"
           onMouseOver={() => {
             handleHover(x, y)

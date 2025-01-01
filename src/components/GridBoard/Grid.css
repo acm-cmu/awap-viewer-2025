@@ -5,30 +5,81 @@
 }
 
 .map-info-box {
+  font-family: "Aldrich", "Roboto", sans-serif;
+  position: absolute;
+  bottom: 0;
   width: 70vw;
   height: 15vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
   padding: 5px;
   background-color: var(--info-box-color);
 }
 
 .map-info-box div {
   flex-basis: 50%;
-
 }
 
-.info-badge {
+.info-box .info-badge {
+  flex-basis: 30%;
   margin: 0;
   aspect-ratio: 1 / 1;
   width: 7vw;
 }
 
+.info-box .info-side {
+  flex-basis: 70%;
+  text-align: left;
+  font-family: "Aldrich", "Roboto", sans-serif;
+  display: inline-block;
+  color: #fff;
+}
+
+.info-box {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.info-badge {
+  position: relative;
+}
+
+.info-coins {
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-box .info-badge .info-coins div {
+  font-weight: bold;
+  margin: auto;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-box .info-badge .info-coins img {
+  width: 50%;
+  height: 50%;
+  margin: 0;
+}
+
+
 .info-badge img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  width: 7vw;
+  margin: auto;
 }
 
 .board {

@@ -311,10 +311,8 @@ export default function SidePanel(props) {
           <p className="info"> Number of Troops: # </p>
         </div>
         <div>
-          <p className="info"> Graph showing number of terms remaing, bar chart </p>
+          <p className="info"> Graph showing number of terms remainng, bar chart </p>
         </div>
-        {/* <TerraformChart />
-        <LineChart /> */}
       </div>
     </div>
   )

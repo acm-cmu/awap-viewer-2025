@@ -32,6 +32,8 @@ export default function GridSquare(props) {
   const classes = `grid-square color-${color}`
   let useImg = null;
 
+  console.log(imgIdx);
+
   switch (Number(color)) {
     case 0:
       useImg = normalImgArray[imgIdx]

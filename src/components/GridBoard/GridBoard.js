@@ -8,18 +8,11 @@ import React, {
 } from "react"
 import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
-import RobotSquare from "./RobotSquare"
+import TroopSquare from "./TroopSquare"
 import TrailSquare from "./TrailSquare"
 import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
-import ExplorerImgRed from "../../better-img/light-outline-red.PNG"
-import TerraformerImgRed from "../../better-img/shovel-outline-red.PNG"
-import MinerImgRed from "../../better-img/pick-outline-red.PNG"
-import ExplorerImgBlue from "../../better-img/light-outline-blue.PNG"
-import TerraformerImgBlue from "../../better-img/shovel-outline-blue.PNG"
-import MinerImgBlue from "../../better-img/pick-outline-blue.PNG"
-import MetalImg from "../../img/metal.png"
-import ExplosionImg from "../../better-img/explosion.png"
+import ExplosionImg from "../../assets/explosion.png"
 
 // for randomization of tile choice
 const blockedImgCnt = 5;
@@ -132,7 +125,7 @@ export default function GridBoard(props) {
         let color = colorKey[initColors[row][col]];
         let randChoice = RandTileColor(color)
         tempArr[row].push(
-          <GridSquare key={`${row}${col}`} color={color} useImg={randChoice} />
+          <GridSquare key={`${row}${col}`} color={color} imgIdx={randChoice} />
         )
         tileInfo[row].push([0, 0, 0])
       }
@@ -166,27 +159,31 @@ export default function GridBoard(props) {
     return [tempArr, tileInfo]
   }, [nrows, ncols, setTiles])
 
-  // Initializes robot grid
-  const initialtroops = useMemo(() => {
+  // Initializes troops grid
+  const initialTroops = useMemo(() => {
     let tempArr = []
     for (let row = 0; row < nrows; row++) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <RobotSquare
-            key={`${row}${col}`}
-            x={row}
-            y={col}
-            hasRobot={false}
-            battery={0}
+          <GridSquare
+            color="5"
           />
         )
+        // tempArr[row].push(
+        //   <TroopSquare
+        //     key={`${row}${col}`}
+        //     x={row}
+        //     y={col}
+        //     hasRobot={false}
+        //     battery={0}
+        //   />
+        // )
       }
     }
     setTroops(tempArr)
     prevTroops.current = {}
     return tempArr
-    // eslint-disable-next-line
   }, [nrows, ncols, replay])
 
   // Initializes visibility grid
@@ -219,12 +216,11 @@ export default function GridBoard(props) {
     [nrows, ncols]
   )
 
-  // eslint-disable-next-line
+  // init player visibility
   const p1InitialVis = useMemo(() => {
     let p1TempArr = makeVisGrid("RED")
     setVisibilityP1(p1TempArr)
     return p1TempArr
-    // eslint-disable-next-line
   }, [makeVisGrid])
 
   const p2InitialVis = useMemo(() => {
@@ -273,6 +269,13 @@ export default function GridBoard(props) {
         nextTileInfo
       ) => {
         if (i < 0) return
+        // change turn
+
+        // update units
+        // update board (for castle & crops)
+        // update fog of war
+        // update currency and player status
+
         let turn = gameTurns[i]
         let player = turn.team
         setMetadata([turn.turn_number, player])
@@ -367,7 +370,7 @@ export default function GridBoard(props) {
           let xExp = oldExp[0]
           let yExp = oldExp[1]
           nexttroops[xExp][yExp] = (
-            <RobotSquare
+            <TroopSquare
               key={`${xExp}${yExp}`}
               x={xExp}
               y={yExp}
@@ -385,7 +388,7 @@ export default function GridBoard(props) {
             let yPrev = prevTroops.current[robotID][1]
             // Remove robot at prev position if it exists
             nexttroops[xPrev][yPrev] = (
-              <RobotSquare
+              <TroopSquare
                 key={`${xPrev}${yPrev}`}
                 x={xPrev}
                 y={yPrev}
@@ -424,7 +427,7 @@ export default function GridBoard(props) {
             }
 
             nexttroops[x][y] = (
-              <RobotSquare
+              <TroopSquare
                 key={`${x}${y}`}
                 srcImg={robotImg}
                 x={x}
@@ -443,7 +446,7 @@ export default function GridBoard(props) {
             let yPrev = prevTroops.current[robotID][1]
             prevExplosions.current.push([xPrev, yPrev])
             nexttroops[xPrev][yPrev] = (
-              <RobotSquare
+              <TroopSquare
                 key={`${xPrev}${yPrev}`}
                 srcImg={ExplosionImg}
                 x={xPrev}
