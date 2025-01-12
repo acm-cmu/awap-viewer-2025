@@ -32,10 +32,10 @@ export default function MapMakerGrid(props) {
       tempMapObj.push([])
       for (let col = 0; col < cols; col++) {
         tempArr[row].push(
-          <MapMakerGridSquare key={`${col}${row}`} x={row} y={col}/>
+          <MapMakerGridSquare key={`${col}${row}`} x={row} y={col} />
         )
         tileInfo[row].push([0, 0])
-        tempMapObj[row].push(['T', 0, 0])
+        tempMapObj[row].push('GRASS')
       }
     }
 
@@ -52,6 +52,6 @@ export default function MapMakerGrid(props) {
     <div>
       <div className="board grid">{grid}</div>
     </div>
-    
+
   )
 }

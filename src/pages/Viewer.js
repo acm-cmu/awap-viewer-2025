@@ -27,14 +27,14 @@ import N5 from "../assets/MapTiles/TileN5.png";
   #0 blue
 */
 
-// for randomization of tile choice
-const blockedImgCnt = 5;
-const normalImgCnt = 5;
 
 const ViewerContext = createContext()
 
 function Viewer({ togglePage }) {
+  // for randomization of tile choice
   const colorKey = { "GRASS": "0" }
+  const blockedImgCnt = 5;
+  const normalImgCnt = 5;
   const blockedImgArray = [B1, B2, B3, B4, B5];
   const normalImgArray = [N1, N2, N3, N4, N5];
 

@@ -95,8 +95,8 @@ export default function MapMakerPanel({ togglePage }) {
       <h2>Brush Settings:</h2>
       <Grid container class="radio-container" direction="column">
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="GRASS" name="brush" onChange={handleBrushRadio} />
-          <label>Terraformable</label>
+          <input type="radio" value="T" name="brush" onChange={handleBrushRadio} />
+          <label>Grass</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
@@ -110,16 +110,6 @@ export default function MapMakerPanel({ togglePage }) {
           <input class="num-input" type="number" placeholder="5" min="5" max="25"
             onChange={(e) => setMnum(parseInt(e.target.value))} />
         </Grid> */}
-
-        <Grid container direction="row" alignItems="center">
-          <input type="radio" value="R" name="brush" onChange={handleBrushRadio} />
-          <label>Red Tile</label>
-        </Grid>
-
-        <Grid container direction="row" alignItems="center">
-          <input type="radio" value="B" name="brush" onChange={handleBrushRadio} />
-          <label>Blue Tile</label>
-        </Grid>
       </Grid>
 
       <Grid container class="switches" direction="column">
