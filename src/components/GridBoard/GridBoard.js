@@ -140,7 +140,7 @@ export default function GridBoard(props) {
       tempArr.push([])
       for (let col = 0; col < ncols; col++) {
         tempArr[row].push(
-          <GridSquare
+          <GridSquare key={`${row}${col}`}
             color="5"
           />
         )

@@ -1,7 +1,8 @@
 .map {
   height: 85vh;
   width: 70vw;
-  background-color: var(--grass-color);
+  background: url("/src/assets/MapTiles/TileB2.png") repeat 0 0 fixed;
+  background-size: var(--tile-size);
 }
 
 .map-info-box {
