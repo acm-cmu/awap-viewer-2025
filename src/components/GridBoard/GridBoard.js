@@ -75,10 +75,10 @@ export default function GridBoard(props) {
     setTimeout,
   } = useContext(ViewerContext)
 
-  const nrows = replay[0].game_state.map.height
-  const ncols = replay[0].game_state.map.width
-  const initImpass = replay[0].game_state.building_placeable_map
-  const initColors = replay[0].game_state.map.tiles
+  const nrows = replay[0].map.height
+  const ncols = replay[0].map.width
+  const initImpass = replay[1].game_state.building_placeable_map
+  const initColors = replay[0].map.tiles
   const gameTurns = replay
 
   const [index, setIndex] = useState(-1)

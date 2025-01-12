@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
 
 
-export default function MapMakerPanel({togglePage}) {
+export default function MapMakerPanel({ togglePage }) {
   const {
     rows,
     setRows,
@@ -35,7 +35,7 @@ export default function MapMakerPanel({togglePage}) {
 
   const downloadMap = () => {
     if (mapObj && showMap) {
-      const fileName = "map.awap23m";
+      const fileName = "map.txt";
       const data = new Blob([JSON.stringify(mapObj)], { type: "text/json" });
       const jsonURL = window.URL.createObjectURL(data);
       const link = document.createElement("a");
@@ -68,10 +68,10 @@ export default function MapMakerPanel({togglePage}) {
   return (
     <div className="side-panel">
       <button
-        style={{ position: "absolute", top: 0, right: 10, zIndex: 10 }} 
+        style={{ position: "absolute", top: 0, right: 10, zIndex: 10 }}
         onClick={togglePage}
-      > 
-        <SwapHorizIcon/>
+      >
+        <SwapHorizIcon />
       </button>
       <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2023</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Map Maker</h2>
@@ -79,10 +79,10 @@ export default function MapMakerPanel({togglePage}) {
         <Grid container direction="column" alignItems="center">
           <Grid container direction="row" justifyContent="center">
             <label>Rows:
-              <input type="number" value={rows} onChange={(e)=>setRows(e.target.value)}/>
+              <input type="number" value={rows} onChange={(e) => setRows(e.target.value)} />
             </label>
             <label>Cols:
-              <input type="number" value={cols} onChange={(e)=>setCols(e.target.value)}/>
+              <input type="number" value={cols} onChange={(e) => setCols(e.target.value)} />
             </label>
           </Grid>
           <Grid container direction="row" justifyContent="center">
@@ -95,29 +95,29 @@ export default function MapMakerPanel({togglePage}) {
       <h2>Brush Settings:</h2>
       <Grid container class="radio-container" direction="column">
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="T" name="brush" onChange={handleBrushRadio}/>
+          <input type="radio" value="T" name="brush" onChange={handleBrushRadio} />
           <label>Terraformable</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="I" name="brush" onChange={handleBrushRadio}/>
+          <input type="radio" value="I" name="brush" onChange={handleBrushRadio} />
           <label>Impassible</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="M" name="brush" onChange={handleBrushRadio}/>
+          <input type="radio" value="M" name="brush" onChange={handleBrushRadio} />
           <label>Mining</label>
           <input class="num-input" type="number" placeholder="5" min="5" max="25"
-            onChange={(e)=>setMnum(parseInt(e.target.value))}/>
+            onChange={(e) => setMnum(parseInt(e.target.value))} />
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="R" name="brush" onChange={handleBrushRadio}/>
+          <input type="radio" value="R" name="brush" onChange={handleBrushRadio} />
           <label>Red Tile</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="B" name="brush" onChange={handleBrushRadio}/>
+          <input type="radio" value="B" name="brush" onChange={handleBrushRadio} />
           <label>Blue Tile</label>
         </Grid>
       </Grid>

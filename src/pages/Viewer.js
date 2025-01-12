@@ -41,8 +41,8 @@ function Viewer({ togglePage }) {
     setIsDisabled(false)
     let root = document.documentElement
     try {
-      root.style.setProperty("--cols", replayData[0].game_state.map.width)
-      root.style.setProperty("--rows", replayData[0].game_state.map.height)
+      root.style.setProperty("--cols", replayData[0].map.width)
+      root.style.setProperty("--rows", replayData[0].map.height)
     } catch (err) {
       console.log(err.message)
     }

@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react"
 import { ViewerContext } from "../../pages/Viewer"
+import srcImg from "../../assets/CyanTraining0.png"
 import "./Grid.css"
 
 export default function TroopSquare(props) {
-  const { x, y, type, hasTroop, health, damage, defense, level, attackRange, damageRange } = props
+  const { x, y, type, hasTroop, id, team, health, damage, defense, level, attackRange, damageRange } = props
   const { setCol, setRow, tiles } = useContext(ViewerContext)
 
   const [tiletype, setTileType] = useState(null)
@@ -60,7 +61,7 @@ export default function TroopSquare(props) {
 
   return (
     <div className="tile-div">
-      {hastroop ? (
+      {hasTroop ? (
         <div className="grid-square">
           <img
             id={`troop${x}${y}`}
@@ -79,7 +80,7 @@ export default function TroopSquare(props) {
             <strong> {boldtiletype} </strong> {tiletype} <br></br>
             <strong> Visibility: </strong> {tilevisib} <br></br>
             <strong> troop: </strong>
-            {id}, {trooptype}, {team}, {battery} <br></br>
+            {id}, {trooptype}, {team} <br></br>
           </p>
         </div>
       ) : (

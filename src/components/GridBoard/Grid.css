@@ -88,9 +88,9 @@
   grid-gap: 0;
   align-items: center;
   border: none;
-  padding: 0;
+  /* padding: 0; */
   /* border: calc(2 * var(--border-width)) solid var(--dark-color);*/
-  margin: var(--grid-padding-vert) var(--grid-padding-hori) var(--grid-padding-vert) var(--grid-padding-hori);
+  margin: var(--grid-padding-vert) var(--grid-padding-hori) var(--grid-padding-vert) var(--grid-padding-hori) !important;
 }
 
 .board img {
