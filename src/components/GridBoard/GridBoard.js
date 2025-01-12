@@ -14,37 +14,6 @@ import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
 import ExplosionImg from "../../assets/explosion.png"
 
-// for randomization of tile choice
-const blockedImgCnt = 5;
-const normalImgCnt = 5;
-const colorKey = { "GRASS": "0" }
-
-function randomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function RandBlockedTile() {
-  return randomInt(0, blockedImgCnt - 1);
-}
-
-function RandNormalTile() {
-  return randomInt(0, normalImgCnt - 1);
-}
-
-function RandTileColor(color) {
-  switch (Number(color)) {
-    case 0:
-      return RandNormalTile();
-
-    case 1:
-      return RandBlockedTile();
-
-    default:
-      return null;
-  }
-}
-
-
 export default function GridBoard(props) {
   const isP1Vis = props.isP1VisToggled
   const isP2Vis = props.isP2VisToggled
@@ -73,7 +42,12 @@ export default function GridBoard(props) {
     setRedtroops,
     setMetadata,
     setTimeout,
+    colorKey,
+    RandTileColor,
+    normalImgArray,
+    blockedImgArray
   } = useContext(ViewerContext)
+
 
   const nrows = replay[0].map.height
   const ncols = replay[0].map.width
@@ -125,7 +99,7 @@ export default function GridBoard(props) {
         let color = colorKey[initColors[row][col]];
         let randChoice = RandTileColor(color)
         tempArr[row].push(
-          <GridSquare key={`${row}${col}`} color={color} imgIdx={randChoice} />
+          <GridSquare key={`${row}${col}`} color={color} imgIdx={randChoice} normalImgArray={normalImgArray} blockedImgArray={blockedImgArray} />
         )
         tileInfo[row].push([0, 0, 0])
       }

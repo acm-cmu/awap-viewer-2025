@@ -3,10 +3,41 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import GridBoard from "../components/GridBoard/GridBoard"
 import SidePanel from "../components/SidePanel/SidePanel"
 import React, { useState, createContext } from "react"
+import B1 from "../assets/MapTiles/TileB1.png";
+import B2 from "../assets/MapTiles/TileB2.png";
+import B3 from "../assets/MapTiles/TileB3.png";
+import B4 from "../assets/MapTiles/TileB4.png";
+import B5 from "../assets/MapTiles/TileB5.png";
+
+import N1 from "../assets/MapTiles/TileN1.png";
+import N2 from "../assets/MapTiles/TileN2.png";
+import N3 from "../assets/MapTiles/TileN3.png";
+import N4 from "../assets/MapTiles/TileN4.png";
+import N5 from "../assets/MapTiles/TileN5.png";
+
+
+
+/*
+  Color labels:
+  0 - empty
+  1 - impassable
+  2 - metal
+  5 - trail (empty color)
+  -#0 red
+  #0 blue
+*/
+
+// for randomization of tile choice
+const blockedImgCnt = 5;
+const normalImgCnt = 5;
 
 const ViewerContext = createContext()
 
 function Viewer({ togglePage }) {
+  const colorKey = { "GRASS": "0" }
+  const blockedImgArray = [B1, B2, B3, B4, B5];
+  const normalImgArray = [N1, N2, N3, N4, N5];
+
   const [replay, setReplay] = useState(null)
   const [metaData, setMetadata] = useState([0, "blue"])
   const [timeout, setTimeout] = useState([false, null])
@@ -56,6 +87,33 @@ function Viewer({ togglePage }) {
     setIsP2VisToggled(toggleStatus)
   }
 
+  // for tile choices
+
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  function RandBlockedTile() {
+    return randomInt(0, blockedImgCnt - 1);
+  }
+
+  function RandNormalTile() {
+    return randomInt(0, normalImgCnt - 1);
+  }
+
+  function RandTileColor(color) {
+    switch (Number(color)) {
+      case 0:
+        return RandNormalTile();
+
+      case 1:
+        return RandBlockedTile();
+
+      default:
+        return null;
+    }
+  }
+
   return (
     <ViewerContext.Provider
       value={{
@@ -99,6 +157,10 @@ function Viewer({ togglePage }) {
         setMetadata,
         timeout,
         setTimeout,
+        colorKey,
+        RandTileColor,
+        normalImgArray,
+        blockedImgArray,
       }}
     >
       <div className="MainPage">
