@@ -166,7 +166,7 @@ export default function SidePanel(props) {
           >
             <h2 className="info">
               {" "}
-              RED vs BLUE
+              {"name1"} (BLUE) vs {"name2"} (RED)
             </h2>
             <Stack
               direction="row"
@@ -189,8 +189,7 @@ export default function SidePanel(props) {
           </Stack>
           <h2 className="info">
             FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
-            {replay.length - 1} / TURN {metaData[0]} OF{" "}
-            {metaData[1] === "blue" ? "BLUE" : "RED"}
+            {replay.length - 1} / TURN {metaData[0]}
           </h2>
         </div>
       ) : (

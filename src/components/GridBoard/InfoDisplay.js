@@ -3,7 +3,8 @@ import RedBadge from "../../assets/RedBadge.png"
 import Coin from "../../assets/Coin.png"
 
 export default function InfoDisplay(props) {
-    const { side } = props;
+    // playerStats = [coinAmount, maxCastleHealth, currCastleHealth, farmlands]
+    const { side, playerStats } = props;
     return (
         <div className="info-box">
             < div className="info-badge" >
@@ -11,13 +12,17 @@ export default function InfoDisplay(props) {
                 <div className="info-coins">
                     <div>
                         <img src={Coin} alt="" />
-                        <p>&nbsp;{1}&nbsp;</p>
+                        <p>&nbsp;{playerStats[0]}&nbsp;</p>
                     </div>
                 </div>
             </div >
             <div className="info-side">
                 <p>Total Troops:</p>
-                <p>Castles: </p>
+                <div>
+                    <label htmlFor={"Progress" + side}>Castle Health:&nbsp;</label>
+                    <progress id="file" value={playerStats[2].health} max={2000}>  </progress>
+                    <p>&nbsp;{Math.round(playerStats[2].health / 2000 * 100)}%</p>
+                </div>
                 <p>Farmlands: </p>
                 <p>Farmlands: </p>
             </div>

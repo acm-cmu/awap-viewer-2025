@@ -1,11 +1,14 @@
 import InfoDisplay from "./InfoDisplay";
+import { ViewerContext } from "../../pages/Viewer"
+import { useContext } from "react";
 
 export default function MapInfoBox(props) {
-    // Need the actual game info
+    const { redStats, blueStats } = useContext(ViewerContext)
+
     return (
         <div className="map-info-box">
-            <InfoDisplay side="Blue" />
-            <InfoDisplay side="Red" />
+            <InfoDisplay side="Blue" playerStats={blueStats} />
+            <InfoDisplay side="Red" playerStats={redStats} />
         </div>
     );
 }

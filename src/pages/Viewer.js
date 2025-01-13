@@ -53,14 +53,16 @@ function Viewer({ togglePage }) {
   const [tiles, setTiles] = useState(null)
 
   const [frame, setFrame] = useState(null)
+
   const [redTroops, setRedTroops] = useState([])
   const [blueTroops, setBlueTroops] = useState([])
 
   const [redCastles, setRedCastles] = useState([])
   const [blueCastles, setBlueCastles] = useState([])
 
-  const [redRobots, setRedRobots] = useState(null)
-  const [blueRobots, setBlueRobots] = useState(null)
+  // [coinAmount, maxCastleHealth, currCastleHealth, farmlands]
+  const [redStats, setRedStats] = useState([0, 0, 0, 0])
+  const [blueStats, setBlueStats] = useState([0, 0, 0, 0])
 
   const [isP1VisToggled, setIsP1VisToggled] = useState(false)
   const [isP2VisToggled, setIsP2VisToggled] = useState(false)
@@ -119,10 +121,6 @@ function Viewer({ togglePage }) {
       value={{
         redTroops,
         setRedTroops,
-        redRobots,
-        setRedRobots,
-        blueRobots,
-        setBlueRobots,
         blueTroops,
         setBlueTroops,
         redCastles,
@@ -161,6 +159,10 @@ function Viewer({ togglePage }) {
         RandTileColor,
         normalImgArray,
         blockedImgArray,
+        redStats,
+        setRedStats,
+        blueStats,
+        setBlueStats
       }}
     >
       <div className="MainPage">
