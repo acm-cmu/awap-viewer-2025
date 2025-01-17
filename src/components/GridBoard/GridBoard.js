@@ -65,6 +65,10 @@ export default function GridBoard(props) {
   setBlueStats([turnInfo.balance.BLUE, 2000, turnInfo.buildings.BLUE["1"], 0])
   setRedStats([turnInfo.balance.RED, 2000, turnInfo.buildings.RED["0"], 0])
 
+  // Set Troops
+  const blueTroops = turnInfo.units.BLUE;
+  const redTroops = turnInfo.units.RED;
+
 
   // Initializes trails
   const initialTrails = useMemo(() => {
@@ -119,6 +123,13 @@ export default function GridBoard(props) {
         )
       }
     }
+
+    // change the one at that index to be valid troopsquare
+    // for (let i = 0; i < blueTroops.length; i++) {
+
+    // }
+    tempArr[10][10] = <TroopSquare color={1} type="Assain" lvl={10} health={7} attack_range={1} damage={1} defense={1} damage_range={1} />
+
     setTroops(tempArr)
     prevTroops.current = {}
     return tempArr
