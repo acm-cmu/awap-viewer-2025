@@ -95,7 +95,7 @@
 }
 
 progress {
-  accent-color: red
+  accent-color: white
 }
 
 .health-bar {
@@ -171,6 +171,7 @@ progress {
   border-style: none;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .tileBgImg {

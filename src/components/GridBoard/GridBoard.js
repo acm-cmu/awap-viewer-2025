@@ -109,12 +109,12 @@ export default function GridBoard(props) {
     // change the one at that index to be valid troopsquare
     for (let i = 0; i < blueTroops.length; i++) {
       const s = blueTroops[i];
-      tempArr[s.x][s.y] = <TroopSquare key={`b${s.id}`} color={1} type={s.type} lvl={s.level} health={s.health} attack_range={s.attack_range} damage={s.damage} defense={s.defense} damage_range={s.damage_range} />
+      tempArr[s.x][s.y] = <TroopSquare key={`b${s.id}`} color={"b"} type={s.type} lvl={s.level} health={s.health} attack_range={s.attack_range} damage={s.damage} defense={s.defense} damage_range={s.damage_range} />
     }
 
     for (let i = 0; i < redTroops.length; i++) {
       const s = redTroops[i];
-      tempArr[s.x][s.y] = <TroopSquare key={`r${s.id}`} color={1} type={s.type} lvl={s.level} health={s.health} attack_range={s.attack_range} damage={s.damage} defense={s.defense} damage_range={s.damage_range} />
+      tempArr[s.x][s.y] = <TroopSquare key={`r${s.id}`} color={"r"} type={s.type} lvl={s.level} health={s.health} attack_range={s.attack_range} damage={s.damage} defense={s.defense} damage_range={s.damage_range} />
     }
 
 

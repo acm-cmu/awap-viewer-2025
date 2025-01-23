@@ -1,6 +1,6 @@
 import React from "react"
 import "./Grid.css"
-import cyanA1 from "../../assets/Troops/CyanA1.png"
+import "./Troop.css"
 import HealthBar from "./HealthBar"
 
 /*
@@ -11,7 +11,7 @@ import HealthBar from "./HealthBar"
 
 export default function TroopSquare(props) {
   const { color, type, lvl, health, attack_range, damage, defense, damage_range } = props
-  const classes = `grid-square color-${-1}`
+  // const classes = `grid-square color-${-1}`
   // let useImg = null;
 
   // switch (Number(color)) {
@@ -28,9 +28,9 @@ export default function TroopSquare(props) {
   //     break;
   // }
   return (
-    <div className={`tile-div ${classes}`}>
+    <div className={`tile-div`}>
       {<HealthBar health={health} />}
-      {<img src={cyanA1} className="tileBgImg" alt="" />}
+      {<div className={`circle ${color}-${type}`}></div>}
     </div>
   )
 }
