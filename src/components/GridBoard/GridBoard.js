@@ -9,7 +9,6 @@ import React, {
 import { ViewerContext } from "../../pages/Viewer"
 import GridSquare from "./GridSquare"
 import TroopSquare from "./TroopSquare"
-import TrailSquare from "./TrailSquare"
 import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
 import ExplosionImg from "../../assets/explosion.png"
@@ -41,13 +40,14 @@ export default function GridBoard(props) {
     blueStats,
   } = useContext(ViewerContext)
 
-
-  const nrows = replay[0].map.height
-  const ncols = replay[0].map.width
-  const initImpass = replay[1].game_state.building_placeable_map
-  const initColors = replay[0].map.tiles
-  const gameTurns = replay
+  const gameTurns = replay.replay
+  const nrows = gameTurns[0].map.height
+  const ncols = gameTurns[0].map.width
+  const initColors = gameTurns[0].map.tiles
   const turnInfo = gameTurns[1].game_state
+
+  document.documentElement.style.setProperty('--cols', ncols)
+  document.documentElement.style.setProperty('--rows', nrows)
 
   const [index, setIndex] = useState(-1)
   const intervalID = useRef(null)
@@ -55,38 +55,16 @@ export default function GridBoard(props) {
   // States for displaying various elements
   const [grid, setGrid] = useState(null)
   const [troops, setTroops] = useState(null)
-  const [trails, setTrails] = useState(null)
+
   const prevTroops = useRef({}) // dictionary mapping troop ids to coordinates
   const [visibilityP1, setVisibilityP1] = useState(null)
   const [visibilityP2, setVisibilityP2] = useState(null)
   const prevExplosions = useRef([])
 
   // Initialize Player Stats
-  setBlueStats([turnInfo.balance.BLUE, 2000, turnInfo.buildings.BLUE["1"], 0])
-  setRedStats([turnInfo.balance.RED, 2000, turnInfo.buildings.RED["0"], 0])
+  setBlueStats([turnInfo.balance.BLUE, 20, turnInfo.buildings.BLUE[0], 0])
+  setRedStats([turnInfo.balance.RED, 20, turnInfo.buildings.RED[0], 0])
 
-  // Set Troops
-  const blueTroops = turnInfo.units.BLUE;
-  const redTroops = turnInfo.units.RED;
-
-
-  // Initializes trails
-  const initialTrails = useMemo(() => {
-    let tempArr = []
-    for (let row = 0; row < nrows; row++) {
-      tempArr.push([])
-      for (let col = 0; col < ncols; col++) {
-        tempArr[row].push(
-          <GridSquare key={`${row}${col}`} color="5" useImg={null} />
-        )
-      }
-    }
-    return tempArr
-  }, [nrows, ncols])
-
-  useEffect(() => {
-    setTrails(initialTrails)
-  }, [initialTrails, replay])
 
   // Initializes tile grid (unchanged during game)
   const initialGrid = useMemo(() => {
@@ -110,6 +88,10 @@ export default function GridBoard(props) {
     return [tempArr]
   }, [nrows, ncols])
 
+  // Set Troops
+  const blueTroops = turnInfo.units.BLUE;
+  const redTroops = turnInfo.units.RED;
+
   // Initializes troops grid
   const initialTroops = useMemo(() => {
     let tempArr = []
@@ -125,10 +107,16 @@ export default function GridBoard(props) {
     }
 
     // change the one at that index to be valid troopsquare
-    // for (let i = 0; i < blueTroops.length; i++) {
+    for (let i = 0; i < blueTroops.length; i++) {
+      const s = blueTroops[i];
+      tempArr[s.x][s.y] = <TroopSquare key={`b${s.id}`} color={1} type={s.type} lvl={s.level} health={s.health} attack_range={s.attack_range} damage={s.damage} defense={s.defense} damage_range={s.damage_range} />
+    }
 
-    // }
-    tempArr[10][10] = <TroopSquare color={1} type="Assain" lvl={10} health={7} attack_range={1} damage={1} defense={1} damage_range={1} />
+    for (let i = 0; i < redTroops.length; i++) {
+      const s = redTroops[i];
+      tempArr[s.x][s.y] = <TroopSquare key={`r${s.id}`} color={1} type={s.type} lvl={s.level} health={s.health} attack_range={s.attack_range} damage={s.damage} defense={s.defense} damage_range={s.damage_range} />
+    }
+
 
     setTroops(tempArr)
     prevTroops.current = {}
@@ -232,47 +220,21 @@ export default function GridBoard(props) {
       if (sliderValue === index) {
       } else if (sliderValue > index) {
         idx = index
-        let newTrails
         const newGrid = makeDeepCopy(grid)
         const newVisP1 = makeDeepCopy(visibilityP1)
         const newVisP2 = makeDeepCopy(visibilityP2)
         const newtroops = makeDeepCopy(troops)
-        while (idx < sliderValue) {
-          newTrails = updateFrame(
-            idx,
-            newGrid,
-            newVisP1,
-            newVisP2,
-            newtroops
-          )
-          idx += 1
-        }
-        setTrails(newTrails)
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
         setTroops(newtroops)
       } else {
         const arr = initialGrid
-        let newTrails
         const newGrid = makeDeepCopy(arr[0])
         const newVisP1 = makeDeepCopy(p1InitialVis)
         const newVisP2 = makeDeepCopy(p2InitialVis)
         const newtroops = makeDeepCopy(initialTroops)
         const newTileInfo = makeDeepCopy3D(arr[1])
-        idx = 0
-        while (idx < sliderValue) {
-          newTrails = updateFrame(
-            idx,
-            newGrid,
-            newVisP1,
-            newVisP2,
-            newtroops,
-            newTileInfo
-          )
-          idx += 1
-        }
-        setTrails(newTrails)
         setGrid(newGrid)
         setVisibilityP1(newVisP1)
         setVisibilityP2(newVisP2)
@@ -310,7 +272,6 @@ export default function GridBoard(props) {
       {isP2Vis && <div className="board visibility">{visibilityP2}</div>}
       {isP1Vis && <div className="board visibility">{visibilityP1}</div>}
       <div className="board robot">{troops}</div>
-      {isTrailToggled && <div className="board trail">{trails}</div>}
       <div className="board grid">{grid}</div>
       {<MapInfoBox />}
     </div>

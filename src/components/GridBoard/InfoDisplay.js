@@ -20,8 +20,8 @@ export default function InfoDisplay(props) {
                 <p>Total Troops:</p>
                 <div>
                     <label htmlFor={"Progress" + side}>Castle HP:&nbsp;</label>
-                    <progress id="file" value={playerStats[2].health} max={2000}>  </progress>
-                    <p>&nbsp;{Math.round(playerStats[2].health / 2000 * 100)}%</p>
+                    <progress id="file" value={playerStats[2].health} max={playerStats[1]}>  </progress>
+                    <p>&nbsp;{Math.round(playerStats[2].health / playerStats[1] * 100)}%</p>
                 </div>
                 <p>Farmlands: </p>
                 <p>Farmlands: </p>

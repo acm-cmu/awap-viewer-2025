@@ -175,7 +175,7 @@ export default function SidePanel(props) {
             >
               {isFinished ? (
                 <h2 className={"info " + replay.winner}>
-                  {replay.winner === "blue" ? "BLUE" : "RED"} WINS!
+                  {replay.winner === "RED" ? "RED" : "BLUE"} WINS!
                 </h2>
               ) : (
                 <div></div>
@@ -189,7 +189,7 @@ export default function SidePanel(props) {
           </Stack>
           <h2 className="info">
             FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
-            {replay.length - 1} / TURN {metaData[0]}
+            {replay.replay.length - 1} / TURN {metaData[0]}
           </h2>
         </div>
       ) : (
@@ -204,7 +204,7 @@ export default function SidePanel(props) {
           step={1}
           marks
           min={0}
-          max={replay != null ? replay.length - 1 : 1}
+          max={replay != null ? replay.replay.length - 1 : 1}
           className="slider"
           onChange={handleFrameChange}
           disabled={isDisabled}
