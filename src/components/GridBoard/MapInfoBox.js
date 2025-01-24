@@ -1,9 +1,9 @@
 import InfoDisplay from "./InfoDisplay";
 import { ViewerContext } from "../../pages/Viewer"
-import { useContext } from "react";
+// import { useContext } from "react";
 
 export default function MapInfoBox(props) {
-    const { redStats, blueStats } = useContext(ViewerContext)
+    const { redStats, blueStats } = props
 
     return (
         <div className="map-info-box">

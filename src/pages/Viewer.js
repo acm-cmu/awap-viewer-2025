@@ -42,7 +42,7 @@ function Viewer({ togglePage }) {
   const [metaData, setMetadata] = useState([0, "blue"])
   const [timeout, setTimeout] = useState([false, null])
 
-  const [sliderValue, setSliderValue] = useState(-1)
+  const [sliderValue, setSliderValue] = useState(1)
   const [isPlay, setIsPlay] = useState(false)
   const [framePlaying, setFramePlaying] = useState(false)
   const [isDisabled, setIsDisabled] = useState(true)

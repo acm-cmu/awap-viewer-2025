@@ -1,3 +1,10 @@
+.updateTest {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: pink;
+}
+
 .map {
   height: 85vh;
   width: 70vw;

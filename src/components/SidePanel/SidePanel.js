@@ -120,16 +120,6 @@ export default function SidePanel(props) {
     setSpeed(event.target.value)
   }
 
-  const handleToggleP1Vis = () => {
-    let checkbox = document.getElementById("p1vis")
-    props.onP1VisToggled(checkbox.checked)
-  }
-
-  const handleToggleP2Vis = () => {
-    let checkbox = document.getElementById("p2vis")
-    props.onP2VisToggled(checkbox.checked)
-  }
-
   const handleToggleSettings = () => {
     setShowSettings(!showSettings)
   }
@@ -276,7 +266,7 @@ export default function SidePanel(props) {
           </FormControl>
         </StyledEngineProvider>
       </Stack>
-      <Collapse in={showSettings}>
+      {/* <Collapse in={showSettings}>
         <div className="toggle-layout">
           <ToggleSwitch
             onToggle={handleToggleP1Vis}
@@ -300,7 +290,7 @@ export default function SidePanel(props) {
             <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
           </ToggleSwitch>
         </div>
-      </Collapse>
+      </Collapse> */}
       <br></br>
 
       <h2>Expedition Progress</h2>
