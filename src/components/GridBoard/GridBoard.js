@@ -12,8 +12,11 @@ import TroopSquare from "./TroopSquare"
 import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
 import BuildSquare from "./BuildSquare"
-import { Slider } from "@mui/material"
-import "../SidePanel/SidePanel.css"
+import { Slider, SliderMarkLabel } from "@mui/material"
+import { IconButton } from "@mui/material"
+import PlayArrowIcon from "@mui/icons-material/PlayArrow"
+import PauseIcon from "@mui/icons-material/Pause"
+
 
 export default function GridBoard(props) {
   const {
@@ -54,6 +57,7 @@ export default function GridBoard(props) {
   const [grid, setGrid] = useState(null)
   const [troops, setTroops] = useState(null)
   const [buildings, setBuildings] = useState(null)
+  const [play, setPlay] = useState(false)
 
 
   // need to update this to account for explosions
@@ -164,31 +168,48 @@ export default function GridBoard(props) {
   }, [nrows, ncols, turnInfo, sliderValue])
 
 
-  const makeDeepCopy = (arr) => {
-    const arrCopy = arr.map((row, i) => {
-      return row.map((elem, j) => {
-        return elem
-      })
-    })
-    return arrCopy
-  }
-
-  const makeDeepCopy3D = (arr) => {
-    const arrCopy = arr.map((row, i) => {
-      return row.map((elemArr, j) => {
-        return elemArr.map((elem, k) => {
-          return elem
-        })
-      })
-    })
-    return arrCopy
-  }
-
   const handleFrameChange = (event, newVal) => {
     const change = newVal - sliderValue;
+    // console.log(newVal)
     if (1 <= sliderValue + change && sliderValue + change <= numTurns)
-      update(change)
+      console.log("changing frame")
+    update(change)
   }
+
+  // const messageRef = useRef('');
+  // const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    console.log("playing")
+    console.log(sliderValue)
+    console.log(numTurns)
+    while (sliderValue <= numTurns) {
+      console.log("loop start")
+      const timeoutId = setInterval(() => {
+        console.log("")
+        handleFrameChange(null, sliderValue + 1)
+      }, 1000);
+
+      // Cleanup function
+      return () => clearInterval(timeoutId);
+    }
+  }, [play]);
+
+  // const handleChange = (e) => {
+  //   e.preventDefault();
+  //   setMessage(e.target.value);
+  // };
+
+  // const sendMessage = (e) => {
+  //   e.preventDefault();
+  //   setTimeout(() => {
+  //     // Most recent value
+  //     alert(messageRef.current);
+  //   }, 2000);
+
+  const handleClick = () => {
+    setPlay((isPlay) => !isPlay)
+  };
 
   const update = (step) => {
     // console.log(sliderValue);
@@ -207,15 +228,14 @@ export default function GridBoard(props) {
       <div className="board robot">{troops}</div>
       <div className="board grid">{grid}</div>
       {<MapInfoBox redStats={redStats} blueStats={blueStats} maxHealth={maxHealth} />}
-      <button className="updateTest" onClick={() => {
-        update(1)
-      }}>update!!</button>
       <div className="sliderSettings">
+        <h2 className="info stats">Winner: {winner}</h2>
         <div className="full">
           <p className="info bold">
             Frame {sliderValue} of {numTurns}:
           </p>
           <Slider
+            sx={{ width: '90%', height: '40%', margin: 0, padding: 0 }}
             aria-label="Frame No."
             defaultValue={0}
             value={sliderValue}
@@ -227,10 +247,21 @@ export default function GridBoard(props) {
             max={replay != null ? numTurns : 1}
             className="slider"
             onChange={handleFrameChange}
-          // disabled={isDisabled}
           />
+          <IconButton
+            id="play-button"
+            aria-label="play/pause"
+            className="play-control"
+            onClick={handleClick}
+          >
+            {framePlaying ? (
+              <PauseIcon className="play-icon" />
+            ) : (
+              <PlayArrowIcon className="play-icon" />
+            )}
+          </IconButton>
         </div>
-        <h2 className="info stats">Winner: {winner}</h2>
+
       </div>
     </div >
   )
