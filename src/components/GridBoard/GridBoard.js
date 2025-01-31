@@ -12,7 +12,8 @@ import TroopSquare from "./TroopSquare"
 import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
 import BuildSquare from "./BuildSquare"
-import { upload } from "@testing-library/user-event/dist/upload"
+import { Slider } from "@mui/material"
+import "../SidePanel/SidePanel.css"
 
 export default function GridBoard(props) {
   const {
@@ -39,6 +40,8 @@ export default function GridBoard(props) {
   const ncols = gameTurns[0].map.width
   const initColors = gameTurns[0].map.tiles
   const [turnInfo, setTurnInfo] = useState(gameTurns[1].game_state)
+  const winner = replay.winner_color;
+  const numTurns = gameTurns.length - 1;
   // const { sliderValue, setSliderValue } = props
   const maxHealth = gameTurns[1].game_state.buildings.BLUE[0].health
   document.documentElement.style.setProperty('--cols', ncols)
@@ -181,12 +184,18 @@ export default function GridBoard(props) {
     return arrCopy
   }
 
-  const update = () => {
+  const handleFrameChange = (event, newVal) => {
+    const change = newVal - sliderValue;
+    if (1 <= sliderValue + change && sliderValue + change <= numTurns)
+      update(change)
+  }
+
+  const update = (step) => {
     // console.log(sliderValue);
     // console.log(gameTurns[60])
-    if (sliderValue + 1 < gameTurns.length) {
-      setTurnInfo(gameTurns[sliderValue + 1].game_state)
-      setSliderValue(sliderValue + 1)
+    if (sliderValue + step < gameTurns.length) {
+      setTurnInfo(gameTurns[sliderValue + step].game_state)
+      setSliderValue(sliderValue + step)
       setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0].health, 0])
       setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0].health, 0])
     }
@@ -198,8 +207,32 @@ export default function GridBoard(props) {
       <div className="board robot">{troops}</div>
       <div className="board grid">{grid}</div>
       {<MapInfoBox redStats={redStats} blueStats={blueStats} maxHealth={maxHealth} />}
-      <button className="updateTest" onClick={update}>update!!</button>
-    </div>
+      <button className="updateTest" onClick={() => {
+        update(1)
+      }}>update!!</button>
+      <div className="sliderSettings">
+        <div className="full">
+          <p className="info bold">
+            Frame {sliderValue} of {numTurns}:
+          </p>
+          <Slider
+            aria-label="Frame No."
+            defaultValue={0}
+            value={sliderValue}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            size="medium"
+            max={replay != null ? numTurns : 1}
+            className="slider"
+            onChange={handleFrameChange}
+          // disabled={isDisabled}
+          />
+        </div>
+        <h2 className="info stats">Winner: {winner}</h2>
+      </div>
+    </div >
   )
 }
 

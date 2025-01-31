@@ -152,10 +152,6 @@ export default function SidePanel(props) {
             alignItems="center"
             justifyContent="space-between"
           >
-            <h2 className="info">
-              {" "}
-              {"name1"} (BLUE) vs {"name2"} (RED)
-            </h2>
             <Stack
               direction="row"
               alignItems="center"
