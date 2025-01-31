@@ -95,13 +95,23 @@ export default function MapMakerPanel({ togglePage }) {
       <h2>Brush Settings:</h2>
       <Grid container class="radio-container" direction="column">
         <Grid container direction="row" alignItems="center">
-          <input type="radio" value="T" name="brush" onChange={handleBrushRadio} />
+          <input type="radio" value="G" name="brush" onChange={handleBrushRadio} />
           <label>Grass</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
           <input type="radio" value="I" name="brush" onChange={handleBrushRadio} />
           <label>Impassible</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="BC" name="brush" onChange={handleBrushRadio} />
+          <label>Blue Castle</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="RC" name="brush" onChange={handleBrushRadio} />
+          <label>Red Castle</label>
         </Grid>
 
         {/* <Grid container direction="row" alignItems="center">

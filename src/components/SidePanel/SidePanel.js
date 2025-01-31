@@ -14,15 +14,12 @@ import Select from "@mui/material/Select"
 import Stack from "@mui/material/Stack"
 import MenuItem from "@mui/material/MenuItem"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
-import LineChart from "./LineChart.js"
-import TerraformChart from "./TerraformChart.js"
+import GridBoard, { update } from "../GridBoard/GridBoard"
 import CyanT1 from "../../assets/CyanTraining0.png";
 
 export default function SidePanel(props) {
   const {
     replay,
-    sliderValue,
-    setSliderValue,
     setIsPlay,
     framePlaying,
     setFramePlaying,
@@ -33,12 +30,13 @@ export default function SidePanel(props) {
     setSpeed,
     setIsTrailToggled,
     metaData,
-    redRobots,
-    blueRobots,
+    sliderValue,
+    setSliderValue,
     setTimeout,
     timeout,
   } = useContext(ViewerContext)
 
+  // const { sliderValue, setSliderValue } = props;
   const [wrongFile, setWrongFile] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
 
@@ -291,7 +289,7 @@ export default function SidePanel(props) {
           </ToggleSwitch>
         </div>
       </Collapse> */}
-      <br></br>
+      {/* <br></br>
 
       <h2>Expedition Progress</h2>
       <div className="hori-container graph">
@@ -302,7 +300,7 @@ export default function SidePanel(props) {
         <div>
           <p className="info"> Graph showing number of terms remainng, bar chart </p>
         </div>
-      </div>
+      </div>*/}
     </div>
   )
 }

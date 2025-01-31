@@ -70,7 +70,7 @@ function Viewer({ togglePage }) {
 
   const handleFileData = (replayData) => {
     setReplay(replayData)
-    setSliderValue(-1)
+    setSliderValue(1)
     setIsDisabled(false)
     let root = document.documentElement
     try {
@@ -169,14 +169,12 @@ function Viewer({ togglePage }) {
         <div className="row-structure">
           <SidePanel
             onFileData={handleFileData}
-            onP1VisToggled={handleP1VisToggled}
-            onP2VisToggled={handleP2VisToggled}
             togglePage={togglePage}
+
           />
           {replay != null ? (
             <GridBoard
-              isP1VisToggled={isP1VisToggled}
-              isP2VisToggled={isP2VisToggled}
+
             />
           ) : null}
         </div>

@@ -12,14 +12,13 @@ import TroopSquare from "./TroopSquare"
 import MapInfoBox from "./MapInfoBox"
 import "./Grid.css"
 import BuildSquare from "./BuildSquare"
+import { upload } from "@testing-library/user-event/dist/upload"
 
 export default function GridBoard(props) {
-  const isP1Vis = props.isP1VisToggled
-  const isP2Vis = props.isP2VisToggled
   const {
     replay,
-    // sliderValue,
-    // setSliderValue,
+    sliderValue,
+    setSliderValue,
     isPlay,
     setIsPlay,
     framePlaying,
@@ -40,7 +39,8 @@ export default function GridBoard(props) {
   const ncols = gameTurns[0].map.width
   const initColors = gameTurns[0].map.tiles
   const [turnInfo, setTurnInfo] = useState(gameTurns[1].game_state)
-  const [sliderValue, setSliderValue] = useState(1)
+  // const { sliderValue, setSliderValue } = props
+  const maxHealth = gameTurns[1].game_state.buildings.BLUE[0].health
   document.documentElement.style.setProperty('--cols', ncols)
   document.documentElement.style.setProperty('--rows', nrows)
 
@@ -55,8 +55,8 @@ export default function GridBoard(props) {
 
   // need to update this to account for explosions
 
-  const [redStats, setRedStats] = useState([turnInfo.balance.RED, 20, turnInfo.buildings.RED[0].health, 0])
-  const [blueStats, setBlueStats] = useState([turnInfo.balance.BLUE, 20, turnInfo.buildings.BLUE[0].health, 0])
+  const [redStats, setRedStats] = useState([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0].health, 0])
+  const [blueStats, setBlueStats] = useState([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0].health, 0])
 
 
   // const redBuildings = turnInfo.buildings.RED[0];
@@ -104,31 +104,26 @@ export default function GridBoard(props) {
       }
     }
 
-    if (sliderValue < gameTurns.length - 1) {
+    if (sliderValue < gameTurns.length) {
+      // console.log(turnInfo)
       const redBuildings = turnInfo.buildings.RED[0];
       const blueBuildings = turnInfo.buildings.BLUE[0];
-
-      // Set Initial Map Position
-      tempArr[redBuildings.x][redBuildings.y] = <BuildSquare id={0} color="RED" type={0} />
-      tempArr[blueBuildings.x][blueBuildings.y] = <BuildSquare id={0} color="BLUE" type={0} />
-    } else {
-      if (turnInfo.buildings.RED.length > 0) {
-        const redBuildings = turnInfo.buildings.RED[0];
+      // console.log(redBuildings)
+      if (redBuildings.health != 0) {
         tempArr[redBuildings.x][redBuildings.y] = <BuildSquare id={0} color="RED" type={0} />
       } else {
-        tempArr[49][49] = <BuildSquare id={0} color="RED" type={3} />
+        tempArr[redBuildings.x][redBuildings.y] = <BuildSquare id={0} color="RED" type={3} />
       }
-      if (turnInfo.buildings.BLUE.length > 0) {
-        const blueBuildings = turnInfo.buildings.BLUE[0];
+      if (blueBuildings.health != 0) {
         tempArr[blueBuildings.x][blueBuildings.y] = <BuildSquare id={0} color="BLUE" type={0} />
       } else {
-        tempArr[0][0] = <BuildSquare id={0} color="BLUE" type={3} />
+        tempArr[blueBuildings.x][blueBuildings.y] = <BuildSquare id={0} color="BLUE" type={3} />
       }
     }
 
     setBuildings(tempArr)
     return tempArr
-  }, [nrows, ncols, turnInfo])
+  }, [nrows, ncols, turnInfo, sliderValue])
 
 
   // Initializes troops grid
@@ -163,7 +158,7 @@ export default function GridBoard(props) {
 
     setTroops(tempArr)
     return tempArr
-  }, [nrows, ncols, turnInfo])
+  }, [nrows, ncols, turnInfo, sliderValue])
 
 
   const makeDeepCopy = (arr) => {
@@ -187,20 +182,13 @@ export default function GridBoard(props) {
   }
 
   const update = () => {
-    console.log(sliderValue);
+    // console.log(sliderValue);
+    // console.log(gameTurns[60])
     if (sliderValue + 1 < gameTurns.length) {
       setTurnInfo(gameTurns[sliderValue + 1].game_state)
       setSliderValue(sliderValue + 1)
-      if (turnInfo.buildings.RED.length > 0) {
-        setRedStats([turnInfo.balance.RED, 20, turnInfo.buildings.RED[0].health, 0])
-      } else {
-        setRedStats([turnInfo.balance.RED, 20, 0, 0])
-      }
-      if (turnInfo.buildings.BLUE.length > 0) {
-        setBlueStats([turnInfo.balance.BLUE, 20, turnInfo.buildings.BLUE[0].health, 0])
-      } else {
-        setBlueStats([turnInfo.balance.BLUE, 20, 0, 0])
-      }
+      setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0].health, 0])
+      setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0].health, 0])
     }
   }
 
@@ -209,8 +197,10 @@ export default function GridBoard(props) {
       <div className="board build">{allBuildings}</div>
       <div className="board robot">{troops}</div>
       <div className="board grid">{grid}</div>
-      {<MapInfoBox redStats={redStats} blueStats={blueStats} />}
+      {<MapInfoBox redStats={redStats} blueStats={blueStats} maxHealth={maxHealth} />}
       <button className="updateTest" onClick={update}>update!!</button>
     </div>
   )
 }
+
+
