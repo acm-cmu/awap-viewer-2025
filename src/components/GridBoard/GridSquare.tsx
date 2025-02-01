@@ -5,16 +5,28 @@ import "./Grid.css"
   Color labels:
   0 - empty
   1 - impassable
-  2 - metal
   5 - trail (empty color)
   -#0 red
   #0 blue
 */
 
-export default function GridSquare(props) {
-  const { color, imgIdx, normalImgArray, blockedImgArray } = props
+export enum GridSquareType {
+  Grass = 0,
+  Impassible = 1,
+  Empty =5
+}
+
+export type GridSquareProps = {
+  color: GridSquareType,
+  normalImgArray: string[],
+  blockedImgArray: string[],
+  imgIdx: number
+}
+
+export default function GridSquare(props: GridSquareProps) {
+  const { color, normalImgArray, blockedImgArray, imgIdx} = props
   const classes = `grid-square color-${color}`
-  let useImg = null;
+  let useImg: string | null = null;
 
   switch (Number(color)) {
     case 0:
