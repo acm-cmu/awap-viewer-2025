@@ -1,8 +1,12 @@
 import InfoDisplay from "./InfoDisplay";
-import { ViewerContext } from "../../pages/Viewer"
-// import { useContext } from "react";
+import React from "react";
 
-export default function MapInfoBox(props) {
+export type MapInfoBoxProps = {
+    redStats: [],
+    blueStats: []
+}
+
+export default function MapInfoBox(props: MapInfoBoxProps) {
     const { redStats, blueStats } = props
 
     return (

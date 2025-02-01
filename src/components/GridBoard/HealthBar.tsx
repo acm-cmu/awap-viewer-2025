@@ -1,9 +1,9 @@
 import React from 'react'
 
   
-  export type HealthBarProps = {
+export type HealthBarProps = {
     health: number
-  }
+}
 
 const HealthBar = (props: HealthBarProps) => {
     const { health } = props
