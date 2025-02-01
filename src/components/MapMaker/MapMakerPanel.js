@@ -73,7 +73,7 @@ export default function MapMakerPanel({ togglePage }) {
       >
         <SwapHorizIcon />
       </button>
-      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2023</h1>
+      <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2025</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Map Maker</h2>
       <form onSubmit={handleSubmit}>
         <Grid container direction="column" alignItems="center">

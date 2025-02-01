@@ -13,9 +13,6 @@ import FormControl from "@mui/material/FormControl"
 import Select from "@mui/material/Select"
 import Stack from "@mui/material/Stack"
 import MenuItem from "@mui/material/MenuItem"
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch"
-import GridBoard, { update } from "../GridBoard/GridBoard"
-import CyanT1 from "../../assets/CyanTraining0.png";
 
 export default function SidePanel(props) {
   const {
@@ -42,7 +39,7 @@ export default function SidePanel(props) {
 
   const showFile = async (event) => {
     var fileInput = document.getElementById("fileobj")
-    var filePath = fileInput.value
+    var filePath= fileInput.value
     let ext = filePath.slice(filePath.length - 4, filePath.length)
     if (ext !== "json") {
       setWrongFile(true)

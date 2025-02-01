@@ -4,7 +4,7 @@ import MapMakerGrid from "../components/MapMaker/MapMakerGrid"
 import MapMakerPanel from "../components/MapMaker/MapMakerPanel"
 import React, { useState, createContext } from "react"
 
-const ViewerContext = createContext()
+const ViewerContext = createContext({})
 
 function MapMaker({togglePage}) {
   const [rows, setRows] = useState(null)

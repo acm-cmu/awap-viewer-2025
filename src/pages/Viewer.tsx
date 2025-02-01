@@ -28,7 +28,7 @@ import N5 from "../assets/MapTiles/TileN5.png";
 */
 
 
-const ViewerContext = createContext()
+const ViewerContext = createContext({})
 
 function Viewer({ togglePage }) {
   // for randomization of tile choice
