@@ -40,9 +40,9 @@
 
 :root {
   --dark-accent-color: #383529;
-  --dark-color: #B68A03;
-  --mid-color: #FFEAAD;
-  --light-color: #F9EFD1;
+  --dark-color: #b68a03;
+  --mid-color: #ffeaad;
+  --light-color: #f9efd1;
   --red-color: rgb(250, 60, 60);
   --blue-color: rgb(100, 150, 255);
   --vis-tint: rgba(42, 40, 40, 0.7);
@@ -54,10 +54,12 @@
   --cols: 32;
   --rows: 32;
   --grid-margin: 2vh;
-  --tile-size: calc(min((85vh - var(--grid-margin)) / var(--rows),
-        (70vw - var(--grid-margin)) / var(--cols)));
-  --tile-size-full: calc(min((100vh - var(--grid-margin)) / var(--rows),
-        (70vw - var(--grid-margin)) / var(--cols)));
+  --tile-size: calc(
+    min((85vh - var(--grid-margin)) / var(--rows), (70vw - var(--grid-margin)) / var(--cols))
+  );
+  --tile-size-full: calc(
+    min((100vh - var(--grid-margin)) / var(--rows), (70vw - var(--grid-margin)) / var(--cols))
+  );
   --grid-size-hori: calc(var(--cols) * var(--tile-size));
   --grid-size-vert: calc(var(--rows) * var(--tile-size));
   --grid-padding-hori: calc((70vw - var(--grid-size-hori)) / 2);

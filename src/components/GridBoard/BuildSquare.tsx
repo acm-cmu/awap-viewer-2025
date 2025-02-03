@@ -1,8 +1,10 @@
-import React, { useMemo } from "react";
-import "./Grid.css";
-import BlueCastle from "../../assets/BlueCastle.png";
-import RedCastle from "../../assets/RedCastle.png";
-import Exploded from "../../assets/explosion.png";
+import React, { useMemo } from 'react';
+
+import './Grid.css';
+
+import BlueCastle from '../../assets/BlueCastle.png';
+import Exploded from '../../assets/explosion.png';
+import RedCastle from '../../assets/RedCastle.png';
 
 /*
   Type labels:
@@ -13,7 +15,7 @@ import Exploded from "../../assets/explosion.png";
 */
 
 type BuildSquareProps = {
-  color: "RED" | "BLUE";
+  color: 'RED' | 'BLUE';
   type: 0 | 1 | 2 | 3;
 };
 
@@ -23,8 +25,8 @@ export default function BuildSquare(props: BuildSquareProps) {
   let useImg: string | null = null;
 
   const currentImage = useMemo(() => {
-    if (color === "RED") return RedCastle;
-    if (color === "BLUE") return BlueCastle;
+    if (color === 'RED') return RedCastle;
+    if (color === 'BLUE') return BlueCastle;
     return null;
   }, [color]);
 
@@ -41,11 +43,7 @@ export default function BuildSquare(props: BuildSquareProps) {
 
   return (
     <div className={`tile-div ${classes}`}>
-      {useImg !== null ? (
-        <img src={useImg} className="tileBgImg" alt="" />
-      ) : (
-        <div></div>
-      )}
+      {useImg !== null ? <img src={useImg} className="tileBgImg" alt="" /> : <div></div>}
     </div>
   );
 }

@@ -1,11 +1,12 @@
-import React from "react"
-import "./ToggleSwitch.css"
+import React from 'react';
+
+import './ToggleSwitch.css';
 
 type ToggleSwitchProps = {
-  useID: string,
-  onToggle: ,
-  disabled: boolean
-}
+  useID: string;
+  onToggle: () => void;
+  disabled: boolean;
+};
 
 // Creates the toggle switch button
 export default function ToggleSwitch(props) {
@@ -19,9 +20,9 @@ export default function ToggleSwitch(props) {
           id={props.useID}
           onClick={props.onToggle}
           disabled={props.disabled}
-        />{" "}
+        />{' '}
         {props.children}
       </label>
     </div>
-  )
+  );
 }

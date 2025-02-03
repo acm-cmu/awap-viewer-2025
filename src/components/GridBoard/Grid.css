@@ -14,7 +14,7 @@
 }
 
 .info {
-  font-family: "Roboto", "Helveltica Nue", sans-serif;
+  font-family: 'Roboto', 'Helveltica Nue', sans-serif;
   color: var(--dark-color);
   font-size: 2vmin;
   margin: 1vh 2vw 1vh 3vw;
@@ -34,7 +34,7 @@
 }
 
 .info.stats {
-  font-family: "Earth Orbiter", "Helveltica Nue", sans-serif;
+  font-family: 'Earth Orbiter', 'Helveltica Nue', sans-serif;
   font-size: 2.5vmin;
   margin: 1vmin 0 1vmin 0;
 }
@@ -196,12 +196,12 @@
 .map {
   height: 85vh;
   width: 70vw;
-  background: url("/src/assets/MapTiles/TileB2.png") repeat 0 0 fixed;
+  background: url('/src/assets/MapTiles/TileB2.png') repeat 0 0 fixed;
   background-size: var(--tile-size);
 }
 
 .map-info-box {
-  font-family: "Aldrich", "Roboto", sans-serif;
+  font-family: 'Aldrich', 'Roboto', sans-serif;
   position: absolute;
   bottom: 0;
   width: 70vw;
@@ -217,7 +217,6 @@
   flex-basis: 50%;
 }
 
-
 .info-box .info-badge {
   flex-basis: 30%;
   margin: 0;
@@ -228,7 +227,7 @@
 .info-box .info-side {
   flex-basis: 70%;
   text-align: left;
-  font-family: "Aldrich", "Roboto", sans-serif;
+  font-family: 'Aldrich', 'Roboto', sans-serif;
   display: inline-block;
   color: #fff;
 }
@@ -282,7 +281,6 @@
   margin: 0;
 }
 
-
 .info-badge img {
   width: 100%;
   height: 100%;
@@ -291,7 +289,7 @@
 }
 
 progress {
-  accent-color: white
+  accent-color: white;
 }
 
 .health-bar {
@@ -302,7 +300,6 @@ progress {
   height: 50%;
   z-index: 10;
 }
-
 
 .health-bar progress {
   /* border-radius: 15%; */
@@ -394,7 +391,6 @@ progress {
   background-color: transparent;
 }
 
-
 /* empty tile */
 .color-0 {
   background-color: var(--mid-color);
@@ -409,7 +405,6 @@ progress {
 .color-2 {
   background-color: #f9b697;
 }
-
 
 /* red color tiles */
 .color--10 {
@@ -457,46 +452,37 @@ progress {
   background-color: rgb(135, 195, 255);
 }
 
-
 .color-20 {
   background-color: rgb(120, 180, 255);
 }
-
 
 .color-30 {
   background-color: rgb(105, 165, 255);
 }
 
-
 .color-40 {
   background-color: rgb(90, 150, 255);
 }
-
 
 .color-50 {
   background-color: rgb(75, 135, 255);
 }
 
-
 .color-60 {
   background-color: rgb(60, 110, 255);
 }
-
 
 .color-70 {
   background-color: rgb(45, 95, 255);
 }
 
-
 .color-80 {
   background-color: rgb(30, 80, 255);
 }
 
-
 .color-90 {
   background-color: rgb(15, 65, 255);
 }
-
 
 .color-100 {
   background-color: rgb(0, 50, 255);
@@ -511,8 +497,6 @@ progress {
 /* .color-3 {
   background-color: rgb(100, 150, 255);
 } */
-
-
 
 /* trail empty color */
 .color-5 {

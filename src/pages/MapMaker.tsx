@@ -1,21 +1,23 @@
-import "./MainPage.css"
-import "bootstrap/dist/css/bootstrap.min.css"
-import MapMakerGrid from "../components/MapMaker/MapMakerGrid"
-import MapMakerPanel from "../components/MapMaker/MapMakerPanel"
-import React, { useState, createContext } from "react"
+import './MainPage.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-const ViewerContext = createContext({})
+import React, { createContext, useState } from 'react';
 
-function MapMaker({togglePage}) {
-  const [rows, setRows] = useState(null)
-  const [cols, setCols] = useState(null)
-  const [showMap, setShowMap] = useState(null)
-  const [mapObj, setMapObj] = useState(null)
-  const [brushPreset, setBrushPreset] = useState(null)
-  const [Mnum, setMnum] = useState(null)
-  const [Hsym, setHsym] = useState(null)
-  const [Vsym, setVsym] = useState(null)
-  const [Rsym, setRsym] = useState(null)
+import MapMakerGrid from '../components/MapMaker/MapMakerGrid';
+import MapMakerPanel from '../components/MapMaker/MapMakerPanel';
+
+const ViewerContext = createContext({});
+
+function MapMaker({ togglePage }) {
+  const [rows, setRows] = useState(null);
+  const [cols, setCols] = useState(null);
+  const [showMap, setShowMap] = useState(null);
+  const [mapObj, setMapObj] = useState(null);
+  const [brushPreset, setBrushPreset] = useState(null);
+  const [Mnum, setMnum] = useState(null);
+  const [Hsym, setHsym] = useState(null);
+  const [Vsym, setVsym] = useState(null);
+  const [Rsym, setRsym] = useState(null);
 
   return (
     <ViewerContext.Provider
@@ -37,20 +39,17 @@ function MapMaker({togglePage}) {
         Vsym,
         setVsym,
         Rsym,
-        setRsym
-      }}
-    >
+        setRsym,
+      }}>
       <div className="MainPage">
         <div className="row-structure">
-          <MapMakerPanel togglePage={togglePage}/>
-          {showMap && rows && cols ? (
-            <MapMakerGrid/>
-          ) : null}
+          <MapMakerPanel togglePage={togglePage} />
+          {showMap && rows && cols ? <MapMakerGrid /> : null}
         </div>
       </div>
     </ViewerContext.Provider>
-  )
+  );
 }
 
-export default MapMaker
-export { ViewerContext }
+export default MapMaker;
+export { ViewerContext };

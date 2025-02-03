@@ -2,7 +2,6 @@
 
 General guidelines/ideas for creating a viewer
 
-
 ## Framework for server
 
 Need to serve static webpages (HTML + CSS + JavaScript)

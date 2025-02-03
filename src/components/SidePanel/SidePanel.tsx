@@ -1,18 +1,21 @@
-import React, { useEffect, useCallback, useContext, useState } from "react"
-import { ViewerContext } from "../../pages/Viewer"
-import "./SidePanel.css"
-import Slider from "@mui/material/Slider"
-import { StyledEngineProvider } from "@mui/material/styles"
-import { IconButton } from "@mui/material"
-import PlayArrowIcon from "@mui/icons-material/PlayArrow"
-import PauseIcon from "@mui/icons-material/Pause"
-import SettingsIcon from "@mui/icons-material/Settings"
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz"
-import Collapse from "@mui/material/Collapse"
-import FormControl from "@mui/material/FormControl"
-import Select from "@mui/material/Select"
-import Stack from "@mui/material/Stack"
-import MenuItem from "@mui/material/MenuItem"
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+
+import { ViewerContext } from '../../pages/Viewer';
+
+import './SidePanel.css';
+
+import PauseIcon from '@mui/icons-material/Pause';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SettingsIcon from '@mui/icons-material/Settings';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import { IconButton } from '@mui/material';
+import Collapse from '@mui/material/Collapse';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import Slider from '@mui/material/Slider';
+import Stack from '@mui/material/Stack';
+import { StyledEngineProvider } from '@mui/material/styles';
 
 export default function SidePanel(props) {
   const {
@@ -31,36 +34,36 @@ export default function SidePanel(props) {
     setSliderValue,
     setTimeout,
     timeout,
-  } = useContext(ViewerContext)
+  } = useContext(ViewerContext);
 
   // const { sliderValue, setSliderValue } = props;
-  const [wrongFile, setWrongFile] = useState(false)
-  const [showSettings, setShowSettings] = useState(false)
+  const [wrongFile, setWrongFile] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
 
   const showFile = async (event) => {
-    var fileInput = document.getElementById("fileobj")
-    var filePath= fileInput.value
-    let ext = filePath.slice(filePath.length - 4, filePath.length)
-    if (ext !== "json") {
-      setWrongFile(true)
-      return
+    const fileInput = document.getElementById('fileobj');
+    const filePath = fileInput.value;
+    const ext = filePath.slice(filePath.length - 4, filePath.length);
+    if (ext !== 'json') {
+      setWrongFile(true);
+      return;
     }
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onload = async (e) => {
-      const replay_text = e.target.result
+      const replay_text = e.target.result;
       try {
-        var replay_object = JSON.parse(replay_text)
-        setWrongFile(false)
-        resetPlaybutton()
-        setIsFinished(false)
-        setTimeout([false, null])
+        const replay_object = JSON.parse(replay_text);
+        setWrongFile(false);
+        resetPlaybutton();
+        setIsFinished(false);
+        setTimeout([false, null]);
       } catch (err) {
-        console.log(err.message)
+        console.log(err.message);
       }
-      props.onFileData(replay_object)
-    }
-    reader.readAsText(event.target.files[0])
-  }
+      props.onFileData(replay_object);
+    };
+    reader.readAsText(event.target.files[0]);
+  };
 
   const handleFrameChange = (event, newVal) => {
     /*
@@ -69,108 +72,80 @@ export default function SidePanel(props) {
     only changing isPlay and not framePlaying will only render the next frame and 
     not future frames, which is the desired behavior.
     */
-    setIsPlay(true)
-    setSliderValue(newVal)
-  }
+    setIsPlay(true);
+    setSliderValue(newVal);
+  };
 
   const handleFrameStep = (step) => {
     if (step <= 0 && sliderValue < 0) {
-      return
+      return;
     }
-    setFramePlaying(false)
-    setIsPlay(true)
-    setSliderValue((sliderValue) => sliderValue + step)
-  }
+    setFramePlaying(false);
+    setIsPlay(true);
+    setSliderValue((sliderValue) => sliderValue + step);
+  };
 
   const changePlay = () => {
-    const newFramePlaying = !framePlaying
-    setFramePlaying(newFramePlaying)
-    setIsPlay(newFramePlaying)
+    const newFramePlaying = !framePlaying;
+    setFramePlaying(newFramePlaying);
+    setIsPlay(newFramePlaying);
     if (isFinished && newFramePlaying) {
-      setIsFinished(false)
-      setTimeout([false, null])
+      setIsFinished(false);
+      setTimeout([false, null]);
     }
-  }
+  };
 
   const resetPlaybutton = useCallback(() => {
     // setRedMetal([])
     // setBlueMetal([])
     // setRedTerraform([])
     // setBlueTerraform([])
-    setFramePlaying(false)
-    setIsPlay(false)
-  }, [
-    setFramePlaying,
-    setIsPlay,
-  ])
+    setFramePlaying(false);
+    setIsPlay(false);
+  }, [setFramePlaying, setIsPlay]);
 
   useEffect(() => {
     if (isFinished) {
-      resetPlaybutton()
-      setSliderValue(-1)
+      resetPlaybutton();
+      setSliderValue(-1);
     }
-  }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished])
+  }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished]);
 
   const handleSpeedChange = (event) => {
-    setSpeed(event.target.value)
-  }
+    setSpeed(event.target.value);
+  };
 
   const handleToggleSettings = () => {
-    setShowSettings(!showSettings)
-  }
+    setShowSettings(!showSettings);
+  };
 
   return (
     <div className="side-panel">
-      <button
-        style={{ position: "absolute", top: 0, right: 10, zIndex: 10 }}
-        onClick={props.togglePage}
-      >
+      <button style={{ position: 'absolute', top: 0, right: 10, zIndex: 10 }} onClick={props.togglePage}>
         <SwapHorizIcon />
       </button>
       <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2025</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Game Viewer</h2>
-      <input
-        id="fileobj"
-        type="file"
-        className="file-upload"
-        onChange={showFile}
-      />
+      <input id="fileobj" type="file" className="file-upload" onChange={showFile} />
       {wrongFile ? (
-        <h2 className="info">
-          Please upload replay files with .awap25r extensions only.{" "}
-        </h2>
+        <h2 className="info">Please upload replay files with .awap25r extensions only. </h2>
       ) : (
         <div></div>
       )}
       {!wrongFile && replay != null ? (
         <div>
-          <Stack
-            direction="column"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Stack
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-            >
+          <Stack direction="column" alignItems="center" justifyContent="space-between">
+            <Stack direction="row" alignItems="center" justifyContent="space-between">
               {isFinished ? (
-                <h2 className={"info " + replay.winner}>
-                  {replay.winner === "RED" ? "RED" : "BLUE"} WINS!
-                </h2>
+                <h2 className={'info ' + replay.winner}>{replay.winner === 'RED' ? 'RED' : 'BLUE'} WINS!</h2>
               ) : (
                 <div></div>
               )}
-              {isFinished && timeout[0] ? (
-                <h2 className="info win">{timeout[1]} TIMED OUT</h2>
-              ) : (
-                <div></div>
-              )}
+              {isFinished && timeout[0] ? <h2 className="info win">{timeout[1]} TIMED OUT</h2> : <div></div>}
             </Stack>
           </Stack>
           <h2 className="info">
-            FRAME {sliderValue < 0 ? 0 : sliderValue} OF{" "}
-            {replay.replay.length - 1} / TURN {metaData[0]}
+            FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN {metaData[0]}
           </h2>
         </div>
       ) : (
@@ -196,24 +171,18 @@ export default function SidePanel(props) {
         direction="row"
         alignItems="center"
         justifyContent="space-around"
-        sx={{ flexWrap: "wrap", gap: 1, px: 1 }}
-      >
+        sx={{ flexWrap: 'wrap', gap: 1, px: 1 }}>
         <button
           onClick={() => handleToggleSettings()}
           style={{
             marginBottom: 0,
             marginTop: 0,
             marginLeft: 0,
-          }}
-        >
+          }}>
           <SettingsIcon />
         </button>
         <Stack direction="row" justifyContent="center" alignItems="center">
-          <button
-            className="arrow"
-            disabled={isDisabled}
-            onClick={() => handleFrameStep(-1)}
-          >
+          <button className="arrow" disabled={isDisabled} onClick={() => handleFrameStep(-1)}>
             &#8249;
           </button>
           <IconButton
@@ -221,19 +190,10 @@ export default function SidePanel(props) {
             aria-label="play/pause"
             className="play-control"
             disabled={isDisabled}
-            onClick={changePlay}
-          >
-            {framePlaying ? (
-              <PauseIcon className="play-icon" />
-            ) : (
-              <PlayArrowIcon className="play-icon" />
-            )}
+            onClick={changePlay}>
+            {framePlaying ? <PauseIcon className="play-icon" /> : <PlayArrowIcon className="play-icon" />}
           </IconButton>
-          <button
-            className="arrow"
-            disabled={isDisabled}
-            onClick={() => handleFrameStep(1)}
-          >
+          <button className="arrow" disabled={isDisabled} onClick={() => handleFrameStep(1)}>
             &#8250;
           </button>
         </Stack>
@@ -245,8 +205,7 @@ export default function SidePanel(props) {
               value={speed}
               disabled={isDisabled}
               onChange={handleSpeedChange}
-              className="speed-select"
-            >
+              className="speed-select">
               <MenuItem value={0.25}>0.25x</MenuItem>
               <MenuItem value={0.5}>0.5</MenuItem>
               <MenuItem value={1}>1.0</MenuItem>
@@ -295,5 +254,5 @@ export default function SidePanel(props) {
         </div>
       </div>*/}
     </div>
-  )
+  );
 }

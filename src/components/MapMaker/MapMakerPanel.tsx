@@ -1,9 +1,13 @@
-import React, { useContext } from "react";
-import { ViewerContext } from "../../pages/MapMaker";
-import "./MapMakerPanel.css";
-import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import Grid from "@mui/material/Grid";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
+import React, { useContext } from 'react';
+
+import { ViewerContext } from '../../pages/MapMaker';
+
+import './MapMakerPanel.css';
+
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import Grid from '@mui/material/Grid';
+
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 
 export default function MapMakerPanel({ togglePage }) {
   const {
@@ -34,13 +38,13 @@ export default function MapMakerPanel({ togglePage }) {
 
   const downloadMap = () => {
     if (mapObj && showMap) {
-      const fileName = "map.txt";
-      const data = new Blob([JSON.stringify(mapObj)], { type: "text/json" });
+      const fileName = 'map.txt';
+      const data = new Blob([JSON.stringify(mapObj)], { type: 'text/json' });
       const jsonURL = window.URL.createObjectURL(data);
-      const link = document.createElement("a");
+      const link = document.createElement('a');
       document.body.appendChild(link);
       link.href = jsonURL;
-      link.setAttribute("download", fileName);
+      link.setAttribute('download', fileName);
       link.click();
       document.body.removeChild(link);
     }
@@ -66,10 +70,7 @@ export default function MapMakerPanel({ togglePage }) {
 
   return (
     <div className="side-panel">
-      <button
-        style={{ position: "absolute", top: 0, right: 10, zIndex: 10 }}
-        onClick={togglePage}
-      >
+      <button style={{ position: 'absolute', top: 0, right: 10, zIndex: 10 }} onClick={togglePage}>
         <SwapHorizIcon />
       </button>
       <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2025</h1>
@@ -79,19 +80,11 @@ export default function MapMakerPanel({ togglePage }) {
           <Grid container direction="row" justifyContent="center">
             <label>
               Rows:
-              <input
-                type="number"
-                value={rows}
-                onChange={(e) => setRows(e.target.value)}
-              />
+              <input type="number" value={rows} onChange={(e) => setRows(e.target.value)} />
             </label>
             <label>
               Cols:
-              <input
-                type="number"
-                value={cols}
-                onChange={(e) => setCols(e.target.value)}
-              />
+              <input type="number" value={cols} onChange={(e) => setCols(e.target.value)} />
             </label>
           </Grid>
           <Grid container direction="row" justifyContent="center">
@@ -104,42 +97,22 @@ export default function MapMakerPanel({ togglePage }) {
       <h2>Brush Settings:</h2>
       <Grid container className="radio-container" direction="column">
         <Grid container direction="row" alignItems="center">
-          <input
-            type="radio"
-            value="G"
-            name="brush"
-            onChange={handleBrushRadio}
-          />
+          <input type="radio" value="G" name="brush" onChange={handleBrushRadio} />
           <label>Grass</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input
-            type="radio"
-            value="I"
-            name="brush"
-            onChange={handleBrushRadio}
-          />
+          <input type="radio" value="I" name="brush" onChange={handleBrushRadio} />
           <label>Impassible</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input
-            type="radio"
-            value="BC"
-            name="brush"
-            onChange={handleBrushRadio}
-          />
+          <input type="radio" value="BC" name="brush" onChange={handleBrushRadio} />
           <label>Blue Castle</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
-          <input
-            type="radio"
-            value="RC"
-            name="brush"
-            onChange={handleBrushRadio}
-          />
+          <input type="radio" value="RC" name="brush" onChange={handleBrushRadio} />
           <label>Red Castle</label>
         </Grid>
 
@@ -153,29 +126,17 @@ export default function MapMakerPanel({ togglePage }) {
 
       <Grid container className="switches" direction="column">
         <Grid container direction="row" alignItems="center">
-          <ToggleSwitch
-            onToggle={handleToggleHSym}
-            useID="hsym"
-            disabled={!showMap}
-          >
+          <ToggleSwitch onToggle={handleToggleHSym} useID="hsym" disabled={!showMap}>
             <p>Horizontal Symmetry</p>
           </ToggleSwitch>
         </Grid>
         <Grid container direction="row" alignItems="center">
-          <ToggleSwitch
-            onToggle={handleToggleVSym}
-            useID="vsym"
-            disabled={!showMap}
-          >
+          <ToggleSwitch onToggle={handleToggleVSym} useID="vsym" disabled={!showMap}>
             <p>Vertical Symmetry</p>
           </ToggleSwitch>
         </Grid>
         <Grid container direction="row" alignItems="center">
-          <ToggleSwitch
-            onToggle={handleToggleRSym}
-            useID="rsym"
-            disabled={!showMap}
-          >
+          <ToggleSwitch onToggle={handleToggleRSym} useID="rsym" disabled={!showMap}>
             <p>Rotational Symmetry</p>
           </ToggleSwitch>
         </Grid>

@@ -1,5 +1,6 @@
-import React from "react"
-import "./Grid.css"
+import React from 'react';
+
+import './Grid.css';
 
 /*
   Color labels:
@@ -13,28 +14,28 @@ import "./Grid.css"
 export enum GridSquareType {
   Grass = 0,
   Impassible = 1,
-  Empty =5
+  Empty = 5,
 }
 
 export type GridSquareProps = {
-  color: GridSquareType,
-  normalImgArray: string[],
-  blockedImgArray: string[],
-  imgIdx: number
-}
+  color: GridSquareType;
+  normalImgArray: string[];
+  blockedImgArray: string[];
+  imgIdx: number;
+};
 
 export default function GridSquare(props: GridSquareProps) {
-  const { color, normalImgArray, blockedImgArray, imgIdx} = props
-  const classes = `grid-square color-${color}`
+  const { color, normalImgArray, blockedImgArray, imgIdx } = props;
+  const classes = `grid-square color-${color}`;
   let useImg: string | null = null;
 
   switch (Number(color)) {
     case 0:
-      useImg = normalImgArray[imgIdx]
+      useImg = normalImgArray[imgIdx];
       break;
 
     case 1:
-      useImg = blockedImgArray[imgIdx]
+      useImg = blockedImgArray[imgIdx];
       break;
 
     default:
@@ -45,5 +46,5 @@ export default function GridSquare(props: GridSquareProps) {
     <div className={`tile-div ${classes}`}>
       {useImg !== null ? <img src={useImg} className="tileBgImg" alt="" /> : <div></div>}
     </div>
-  )
+  );
 }

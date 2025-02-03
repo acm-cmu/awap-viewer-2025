@@ -1,17 +1,17 @@
 /* Troop Types */
 
 .circle {
-    width: 70%;
-    height: 70%;
-    border-radius: 50%;
-    border: 1px solid black;
-    box-shadow: none;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: none;
 }
 
 .b-KNIGHT {
-    background-color: blue;
+  background-color: blue;
 }
 
 .r-KNIGHT {
-    background-color: red;
+  background-color: red;
 }
