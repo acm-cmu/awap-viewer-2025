@@ -14,7 +14,7 @@ import N3 from '../../assets/MapTiles/TileN3.png';
 import N4 from '../../assets/MapTiles/TileN4.png';
 import N5 from '../../assets/MapTiles/TileN5.png';
 import RedCastle from '../../assets/RedCastle.png';
-import { ViewerContext } from '../../pages/MapMaker';
+import { ViewerContext } from '../../pages/MapMaker.js';
 
 const blockedImgCnt = 5;
 const normalImgCnt = 5;

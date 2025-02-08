@@ -1,7 +1,7 @@
 import './MainPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { createContext, useState } from 'react';
+import React, { Dispatch, SetStateAction, createContext, Provider, useState } from 'react';
 
 import B1 from '../assets/MapTiles/TileB1.png';
 import B2 from '../assets/MapTiles/TileB2.png';
@@ -13,8 +13,8 @@ import N2 from '../assets/MapTiles/TileN2.png';
 import N3 from '../assets/MapTiles/TileN3.png';
 import N4 from '../assets/MapTiles/TileN4.png';
 import N5 from '../assets/MapTiles/TileN5.png';
-import GridBoard from '../components/GridBoard/GridBoard';
-import SidePanel from '../components/SidePanel/SidePanel';
+import GridBoard from '../components/GridBoard/GridBoard.js';
+import SidePanel from '../components/SidePanel/SidePanel.js';
 
 /*
   Color labels:
@@ -26,9 +26,26 @@ import SidePanel from '../components/SidePanel/SidePanel';
   #0 blue
 */
 
-const ViewerContext = createContext({});
+interface ViewerContextTypes{
+  replay: object,
+  sliderValue: number,
+  setSliderValue: Dispatch<SetStateAction<number>>,
+  isPlay: boolean,
+  setIsPlay: Dispatch<SetStateAction<boolean>>,
+  framePlaying: Dispatch<SetStateAction<boolean>>,
+  setIsFinished: Dispatch<SetStateAction<boolean>>,
+  speed: number,
+  setMetadata:  Dispatch<SetStateAction<(string | number)[]>>,
+  setTimeout:  Dispatch<SetStateAction<boolean>>,
+  colorKey: number,
+  RandTileColor: number,
+  normalImgArray: HTMLImageElement[],
+  blockedImgArray: HTMLImageElement[]
+};
 
-function Viewer({ togglePage }) {
+const ViewerContext = createContext<ViewerContextTypes>({} as ViewerContextTypes);
+
+function Viewer({ togglePage} ) {
   // for randomization of tile choice
   const colorKey = { GRASS: '0' };
   const blockedImgCnt = 5;

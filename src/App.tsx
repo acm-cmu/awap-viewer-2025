@@ -2,8 +2,8 @@ import React from 'react';
 
 import './App.css';
 
-import MapMaker from './pages/MapMaker';
-import Viewer from './pages/Viewer';
+import MapMaker from './pages/MapMaker.js';
+import Viewer from './pages/Viewer.js';
 
 function App() {
   const [page, setPage] = React.useState<'viewer' | 'mapmaker'>('viewer');

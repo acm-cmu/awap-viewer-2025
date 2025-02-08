@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
-import { ViewerContext } from '../../pages/Viewer';
+import { ViewerContext } from '../../pages/Viewer.js';
 
 import './SidePanel.css';
 
-import PauseIcon from '@mui/icons-material/Pause';
+import PauseIcon from '@mui/icomaterial/PauseIcon';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';

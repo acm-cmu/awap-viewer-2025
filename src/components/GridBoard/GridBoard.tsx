@@ -1,19 +1,20 @@
-import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, {Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { ViewerContext } from '../../pages/Viewer';
-import GridSquare from './GridSquare';
-import MapInfoBox from './MapInfoBox';
-import TroopSquare from './TroopSquare';
+import { ViewerContext } from '../../pages/Viewer.js';
+import GridSquare from './GridSquare.js';
+import MapInfoBox from './MapInfoBox.js';
+import TroopSquare from './TroopSquare.js';
 
 import './Grid.css';
 
 import { Slider } from '@mui/material';
 
-import BuildSquare from './BuildSquare';
+import BuildSquare from './BuildSquare.js';
 
 import '../SidePanel/SidePanel.css';
 
-export default function GridBoard(props) {
+
+export default function GridBoard() {
   const {
     replay,
     sliderValue,
@@ -29,8 +30,6 @@ export default function GridBoard(props) {
     RandTileColor,
     normalImgArray,
     blockedImgArray,
-    // setRedStats,
-    // setBlueStats,
   } = useContext(ViewerContext);
   // setSliderValue(1)
   const gameTurns = replay.replay;

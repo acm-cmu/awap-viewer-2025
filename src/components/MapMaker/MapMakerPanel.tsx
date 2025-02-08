@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
-import { ViewerContext } from '../../pages/MapMaker';
+import { ViewerContext } from '../../pages/MapMaker.js';
 
 import './MapMakerPanel.css';
 
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import Grid from '@mui/material/Grid';
 
-import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
 export default function MapMakerPanel({ togglePage }) {
   const {

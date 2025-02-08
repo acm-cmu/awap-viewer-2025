@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import React, { createContext, useState } from 'react';
 
-import MapMakerGrid from '../components/MapMaker/MapMakerGrid';
-import MapMakerPanel from '../components/MapMaker/MapMakerPanel';
+import MapMakerGrid from '../components/MapMaker/MapMakerGrid.js';
+import MapMakerPanel from '../components/MapMaker/MapMakerPanel.js';
 
 const ViewerContext = createContext({});
 

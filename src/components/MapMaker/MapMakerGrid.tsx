@@ -1,7 +1,7 @@
 import React, { useContext, useMemo, useState } from 'react';
 
-import { ViewerContext } from '../../pages/MapMaker';
-import MapMakerGridSquare from './MapMakerGridSquare';
+import { ViewerContext } from '../../pages/MapMaker.js';
+import MapMakerGridSquare from './MapMakerGridSquare.js';
 
 import './MapMakerGrid.css';
 
