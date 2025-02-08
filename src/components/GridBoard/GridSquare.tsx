@@ -12,9 +12,9 @@ import './Grid.css';
 */
 
 export enum GridSquareType {
-  Grass = 0,
-  Impassible = 1,
-  Empty = 5,
+  Grass = "0",
+  Impassible = "1",
+  Empty = "5",
 }
 
 export type GridSquareProps = {

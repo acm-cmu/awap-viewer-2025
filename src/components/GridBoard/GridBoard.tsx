@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, {ReactNode,Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { ViewerContext } from '../../pages/Viewer.js';
 import GridSquare from './GridSquare.js';
@@ -76,7 +76,7 @@ export default function GridBoard() {
 
   // Initializes tile grid (unchanged during game)
   const initialGrid = useMemo(() => {
-    const tempArr = [];
+    const tempArr : ReactNode[] = [];
     // Basic Map
     for (let row = 0; row < nrows; row++) {
       tempArr.push([]);
@@ -104,7 +104,7 @@ export default function GridBoard() {
 
   // Initializes buildings
   const allBuildings = useMemo(() => {
-    const tempArr = [];
+    const tempArr : ReactNode[] = [];
     // Basic Map
     for (let row = 0; row < nrows; row++) {
       tempArr.push([]);

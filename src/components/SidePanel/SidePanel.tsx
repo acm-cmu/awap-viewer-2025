@@ -9,13 +9,66 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { IconButton } from '@mui/material';
-import Collapse from '@mui/material/Collapse';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import Stack from '@mui/material/Stack';
 import { StyledEngineProvider } from '@mui/material/styles';
+
+export type Building = {
+  id: number,
+  team: "RED" | "BLUE",
+  type: "MAIN_CASTLE",
+  x: number,
+  y: number,
+  health: number,
+  damage: number,
+  defense: number,
+  attack_range: number,
+  damage_range: number,
+  turn_actions_remaining: number,
+  level: number
+}
+
+export type Unit = {
+  id: number,
+  team: string,
+  type: string,
+  x: number,
+  y: number,
+  turn_actions_remaining: number,
+  turn_movement_remaining: number,
+  attack_range: number,
+  health: number,
+  damage: number,
+  defense: number,
+  damage_range: number,
+  level: number
+}
+
+export type Turn = {
+  turn_number: number,
+  game_state: {balance: {BLUE: number, RED: number}},
+  turn: number,
+  tile_size: number,
+  buildings: {BLUE: Building[], RED: Building[]},
+  units: {
+    BLUE: Unit[], 
+    RED: Unit[], 
+    red_main_castle_id: number, 
+    blue_main_castle_id: number, 
+    time_remaining: {RED: number, BLUE:number}
+  },
+  winner_color: string
+}
+
+export interface Replay {
+  UUID: string,
+  map: {width: number, height: number, tiles: string[]},
+  winner_color: string,
+  replay: Turn[]
+}
 
 export default function SidePanel(props) {
   const {
@@ -28,7 +81,6 @@ export default function SidePanel(props) {
     setIsFinished,
     speed,
     setSpeed,
-    setIsTrailToggled,
     metaData,
     sliderValue,
     setSliderValue,
@@ -42,7 +94,7 @@ export default function SidePanel(props) {
 
   const showFile = async (event) => {
     const fileInput = document.getElementById('fileobj');
-    const filePath = fileInput.value;
+    const filePath = fileInput!.value;
     const ext = filePath.slice(filePath.length - 4, filePath.length);
     if (ext !== 'json') {
       setWrongFile(true);
@@ -50,9 +102,9 @@ export default function SidePanel(props) {
     }
     const reader = new FileReader();
     reader.onload = async (e) => {
-      const replay_text = e.target.result;
+      const replay_text = e.target!.result;
       try {
-        const replay_object = JSON.parse(replay_text);
+        const replay_object : Replay = JSON.parse(replay_text as string);
         setWrongFile(false);
         resetPlaybutton();
         setIsFinished(false);

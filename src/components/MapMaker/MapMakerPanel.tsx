@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { ViewerContext } from '../../pages/MapMaker.js';
+import { MapMakerProps, ViewerContext } from '../../pages/MapMaker.js';
 
 import './MapMakerPanel.css';
 
@@ -9,11 +9,8 @@ import Grid from '@mui/material/Grid';
 
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
-type MapMakerPanelProps = {
-  togglePage: boolean
-}
 
-export default function MapMakerPanel({ togglePage } : MapMakerPanelProps) {
+export default function MapMakerPanel({ togglePage }) {
   const {
     rows,
     setRows,

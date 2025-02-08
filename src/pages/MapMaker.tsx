@@ -8,6 +8,8 @@ import MapMakerPanel from '../components/MapMaker/MapMakerPanel.js';
 
 const ViewerContext = createContext({});
 
+
+
 function MapMaker({ togglePage }) {
   const [rows, setRows] = useState(null);
   const [cols, setCols] = useState(null);

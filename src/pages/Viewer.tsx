@@ -26,7 +26,7 @@ import SidePanel from '../components/SidePanel/SidePanel.js';
   #0 blue
 */
 
-interface ViewerContextTypes{
+export interface ViewerContextTypes{
   replay: object,
   sliderValue: number,
   setSliderValue: Dispatch<SetStateAction<number>>,
@@ -36,14 +36,14 @@ interface ViewerContextTypes{
   setIsFinished: Dispatch<SetStateAction<boolean>>,
   speed: number,
   setMetadata:  Dispatch<SetStateAction<(string | number)[]>>,
-  setTimeout:  Dispatch<SetStateAction<boolean>>,
+  setTimeout:  (boolean | null)[],
   colorKey: number,
   RandTileColor: number,
   normalImgArray: HTMLImageElement[],
   blockedImgArray: HTMLImageElement[]
 };
 
-const ViewerContext = createContext<ViewerContextTypes>({} as ViewerContextTypes);
+const ViewerContext = createContext<ViewerContextTypes>({});
 
 function Viewer({ togglePage} ) {
   // for randomization of tile choice
