@@ -9,7 +9,11 @@ import Grid from '@mui/material/Grid';
 
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
-export default function MapMakerPanel({ togglePage }) {
+type MapMakerPanelProps = {
+  togglePage: boolean
+}
+
+export default function MapMakerPanel({ togglePage } : MapMakerPanelProps) {
   const {
     rows,
     setRows,

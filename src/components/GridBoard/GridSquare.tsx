@@ -27,7 +27,7 @@ export type GridSquareProps = {
 export default function GridSquare(props: GridSquareProps) {
   const { color, normalImgArray, blockedImgArray, imgIdx } = props;
   const classes = `grid-square color-${color}`;
-  let useImg: string | null = null;
+  let useImg: string | null | undefined = null;
 
   switch (Number(color)) {
     case 0:

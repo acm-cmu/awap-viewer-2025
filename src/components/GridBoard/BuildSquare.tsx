@@ -9,7 +9,7 @@ import RedCastle from '../../assets/RedCastle.png';
 /*
   Type labels:
   0 - main castle
-  1 - Ship
+  1 - Spawner
   2 - Farmlands
   3 - Exploded
 */

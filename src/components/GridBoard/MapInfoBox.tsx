@@ -3,8 +3,8 @@ import React from 'react';
 import InfoDisplay from './InfoDisplay.js';
 
 export type MapInfoBoxProps = {
-  redStats: [];
-  blueStats: [];
+  redStats: [number, number, number, number];
+  blueStats: [number, number, number, number];
 };
 
 export default function MapInfoBox(props: MapInfoBoxProps) {

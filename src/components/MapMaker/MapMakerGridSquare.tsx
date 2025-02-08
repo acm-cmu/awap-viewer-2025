@@ -33,7 +33,7 @@ function RandNormalTile() {
   return normalImgArray[randomInt(0, normalImgCnt - 1)];
 }
 
-function RandTileColor(color) {
+function RandTileColor(color: string) {
   switch (Number(color)) {
     case 0:
       return RandNormalTile();
