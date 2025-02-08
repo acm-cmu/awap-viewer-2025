@@ -9,6 +9,17 @@ import HealthBar from './HealthBar.js';
   Type labels:
   0 - red
   1 - blue
+  KNIGHT 
+  WARRIOR
+  SWORDSMAN
+  DEFENDER 
+  CATAPULT
+  SAILOR 
+  RAIDER 
+  CAPTAIN 
+  GALLEY 
+  EXPLORER 
+  ENGINEER
 */
 
 export enum TroopSquareType {
