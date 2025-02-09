@@ -46,11 +46,11 @@ export default function GridBoard() {
   // setSliderValue(1)
   if (!replay) {
     console.log("error with gameturns");
-    return
+    return <div></div>
   }
 
   const gameTurns = replay.replay;
-  if (!gameTurns || ! gameTurns[0] || !gameTurns[0].game_state.buildings.BLUE[0]) return
+  if (!gameTurns || ! gameTurns[0] || !gameTurns[0].game_state.buildings.BLUE[0]) return <div></div>
   const nrows = replay.map.height;
   const ncols = replay.map.width;
   const initColors = replay.map.tiles;
@@ -72,7 +72,7 @@ export default function GridBoard() {
 
   // need to update this to account for explosions
 
-  if (!turnInfo.buildings.RED[0] || !turnInfo.buildings.BLUE[0]) return
+  if (!turnInfo.buildings.RED[0] || !turnInfo.buildings.BLUE[0]) return <div></div>
 
   setRedStats([
     turnInfo.balance.RED,
@@ -101,11 +101,11 @@ export default function GridBoard() {
     for (let row = 0; row < nrows; row++) {
       tempArr.push([] as ReactNode[]);
       for (let col = 0; col < ncols; col++) {
-        if (!initColors) return
+        if (!initColors) return <div></div>
         const k = initColors[row]?.[col] as string
         const color = colorKey?.[k] as string;
         const randChoice = RandTileColor(color);
-        if (! tempArr || !tempArr[row]) return;
+        if (! tempArr || !tempArr[row]) return <div></div>;
         tempArr[row]?.push(
           <GridSquare
             key={`${row}${col}`}
@@ -132,7 +132,7 @@ export default function GridBoard() {
     for (let row = 0; row < nrows; row++) {
       tempArr.push([]);
       for (let col = 0; col < ncols; col++) {
-        tempArr[row].push(<GridSquare key={`b${row}${col}`} color="5" />);
+        tempArr[row]?.push(<GridSquare key={`b${row}${col}`} color="5" />);
       }
     }
 
@@ -142,14 +142,14 @@ export default function GridBoard() {
       const blueBuildings = turnInfo.buildings.BLUE[0];
       // console.log(redBuildings)
       if (redBuildings!.health != 0) {
-        tempArr[redBuildings!.x][redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
+        tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
       } else {
-        tempArr[redBuildings!.x][redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
+        tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
       }
       if (blueBuildings!.health != 0) {
-        tempArr[blueBuildings!.x][blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
+        tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
       } else {
-        tempArr[blueBuildings!.x][blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
+        tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
       }
     }
 
@@ -167,15 +167,15 @@ export default function GridBoard() {
     for (let row = 0; row < nrows; row++) {
       tempArr.push([]);
       for (let col = 0; col < ncols; col++) {
-        tempArr[row].push(<GridSquare key={`t${row}${col}`} color="5" />);
+        tempArr[row]!.push(<GridSquare key={`t${row}${col}`} color="5" />);
       }
     }
 
     // change the one at that index to be valid troopsquare
     for (let i = 0; i < blueTroops.length; i++) {
       const s = blueTroops[i];
-      if (!s) return
-      tempArr[s.x][s.y] = (
+      if (!s) return  <div></div>
+      tempArr[s.x]![s.y] = (
         <TroopSquare
           key={`b${s.id}`}
           color={'b'}
@@ -192,8 +192,8 @@ export default function GridBoard() {
 
     for (let i = 0; i < redTroops.length; i++) {
       const s = redTroops[i];
-      if (!s) return
-      tempArr[s.x][s.y] = (
+      if (!s) return <div></div>
+      tempArr[s.x]![s.y] = (
         <TroopSquare
           key={`r${s.id}`}
           color={'r'}
@@ -212,19 +212,19 @@ export default function GridBoard() {
     return tempArr;
   }, [nrows, ncols, turnInfo, sliderValue]);
 
-  const handleFrameChange = (event, newVal) => {
+  const handleFrameChange = (event:React.ChangeEvent<HTMLInputElement>, newVal:number) => {
     const change = newVal - sliderValue;
     if (1 <= sliderValue + change && sliderValue + change <= numTurns) update(change);
   };
 
-  const update = (step) => {
+  const update = (step: number) => {
     // console.log(sliderValue);
     // console.log(gameTurns[60])
     if (sliderValue + step < gameTurns.length) {
-      setTurnInfo(gameTurns[sliderValue + step].game_state);
+      setTurnInfo(gameTurns[sliderValue + step]!.game_state);
       setSliderValue(sliderValue + step);
-      setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0].health, 0]);
-      setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0].health, 0]);
+      setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0]!.health, 0]);
+      setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0]!.health, 0]);
     }
   };
 
