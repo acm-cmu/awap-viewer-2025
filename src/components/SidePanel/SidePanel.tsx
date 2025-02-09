@@ -1,6 +1,6 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState, ChangeEvent } from 'react';
 
-import { ViewerContext } from '../../pages/Viewer.js';
+import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer.js';
 
 import './SidePanel.css';
 
@@ -49,7 +49,8 @@ export type Unit = {
 
 export type Turn = {
   turn_number: number,
-  game_state: {balance: {BLUE: number, RED: number}},
+  game_state: {
+  balance: {BLUE: number, RED: number},
   turn: number,
   tile_size: number,
   buildings: {BLUE: Building[], RED: Building[]},
@@ -59,7 +60,7 @@ export type Turn = {
     red_main_castle_id: number, 
     blue_main_castle_id: number, 
     time_remaining: {RED: number, BLUE:number}
-  },
+  }},
   winner_color: string
 }
 
@@ -70,30 +71,47 @@ export interface Replay {
   replay: Turn[]
 }
 
-export default function SidePanel(props) {
+type SidePanelProps = {
+  onFileData: (arg0: Replay) => void,
+  togglePage: () => void
+}
+
+export default function SidePanel(props: SidePanelProps) {
+  const context = useContext(ViewerContext);
+
+  if (!context) {
+    throw new Error("useViewer must be used within a ViewerProvider");
+  }
+
   const {
-    replay,
-    setIsPlay,
-    framePlaying,
-    setFramePlaying,
-    isDisabled,
-    isFinished,
-    setIsFinished,
-    speed,
-    setSpeed,
-    metaData,
-    sliderValue,
-    setSliderValue,
-    setTimeout,
-    timeout,
-  } = useContext(ViewerContext);
+        replay,
+        setReplay,
+        sliderValue,
+        setSliderValue,
+        isPlay,
+        setIsPlay,
+        framePlaying,
+        setFramePlaying,
+        timeout,
+        setTimeout,
+        colorKey,
+        RandTileColor,
+        normalImgArray,
+        blockedImgArray,
+        redStats,
+        setRedStats,
+        blueStats,
+        setBlueStats,
+        isFinished,
+        setIsFinished
+  }  = context
 
   // const { sliderValue, setSliderValue } = props;
   const [wrongFile, setWrongFile] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
-  const showFile = async (event) => {
-    const fileInput = document.getElementById('fileobj');
+  const showFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const fileInput = document.getElementById('fileobj') as HTMLInputElement;
     const filePath = fileInput!.value;
     const ext = filePath.slice(filePath.length - 4, filePath.length);
     if (ext !== 'json') {
@@ -107,17 +125,19 @@ export default function SidePanel(props) {
         const replay_object : Replay = JSON.parse(replay_text as string);
         setWrongFile(false);
         resetPlaybutton();
-        setIsFinished(false);
         setTimeout([false, null]);
-      } catch (err) {
+        props.onFileData(replay_object);
+      } catch (error) {
+        const err = error as Error
         console.log(err.message);
       }
-      props.onFileData(replay_object);
+      // props.onFileData(replay_object);
     };
-    reader.readAsText(event.target.files[0]);
+    const f = event.target.files as FileList
+    reader.readAsText(f[0] as Blob);
   };
 
-  const handleFrameChange = (event, newVal) => {
+  const handleFrameChange = (event : React.ChangeEvent<HTMLInputElement>, newVal: number) => {
     /*
     Note: If framePlaying == true, then the viewer is playing, so setIsPlay(true)  
     has no effect since isPlay == true anyway. If framePlaying == false, then  
@@ -128,7 +148,7 @@ export default function SidePanel(props) {
     setSliderValue(newVal);
   };
 
-  const handleFrameStep = (step) => {
+  const handleFrameStep = (step: number) => {
     if (step <= 0 && sliderValue < 0) {
       return;
     }
@@ -148,10 +168,6 @@ export default function SidePanel(props) {
   };
 
   const resetPlaybutton = useCallback(() => {
-    // setRedMetal([])
-    // setBlueMetal([])
-    // setRedTerraform([])
-    // setBlueTerraform([])
     setFramePlaying(false);
     setIsPlay(false);
   }, [setFramePlaying, setIsPlay]);
@@ -163,9 +179,6 @@ export default function SidePanel(props) {
     }
   }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished]);
 
-  const handleSpeedChange = (event) => {
-    setSpeed(event.target.value);
-  };
 
   const handleToggleSettings = () => {
     setShowSettings(!showSettings);
@@ -189,7 +202,7 @@ export default function SidePanel(props) {
           <Stack direction="column" alignItems="center" justifyContent="space-between">
             <Stack direction="row" alignItems="center" justifyContent="space-between">
               {isFinished ? (
-                <h2 className={'info ' + replay.winner}>{replay.winner === 'RED' ? 'RED' : 'BLUE'} WINS!</h2>
+                <h2 className={'info ' + replay.winner_color}>{replay.winner_color === 'RED' ? 'RED' : 'BLUE'} WINS!</h2>
               ) : (
                 <div></div>
               )}
@@ -197,7 +210,7 @@ export default function SidePanel(props) {
             </Stack>
           </Stack>
           <h2 className="info">
-            FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN {metaData[0]}
+            FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN {replay.replay.length}
           </h2>
         </div>
       ) : (
@@ -215,7 +228,6 @@ export default function SidePanel(props) {
           max={replay != null ? replay.replay.length - 1 : 1}
           className="slider"
           onChange={handleFrameChange}
-          disabled={isDisabled}
         />
       </StyledEngineProvider>
       <br></br>
@@ -234,23 +246,22 @@ export default function SidePanel(props) {
           <SettingsIcon />
         </button>
         <Stack direction="row" justifyContent="center" alignItems="center">
-          <button className="arrow" disabled={isDisabled} onClick={() => handleFrameStep(-1)}>
+          <button className="arrow"  onClick={() => handleFrameStep(-1)}>
             &#8249;
           </button>
           <IconButton
             id="play-button"
             aria-label="play/pause"
             className="play-control"
-            disabled={isDisabled}
             onClick={changePlay}>
             {framePlaying ? <PauseIcon className="play-icon" /> : <PlayArrowIcon className="play-icon" />}
           </IconButton>
-          <button className="arrow" disabled={isDisabled} onClick={() => handleFrameStep(1)}>
+          <button className="arrow" onClick={() => handleFrameStep(1)}>
             &#8250;
           </button>
         </Stack>
 
-        <StyledEngineProvider injectFirst>
+        {/* <StyledEngineProvider injectFirst>
           <FormControl variant="outlined">
             <Select
               id="speed-toggle"
@@ -266,7 +277,7 @@ export default function SidePanel(props) {
               <MenuItem value={8.0}>8x</MenuItem>
             </Select>
           </FormControl>
-        </StyledEngineProvider>
+        </StyledEngineProvider> */}
       </Stack>
       {/* <Collapse in={showSettings}>
         <div className="toggle-layout">

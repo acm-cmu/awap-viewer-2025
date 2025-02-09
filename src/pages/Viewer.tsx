@@ -62,7 +62,9 @@ export interface ViewerContextTypes{
   colorKey: ColorKeyType,
   RandTileColor: (color: string) => number | null,
   normalImgArray: HTMLImageElement[],
-  blockedImgArray: HTMLImageElement[]
+  blockedImgArray: HTMLImageElement[],
+  isFinished: boolean,
+  setIsFinished: Dispatch<SetStateAction<boolean>>,
 };
 
 const ViewerContext = createContext<ViewerContextTypes | undefined>(undefined);
@@ -78,10 +80,10 @@ function Viewer({ togglePage}: TogglePageType ) {
   const [replay, setReplay] = useState<Replay | null>(null);
   const [timeout, setTimeout] = useState([false, null]);
 
-  const [sliderValue, setSliderValue] = useState(1);
+  const [sliderValue, setSliderValue] = useState(0);
   const [isPlay, setIsPlay] = useState(false);
   const [framePlaying, setFramePlaying] = useState(false);
-
+  const [isFinished, setIsFinished] = useState(false);
 
   const [redTroops, setRedTroops] = useState<ReactNode[]>([]);
   const [blueTroops, setBlueTroops] = useState<ReactNode[]>([]);
@@ -156,6 +158,8 @@ function Viewer({ togglePage}: TogglePageType ) {
         setRedStats,
         blueStats,
         setBlueStats,
+        isFinished,
+        setIsFinished
       }}>
       <div className="MainPage">
         <div className="row-structure">

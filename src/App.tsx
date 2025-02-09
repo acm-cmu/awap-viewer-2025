@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div className="App">
-      <MapMaker togglePage={togglePage} />
+      {/* <MapMaker togglePage={togglePage} /> */}
     </div>
   );
 }

@@ -15,34 +15,50 @@ import '../SidePanel/SidePanel.css';
 
 
 export default function GridBoard() {
-  const {
-    replay,
-    sliderValue,
-    setSliderValue,
-    isPlay,
-    setIsPlay,
-    framePlaying,
-    setIsFinished,
-    speed,
-    setMetadata,
-    setTimeout,
-    colorKey,
-    RandTileColor,
-    normalImgArray,
-    blockedImgArray,
-  } = useContext(ViewerContext);
+  const context = useContext(ViewerContext);
+  
+    if (!context) {
+      throw new Error("useViewer must be used within a ViewerProvider");
+    }
+  
+    const {
+          replay,
+          setReplay,
+          sliderValue,
+          setSliderValue,
+          isPlay,
+          setIsPlay,
+          framePlaying,
+          setFramePlaying,
+          timeout,
+          setTimeout,
+          colorKey,
+          RandTileColor,
+          normalImgArray,
+          blockedImgArray,
+          redStats,
+          setRedStats,
+          blueStats,
+          setBlueStats,
+          isFinished,
+          setIsFinished
+    }  = context
   // setSliderValue(1)
-  const gameTurns = replay.replay;
-  const nrows = gameTurns[0].map.height;
-  const ncols = gameTurns[0].map.width;
-  const initColors = gameTurns[0].map.tiles;
-  const [turnInfo, setTurnInfo] = useState(gameTurns[1].game_state);
-  const winner = replay.winner_color;
+  const gameTurns = replay!.replay;
+  if (!gameTurns || !replay) {
+    console.log("error with gameturns");
+    return
+  }
+  const nrows = replay.map.height;
+  const ncols = replay.map.width;
+  const initColors = replay.map.tiles;
+  const [turnInfo, setTurnInfo] = useState(gameTurns[0].game_state);
+  const winner = replay!.winner_color;
   const numTurns = gameTurns.length - 1;
   // const { sliderValue, setSliderValue } = props
-  const maxHealth = gameTurns[1].game_state.buildings.BLUE[0].health;
-  document.documentElement.style.setProperty('--cols', ncols);
-  document.documentElement.style.setProperty('--rows', nrows);
+  const maxHealth = gameTurns[0].game_state.buildings.BLUE[0].health;
+  document.documentElement.style.setProperty('--cols', ncols.toString());
+  document.documentElement.style.setProperty('--rows', nrows.toString());
 
   const [index, setIndex] = useState(-1);
   const intervalID = useRef(null);
@@ -54,13 +70,13 @@ export default function GridBoard() {
 
   // need to update this to account for explosions
 
-  const [redStats, setRedStats] = useState([
+  setRedStats([
     turnInfo.balance.RED,
     maxHealth,
     turnInfo.buildings.RED[0].health,
     0,
   ]);
-  const [blueStats, setBlueStats] = useState([
+  setBlueStats([
     turnInfo.balance.BLUE,
     maxHealth,
     turnInfo.buildings.BLUE[0].health,
