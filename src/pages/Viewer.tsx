@@ -21,13 +21,13 @@ import SidePanel, { Replay } from '../components/SidePanel/SidePanel.js';
   0 - empty
   1 - impassable
   2 - metal
-  5 - trail (empty color)
+  5 - trail (empty olor)
   -#0 red
   #0 blue
 */
 
 type ColorKeyType = {
-  GRASS: string
+  [key: string] : string
 }
 
 type StatsType = number[]
@@ -61,8 +61,8 @@ export interface ViewerContextTypes{
   setTimeout:  Dispatch<SetStateAction<(boolean | null)[]>>,
   colorKey: ColorKeyType,
   RandTileColor: (color: string) => number | null,
-  normalImgArray: HTMLImageElement[],
-  blockedImgArray: HTMLImageElement[],
+  normalImgArray: string[],
+  blockedImgArray: string[],
   isFinished: boolean,
   setIsFinished: Dispatch<SetStateAction<boolean>>,
 };

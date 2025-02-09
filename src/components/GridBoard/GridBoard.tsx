@@ -44,11 +44,13 @@ export default function GridBoard() {
           setIsFinished
     }  = context
   // setSliderValue(1)
-  const gameTurns = replay!.replay;
-  if (!gameTurns || !replay) {
+  if (!replay) {
     console.log("error with gameturns");
     return
   }
+
+  const gameTurns = replay.replay;
+  if (!gameTurns || ! gameTurns[0] || !gameTurns[0].game_state.buildings.BLUE[0]) return
   const nrows = replay.map.height;
   const ncols = replay.map.width;
   const initColors = replay.map.tiles;
@@ -64,11 +66,13 @@ export default function GridBoard() {
   const intervalID = useRef(null);
 
   // States for displaying various elements
-  const [grid, setGrid] = useState(null);
-  const [troops, setTroops] = useState(null);
-  const [buildings, setBuildings] = useState(null);
+  const [grid, setGrid] = useState<ReactNode[][]>([]);
+  const [troops, setTroops] = useState<ReactNode[][]>([]);
+  const [buildings, setBuildings] = useState<ReactNode[][]>([]);
 
   // need to update this to account for explosions
+
+  if (!turnInfo.buildings.RED[0] || !turnInfo.buildings.BLUE[0]) return
 
   setRedStats([
     turnInfo.balance.RED,
@@ -92,35 +96,38 @@ export default function GridBoard() {
 
   // Initializes tile grid (unchanged during game)
   const initialGrid = useMemo(() => {
-    const tempArr : ReactNode[] = [];
+    const tempArr : ReactNode[][] = [];
     // Basic Map
     for (let row = 0; row < nrows; row++) {
-      tempArr.push([]);
+      tempArr.push([] as ReactNode[]);
       for (let col = 0; col < ncols; col++) {
-        const color = colorKey[initColors[row][col]];
+        if (!initColors) return
+        const k = initColors[row]?.[col] as string
+        const color = colorKey?.[k] as string;
         const randChoice = RandTileColor(color);
-        tempArr[row].push(
+        if (! tempArr || !tempArr[row]) return;
+        tempArr[row]?.push(
           <GridSquare
             key={`${row}${col}`}
             color={color}
-            imgIdx={randChoice}
-            normalImgArray={normalImgArray}
-            blockedImgArray={blockedImgArray}
-          />
+            imgIdx={randChoice as number}
+            normalImgArray={normalImgArray as string[]}
+            blockedImgArray={blockedImgArray as string[]}
+          /> as ReactNode
         );
       }
     }
 
     setGrid(tempArr);
     setIndex(-1);
-    clearInterval(intervalID.current);
-    intervalID.current = null;
+    // clearInterval(intervalID.current);
+    // intervalID.current = null;
     return [tempArr];
   }, [nrows, ncols]);
 
   // Initializes buildings
   const allBuildings = useMemo(() => {
-    const tempArr : ReactNode[] = [];
+    const tempArr : ReactNode[][] = [];
     // Basic Map
     for (let row = 0; row < nrows; row++) {
       tempArr.push([]);

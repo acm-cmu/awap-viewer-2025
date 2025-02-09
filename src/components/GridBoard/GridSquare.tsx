@@ -18,7 +18,7 @@ export enum GridSquareType {
 }
 
 export type GridSquareProps = {
-  color: GridSquareType;
+  color: string;
   normalImgArray: string[];
   blockedImgArray: string[];
   imgIdx: number;
