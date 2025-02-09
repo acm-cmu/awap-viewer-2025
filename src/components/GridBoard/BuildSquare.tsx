@@ -17,6 +17,7 @@ import RedCastle from '../../assets/RedCastle.png';
 type BuildSquareProps = {
   color: 'RED' | 'BLUE';
   type: 0 | 1 | 2 | 3;
+  id: number
 };
 
 export default function BuildSquare(props: BuildSquareProps) {

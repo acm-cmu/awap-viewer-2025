@@ -23,12 +23,12 @@ import HealthBar from './HealthBar.js';
 */
 
 export enum TroopSquareType {
-  Red = 0,
-  Blue = 1,
+  'b' = 0,
+  'r' = 1,
 }
 
 export type TroopSquareProps = {
-  color: TroopSquareType;
+  color: string;
   type: string;
   lvl: number;
   health: number;

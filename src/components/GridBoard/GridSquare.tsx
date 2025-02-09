@@ -19,9 +19,9 @@ export enum GridSquareType {
 
 export type GridSquareProps = {
   color: string;
-  normalImgArray: string[];
-  blockedImgArray: string[];
-  imgIdx: number;
+  normalImgArray?: string[];
+  blockedImgArray?: string[];
+  imgIdx?: number;
 };
 
 export default function GridSquare(props: GridSquareProps) {
@@ -29,6 +29,7 @@ export default function GridSquare(props: GridSquareProps) {
   const classes = `grid-square color-${color}`;
   let useImg: string | null | undefined = null;
 
+  if (normalImgArray&& blockedImgArray && imgIdx) {
   switch (Number(color)) {
     case 0:
       useImg = normalImgArray[imgIdx];
@@ -42,6 +43,7 @@ export default function GridSquare(props: GridSquareProps) {
       useImg = null;
       break;
   }
+}
   return (
     <div className={`tile-div ${classes}`}>
       {useImg !== null ? <img src={useImg} className="tileBgImg" alt="" /> : <div></div>}

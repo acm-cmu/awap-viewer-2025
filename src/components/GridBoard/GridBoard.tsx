@@ -141,15 +141,15 @@ export default function GridBoard() {
       const redBuildings = turnInfo.buildings.RED[0];
       const blueBuildings = turnInfo.buildings.BLUE[0];
       // console.log(redBuildings)
-      if (redBuildings.health != 0) {
-        tempArr[redBuildings.x][redBuildings.y] = <BuildSquare id={0} color="RED" type={0} />;
+      if (redBuildings!.health != 0) {
+        tempArr[redBuildings!.x][redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
       } else {
-        tempArr[redBuildings.x][redBuildings.y] = <BuildSquare id={0} color="RED" type={3} />;
+        tempArr[redBuildings!.x][redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
       }
-      if (blueBuildings.health != 0) {
-        tempArr[blueBuildings.x][blueBuildings.y] = <BuildSquare id={0} color="BLUE" type={0} />;
+      if (blueBuildings!.health != 0) {
+        tempArr[blueBuildings!.x][blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
       } else {
-        tempArr[blueBuildings.x][blueBuildings.y] = <BuildSquare id={0} color="BLUE" type={3} />;
+        tempArr[blueBuildings!.x][blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
       }
     }
 
@@ -163,7 +163,7 @@ export default function GridBoard() {
     const blueTroops = turnInfo.units.BLUE;
     const redTroops = turnInfo.units.RED;
 
-    const tempArr = [];
+    const tempArr: ReactNode[][] = [];
     for (let row = 0; row < nrows; row++) {
       tempArr.push([]);
       for (let col = 0; col < ncols; col++) {
@@ -174,6 +174,7 @@ export default function GridBoard() {
     // change the one at that index to be valid troopsquare
     for (let i = 0; i < blueTroops.length; i++) {
       const s = blueTroops[i];
+      if (!s) return
       tempArr[s.x][s.y] = (
         <TroopSquare
           key={`b${s.id}`}
@@ -191,6 +192,7 @@ export default function GridBoard() {
 
     for (let i = 0; i < redTroops.length; i++) {
       const s = redTroops[i];
+      if (!s) return
       tempArr[s.x][s.y] = (
         <TroopSquare
           key={`r${s.id}`}
@@ -209,26 +211,6 @@ export default function GridBoard() {
     setTroops(tempArr);
     return tempArr;
   }, [nrows, ncols, turnInfo, sliderValue]);
-
-  const makeDeepCopy = (arr) => {
-    const arrCopy = arr.map((row, i) => {
-      return row.map((elem, j) => {
-        return elem;
-      });
-    });
-    return arrCopy;
-  };
-
-  const makeDeepCopy3D = (arr) => {
-    const arrCopy = arr.map((row, i) => {
-      return row.map((elemArr, j) => {
-        return elemArr.map((elem, k) => {
-          return elem;
-        });
-      });
-    });
-    return arrCopy;
-  };
 
   const handleFrameChange = (event, newVal) => {
     const change = newVal - sliderValue;
