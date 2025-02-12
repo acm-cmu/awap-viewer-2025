@@ -6,26 +6,36 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "ESNext",
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
     "isolatedModules": true,
-
     /** Keep TSC performant in monorepos */
     "incremental": true,
     "disableSourceOfProjectReferenceRedirect": true,
-
     /** Strictness */
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
-
     /** Transpile using Bundler (not tsc) */
-    "module": "ESNext",
+    "module": "NodeNext",
     "moduleResolution": "nodenext",
     "noEmit": true,
-		"jsx": "react-jsx",
+    "jsx": "react-jsx",
   },
-  "exclude": ["node_modules", "build", "dist", ".next", ".expo", "public"]
+  "exclude": [
+    "node_modules",
+    "build",
+    "dist",
+    ".next",
+    ".expo",
+    "public"
+  ],
+  "include": [
+    "src/**/*"
+  ]
 }

@@ -1,19 +1,19 @@
 import React, { useCallback, useContext, useEffect, useState, ChangeEvent } from 'react';
 
-import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer.js';
+import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer';
 
 import './SidePanel.css';
 
 import PauseIcon from '@mui/icons-material/PauseCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
-import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { IconButton } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
-import Stack from '@mui/material/Stack';
+import { Stack } from '@mui/material';
+import SwapHoriz from '@mui/icons-material/SwapHoriz';
 import { StyledEngineProvider } from '@mui/material/styles';
 
 export type Building = {
@@ -187,7 +187,7 @@ export default function SidePanel(props: SidePanelProps) {
   return (
     <div className="side-panel">
       <button style={{ position: 'absolute', top: 0, right: 10, zIndex: 10 }} onClick={props.togglePage}>
-        <SwapHorizIcon />
+        Swap
       </button>
       <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2025</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Game Viewer</h2>
@@ -216,7 +216,12 @@ export default function SidePanel(props: SidePanelProps) {
       ) : (
         <h2 className="info">FRAME 0 OF 250 / TURN 0 OF BLUE </h2>
       )}
-      <StyledEngineProvider injectFirst>
+      </div>
+    )
+  }
+
+
+/* <StyledEngineProvider injectFirst>
         <Slider
           aria-label="Frame No."
           defaultValue={0}
@@ -259,9 +264,11 @@ export default function SidePanel(props: SidePanelProps) {
           <button className="arrow" onClick={() => handleFrameStep(1)}>
             &#8250;
           </button>
-        </Stack>
+        </Stack> */
 
-        {/* <StyledEngineProvider injectFirst>
+        /* Divide!!! */
+
+        /* <StyledEngineProvider injectFirst>
           <FormControl variant="outlined">
             <Select
               id="speed-toggle"
@@ -277,9 +284,9 @@ export default function SidePanel(props: SidePanelProps) {
               <MenuItem value={8.0}>8x</MenuItem>
             </Select>
           </FormControl>
-        </StyledEngineProvider> */}
-      </Stack>
-      {/* <Collapse in={showSettings}>
+        </StyledEngineProvider> */
+      /* </Stack> */
+      /* <Collapse in={showSettings}>
         <div className="toggle-layout">
           <ToggleSwitch
             onToggle={handleToggleP1Vis}
@@ -303,8 +310,8 @@ export default function SidePanel(props: SidePanelProps) {
             <h2 className="togglelabel">SHOW ROBOT MOVE TRAIL</h2>
           </ToggleSwitch>
         </div>
-      </Collapse> */}
-      {/* <br></br>
+      </Collapse> */
+      /* <br></br>
 
       <h2>Expedition Progress</h2>
       <div className="hori-container graph">
@@ -315,7 +322,6 @@ export default function SidePanel(props: SidePanelProps) {
         <div>
           <p className="info"> Graph showing number of terms remainng, bar chart </p>
         </div>
-      </div>*/}
-    </div>
-  );
-}
+      </div>*/
+    /* </div> */
+  /* ); */

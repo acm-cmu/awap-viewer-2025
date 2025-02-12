@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "allowJs": true,
+        "jsx": "react-jsx"
+    },
+    "include": [
+        "src"
+    ]
+}

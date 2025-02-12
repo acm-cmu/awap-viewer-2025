@@ -13,8 +13,8 @@ import N2 from '../assets/MapTiles/TileN2.png';
 import N3 from '../assets/MapTiles/TileN3.png';
 import N4 from '../assets/MapTiles/TileN4.png';
 import N5 from '../assets/MapTiles/TileN5.png';
-import GridBoard from '../components/GridBoard/GridBoard.js';
-import SidePanel, { Replay } from '../components/SidePanel/SidePanel.js';
+import GridBoard from '../components/GridBoard/GridBoard';
+import SidePanel, { Replay } from '../components/SidePanel/SidePanel';
 
 /*
   Color labels:
@@ -30,7 +30,7 @@ type ColorKeyType = {
   [key: string] : string
 }
 
-type StatsType = number[]
+type StatsType = [number, number, number, number]
 
 export type TogglePageType = {
   togglePage: () => void
@@ -92,8 +92,8 @@ function Viewer({ togglePage}: TogglePageType ) {
   const [blueCastles, setBlueCastles] = useState<ReactNode[]>([]);
 
   // [coinAmount, maxCastleHealth, currCastleHealth, farmlands]
-  const [redStats, setRedStats] = useState([0, 0, 0, 0]);
-  const [blueStats, setBlueStats] = useState([0, 0, 0, 0]);
+  const [redStats, setRedStats] = useState<[number, number, number, number]>([0, 0, 0, 0]);
+  const [blueStats, setBlueStats] = useState<[number, number, number, number]>([0, 0, 0, 0]);
 
 
   const handleFileData = (replayData: Replay) => {

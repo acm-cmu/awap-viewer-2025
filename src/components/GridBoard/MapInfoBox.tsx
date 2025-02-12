@@ -1,6 +1,6 @@
 import React from 'react';
 
-import InfoDisplay from './InfoDisplay.js';
+import InfoDisplay from './InfoDisplay';
 
 export type MapInfoBoxProps = {
   redStats: [number, number, number, number];

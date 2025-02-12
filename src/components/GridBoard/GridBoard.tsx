@@ -1,15 +1,14 @@
 import React, {ReactNode,Dispatch, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { ViewerContext } from '../../pages/Viewer.js';
-import GridSquare from './GridSquare.js';
-import MapInfoBox from './MapInfoBox.js';
-import TroopSquare from './TroopSquare.js';
+import { ViewerContext } from '../../pages/Viewer';
+import GridSquare from './GridSquare';
+import MapInfoBox from './MapInfoBox';
+import TroopSquare from './TroopSquare';
+import BuildSquare from './BuildSquare';
 
 import './Grid.css';
 
 import { Slider } from '@mui/material';
-
-import BuildSquare from './BuildSquare.js';
 
 import '../SidePanel/SidePanel.css';
 
@@ -233,7 +232,7 @@ export default function GridBoard() {
       <div className="board build">{allBuildings}</div>
       <div className="board robot">{troops}</div>
       <div className="board grid">{grid}</div>
-      {<MapInfoBox redStats={redStats} blueStats={blueStats} maxHealth={maxHealth} />}
+      {<MapInfoBox redStats={redStats} blueStats={blueStats} />}
       <button
         className="updateTest"
         onClick={() => {
@@ -241,7 +240,13 @@ export default function GridBoard() {
         }}>
         update!!
       </button>
-      <div className="sliderSettings">
+    </div>
+  );
+}
+
+
+/*
+<div className="sliderSettings">
         <div className="full">
           <p className="info bold">
             Frame {sliderValue} of {numTurns}:
@@ -263,6 +268,5 @@ export default function GridBoard() {
         </div>
         <h2 className="info stats">Winner: {winner}</h2>
       </div>
-    </div>
-  );
-}
+
+*/ 
