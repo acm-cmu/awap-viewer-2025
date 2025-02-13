@@ -9,7 +9,6 @@
 
 // import ToggleSwitch from '../ToggleSwitch/ToggleSwitch.js';
 
-
 // export default function MapMakerPanel({ togglePage }) {
 //   const {
 //     rows,

@@ -3,7 +3,7 @@ import React from 'react';
 import './Grid.css';
 import './Troop.css';
 
-import HealthBar from './HealthBar';
+import HealthBar from './HealthBar.tsx';
 
 /*
   Type labels:

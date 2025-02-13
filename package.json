@@ -14,12 +14,6 @@
     "start": "react-scripts start",
     "test": "react-scripts test"
   },
-  "eslintConfig": {
-    "root": true,
-    "extends": [
-      "./eslint.config.cjs"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -31,6 +25,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "root": true
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -53,6 +50,8 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "@types/eslint": "^9.6.1",
     "@types/node": "^22.13.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
     "eslint": "^8.57.1",
@@ -63,6 +62,8 @@
     "gh-deploy": "^0.2.3",
     "gh-pages": "^5.0.0",
     "prettier": "^3.4.2",
-    "prettier-plugin-packagejson": "^2.5.8"
+    "prettier-plugin-packagejson": "^2.5.8",
+    "ts-loader": "^9.5.2",
+    "typescript": "^4.9.5"
   }
 }
