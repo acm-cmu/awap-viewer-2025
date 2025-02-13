@@ -1,7 +1,7 @@
 import './MainPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { ReactNode, Dispatch, SetStateAction, createContext, Provider, useState } from 'react';
+import React, { createContext, Dispatch, Provider, ReactNode, SetStateAction, useState } from 'react';
 
 import B1 from '../assets/MapTiles/TileB1.png';
 import B2 from '../assets/MapTiles/TileB2.png';
@@ -27,49 +27,49 @@ import SidePanel, { Replay } from '../components/SidePanel/SidePanel';
 */
 
 type ColorKeyType = {
-  [key: string] : string
-}
+  [key: string]: string;
+};
 
-type StatsType = [number, number, number, number]
+type StatsType = [number, number, number, number];
 
 export type TogglePageType = {
-  togglePage: () => void
-}
-
-export interface ViewerContextTypes{
-  redTroops: ReactNode[],
-  setRedTroops: Dispatch<SetStateAction<ReactNode[]>>,
-  blueTroops: ReactNode[],
-  setBlueTroops: Dispatch<SetStateAction<ReactNode[]>>,
-  redCastles: ReactNode[],
-  setRedCastles: Dispatch<SetStateAction<ReactNode[]>>,
-  blueCastles: ReactNode[],
-  setBlueCastles: Dispatch<SetStateAction<ReactNode[]>>,
-  redStats: StatsType,
-  setRedStats: Dispatch<SetStateAction<StatsType>>,
-  blueStats: StatsType,
-  setBlueStats: Dispatch<SetStateAction<StatsType>>,
-  replay: Replay | null,
-  setReplay: Dispatch<SetStateAction<Replay | null>>,
-  sliderValue: number,
-  setSliderValue: Dispatch<SetStateAction<number>>,
-  isPlay: boolean,
-  setIsPlay: Dispatch<SetStateAction<boolean>>,
-  framePlaying: boolean,
-  setFramePlaying: Dispatch<SetStateAction<boolean>>,
-  timeout: (boolean | null)[],
-  setTimeout:  Dispatch<SetStateAction<(boolean | null)[]>>,
-  colorKey: ColorKeyType,
-  RandTileColor: (color: string) => number | null,
-  normalImgArray: string[],
-  blockedImgArray: string[],
-  isFinished: boolean,
-  setIsFinished: Dispatch<SetStateAction<boolean>>,
+  togglePage: () => void;
 };
+
+export interface ViewerContextTypes {
+  redTroops: ReactNode[];
+  setRedTroops: Dispatch<SetStateAction<ReactNode[]>>;
+  blueTroops: ReactNode[];
+  setBlueTroops: Dispatch<SetStateAction<ReactNode[]>>;
+  redCastles: ReactNode[];
+  setRedCastles: Dispatch<SetStateAction<ReactNode[]>>;
+  blueCastles: ReactNode[];
+  setBlueCastles: Dispatch<SetStateAction<ReactNode[]>>;
+  redStats: StatsType;
+  setRedStats: Dispatch<SetStateAction<StatsType>>;
+  blueStats: StatsType;
+  setBlueStats: Dispatch<SetStateAction<StatsType>>;
+  replay: Replay | null;
+  setReplay: Dispatch<SetStateAction<Replay | null>>;
+  sliderValue: number;
+  setSliderValue: Dispatch<SetStateAction<number>>;
+  isPlay: boolean;
+  setIsPlay: Dispatch<SetStateAction<boolean>>;
+  framePlaying: boolean;
+  setFramePlaying: Dispatch<SetStateAction<boolean>>;
+  timeout: (boolean | null)[];
+  setTimeout: Dispatch<SetStateAction<(boolean | null)[]>>;
+  colorKey: ColorKeyType;
+  RandTileColor: (color: string) => number | null;
+  normalImgArray: string[];
+  blockedImgArray: string[];
+  isFinished: boolean;
+  setIsFinished: Dispatch<SetStateAction<boolean>>;
+}
 
 const ViewerContext = createContext<ViewerContextTypes | undefined>(undefined);
 
-function Viewer({ togglePage}: TogglePageType ) {
+function Viewer({ togglePage }: TogglePageType) {
   // for randomization of tile choice
   const colorKey: ColorKeyType = { GRASS: '0' };
   const blockedImgCnt = 5;
@@ -95,16 +95,14 @@ function Viewer({ togglePage}: TogglePageType ) {
   const [redStats, setRedStats] = useState<[number, number, number, number]>([0, 0, 0, 0]);
   const [blueStats, setBlueStats] = useState<[number, number, number, number]>([0, 0, 0, 0]);
 
-
   const handleFileData = (replayData: Replay) => {
     setReplay(replayData);
     setSliderValue(1);
   };
 
-
   // for tile choices
 
-  function randomInt(min : number, max : number) {
+  function randomInt(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -159,7 +157,7 @@ function Viewer({ togglePage}: TogglePageType ) {
         blueStats,
         setBlueStats,
         isFinished,
-        setIsFinished
+        setIsFinished,
       }}>
       <div className="MainPage">
         <div className="row-structure">

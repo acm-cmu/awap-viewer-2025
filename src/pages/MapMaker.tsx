@@ -8,8 +8,6 @@
 
 // const ViewerContext = createContext({});
 
-
-
 // function MapMaker({ togglePage }) {
 //   const [rows, setRows] = useState(null);
 //   const [cols, setCols] = useState(null);
@@ -56,12 +54,10 @@
 // export default MapMaker;
 // export { ViewerContext };
 
-import React from 'react'
+import React from 'react';
 
 const MapMaker = () => {
-  return (
-    <div>MapMaker</div>
-  )
-}
+  return <div>MapMaker</div>;
+};
 
-export default MapMaker
+export default MapMaker;

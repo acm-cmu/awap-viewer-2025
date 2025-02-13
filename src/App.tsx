@@ -21,11 +21,7 @@ function App() {
     );
   }
 
-  return (
-  <div className="App">
-      {/* <MapMaker togglePage={togglePage} /> */}
-    </div>
-  );
+  return <div className="App">{/* <MapMaker togglePage={togglePage} /> */}</div>;
 }
 
 export default App;

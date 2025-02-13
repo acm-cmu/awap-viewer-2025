@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState, ChangeEvent } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
 
 import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer';
 
@@ -7,104 +7,104 @@ import './SidePanel.css';
 import PauseIcon from '@mui/icons-material/PauseCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { IconButton } from '@mui/material';
+import SwapHoriz from '@mui/icons-material/SwapHoriz';
+import { IconButton, Stack } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
-import { Stack } from '@mui/material';
-import SwapHoriz from '@mui/icons-material/SwapHoriz';
 import { StyledEngineProvider } from '@mui/material/styles';
 
 export type Building = {
-  id: number,
-  team: "RED" | "BLUE",
-  type: "MAIN_CASTLE",
-  x: number,
-  y: number,
-  health: number,
-  damage: number,
-  defense: number,
-  attack_range: number,
-  damage_range: number,
-  turn_actions_remaining: number,
-  level: number
-}
+  id: number;
+  team: 'RED' | 'BLUE';
+  type: 'MAIN_CASTLE';
+  x: number;
+  y: number;
+  health: number;
+  damage: number;
+  defense: number;
+  attack_range: number;
+  damage_range: number;
+  turn_actions_remaining: number;
+  level: number;
+};
 
 export type Unit = {
-  id: number,
-  team: string,
-  type: string,
-  x: number,
-  y: number,
-  turn_actions_remaining: number,
-  turn_movement_remaining: number,
-  attack_range: number,
-  health: number,
-  damage: number,
-  defense: number,
-  damage_range: number,
-  level: number
-}
+  id: number;
+  team: string;
+  type: string;
+  x: number;
+  y: number;
+  turn_actions_remaining: number;
+  turn_movement_remaining: number;
+  attack_range: number;
+  health: number;
+  damage: number;
+  defense: number;
+  damage_range: number;
+  level: number;
+};
 
 export type Turn = {
-  turn_number: number,
+  turn_number: number;
   game_state: {
-  balance: {BLUE: number, RED: number},
-  turn: number,
-  tile_size: number,
-  buildings: {BLUE: Building[], RED: Building[]},
-  units: {
-    BLUE: Unit[], 
-    RED: Unit[], 
-    red_main_castle_id: number, 
-    blue_main_castle_id: number, 
-    time_remaining: {RED: number, BLUE:number}
-  }},
-  winner_color: string
-}
+    balance: { BLUE: number; RED: number };
+    turn: number;
+    tile_size: number;
+    buildings: { BLUE: Building[]; RED: Building[] };
+    units: {
+      BLUE: Unit[];
+      RED: Unit[];
+      red_main_castle_id: number;
+      blue_main_castle_id: number;
+      time_remaining: { RED: number; BLUE: number };
+    };
+  };
+  winner_color: string;
+};
 
 export interface Replay {
-  UUID: string,
-  map: {width: number, height: number, tiles: string[]},
-  winner_color: string,
-  replay: Turn[]
+  UUID: string;
+  map: { width: number; height: number; tiles: string[] };
+  winner_color: string;
+  replay: Turn[];
 }
 
 type SidePanelProps = {
-  onFileData: (arg0: Replay) => void,
-  togglePage: () => void
-}
+  onFileData: (arg0: Replay) => void;
+  togglePage: () => void;
+};
 
 export default function SidePanel(props: SidePanelProps) {
   const context = useContext(ViewerContext);
 
   if (!context) {
-    throw new Error("useViewer must be used within a ViewerProvider");
+    throw new Error('useViewer must be used within a ViewerProvider');
   }
 
   const {
-        replay,
-        setReplay,
-        sliderValue,
-        setSliderValue,
-        isPlay,
-        setIsPlay,
-        framePlaying,
-        setFramePlaying,
-        timeout,
-        setTimeout,
-        colorKey,
-        RandTileColor,
-        normalImgArray,
-        blockedImgArray,
-        redStats,
-        setRedStats,
-        blueStats,
-        setBlueStats,
-        isFinished,
-        setIsFinished
-  }  = context
+    replay,
+    setReplay,
+    sliderValue,
+    setSliderValue,
+    isPlay,
+    setIsPlay,
+    framePlaying,
+    setFramePlaying,
+    timeout,
+    setTimeout,
+    colorKey,
+    RandTileColor,
+    normalImgArray,
+    blockedImgArray,
+    redStats,
+    setRedStats,
+    blueStats,
+    setBlueStats,
+    isFinished,
+    setIsFinished,
+  } = context;
 
   // const { sliderValue, setSliderValue } = props;
   const [wrongFile, setWrongFile] = useState(false);
@@ -113,8 +113,8 @@ export default function SidePanel(props: SidePanelProps) {
   const showFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const fileInput = document.getElementById('fileobj') as HTMLInputElement;
     const filePath = fileInput!.value;
-    const ext = filePath.slice(filePath.length - 4, filePath.length);
-    if (ext !== 'json') {
+    const ext = filePath.slice(filePath.length - 8, filePath.length);
+    if (ext !== '.awap25r') {
       setWrongFile(true);
       return;
     }
@@ -122,22 +122,22 @@ export default function SidePanel(props: SidePanelProps) {
     reader.onload = async (e) => {
       const replay_text = e.target!.result;
       try {
-        const replay_object : Replay = JSON.parse(replay_text as string);
+        const replay_object: Replay = JSON.parse(replay_text as string);
         setWrongFile(false);
         resetPlaybutton();
         setTimeout([false, null]);
         props.onFileData(replay_object);
       } catch (error) {
-        const err = error as Error
+        const err = error as Error;
         console.log(err.message);
       }
       // props.onFileData(replay_object);
     };
-    const f = event.target.files as FileList
+    const f = event.target.files as FileList;
     reader.readAsText(f[0] as Blob);
   };
 
-  const handleFrameChange = (event : React.ChangeEvent<HTMLInputElement>, newVal: number) => {
+  const handleFrameChange = (event: Event, value: number | number[]) => {
     /*
     Note: If framePlaying == true, then the viewer is playing, so setIsPlay(true)  
     has no effect since isPlay == true anyway. If framePlaying == false, then  
@@ -145,7 +145,13 @@ export default function SidePanel(props: SidePanelProps) {
     not future frames, which is the desired behavior.
     */
     setIsPlay(true);
-    setSliderValue(newVal);
+    console.log(`${value}`);
+    console.log(replay);
+
+    if (0 <= sliderValue && sliderValue < replay!.replay.length - 1) {
+      setSliderValue(value as number);
+      console.log(`changed ${value}`);
+    }
   };
 
   const handleFrameStep = (step: number) => {
@@ -179,7 +185,6 @@ export default function SidePanel(props: SidePanelProps) {
     }
   }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished]);
 
-
   const handleToggleSettings = () => {
     setShowSettings(!showSettings);
   };
@@ -202,7 +207,9 @@ export default function SidePanel(props: SidePanelProps) {
           <Stack direction="column" alignItems="center" justifyContent="space-between">
             <Stack direction="row" alignItems="center" justifyContent="space-between">
               {isFinished ? (
-                <h2 className={'info ' + replay.winner_color}>{replay.winner_color === 'RED' ? 'RED' : 'BLUE'} WINS!</h2>
+                <h2 className={'info ' + replay.winner_color}>
+                  {replay.winner_color === 'RED' ? 'RED' : 'BLUE'} WINS!
+                </h2>
               ) : (
                 <div></div>
               )}
@@ -210,16 +217,31 @@ export default function SidePanel(props: SidePanelProps) {
             </Stack>
           </Stack>
           <h2 className="info">
-            FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN {replay.replay.length}
+            FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN{' '}
+            {replay.replay.length - 1}
           </h2>
+          <div>
+            <StyledEngineProvider injectFirst>
+              <Slider
+                aria-label="Frame No."
+                defaultValue={0}
+                value={sliderValue}
+                valueLabelDisplay="auto"
+                step={1}
+                marks
+                min={0}
+                max={replay != null ? replay.replay.length - 1 : 1}
+                className="slider"
+                onChange={handleFrameChange}></Slider>
+            </StyledEngineProvider>
+          </div>
         </div>
       ) : (
         <h2 className="info">FRAME 0 OF 250 / TURN 0 OF BLUE </h2>
       )}
-      </div>
-    )
-  }
-
+    </div>
+  );
+}
 
 /* <StyledEngineProvider injectFirst>
         <Slider
@@ -266,9 +288,9 @@ export default function SidePanel(props: SidePanelProps) {
           </button>
         </Stack> */
 
-        /* Divide!!! */
+/* Divide!!! */
 
-        /* <StyledEngineProvider injectFirst>
+/* <StyledEngineProvider injectFirst>
           <FormControl variant="outlined">
             <Select
               id="speed-toggle"
@@ -285,8 +307,8 @@ export default function SidePanel(props: SidePanelProps) {
             </Select>
           </FormControl>
         </StyledEngineProvider> */
-      /* </Stack> */
-      /* <Collapse in={showSettings}>
+/* </Stack> */
+/* <Collapse in={showSettings}>
         <div className="toggle-layout">
           <ToggleSwitch
             onToggle={handleToggleP1Vis}
@@ -311,7 +333,7 @@ export default function SidePanel(props: SidePanelProps) {
           </ToggleSwitch>
         </div>
       </Collapse> */
-      /* <br></br>
+/* <br></br>
 
       <h2>Expedition Progress</h2>
       <div className="hori-container graph">
@@ -323,5 +345,5 @@ export default function SidePanel(props: SidePanelProps) {
           <p className="info"> Graph showing number of terms remainng, bar chart </p>
         </div>
       </div>*/
-    /* </div> */
-  /* ); */
+/* </div> */
+/* ); */
