@@ -25,18 +25,17 @@ export default function BuildSquare(props: BuildSquareProps) {
   const classes = `grid-square`;
   let useImg: string | null = null;
 
-  let currentImage = BlueCastle;
-
-  if (color === 'RED') {
-    currentImage = RedCastle;
-  }
+  const currentImage = useMemo(() => {
+    if (color === 'RED') return RedCastle;
+    if (color === 'BLUE') return BlueCastle;
+    return null;
+  }, [color]);
 
   switch (type) {
     case 0:
       useImg = currentImage;
       break;
     case 3:
-      console.log("Should have exploded")
       useImg = Exploded;
       break;
     default:
