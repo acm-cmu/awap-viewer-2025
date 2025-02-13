@@ -22,8 +22,8 @@
     "noUncheckedIndexedAccess": true,
     "checkJs": true,
     /** Transpile using Bundler (not tsc) */
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "noEmit": true,
     "jsx": "react-jsx",
   },
