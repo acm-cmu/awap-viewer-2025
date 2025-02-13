@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.42317275.css",
+    "main.js": "/static/js/main.96ef6a62.js",
+    "static/js/787.b44ada62.chunk.js": "/static/js/787.b44ada62.chunk.js",
+    "static/media/explosion.png": "/static/media/explosion.0ef6b79ecab233617c53.png",
+    "static/media/Mountain.png": "/static/media/Mountain.1415237247acae9d27dc.png",
+    "index.html": "/index.html",
+    "main.42317275.css.map": "/static/css/main.42317275.css.map",
+    "main.96ef6a62.js.map": "/static/js/main.96ef6a62.js.map",
+    "787.b44ada62.chunk.js.map": "/static/js/787.b44ada62.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.42317275.css",
+    "static/js/main.96ef6a62.js"
+  ]
+}
