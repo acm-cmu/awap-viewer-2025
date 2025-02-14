@@ -211,7 +211,6 @@ export default function GridBoard() {
 
   useEffect(() => {
     setTurnInfo(gameTurns[sliderValue]!.game_state);
-    console.log(turnInfo);
 
     // reset troops
     const blueTroops = turnInfo.units.BLUE;

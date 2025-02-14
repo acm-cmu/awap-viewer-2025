@@ -1,7 +1,16 @@
 import './MainPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import React, { createContext, Dispatch, Provider, ReactNode, SetStateAction, useState } from 'react';
+import React, {
+  createContext,
+  Dispatch,
+  Provider,
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useState,
+} from 'react';
 
 import B1 from '../assets/MapTiles/TileB1.png';
 import B2 from '../assets/MapTiles/TileB2.png';
@@ -65,6 +74,7 @@ export interface ViewerContextTypes {
   blockedImgArray: string[];
   isFinished: boolean;
   setIsFinished: Dispatch<SetStateAction<boolean>>;
+  updateSliderValue: (x: number) => void;
 }
 
 const ViewerContext = createContext<ViewerContextTypes | undefined>(undefined);
@@ -127,38 +137,48 @@ function Viewer({ togglePage }: TogglePageType) {
     }
   }
 
+  const updateSliderValue = useCallback((newValue: number) => {
+    console.log('updating slider');
+    setSliderValue(newValue);
+  }, []);
+
+  const contextValues = useMemo(
+    () => ({
+      redTroops,
+      setRedTroops,
+      blueTroops,
+      setBlueTroops,
+      redCastles,
+      setRedCastles,
+      blueCastles,
+      setBlueCastles,
+      replay,
+      setReplay,
+      sliderValue,
+      setSliderValue,
+      isPlay,
+      setIsPlay,
+      framePlaying,
+      setFramePlaying,
+      timeout,
+      setTimeout,
+      colorKey,
+      RandTileColor,
+      normalImgArray,
+      blockedImgArray,
+      redStats,
+      setRedStats,
+      blueStats,
+      setBlueStats,
+      isFinished,
+      setIsFinished,
+      updateSliderValue,
+    }),
+    [replay, sliderValue]
+  );
+
   return (
-    <ViewerContext.Provider
-      value={{
-        redTroops,
-        setRedTroops,
-        blueTroops,
-        setBlueTroops,
-        redCastles,
-        setRedCastles,
-        blueCastles,
-        setBlueCastles,
-        replay,
-        setReplay,
-        sliderValue,
-        setSliderValue,
-        isPlay,
-        setIsPlay,
-        framePlaying,
-        setFramePlaying,
-        timeout,
-        setTimeout,
-        colorKey,
-        RandTileColor,
-        normalImgArray,
-        blockedImgArray,
-        redStats,
-        setRedStats,
-        blueStats,
-        setBlueStats,
-        isFinished,
-        setIsFinished,
-      }}>
+    <ViewerContext.Provider value={contextValues}>
       <div className="MainPage">
         <div className="row-structure">
           <SidePanel onFileData={handleFileData} togglePage={togglePage} />

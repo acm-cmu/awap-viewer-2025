@@ -1,12 +1,13 @@
-import React, { ChangeEvent, useCallback, useContext, useEffect, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer';
 
 import './SidePanel.css';
 
+import { time } from 'console';
 import { Co2Sharp } from '@mui/icons-material';
 import PauseIcon from '@mui/icons-material/PauseCircle';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import PlayArrowIcon from '@mui/icons-material/PlayCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SwapHoriz from '@mui/icons-material/SwapHorizontalCircleRounded';
 import { IconButton, Stack } from '@mui/material';
@@ -107,6 +108,7 @@ export default function SidePanel(props: SidePanelProps) {
     setBlueStats,
     isFinished,
     setIsFinished,
+    updateSliderValue,
   } = context;
 
   // const { sliderValue, setSliderValue } = props;
@@ -140,24 +142,17 @@ export default function SidePanel(props: SidePanelProps) {
     reader.readAsText(f[0] as Blob);
   };
 
-  const handleFrameChange = (event: Event | React.SyntheticEvent, value: number | number[]) => {
-    /*
-    Note: If framePlaying == true, then the viewer is playing, so setIsPlay(true)  
-    has no effect since isPlay == true anyway. If framePlaying == false, then  
-    only changing isPlay and not framePlaying will only render the next frame and 
-    not future frames, which is the desired behavior.
-    */
-    try {
-      if (typeof value === 'number') {
-        const v = Number(value) as number;
-        if (0 <= v && v < replay!.replay.length && v != sliderValue) {
-          setSliderValue(v);
-          console.log(`changed ${value}`);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const [value, setValue] = useState<number>(0);
+
+  const handleFrameChange = (event: Event, value: number | number[]) => {
+    setValue(value as number);
+    console.log(value);
+    // if (typeof value === 'number') {
+    //   const v = Number(value) as number;
+    //   if (v != sliderValue && 0 <= v && v < replay!.replay.length) {
+    //     updateSliderValue(v);
+    //   }
+    // }
   };
 
   const handleFrameStep = (step: number) => {
@@ -170,17 +165,18 @@ export default function SidePanel(props: SidePanelProps) {
   };
 
   const changePlay = () => {
-    const newFramePlaying = !framePlaying;
-    setFramePlaying(newFramePlaying);
-    setIsPlay(newFramePlaying);
-    if (isFinished && newFramePlaying) {
-      setIsFinished(false);
-      setTimeout([false, null]);
-    }
+    setIsPlay(true);
+    // const newFramePlaying = !framePlaying;
+    // setFramePlaying(newFramePlaying);
+    // setIsPlay(newFramePlaying);
+    // if (isFinished && newFramePlaying) {
+    //   setIsFinished(false);
+    //   setTimeout([false, null]);
+    // }
   };
 
   const resetPlaybutton = useCallback(() => {
-    setFramePlaying(false);
+    // setFramePlaying(false);
     setIsPlay(false);
   }, [setFramePlaying, setIsPlay]);
 
@@ -194,6 +190,47 @@ export default function SidePanel(props: SidePanelProps) {
   const handleToggleSettings = () => {
     setShowSettings(!showSettings);
   };
+
+  const intervalRef = useRef<number | null>(null);
+
+  const isPlayRef = useRef(false);
+
+  useEffect(() => {
+    // 🔍 Debugging
+
+    if (isPlayRef.current) {
+      intervalRef.current = window.setInterval(() => {
+        setSliderValue((prev) => {
+          const nextValue = prev + 1;
+          if (nextValue >= replay!.replay.length) {
+            setIsPlay(false); // Stop autoplay when the last frame is reached
+            clearInterval(intervalRef.current!); // Clear the interval once the last frame is reached
+            return prev; // Return the previous value to prevent going beyond the last frame
+          }
+          return nextValue;
+        });
+      }, 500);
+
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+          intervalRef.current = null;
+        }
+      };
+    }
+  }, [isPlayRef.current]);
+
+  const handlePlay = () => {
+    isPlayRef.current = true;
+  };
+
+  const handleStopPlay = () => {
+    isPlayRef.current = false;
+  };
+
+  // useEffect(() => {
+  //   console.log('🔥 isPlay changed:', isPlayRef);
+  // }, [isPlayRef]);
 
   return (
     <div className="side-panel">
@@ -241,16 +278,26 @@ export default function SidePanel(props: SidePanelProps) {
               <Slider
                 aria-label="Frame No."
                 defaultValue={0}
-                value={sliderValue}
+                value={value}
                 valueLabelDisplay="auto"
                 step={1}
                 marks={true}
                 min={0}
                 max={replay != null ? replay.replay.length - 1 : 1}
                 className="slider"
-                onChange={handleFrameChange}
-                onChangeCommitted={handleFrameChange}></Slider>
+                onChange={handleFrameChange}></Slider>
             </StyledEngineProvider>
+          </div>
+          <div>
+            {!isPlayRef.current ? (
+              <button onClick={handlePlay} style={{ background: 'transparent' }}>
+                <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
+              </button>
+            ) : (
+              <button onClick={handleStopPlay} style={{ background: 'transparent' }}>
+                <PauseIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
+              </button>
+            )}
           </div>
         </div>
       ) : (
