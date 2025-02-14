@@ -287,8 +287,8 @@ export default function SidePanel(props: SidePanelProps) {
               <ArrowCircleLeftIcon style={{ color: '#be8700', fontSize: 'xx-large' }} />
             </button>
             {!isPlayRef.current ? (
-              <button onClick={handlePlay} style={{ background: 'transparent' }}>
-                <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
+              <button onClick={handlePlay} style={{ background: 'transparent', margin: '0px' }}>
+                <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large', margin: '0' }} />
               </button>
             ) : (
               <button onClick={handleStopPlay} style={{ background: 'transparent' }}>

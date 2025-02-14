@@ -170,7 +170,7 @@ export default function GridBoard() {
       tempArr[s.x]![s.y] = (
         <TroopSquare
           key={`b${s.id}`}
-          color={'b'}
+          color={'BLUE'}
           type={s.type}
           lvl={s.level}
           health={s.health}
@@ -188,7 +188,7 @@ export default function GridBoard() {
       tempArr[s.x]![s.y] = (
         <TroopSquare
           key={`r${s.id}`}
-          color={'r'}
+          color={'RED'}
           type={s.type}
           lvl={s.level}
           health={s.health}
@@ -231,7 +231,7 @@ export default function GridBoard() {
       tempArr[s.x]![s.y] = (
         <TroopSquare
           key={`b${s.id}`}
-          color={'b'}
+          color={'BLUE'}
           type={s.type}
           lvl={s.level}
           health={s.health}
@@ -249,7 +249,7 @@ export default function GridBoard() {
       tempArr[s.x]![s.y] = (
         <TroopSquare
           key={`r${s.id}`}
-          color={'r'}
+          color={'RED'}
           type={s.type}
           lvl={s.level}
           health={s.health}

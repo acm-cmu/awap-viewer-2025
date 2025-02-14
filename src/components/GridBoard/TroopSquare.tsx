@@ -43,7 +43,11 @@ export default function TroopSquare(props: TroopSquareProps) {
   return (
     <div className={`tile-div`}>
       {<HealthBar health={health} />}
-      {<div className={`circle ${color}-${type}`}></div>}
+      {<img className="troop-image" src={`/TroopSquares/${type}_${color}.png`}></img>}
     </div>
   );
+}
+
+{
+  /* <div className={`circle ${color}-${type}`}></div> */
 }

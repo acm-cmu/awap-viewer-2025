@@ -1,5 +1,10 @@
 /* Troop Types */
 
+.troop-image {
+  width: 75%;
+  height: 75%;
+}
+/* 
 .circle {
   width: 70%;
   height: 70%;
@@ -14,4 +19,4 @@
 
 .r-KNIGHT {
   background-color: red;
-}
+} */
