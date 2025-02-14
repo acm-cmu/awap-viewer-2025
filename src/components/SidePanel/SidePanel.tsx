@@ -288,10 +288,10 @@ export default function SidePanel(props: SidePanelProps) {
             </button>
             {!isPlayRef.current ? (
               <button onClick={handlePlay} style={{ background: 'transparent', margin: '0px' }}>
-                <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large', margin: '0' }} />
+                <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
               </button>
             ) : (
-              <button onClick={handleStopPlay} style={{ background: 'transparent' }}>
+              <button onClick={handleStopPlay} style={{ background: 'transparent', margin: '0px' }}>
                 <PauseIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
               </button>
             )}
