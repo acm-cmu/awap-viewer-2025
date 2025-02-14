@@ -8,7 +8,7 @@ import { Co2Sharp } from '@mui/icons-material';
 import PauseIcon from '@mui/icons-material/PauseCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
-import SwapHoriz from '@mui/icons-material/SwapHoriz';
+import SwapHoriz from '@mui/icons-material/SwapHorizontalCircleRounded';
 import { IconButton, Stack } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
@@ -197,8 +197,18 @@ export default function SidePanel(props: SidePanelProps) {
 
   return (
     <div className="side-panel">
-      <button style={{ position: 'absolute', top: 0, right: 10, zIndex: 10 }} onClick={props.togglePage}>
-        Swap
+      <button
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 10,
+          zIndex: 10,
+          background: 'transparent',
+          border: 'none',
+          margin: '5px',
+        }}
+        onClick={props.togglePage}>
+        <SwapHoriz style={{ color: '#be8700', fontSize: 'xx-large' }} />
       </button>
       <h1 style={{ marginTop: 18, marginBottom: 0 }}>AWAP 2025</h1>
       <h2 style={{ marginTop: 0, marginBottom: 18 }}>Game Viewer</h2>
