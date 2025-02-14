@@ -234,7 +234,7 @@ export default function SidePanel(props: SidePanelProps) {
                 value={sliderValue}
                 valueLabelDisplay="auto"
                 step={1}
-                marks
+                marks={true}
                 min={0}
                 max={replay != null ? replay.replay.length - 1 : 1}
                 className="slider"
