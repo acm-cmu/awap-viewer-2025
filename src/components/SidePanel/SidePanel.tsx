@@ -1,19 +1,17 @@
-import React, { ChangeEvent, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer';
 
 import './SidePanel.css';
 
-import { time } from 'console';
 import { Co2Sharp } from '@mui/icons-material';
+import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import PauseIcon from '@mui/icons-material/PauseCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayCircle';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SwapHoriz from '@mui/icons-material/SwapHorizontalCircleRounded';
-import { IconButton, Stack } from '@mui/material';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import { Stack } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import { StyledEngineProvider } from '@mui/material/styles';
 
@@ -142,37 +140,29 @@ export default function SidePanel(props: SidePanelProps) {
     reader.readAsText(f[0] as Blob);
   };
 
-  const [value, setValue] = useState<number>(0);
+  const [tempValue, setTempValue] = useState<number>(0);
 
   const handleFrameChange = (event: Event, value: number | number[]) => {
-    setValue(value as number);
-    console.log(value);
-    // if (typeof value === 'number') {
-    //   const v = Number(value) as number;
-    //   if (v != sliderValue && 0 <= v && v < replay!.replay.length) {
-    //     updateSliderValue(v);
-    //   }
-    // }
+    if (typeof value === 'number') {
+      const v = Number(value) as number;
+      if (v != tempValue && 0 <= v && v < replay!.replay.length) {
+        setTempValue(v);
+      }
+    }
   };
 
+  useEffect(() => {
+    setSliderValue(tempValue);
+  }, [tempValue]);
+
   const handleFrameStep = (step: number) => {
-    if (step <= 0 && sliderValue < 0) {
-      return;
+    if (0 <= sliderValue + step && sliderValue + step < replay!.replay.length) {
+      setTempValue((value) => value + step);
     }
-    setFramePlaying(false);
-    setIsPlay(true);
-    setSliderValue((sliderValue) => sliderValue + step);
   };
 
   const changePlay = () => {
     setIsPlay(true);
-    // const newFramePlaying = !framePlaying;
-    // setFramePlaying(newFramePlaying);
-    // setIsPlay(newFramePlaying);
-    // if (isFinished && newFramePlaying) {
-    //   setIsFinished(false);
-    //   setTimeout([false, null]);
-    // }
   };
 
   const resetPlaybutton = useCallback(() => {
@@ -228,10 +218,6 @@ export default function SidePanel(props: SidePanelProps) {
     isPlayRef.current = false;
   };
 
-  // useEffect(() => {
-  //   console.log('🔥 isPlay changed:', isPlayRef);
-  // }, [isPlayRef]);
-
   return (
     <div className="side-panel">
       <button
@@ -278,7 +264,7 @@ export default function SidePanel(props: SidePanelProps) {
               <Slider
                 aria-label="Frame No."
                 defaultValue={0}
-                value={value}
+                value={sliderValue}
                 valueLabelDisplay="auto"
                 step={1}
                 marks={true}
@@ -289,6 +275,17 @@ export default function SidePanel(props: SidePanelProps) {
             </StyledEngineProvider>
           </div>
           <div>
+            <button
+              style={{
+                background: 'transparent',
+                border: 'none',
+                margin: '5px',
+              }}
+              onClick={() => {
+                handleFrameStep(-1);
+              }}>
+              <ArrowCircleLeftIcon style={{ color: '#be8700', fontSize: 'xx-large' }} />
+            </button>
             {!isPlayRef.current ? (
               <button onClick={handlePlay} style={{ background: 'transparent' }}>
                 <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
@@ -298,6 +295,17 @@ export default function SidePanel(props: SidePanelProps) {
                 <PauseIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
               </button>
             )}
+            <button
+              style={{
+                background: 'transparent',
+                border: 'none',
+                margin: '5px',
+              }}
+              onClick={() => {
+                handleFrameStep(1);
+              }}>
+              <ArrowCircleRightIcon style={{ color: '#be8700', fontSize: 'xx-large' }} />
+            </button>
           </div>
         </div>
       ) : (
