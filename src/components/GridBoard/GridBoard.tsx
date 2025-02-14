@@ -51,7 +51,6 @@ export default function GridBoard() {
     isFinished,
     setIsFinished,
   } = context;
-  // setSliderValue(1)
   if (!replay) {
     console.log('error with gameturns');
     return <div></div>;
@@ -83,13 +82,6 @@ export default function GridBoard() {
 
   setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0].health, 0]);
   setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0].health, 0]);
-
-  // const redBuildings = turnInfo.buildings.RED[0];
-  // const blueBuildings = turnInfo.buildings.BLUE[0];
-
-  // Initialize Player Stats
-  // setBlueStats([turnInfo.balance.BLUE, 20, turnInfo.buildings.BLUE[sliderValue], 0])
-  // setRedStats([turnInfo.balance.RED, 20, turnInfo.buildings.RED[sliderValue], 0])
 
   // Initializes tile grid (unchanged during game)
   const initialGrid = useMemo(() => {
@@ -212,9 +204,15 @@ export default function GridBoard() {
     return tempArr;
   }, [nrows, ncols, turnInfo]);
 
+  useMemo(() => {
+    setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0]!.health, 0]);
+    setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0]!.health, 0]);
+  }, [turnInfo]);
+
   useEffect(() => {
     setTurnInfo(gameTurns[sliderValue]!.game_state);
     console.log(turnInfo);
+
     // reset troops
     const blueTroops = turnInfo.units.BLUE;
     const redTroops = turnInfo.units.RED;
@@ -275,37 +273,21 @@ export default function GridBoard() {
       }
     }
 
-    if (sliderValue < gameTurns.length) {
-      const redBuildings = turnInfo.buildings.RED[0];
-      const blueBuildings = turnInfo.buildings.BLUE[0];
-      if (redBuildings!.health != 0) {
-        tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
-      } else {
-        tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
-      }
-      if (blueBuildings!.health != 0) {
-        tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
-      } else {
-        tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
-      }
+    const redBuildings = turnInfo.buildings.RED[0];
+    const blueBuildings = turnInfo.buildings.BLUE[0];
+    if (redBuildings!.health != 0) {
+      tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
+    } else {
+      tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
+    }
+    if (blueBuildings!.health != 0) {
+      tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
+    } else {
+      tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
     }
 
     setBuildings(tempArr);
   }, [sliderValue]);
-
-  const handleFrameChange = (event: React.ChangeEvent<HTMLInputElement>, newVal: number) => {
-    const change = newVal - sliderValue;
-    if (1 <= sliderValue + change && sliderValue + change <= numTurns) update(change);
-  };
-
-  const update = (step: number) => {
-    if (sliderValue + step < gameTurns.length) {
-      setTurnInfo(gameTurns[sliderValue + step]!.game_state);
-      setSliderValue(sliderValue + step);
-      setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0]!.health, 0]);
-      setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0]!.health, 0]);
-    }
-  };
 
   return (
     <div className="map">

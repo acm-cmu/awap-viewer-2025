@@ -71,7 +71,7 @@ const ViewerContext = createContext<ViewerContextTypes | undefined>(undefined);
 
 function Viewer({ togglePage }: TogglePageType) {
   // for randomization of tile choice
-  const colorKey: ColorKeyType = { GRASS: '0' };
+  const colorKey: ColorKeyType = { GRASS: '0', MOUNTAIN: '2', WATER: '3', SAND: '4', BRIDGE: '6' };
   const blockedImgCnt = 5;
   const normalImgCnt = 5;
   const blockedImgArray = [B1, B2, B3, B4, B5];
@@ -97,7 +97,7 @@ function Viewer({ togglePage }: TogglePageType) {
 
   const handleFileData = (replayData: Replay) => {
     setReplay(replayData);
-    setSliderValue(1);
+    setSliderValue(0);
   };
 
   // for tile choices

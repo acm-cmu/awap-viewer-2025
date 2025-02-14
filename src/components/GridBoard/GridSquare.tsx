@@ -13,7 +13,9 @@ import Water from './../../assets/MapTiles/Water.png';
   1 - impassable
   2 - Mountain
   3 - Water
+  4 - Sand
   5 - trail (empty color)
+  6 - Bridge
   -#0 red
   #0 blue
 */

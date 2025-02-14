@@ -4,6 +4,7 @@ import { ViewerContext, ViewerContextTypes } from '../../pages/Viewer';
 
 import './SidePanel.css';
 
+import { Co2Sharp } from '@mui/icons-material';
 import PauseIcon from '@mui/icons-material/PauseCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -137,20 +138,23 @@ export default function SidePanel(props: SidePanelProps) {
     reader.readAsText(f[0] as Blob);
   };
 
-  const handleFrameChange = (event: Event, value: number | number[]) => {
+  const handleFrameChange = (event: Event | React.SyntheticEvent, value: number | number[]) => {
     /*
     Note: If framePlaying == true, then the viewer is playing, so setIsPlay(true)  
     has no effect since isPlay == true anyway. If framePlaying == false, then  
     only changing isPlay and not framePlaying will only render the next frame and 
     not future frames, which is the desired behavior.
     */
-    setIsPlay(true);
-    console.log(`${value}`);
-    console.log(replay);
-
-    if (0 <= sliderValue && sliderValue < replay!.replay.length - 1) {
-      setSliderValue(value as number);
-      console.log(`changed ${value}`);
+    try {
+      if (typeof value === 'number') {
+        const v = Number(value) as number;
+        if (0 <= v && v < replay!.replay.length && v != sliderValue) {
+          setSliderValue(v);
+          console.log(`changed ${value}`);
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -232,7 +236,8 @@ export default function SidePanel(props: SidePanelProps) {
                 min={0}
                 max={replay != null ? replay.replay.length - 1 : 1}
                 className="slider"
-                onChange={handleFrameChange}></Slider>
+                onChange={handleFrameChange}
+                onChangeCommitted={handleFrameChange}></Slider>
             </StyledEngineProvider>
           </div>
         </div>
