@@ -29,6 +29,7 @@ const config = {
   semi: true,
   printWidth: 110,
   arrowParens: 'always',
+  endOfLine: 'lf',
 };
 
 export default config;

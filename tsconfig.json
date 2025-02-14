@@ -6,10 +6,7 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "target": "ESNext",
-    "lib": [
-      "ESNext",
-      "DOM"
-    ],
+    "lib": ["ESNext", "DOM"],
     "allowJs": true,
     "resolveJsonModule": true,
     "moduleDetection": "force",
@@ -25,17 +22,8 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react-jsx"
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "dist",
-    ".next",
-    ".expo",
-    "public"
-  ],
-  "include": [
-    "src/**/*"
-  ]
+  "exclude": ["node_modules", "build", "dist", ".next", ".expo", "public"],
+  "include": ["src/**/*"]
 }
