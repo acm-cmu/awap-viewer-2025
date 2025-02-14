@@ -16,6 +16,8 @@ import Select from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import { StyledEngineProvider } from '@mui/material/styles';
 
+import TroopTable from '../../assets/Troop Table.png';
+
 export type Building = {
   id: number;
   team: 'RED' | 'BLUE';
@@ -244,6 +246,7 @@ export default function SidePanel(props: SidePanelProps) {
       ) : (
         <h2 className="info">FRAME 0 OF 250 / TURN 0 OF BLUE </h2>
       )}
+      <img id="troop-label" src={TroopTable} alt="troop table" />
     </div>
   );
 }

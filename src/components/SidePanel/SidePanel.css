@@ -7,6 +7,12 @@
   overflow-x: hidden;
 }
 
+#troop-label {
+  margin: 5%;
+  border: solid #faf3d9 5px;
+  width: 80%;
+}
+
 h1 {
   font-family: 'Earth Orbiter', sans-serif;
   color: var(--dark-color);
