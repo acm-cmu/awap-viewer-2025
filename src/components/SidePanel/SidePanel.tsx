@@ -9,9 +9,11 @@ import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import PauseIcon from '@mui/icons-material/PauseCircle';
 import PlayArrowIcon from '@mui/icons-material/PlayCircle';
-import SettingsIcon from '@mui/icons-material/Settings';
 import SwapHoriz from '@mui/icons-material/SwapHorizontalCircleRounded';
 import { Stack } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import { StyledEngineProvider } from '@mui/material/styles';
 
@@ -110,7 +112,6 @@ export default function SidePanel(props: SidePanelProps) {
     updateSliderValue,
   } = context;
 
-  // const { sliderValue, setSliderValue } = props;
   const [wrongFile, setWrongFile] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -142,6 +143,7 @@ export default function SidePanel(props: SidePanelProps) {
   };
 
   const [tempValue, setTempValue] = useState<number>(0);
+  const [speed, setSpeed] = useState(1);
 
   const handleFrameChange = (event: Event, value: number | number[]) => {
     if (typeof value === 'number') {
@@ -196,14 +198,14 @@ export default function SidePanel(props: SidePanelProps) {
         setSliderValue((prev) => {
           const nextValue = prev + 1;
           if (nextValue >= replay!.replay.length) {
-            setIsPlay(false); // Stop autoplay when the last frame is reached
+            isPlayRef.current = false; // Stop autoplay when the last frame is reached
             clearInterval(intervalRef.current!); // Clear the interval once the last frame is reached
             return prev; // Return the previous value to prevent going beyond the last frame
           }
           return nextValue;
         });
         currVal = sliderValue;
-      }, 500);
+      }, 500 / speed);
 
       return () => {
         if (intervalRef.current) {
@@ -212,10 +214,14 @@ export default function SidePanel(props: SidePanelProps) {
         }
       };
     }
-  }, [isPlayRef.current]);
+  }, [isPlayRef.current, speed]);
 
   const handlePlay = () => {
     isPlayRef.current = true;
+  };
+
+  const changeSpeed = (event: SelectChangeEvent) => {
+    setSpeed(Number(event.target.value));
   };
 
   const handleStopPlay = () => {
@@ -260,10 +266,29 @@ export default function SidePanel(props: SidePanelProps) {
               {isFinished && timeout[0] ? <h2 className="info win">{timeout[1]} TIMED OUT</h2> : <div></div>}
             </Stack>
           </Stack>
-          <h2 className="info">
-            FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN{' '}
-            {replay.replay.length - 1}
-          </h2>
+          <div>
+            <h2 className="info">
+              FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN{' '}
+              {replay.replay.length - 1}
+            </h2>
+            <FormControl variant="outlined" sx={{ m: 1 }}>
+              <Select
+                id="speed-select"
+                value={speed.toString()}
+                label="Speed"
+                style={{ height: 20, fontFamily: 'Roboto', color: 'var(--dark-color)' }}
+                onChange={changeSpeed}>
+                <MenuItem value={10.0}>10.0x</MenuItem>
+                <MenuItem value={4.0}>4.0x</MenuItem>
+                <MenuItem value={2.0}>2.0x</MenuItem>
+                <MenuItem value={1.5}>1.5x</MenuItem>
+                <MenuItem value={1.0}>1.0x</MenuItem>
+                <MenuItem value={0.5}>0.5x</MenuItem>
+                <MenuItem value={0.25}>0.25x</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+
           <div>
             <StyledEngineProvider injectFirst>
               <Slider
