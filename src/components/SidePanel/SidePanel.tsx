@@ -68,7 +68,8 @@ export type Turn = {
 
 export interface Replay {
   UUID: string;
-  map: { width: number; height: number; tiles: string[] };
+  map: { width: number; height: number; tiles: string[][] };
+  'map-changes': { 'changed-turns': number[]; 'changed-maps': string[][][] };
   winner_color: string;
   replay: Turn[];
 }
@@ -311,6 +312,7 @@ export default function SidePanel(props: SidePanelProps) {
               <ArrowCircleRightIcon style={{ color: '#be8700', fontSize: 'xx-large' }} />
             </button>
           </div>
+          <h2>{replay.winner_color} wins!</h2>
         </div>
       ) : (
         <h2 className="info">FRAME 0 OF 250 / TURN 0 OF BLUE </h2>

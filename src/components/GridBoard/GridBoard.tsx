@@ -64,13 +64,12 @@ export default function GridBoard() {
   const [turnInfo, setTurnInfo] = useState(gameTurns[sliderValue]!.game_state);
   const winner = replay!.winner_color;
   const numTurns = gameTurns.length - 1;
+  const mapChangesIndices = replay['map-changes']['changed-turns'];
+  const mapChangeTiles = replay['map-changes']['changed-maps'];
   // const { sliderValue, setSliderValue } = props
   const maxHealth = gameTurns[0].game_state.buildings.BLUE[0].health;
   document.documentElement.style.setProperty('--cols', ncols.toString());
   document.documentElement.style.setProperty('--rows', nrows.toString());
-
-  const [index, setIndex] = useState(-1);
-  const intervalID = useRef(null);
 
   // States for displaying various elements
   const [grid, setGrid] = useState<ReactNode[][]>([]);
@@ -113,11 +112,8 @@ export default function GridBoard() {
     }
 
     setGrid(tempArr);
-    setIndex(-1);
-    // clearInterval(intervalID.current);
-    // intervalID.current = null;
-    return [tempArr];
-  }, [nrows, ncols]);
+    return tempArr;
+  }, [nrows, ncols]) as ReactNode[][];
 
   // Initializes buildings
   const allBuildings = useMemo(() => {
@@ -215,6 +211,54 @@ export default function GridBoard() {
     // reset troops
     const blueTroops = turnInfo.units.BLUE;
     const redTroops = turnInfo.units.RED;
+
+    let mapChangeI = 0;
+    for (let i = 0; i < mapChangesIndices.length; i++) {
+      if (mapChangesIndices[mapChangeI]! <= sliderValue) {
+        mapChangeI += 1;
+      } else {
+        break;
+      }
+    }
+    mapChangeI -= 1;
+
+    // want to change the map
+    if (0 <= mapChangeI) {
+      const tempArr: ReactNode[][] = [];
+      const newTiles = mapChangeTiles[mapChangeI];
+      console.log(newTiles);
+      // Basic Map
+      for (let row = 0; row < nrows; row++) {
+        tempArr.push([] as ReactNode[]);
+        for (let col = 0; col < ncols; col++) {
+          if (newTiles![row]![col] === initColors[row]![col]) {
+            tempArr[row]![col] = grid[row]![col];
+          } else {
+            const k = newTiles![row]?.[col] as string;
+            const color = colorKey?.[k] as string;
+            let randChoice = 0;
+            if (color === '0' || color == '1') {
+              randChoice = RandTileColor(color)!;
+            }
+            if (!tempArr || !tempArr[row]) return;
+            tempArr[row]?.push(
+              (
+                <GridSquare
+                  key={`${row}${col}`}
+                  color={color}
+                  imgIdx={randChoice as number}
+                  normalImgArray={normalImgArray as string[]}
+                  blockedImgArray={blockedImgArray as string[]}
+                />
+              ) as ReactNode
+            );
+          }
+        }
+      }
+      setGrid(tempArr);
+    } else {
+      setGrid(initialGrid);
+    }
 
     let tempArr: ReactNode[][] = [];
     for (let row = 0; row < nrows; row++) {
