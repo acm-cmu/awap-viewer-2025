@@ -290,8 +290,8 @@ export default function GridBoard() {
 
   return (
     <div className="map">
-      <div className="board build">{allBuildings}</div>
       <div className="board robot">{troops}</div>
+      <div className="board build">{allBuildings}</div>
       <div className="board grid">{grid}</div>
       {<MapInfoBox redStats={redStats} blueStats={blueStats} />}
     </div>

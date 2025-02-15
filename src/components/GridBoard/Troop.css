@@ -1,8 +1,40 @@
 /* Troop Types */
 
+/* div {
+  white-space: pre-line;
+} */
+
+div {
+  display: block;
+}
+
 .troop-image {
   width: 75%;
   height: 75%;
+}
+
+.troop-info {
+  position: absolute;
+  background-color: white;
+  border: #faf3d9 solid 5px;
+  border-radius: 10%;
+  box-sizing: content-box;
+  height: fit-content;
+  width: 13vw;
+  text-align: left;
+  padding: 15px;
+  z-index: 200;
+  display: none;
+  bottom: -25vh;
+  left: 5vw;
+}
+
+.troop-square:hover .troop-info {
+  display: block;
+}
+
+.bold {
+  font-weight: bold;
 }
 /* 
 .circle {

@@ -332,7 +332,7 @@ progress {
 
 .board.robot {
   position: absolute;
-  z-index: 2;
+  z-index: 30;
 }
 
 .board.build {
