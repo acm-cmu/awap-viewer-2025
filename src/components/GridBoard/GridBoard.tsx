@@ -128,8 +128,9 @@ export default function GridBoard() {
       }
     }
 
-    const redBuildings = turnInfo.buildings.RED;
-    const blueBuildings = turnInfo.buildings.BLUE;
+    const currTurn = gameTurns[sliderValue]!.game_state;
+    const redBuildings = currTurn.buildings.RED;
+    const blueBuildings = currTurn.buildings.BLUE;
 
     for (let i = 1; i < redBuildings.length; i++) {
       const currB = redBuildings[i]!;
@@ -221,12 +222,13 @@ export default function GridBoard() {
 
   useEffect(() => {
     setTurnInfo(gameTurns[sliderValue]!.game_state);
+    const currTurn = gameTurns[sliderValue]!.game_state;
 
-    setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0]!.health, 0]);
-    setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0]!.health, 0]);
+    setRedStats([currTurn.balance.RED, maxHealth, currTurn.buildings.RED[0]!.health, 0]);
+    setBlueStats([currTurn.balance.BLUE, maxHealth, currTurn.buildings.BLUE[0]!.health, 0]);
     // reset troops
-    const blueTroops = turnInfo.units.BLUE;
-    const redTroops = turnInfo.units.RED;
+    const blueTroops = currTurn.units.BLUE;
+    const redTroops = currTurn.units.RED;
 
     let mapChangeI = 0;
     for (let i = 0; i < mapChangesIndices.length; i++) {

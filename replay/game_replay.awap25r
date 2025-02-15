@@ -1,5 +1,5 @@
 {
-    "ID": "1ffab1fb-cce3-4f84-af4d-be9ed156a789",
+    "ID": "685cb359-e4dc-4384-9f52-50294c059f0d",
     "map": {
         "width": 10,
         "height": 10,
@@ -126,6 +126,135 @@
             ]
         ]
     },
+    "map-changes": {
+        "changed-turns": [
+            13
+        ],
+        "changed-maps": [
+            [
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "WATER",
+                    "WATER",
+                    "MOUNTAIN",
+                    "WATER",
+                    "WATER",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "BRIDGE",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "WATER",
+                    "WATER",
+                    "WATER",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ],
+                [
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS",
+                    "GRASS"
+                ]
+            ]
+        ]
+    },
     "winner_color": "BLUE",
     "replay": [
         {
@@ -210,8 +339,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.009636650085449,
-                    "RED": 10.009727964401245
+                    "BLUE": 10.008983144760132,
+                    "RED": 10.009016523361206
                 }
             },
             "winner_color": "BLUE"
@@ -298,8 +427,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.019393701553344,
-                    "RED": 10.01936842918396
+                    "BLUE": 10.018983144760131,
+                    "RED": 10.018040199279785
                 }
             }
         },
@@ -415,8 +544,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.029117374420165,
-                    "RED": 10.028973608016967
+                    "BLUE": 10.028983144760131,
+                    "RED": 10.027081518173217
                 }
             }
         },
@@ -532,8 +661,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.038847484588622,
-                    "RED": 10.03854564666748
+                    "BLUE": 10.037983217239379,
+                    "RED": 10.036080875396728
                 }
             }
         },
@@ -679,8 +808,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.04853205680847,
-                    "RED": 10.048080253601073
+                    "BLUE": 10.046985673904418,
+                    "RED": 10.045081901550292
                 }
             }
         },
@@ -826,8 +955,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.058218059539794,
-                    "RED": 10.057502088546752
+                    "BLUE": 10.055983123779296,
+                    "RED": 10.054083166122435
                 }
             }
         },
@@ -1003,8 +1132,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.067662305831908,
-                    "RED": 10.066519804000853
+                    "BLUE": 10.064947671890257,
+                    "RED": 10.063077278137206
                 }
             }
         },
@@ -1180,8 +1309,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.077249603271483,
-                    "RED": 10.075689630508421
+                    "BLUE": 10.07398636817932,
+                    "RED": 10.071041421890257
                 }
             }
         },
@@ -1190,7 +1319,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 14,
-                    "RED": 14
+                    "RED": 13
                 },
                 "turn": 9,
                 "tile_size": -1,
@@ -1370,15 +1499,15 @@
                         {
                             "id": 9,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "ENGINEER",
                             "x": 9,
                             "y": 0,
                             "turn_actions_remaining": 0,
                             "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
+                            "attack_range": 0,
+                            "health": 5,
+                            "damage": 0,
+                            "defense": 0,
                             "damage_range": 0,
                             "level": 1
                         }
@@ -1387,8 +1516,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.086826171874998,
-                    "RED": 10.085078563690184
+                    "BLUE": 10.082983579635618,
+                    "RED": 10.079079952239988
                 }
             }
         },
@@ -1397,7 +1526,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 15,
-                    "RED": 15
+                    "RED": 14
                 },
                 "turn": 10,
                 "tile_size": -1,
@@ -1577,15 +1706,15 @@
                         {
                             "id": 9,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "ENGINEER",
                             "x": 8,
                             "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
+                            "attack_range": 0,
+                            "health": 5,
+                            "damage": 0,
+                            "defense": 0,
                             "damage_range": 0,
                             "level": 1
                         }
@@ -1594,8 +1723,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.096428489685056,
-                    "RED": 10.094457244873045
+                    "BLUE": 10.09193215370178,
+                    "RED": 10.087080812454222
                 }
             }
         },
@@ -1604,7 +1733,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 15,
-                    "RED": 15
+                    "RED": 14
                 },
                 "turn": 11,
                 "tile_size": -1,
@@ -1799,15 +1928,15 @@
                         {
                             "id": 9,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "ENGINEER",
                             "x": 7,
                             "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
+                            "attack_range": 0,
+                            "health": 5,
+                            "damage": 0,
+                            "defense": 0,
                             "damage_range": 0,
                             "level": 1
                         },
@@ -1831,8 +1960,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.105982170104978,
-                    "RED": 10.103744850158689
+                    "BLUE": 10.099978313446043,
+                    "RED": 10.094086036682127
                 }
             }
         },
@@ -1841,7 +1970,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 16,
-                    "RED": 16
+                    "RED": 15
                 },
                 "turn": 12,
                 "tile_size": -1,
@@ -2036,15 +2165,15 @@
                         {
                             "id": 9,
                             "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 7,
-                            "y": 2,
+                            "type": "ENGINEER",
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
+                            "attack_range": 0,
+                            "health": 5,
+                            "damage": 0,
+                            "defense": 0,
                             "damage_range": 0,
                             "level": 1
                         },
@@ -2068,8 +2197,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.115536088943479,
-                    "RED": 10.112956876754758
+                    "BLUE": 10.108581895828245,
+                    "RED": 10.102095241546628
                 }
             }
         },
@@ -2078,7 +2207,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 16,
-                    "RED": 16
+                    "RED": 15
                 },
                 "turn": 13,
                 "tile_size": -1,
@@ -2274,23 +2403,8 @@
                             "id": 7,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 6,
-                            "y": 2,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
                             "x": 7,
-                            "y": 3,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -2304,10 +2418,10 @@
                             "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 7,
-                            "y": 2,
+                            "x": 8,
+                            "y": 1,
                             "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
+                            "turn_movement_remaining": 1,
                             "attack_range": 1,
                             "health": 10,
                             "damage": 1,
@@ -2335,8 +2449,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.125048761367795,
-                    "RED": 10.12188160896301
+                    "BLUE": 10.116580133438108,
+                    "RED": 10.109089736938474
                 }
             }
         },
@@ -2345,7 +2459,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 17,
-                    "RED": 17
+                    "RED": 16
                 },
                 "turn": 14,
                 "tile_size": -1,
@@ -2526,8 +2640,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 5,
-                            "y": 2,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -2539,21 +2653,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 6,
-                            "y": 2,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 7,
@@ -2602,8 +2701,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.134533061981198,
-                    "RED": 10.130875482559201
+                    "BLUE": 10.124579801559445,
+                    "RED": 10.117090120315549
                 }
             }
         },
@@ -2612,7 +2711,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 17,
-                    "RED": 17
+                    "RED": 14
                 },
                 "turn": 15,
                 "tile_size": -1,
@@ -2808,8 +2907,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 4,
-                            "y": 2,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -2821,21 +2920,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 5,
-                            "y": 2,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 6,
@@ -2882,16 +2966,16 @@
                         {
                             "id": 15,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "LAND_HEALER_1",
                             "x": 9,
                             "y": 0,
                             "turn_actions_remaining": 0,
                             "turn_movement_remaining": 0,
-                            "attack_range": 1,
+                            "attack_range": 2,
                             "health": 10,
-                            "damage": 1,
+                            "damage": 0,
                             "defense": 1,
-                            "damage_range": 0,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -2899,8 +2983,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.14400973320007,
-                    "RED": 10.140068435668942
+                    "BLUE": 10.1325484752655,
+                    "RED": 10.12407793998718
                 }
             }
         },
@@ -2909,7 +2993,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 18,
-                    "RED": 18
+                    "RED": 15
                 },
                 "turn": 16,
                 "tile_size": -1,
@@ -2999,7 +3083,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 4,
-                            "y": 1,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3105,7 +3189,7 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 3,
+                            "x": 6,
                             "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
@@ -3118,21 +3202,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 4,
-                            "y": 2,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 5,
@@ -3179,16 +3248,16 @@
                         {
                             "id": 15,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "LAND_HEALER_1",
                             "x": 9,
                             "y": 1,
                             "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
                             "health": 9,
-                            "damage": 1,
+                            "damage": 0,
                             "defense": 1,
-                            "damage_range": 0,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -3196,8 +3265,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.153399858474728,
-                    "RED": 10.149165544509884
+                    "BLUE": 10.140556964874264,
+                    "RED": 10.131067905426022
                 }
             }
         },
@@ -3206,7 +3275,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 18,
-                    "RED": 19
+                    "RED": 16
                 },
                 "turn": 17,
                 "tile_size": -1,
@@ -3310,8 +3379,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 4,
+                            "x": 3,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3326,7 +3395,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 2,
-                            "y": 5,
+                            "y": 4,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3417,7 +3486,7 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 2,
+                            "x": 6,
                             "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
@@ -3430,21 +3499,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 3,
-                            "y": 3,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 4,
@@ -3491,16 +3545,16 @@
                         {
                             "id": 15,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "LAND_HEALER_1",
                             "x": 8,
                             "y": 2,
                             "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
                             "health": 9,
-                            "damage": 1,
+                            "damage": 0,
                             "defense": 1,
-                            "damage_range": 0,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -3508,8 +3562,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.16243593215942,
-                    "RED": 10.158313913345333
+                    "BLUE": 10.14855734825134,
+                    "RED": 10.139119787216183
                 }
             }
         },
@@ -3518,7 +3572,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 19,
-                    "RED": 20
+                    "RED": 17
                 },
                 "turn": 18,
                 "tile_size": -1,
@@ -3622,8 +3676,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 4,
+                            "x": 3,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3637,8 +3691,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 6,
+                            "x": 3,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3652,8 +3706,8 @@
                             "id": 12,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 3,
-                            "y": 7,
+                            "x": 2,
+                            "y": 6,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3729,8 +3783,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 4,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3744,23 +3798,8 @@
                             "id": 7,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 3,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 3,
-                            "y": 3,
+                            "x": 4,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3774,7 +3813,7 @@
                             "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 4,
+                            "x": 6,
                             "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
@@ -3803,16 +3842,16 @@
                         {
                             "id": 15,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "LAND_HEALER_1",
                             "x": 7,
                             "y": 2,
                             "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
                             "health": 9,
-                            "damage": 1,
+                            "damage": 0,
                             "defense": 1,
-                            "damage_range": 0,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -3820,8 +3859,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.171853952407833,
-                    "RED": 10.167467527389523
+                    "BLUE": 10.156552009582516,
+                    "RED": 10.14711683273315
                 }
             }
         },
@@ -3830,7 +3869,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 20,
-                    "RED": 21
+                    "RED": 18
                 },
                 "turn": 19,
                 "tile_size": -1,
@@ -3934,8 +3973,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 5,
+                            "x": 4,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3949,8 +3988,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 6,
+                            "x": 3,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3964,8 +4003,8 @@
                             "id": 12,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 3,
-                            "y": 7,
+                            "x": 2,
+                            "y": 5,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -3980,7 +4019,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 2,
-                            "y": 7,
+                            "y": 6,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4041,8 +4080,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 5,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4056,22 +4095,7 @@
                             "id": 7,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 4,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 2,
+                            "x": 3,
                             "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
@@ -4086,8 +4110,8 @@
                             "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 3,
-                            "y": 3,
+                            "x": 5,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4115,16 +4139,16 @@
                         {
                             "id": 15,
                             "team": "RED",
-                            "type": "KNIGHT",
+                            "type": "LAND_HEALER_1",
                             "x": 7,
                             "y": 3,
                             "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
                             "health": 9,
-                            "damage": 1,
+                            "damage": 0,
                             "defense": 1,
-                            "damage_range": 0,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -4132,8 +4156,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.181263866424556,
-                    "RED": 10.176510992050167
+                    "BLUE": 10.16559571266174,
+                    "RED": 10.154084386825557
                 }
             }
         },
@@ -4142,7 +4166,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 21,
-                    "RED": 22
+                    "RED": 19
                 },
                 "turn": 20,
                 "tile_size": -1,
@@ -4246,8 +4270,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 5,
+                            "x": 5,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4261,8 +4285,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 6,
+                            "x": 4,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4276,8 +4300,8 @@
                             "id": 12,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 3,
-                            "y": 7,
+                            "x": 2,
+                            "y": 4,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4353,8 +4377,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 6,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4366,36 +4390,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 1,
-                            "y": 5,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 2,
-                            "y": 4,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 2,
@@ -4410,7 +4404,7 @@
                             "level": 1
                         },
                         {
-                            "id": 13,
+                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 5,
@@ -4425,7 +4419,7 @@
                             "level": 1
                         },
                         {
-                            "id": 15,
+                            "id": 13,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 7,
@@ -4433,10 +4427,25 @@
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
-                            "health": 9,
+                            "health": 10,
                             "damage": 1,
                             "defense": 1,
                             "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 15,
+                            "team": "RED",
+                            "type": "LAND_HEALER_1",
+                            "x": 6,
+                            "y": 2,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
+                            "health": 9,
+                            "damage": 0,
+                            "defense": 1,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -4444,8 +4453,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.190338563919063,
-                    "RED": 10.18563456535339
+                    "BLUE": 10.174582910537715,
+                    "RED": 10.161134433746334
                 }
             }
         },
@@ -4454,7 +4463,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 22,
-                    "RED": 23
+                    "RED": 20
                 },
                 "turn": 21,
                 "tile_size": -1,
@@ -4558,8 +4567,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 5,
+                            "x": 6,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4573,8 +4582,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 6,
+                            "x": 5,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4589,7 +4598,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 3,
-                            "y": 7,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4604,7 +4613,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 2,
-                            "y": 7,
+                            "y": 6,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4618,8 +4627,8 @@
                             "id": 16,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 8,
+                            "x": 2,
+                            "y": 7,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4665,8 +4674,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 7,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4678,36 +4687,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 1,
-                            "y": 6,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 1,
-                            "y": 5,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 2,
@@ -4722,7 +4701,7 @@
                             "level": 1
                         },
                         {
-                            "id": 13,
+                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 4,
@@ -4737,7 +4716,7 @@
                             "level": 1
                         },
                         {
-                            "id": 15,
+                            "id": 13,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 7,
@@ -4745,10 +4724,25 @@
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
-                            "health": 9,
+                            "health": 10,
                             "damage": 1,
                             "defense": 1,
                             "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 15,
+                            "team": "RED",
+                            "type": "LAND_HEALER_1",
+                            "x": 5,
+                            "y": 2,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
+                            "health": 9,
+                            "damage": 0,
+                            "defense": 1,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -4756,8 +4750,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.199729404449458,
-                    "RED": 10.194762668609615
+                    "BLUE": 10.183536729812618,
+                    "RED": 10.168179473876949
                 }
             }
         },
@@ -4766,7 +4760,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 23,
-                    "RED": 24
+                    "RED": 21
                 },
                 "turn": 22,
                 "tile_size": -1,
@@ -4870,8 +4864,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 5,
+                            "x": 7,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4885,8 +4879,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 6,
+                            "x": 6,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4901,7 +4895,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 3,
-                            "y": 7,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4916,7 +4910,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 2,
-                            "y": 7,
+                            "y": 5,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4931,7 +4925,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 2,
-                            "y": 8,
+                            "y": 6,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4977,8 +4971,8 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 0,
-                            "y": 8,
+                            "x": 6,
+                            "y": 3,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -4993,36 +4987,6 @@
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 1,
-                            "y": 7,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 1,
-                            "y": 6,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 11,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 1,
                             "y": 5,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
@@ -5034,7 +4998,7 @@
                             "level": 1
                         },
                         {
-                            "id": 13,
+                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 3,
@@ -5049,7 +5013,7 @@
                             "level": 1
                         },
                         {
-                            "id": 15,
+                            "id": 13,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 7,
@@ -5057,10 +5021,25 @@
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
-                            "health": 9,
+                            "health": 10,
                             "damage": 1,
                             "defense": 1,
                             "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 15,
+                            "team": "RED",
+                            "type": "LAND_HEALER_1",
+                            "x": 4,
+                            "y": 2,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
+                            "health": 9,
+                            "damage": 0,
+                            "defense": 1,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -5068,8 +5047,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.209118099212642,
-                    "RED": 10.203900070190425
+                    "BLUE": 10.19053456306457,
+                    "RED": 10.175183744430537
                 }
             }
         },
@@ -5078,7 +5057,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 24,
-                    "RED": 25
+                    "RED": 22
                 },
                 "turn": 23,
                 "tile_size": -1,
@@ -5090,7 +5069,7 @@
                             "type": "MAIN_CASTLE",
                             "x": 0,
                             "y": 9,
-                            "health": 21,
+                            "health": 22,
                             "damage": 0,
                             "defense": 0,
                             "attack_range": 0,
@@ -5182,8 +5161,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 4,
+                            "x": 7,
+                            "y": 0,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5197,8 +5176,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 5,
+                            "x": 7,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5212,8 +5191,8 @@
                             "id": 12,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 6,
+                            "x": 4,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5227,8 +5206,8 @@
                             "id": 14,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 3,
-                            "y": 7,
+                            "x": 2,
+                            "y": 4,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5289,9 +5268,9 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 8,
-                            "turn_actions_remaining": 0,
+                            "x": 6,
+                            "y": 3,
+                            "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
                             "health": 10,
@@ -5302,36 +5281,6 @@
                         },
                         {
                             "id": 7,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 0,
-                            "y": 8,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 1,
-                            "y": 7,
-                            "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 1,
@@ -5346,7 +5295,7 @@
                             "level": 1
                         },
                         {
-                            "id": 13,
+                            "id": 11,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 2,
@@ -5361,7 +5310,7 @@
                             "level": 1
                         },
                         {
-                            "id": 15,
+                            "id": 13,
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 7,
@@ -5369,10 +5318,25 @@
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
-                            "health": 9,
+                            "health": 10,
                             "damage": 1,
                             "defense": 1,
                             "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 15,
+                            "team": "RED",
+                            "type": "LAND_HEALER_1",
+                            "x": 3,
+                            "y": 3,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
+                            "health": 9,
+                            "damage": 0,
+                            "defense": 1,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -5380,8 +5344,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.218515377044673,
-                    "RED": 10.213041048049922
+                    "BLUE": 10.198485355377192,
+                    "RED": 10.183196048736567
                 }
             }
         },
@@ -5390,7 +5354,7 @@
             "game_state": {
                 "balance": {
                     "BLUE": 25,
-                    "RED": 26
+                    "RED": 23
                 },
                 "turn": 24,
                 "tile_size": -1,
@@ -5402,7 +5366,7 @@
                             "type": "MAIN_CASTLE",
                             "x": 0,
                             "y": 9,
-                            "health": 17,
+                            "health": 0,
                             "damage": 0,
                             "defense": 0,
                             "attack_range": 0,
@@ -5418,7 +5382,7 @@
                             "type": "MAIN_CASTLE",
                             "x": 9,
                             "y": 0,
-                            "health": 4,
+                            "health": 0,
                             "damage": 0,
                             "defense": 0,
                             "attack_range": 0,
@@ -5494,8 +5458,8 @@
                             "id": 8,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 3,
-                            "y": 3,
+                            "x": 7,
+                            "y": 0,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5509,8 +5473,8 @@
                             "id": 10,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 4,
+                            "x": 7,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5524,8 +5488,8 @@
                             "id": 12,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 2,
-                            "y": 5,
+                            "x": 5,
+                            "y": 1,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5540,7 +5504,7 @@
                             "team": "BLUE",
                             "type": "KNIGHT",
                             "x": 2,
-                            "y": 6,
+                            "y": 5,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5554,7 +5518,304 @@
                             "id": 16,
                             "team": "BLUE",
                             "type": "KNIGHT",
-                            "x": 3,
+                            "x": 2,
+                            "y": 6,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        }
+                    ],
+                    "RED": [
+                        {
+                            "id": 1,
+                            "team": "RED",
+                            "type": "KNIGHT",
+                            "x": 0,
+                            "y": 9,
+                            "turn_actions_remaining": 0,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 3,
+                            "team": "RED",
+                            "type": "KNIGHT",
+                            "x": 1,
+                            "y": 8,
+                            "turn_actions_remaining": 0,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 5,
+                            "team": "RED",
+                            "type": "KNIGHT",
+                            "x": 6,
+                            "y": 3,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 7,
+                            "team": "RED",
+                            "type": "KNIGHT",
+                            "x": 1,
+                            "y": 7,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 11,
+                            "team": "RED",
+                            "type": "KNIGHT",
+                            "x": 2,
+                            "y": 4,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 13,
+                            "team": "RED",
+                            "type": "KNIGHT",
+                            "x": 6,
+                            "y": 2,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 15,
+                            "team": "RED",
+                            "type": "LAND_HEALER_1",
+                            "x": 2,
+                            "y": 3,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
+                            "health": 9,
+                            "damage": 0,
+                            "defense": 1,
+                            "damage_range": 1,
+                            "level": 1
+                        }
+                    ]
+                },
+                "red_main_castle_id": 0,
+                "blue_main_castle_id": 1,
+                "time_remaining": {
+                    "BLUE": 10.206523647308344,
+                    "RED": 10.191195240020747
+                }
+            }
+        },
+        {
+            "turn_number": 24,
+            "game_state": {
+                "balance": {
+                    "BLUE": 26,
+                    "RED": 24
+                },
+                "turn": 25,
+                "tile_size": -1,
+                "buildings": {
+                    "BLUE": [
+                        {
+                            "id": 1,
+                            "team": "BLUE",
+                            "type": "MAIN_CASTLE",
+                            "x": 0,
+                            "y": 9,
+                            "health": 18,
+                            "damage": 0,
+                            "defense": 0,
+                            "attack_range": 0,
+                            "damage_range": 1,
+                            "turn_actions_remaining": 1,
+                            "level": 1
+                        }
+                    ],
+                    "RED": [
+                        {
+                            "id": 0,
+                            "team": "RED",
+                            "type": "MAIN_CASTLE",
+                            "x": 9,
+                            "y": 0,
+                            "health": 0,
+                            "damage": 0,
+                            "defense": 0,
+                            "attack_range": 0,
+                            "damage_range": 1,
+                            "turn_actions_remaining": 1,
+                            "level": 1
+                        }
+                    ]
+                },
+                "units": {
+                    "BLUE": [
+                        {
+                            "id": 0,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 9,
+                            "y": 0,
+                            "turn_actions_remaining": 0,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 9,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 2,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 9,
+                            "y": 1,
+                            "turn_actions_remaining": 0,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 4,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 8,
+                            "y": 1,
+                            "turn_actions_remaining": 0,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 6,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 8,
+                            "y": 0,
+                            "turn_actions_remaining": 0,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 8,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 7,
+                            "y": 1,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 10,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 8,
+                            "y": 2,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 12,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 6,
+                            "y": 1,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 14,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 2,
+                            "y": 5,
+                            "turn_actions_remaining": 1,
+                            "turn_movement_remaining": 0,
+                            "attack_range": 1,
+                            "health": 10,
+                            "damage": 1,
+                            "defense": 1,
+                            "damage_range": 0,
+                            "level": 1
+                        },
+                        {
+                            "id": 16,
+                            "team": "BLUE",
+                            "type": "KNIGHT",
+                            "x": 2,
                             "y": 7,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
@@ -5601,9 +5862,9 @@
                             "id": 5,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 8,
-                            "turn_actions_remaining": 0,
+                            "x": 6,
+                            "y": 3,
+                            "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
                             "health": 10,
@@ -5616,23 +5877,8 @@
                             "id": 7,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 0,
+                            "x": 1,
                             "y": 8,
-                            "turn_actions_remaining": 0,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
-                            "health": 10,
-                            "damage": 1,
-                            "defense": 1,
-                            "damage_range": 0,
-                            "level": 1
-                        },
-                        {
-                            "id": 9,
-                            "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 0,
-                            "y": 7,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5647,7 +5893,7 @@
                             "team": "RED",
                             "type": "KNIGHT",
                             "x": 1,
-                            "y": 7,
+                            "y": 5,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5661,8 +5907,8 @@
                             "id": 13,
                             "team": "RED",
                             "type": "KNIGHT",
-                            "x": 1,
-                            "y": 4,
+                            "x": 5,
+                            "y": 2,
                             "turn_actions_remaining": 1,
                             "turn_movement_remaining": 0,
                             "attack_range": 1,
@@ -5675,16 +5921,16 @@
                         {
                             "id": 15,
                             "team": "RED",
-                            "type": "KNIGHT",
-                            "x": 7,
-                            "y": 2,
+                            "type": "LAND_HEALER_1",
+                            "x": 2,
+                            "y": 4,
                             "turn_actions_remaining": 1,
-                            "turn_movement_remaining": 0,
-                            "attack_range": 1,
+                            "turn_movement_remaining": 1,
+                            "attack_range": 2,
                             "health": 9,
-                            "damage": 1,
+                            "damage": 0,
                             "defense": 1,
-                            "damage_range": 0,
+                            "damage_range": 1,
                             "level": 1
                         }
                     ]
@@ -5692,8 +5938,8 @@
                 "red_main_castle_id": 0,
                 "blue_main_castle_id": 1,
                 "time_remaining": {
-                    "BLUE": 10.227699508666987,
-                    "RED": 10.222128143310542
+                    "BLUE": 10.213990211486811,
+                    "RED": 10.197679758071894
                 }
             }
         }

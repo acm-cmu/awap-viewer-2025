@@ -36,7 +36,6 @@ export default function BuildSquare(props: BuildSquareProps) {
       useImg = currentImage;
       break;
     case '3':
-      console.log('Should have exploded');
       useImg = Exploded;
       break;
     default:

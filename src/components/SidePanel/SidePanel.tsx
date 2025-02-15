@@ -194,6 +194,7 @@ export default function SidePanel(props: SidePanelProps) {
 
     if (isPlayRef) {
       intervalRef.current = window.setInterval(() => {
+        currVal = Math.min(sliderValue + 1, replay!.replay.length - 1);
         setSliderValue((prev) => {
           const nextValue = prev + 1;
           if (nextValue >= replay!.replay.length) {
@@ -203,7 +204,6 @@ export default function SidePanel(props: SidePanelProps) {
           }
           return nextValue;
         });
-        currVal = sliderValue;
       }, 500 / speed);
 
       return () => {
