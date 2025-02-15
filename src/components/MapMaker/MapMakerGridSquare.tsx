@@ -114,17 +114,6 @@ export default function MapMakerGridSquare(props: MapMakerGridSquareProps) {
       } else if (brushPreset === 'BC') {
         setBC(x, y);
         if (Hsym) {
-          setBC(x, cols - y - 1);
-        }
-        if (Vsym) {
-          setBC(rows - x - 1, y);
-        }
-        if (Rsym) {
-          setBC(rows - x - 1, cols - y - 1);
-        }
-      } else if (brushPreset === 'RC') {
-        setRC(x, y);
-        if (Hsym) {
           setRC(x, cols - y - 1);
         }
         if (Vsym) {
@@ -132,6 +121,17 @@ export default function MapMakerGridSquare(props: MapMakerGridSquareProps) {
         }
         if (Rsym) {
           setRC(rows - x - 1, cols - y - 1);
+        }
+      } else if (brushPreset === 'RC') {
+        setRC(x, y);
+        if (Hsym) {
+          setBC(x, cols - y - 1);
+        }
+        if (Vsym) {
+          setBC(rows - x - 1, y);
+        }
+        if (Rsym) {
+          setBC(rows - x - 1, cols - y - 1);
         }
       }
     }

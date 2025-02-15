@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
 }
+.form-switch .form-check-input {
+  margin: 5px;
+}
 
 .form-check-label {
   font-size: 2vmin;
@@ -16,7 +19,8 @@
 /* Background color: focus (checked, unchecked) */
 .form-check-input:focus {
   border-color: var(--dark-color);
-  box-shadow: 0px 0px 0px rgba(255, 255, 255, 0) inset,
+  box-shadow:
+    0px 0px 0px rgba(255, 255, 255, 0) inset,
     0px 0px 8px var(--dark-color);
 }
 

@@ -142,19 +142,16 @@ export default function MapMakerPanel({ togglePage }: MapMakerProps) {
 
       <Grid container className="switches" direction="column">
         <Grid container direction="row" alignItems="center">
-          <ToggleSwitch onToggle={handleToggleHSym} useID="hsym" disabled={!showMap}>
-            <p>Horizontal Symmetry</p>
-          </ToggleSwitch>
+          <p>Horizontal Symmetry</p>
+          <ToggleSwitch onToggle={handleToggleHSym} useID="hsym" disabled={!showMap} />
         </Grid>
         <Grid container direction="row" alignItems="center">
-          <ToggleSwitch onToggle={handleToggleVSym} useID="vsym" disabled={!showMap}>
-            <p>Vertical Symmetry</p>
-          </ToggleSwitch>
+          <p>Vertical Symmetry</p>
+          <ToggleSwitch onToggle={handleToggleVSym} useID="vsym" disabled={!showMap} />
         </Grid>
         <Grid container direction="row" alignItems="center">
-          <ToggleSwitch onToggle={handleToggleRSym} useID="rsym" disabled={!showMap}>
-            <p>Rotational Symmetry</p>
-          </ToggleSwitch>
+          <p>Rotational Symmetry</p>
+          <ToggleSwitch onToggle={handleToggleRSym} useID="rsym" disabled={!showMap} />
         </Grid>
       </Grid>
 

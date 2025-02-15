@@ -6,7 +6,6 @@ type ToggleSwitchProps = {
   useID: string;
   onToggle: (event: React.MouseEvent) => void;
   disabled: boolean;
-  children: React.ReactNode;
 };
 
 // Creates the toggle switch button
@@ -23,7 +22,6 @@ export default function ToggleSwitch(props: ToggleSwitchProps) {
           disabled={props.disabled}
         />{' '}
       </label>
-      {props.children}{' '}
     </div>
   );
 }
