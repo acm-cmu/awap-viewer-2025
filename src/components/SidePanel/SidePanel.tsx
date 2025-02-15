@@ -185,6 +185,8 @@ export default function SidePanel(props: SidePanelProps) {
 
   const isPlayRef = useRef(false);
 
+  let currVal = sliderValue;
+
   useEffect(() => {
     // 🔍 Debugging
 
@@ -199,6 +201,7 @@ export default function SidePanel(props: SidePanelProps) {
           }
           return nextValue;
         });
+        currVal = sliderValue;
       }, 500);
 
       return () => {
@@ -216,6 +219,7 @@ export default function SidePanel(props: SidePanelProps) {
 
   const handleStopPlay = () => {
     isPlayRef.current = false;
+    setTempValue(currVal);
   };
 
   return (
