@@ -16,7 +16,7 @@ import RedCastle from '../../assets/RedCastle.png';
 
 type BuildSquareProps = {
   color: 'RED' | 'BLUE';
-  type: 0 | 1 | 2 | 3;
+  type: string;
   id: string;
 };
 
@@ -32,18 +32,15 @@ export default function BuildSquare(props: BuildSquareProps) {
   }
 
   switch (type) {
-    case 0:
+    case '0':
       useImg = currentImage;
       break;
-    case 1:
-      useImg = `/FARMLAND_${color}.png`;
-      break;
-    case 3:
+    case '3':
       console.log('Should have exploded');
       useImg = Exploded;
       break;
     default:
-      break;
+      useImg = `/${type}_${color}.png`;
   }
 
   return (

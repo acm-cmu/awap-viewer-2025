@@ -109,7 +109,6 @@ export default function SidePanel(props: SidePanelProps) {
     setBlueStats,
     isFinished,
     setIsFinished,
-    updateSliderValue,
   } = context;
 
   const [wrongFile, setWrongFile] = useState(false);
@@ -160,7 +159,7 @@ export default function SidePanel(props: SidePanelProps) {
 
   const handleFrameStep = (step: number) => {
     if (0 <= sliderValue + step && sliderValue + step < replay!.replay.length) {
-      setTempValue((value) => value + step);
+      setTempValue((value) => sliderValue + step);
     }
   };
 
@@ -173,12 +172,12 @@ export default function SidePanel(props: SidePanelProps) {
     setIsPlay(false);
   }, [setFramePlaying, setIsPlay]);
 
-  useEffect(() => {
-    if (isFinished) {
-      resetPlaybutton();
-      setSliderValue(-1);
-    }
-  }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished]);
+  // useEffect(() => {
+  //   if (isFinished) {
+  //     resetPlaybutton();
+  //     setSliderValue(-1);
+  //   }
+  // }, [isFinished, resetPlaybutton, setSliderValue, setIsFinished]);
 
   const handleToggleSettings = () => {
     setShowSettings(!showSettings);
@@ -186,19 +185,19 @@ export default function SidePanel(props: SidePanelProps) {
 
   const intervalRef = useRef<number | null>(null);
 
-  const isPlayRef = useRef(false);
+  const [isPlayRef, setIsPlayRef] = useState(false);
 
   let currVal = sliderValue;
 
   useEffect(() => {
     // 🔍 Debugging
 
-    if (isPlayRef.current) {
+    if (isPlayRef) {
       intervalRef.current = window.setInterval(() => {
         setSliderValue((prev) => {
           const nextValue = prev + 1;
           if (nextValue >= replay!.replay.length) {
-            isPlayRef.current = false; // Stop autoplay when the last frame is reached
+            setIsPlayRef(false); // Stop autoplay when the last frame is reached
             clearInterval(intervalRef.current!); // Clear the interval once the last frame is reached
             return prev; // Return the previous value to prevent going beyond the last frame
           }
@@ -214,10 +213,10 @@ export default function SidePanel(props: SidePanelProps) {
         }
       };
     }
-  }, [isPlayRef.current, speed]);
+  }, [isPlayRef, speed]);
 
   const handlePlay = () => {
-    isPlayRef.current = true;
+    setIsPlayRef(true);
   };
 
   const changeSpeed = (event: SelectChangeEvent) => {
@@ -225,7 +224,7 @@ export default function SidePanel(props: SidePanelProps) {
   };
 
   const handleStopPlay = () => {
-    isPlayRef.current = false;
+    setIsPlayRef(false);
     setTempValue(currVal);
   };
 
@@ -271,22 +270,24 @@ export default function SidePanel(props: SidePanelProps) {
               FRAME {sliderValue < 0 ? 0 : sliderValue} OF {replay.replay.length - 1} / TURN{' '}
               {replay.replay.length - 1}
             </h2>
-            <FormControl variant="outlined" sx={{ m: 1 }}>
-              <Select
-                id="speed-select"
-                value={speed.toString()}
-                label="Speed"
-                style={{ height: 20, fontFamily: 'Roboto', color: 'var(--dark-color)' }}
-                onChange={changeSpeed}>
-                <MenuItem value={10.0}>10.0x</MenuItem>
-                <MenuItem value={4.0}>4.0x</MenuItem>
-                <MenuItem value={2.0}>2.0x</MenuItem>
-                <MenuItem value={1.5}>1.5x</MenuItem>
-                <MenuItem value={1.0}>1.0x</MenuItem>
-                <MenuItem value={0.5}>0.5x</MenuItem>
-                <MenuItem value={0.25}>0.25x</MenuItem>
-              </Select>
-            </FormControl>
+            <StyledEngineProvider injectFirst>
+              <FormControl variant="outlined" sx={{ m: 1 }}>
+                <Select
+                  id="speed-select"
+                  value={speed.toString()}
+                  label="Speed"
+                  style={{ height: 20, fontFamily: 'Roboto', color: 'var(--dark-color)' }}
+                  onChange={changeSpeed}>
+                  <MenuItem value={10.0}>10.0x</MenuItem>
+                  <MenuItem value={4.0}>4.0x</MenuItem>
+                  <MenuItem value={2.0}>2.0x</MenuItem>
+                  <MenuItem value={1.5}>1.5x</MenuItem>
+                  <MenuItem value={1.0}>1.0x</MenuItem>
+                  <MenuItem value={0.5}>0.5x</MenuItem>
+                  <MenuItem value={0.25}>0.25x</MenuItem>
+                </Select>
+              </FormControl>
+            </StyledEngineProvider>
           </div>
 
           <div>
@@ -316,7 +317,7 @@ export default function SidePanel(props: SidePanelProps) {
               }}>
               <ArrowCircleLeftIcon style={{ color: '#be8700', fontSize: 'xx-large' }} />
             </button>
-            {!isPlayRef.current ? (
+            {!isPlayRef ? (
               <button onClick={handlePlay} style={{ background: 'transparent', margin: '0px' }}>
                 <PlayArrowIcon style={{ color: '#be8700', fontSize: 'xxx-large' }} />
               </button>

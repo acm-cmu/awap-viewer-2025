@@ -79,8 +79,10 @@ export default function GridBoard() {
   // need to update this to account for explosions
   if (!turnInfo.buildings.RED[0] || !turnInfo.buildings.BLUE[0]) return <div></div>;
 
-  setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0].health, 0]);
-  setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0].health, 0]);
+  useEffect(() => {
+    setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings!.RED[0]!.health, 0]);
+    setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings!.BLUE[0]!.health, 0]);
+  }, [ncols, nrows]);
 
   // Initializes tile grid (unchanged during game)
   const initialGrid = useMemo(() => {
@@ -129,33 +131,37 @@ export default function GridBoard() {
     const redBuildings = turnInfo.buildings.RED;
     const blueBuildings = turnInfo.buildings.BLUE;
     if (redBuildings[0]!.health != 0) {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={0} />;
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'0'} />;
     } else {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={3} />;
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'3'} />;
     }
     if (blueBuildings[0]!.health != 0) {
       tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={0} />
+        <BuildSquare id={`bu${1}`} color="BLUE" type={'0'} />
       );
     } else {
       tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={3} />
+        <BuildSquare id={`bu${1}`} color="BLUE" type={'3'} />
       );
     }
 
     for (let i = 1; i < redBuildings.length; i++) {
       const currB = redBuildings[i]!;
-      tempArr[currB.x]![currB.y] = <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={1} />;
+      tempArr[currB.x]![currB.y] = (
+        <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={currB.type} />
+      );
     }
 
     for (let i = 1; i < blueBuildings.length; i++) {
       const currB = blueBuildings[i]!;
-      tempArr[currB.x]![currB.y] = <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={1} />;
+      tempArr[currB.x]![currB.y] = (
+        <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={currB.type} />
+      );
     }
 
     setBuildings(tempArr);
     return tempArr;
-  }, [nrows, ncols, turnInfo]);
+  }, [nrows, ncols]);
 
   // Initializes troops grid
   const initialTroops = useMemo(() => {
@@ -210,16 +216,13 @@ export default function GridBoard() {
 
     setTroops(tempArr);
     return tempArr;
-  }, [nrows, ncols, turnInfo]);
-
-  useMemo(() => {
-    setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0]!.health, 0]);
-    setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0]!.health, 0]);
-  }, [turnInfo]);
+  }, [nrows, ncols]);
 
   useEffect(() => {
     setTurnInfo(gameTurns[sliderValue]!.game_state);
 
+    setRedStats([turnInfo.balance.RED, maxHealth, turnInfo.buildings.RED[0]!.health, 0]);
+    setBlueStats([turnInfo.balance.BLUE, maxHealth, turnInfo.buildings.BLUE[0]!.health, 0]);
     // reset troops
     const blueTroops = turnInfo.units.BLUE;
     const redTroops = turnInfo.units.RED;
@@ -330,28 +333,33 @@ export default function GridBoard() {
     const redBuildings = turnInfo.buildings.RED;
     const blueBuildings = turnInfo.buildings.BLUE;
     if (redBuildings[0]!.health != 0) {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={0} />;
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'0'} />;
     } else {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={3} />;
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'3'} />;
     }
     if (blueBuildings[0]!.health != 0) {
       tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={0} />
+        <BuildSquare id={`bu${1}`} color="BLUE" type={'0'} />
       );
     } else {
       tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={3} />
+        <BuildSquare id={`bu${1}`} color="BLUE" type={'3'} />
       );
     }
 
     for (let i = 1; i < redBuildings.length; i++) {
       const currB = redBuildings[i]!;
-      tempArr[currB.x]![currB.y] = <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={1} />;
+      tempArr[currB.x]![currB.y] = (
+        <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={currB.type} />
+      );
     }
 
     for (let i = 1; i < blueBuildings.length; i++) {
       const currB = blueBuildings[i]!;
-      tempArr[currB.x]![currB.y] = <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={1} />;
+      console.log(currB.type);
+      tempArr[currB.x]![currB.y] = (
+        <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={currB.type} />
+      );
     }
 
     setBuildings(tempArr);

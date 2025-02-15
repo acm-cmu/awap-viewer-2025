@@ -8,7 +8,6 @@ import React, {
   ReactNode,
   SetStateAction,
   useCallback,
-  useMemo,
   useState,
 } from 'react';
 
@@ -74,7 +73,6 @@ export interface ViewerContextTypes {
   blockedImgArray: string[];
   isFinished: boolean;
   setIsFinished: Dispatch<SetStateAction<boolean>>;
-  updateSliderValue: (x: number) => void;
 }
 
 const ViewerContext = createContext<ViewerContextTypes | undefined>(undefined);
@@ -137,11 +135,6 @@ function Viewer({ togglePage }: TogglePageType) {
     }
   }
 
-  const updateSliderValue = useCallback((newValue: number) => {
-    console.log('updating slider');
-    setSliderValue(newValue);
-  }, []);
-
   const contextValues = {
     redTroops,
     setRedTroops,
@@ -171,7 +164,6 @@ function Viewer({ togglePage }: TogglePageType) {
     setBlueStats,
     isFinished,
     setIsFinished,
-    updateSliderValue,
   };
 
   return (
