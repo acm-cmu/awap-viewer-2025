@@ -40,7 +40,7 @@ export default function BuildSquare(props: BuildSquareProps) {
       useImg = Exploded;
       break;
     default:
-      useImg = `/${type}_${color}.png`;
+      useImg = `/Buildings/${type}_${color}.png`;
   }
 
   return (

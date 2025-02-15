@@ -130,20 +130,6 @@ export default function GridBoard() {
 
     const redBuildings = turnInfo.buildings.RED;
     const blueBuildings = turnInfo.buildings.BLUE;
-    if (redBuildings[0]!.health != 0) {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'0'} />;
-    } else {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'3'} />;
-    }
-    if (blueBuildings[0]!.health != 0) {
-      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={'0'} />
-      );
-    } else {
-      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={'3'} />
-      );
-    }
 
     for (let i = 1; i < redBuildings.length; i++) {
       const currB = redBuildings[i]!;
@@ -159,9 +145,24 @@ export default function GridBoard() {
       );
     }
 
+    if (redBuildings[0]!.health != 0) {
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'0'} />;
+    } else {
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'3'} />;
+    }
+    if (blueBuildings[0]!.health != 0) {
+      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
+        <BuildSquare id={`bu${1}`} color="BLUE" type={'0'} />
+      );
+    } else {
+      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
+        <BuildSquare id={`bu${1}`} color="BLUE" type={'3'} />
+      );
+    }
+
     setBuildings(tempArr);
     return tempArr;
-  }, [nrows, ncols]);
+  }, [nrows, ncols, sliderValue]);
 
   // Initializes troops grid
   const initialTroops = useMemo(() => {
@@ -329,40 +330,6 @@ export default function GridBoard() {
         tempArr[row]?.push(<GridSquare key={`b${row}${col}`} color="5" />);
       }
     }
-
-    const redBuildings = turnInfo.buildings.RED;
-    const blueBuildings = turnInfo.buildings.BLUE;
-    if (redBuildings[0]!.health != 0) {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'0'} />;
-    } else {
-      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={'3'} />;
-    }
-    if (blueBuildings[0]!.health != 0) {
-      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={'0'} />
-      );
-    } else {
-      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
-        <BuildSquare id={`bu${1}`} color="BLUE" type={'3'} />
-      );
-    }
-
-    for (let i = 1; i < redBuildings.length; i++) {
-      const currB = redBuildings[i]!;
-      tempArr[currB.x]![currB.y] = (
-        <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={currB.type} />
-      );
-    }
-
-    for (let i = 1; i < blueBuildings.length; i++) {
-      const currB = blueBuildings[i]!;
-      console.log(currB.type);
-      tempArr[currB.x]![currB.y] = (
-        <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={currB.type} />
-      );
-    }
-
-    setBuildings(tempArr);
   }, [sliderValue]);
 
   return (
