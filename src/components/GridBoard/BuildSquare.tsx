@@ -9,15 +9,15 @@ import RedCastle from '../../assets/RedCastle.png';
 /*
   Type labels:
   0 - main castle
-  1 - Spawner
-  2 - Farmlands
+  1 - Farmlands
+  2 - Spawner (didn't do)
   3 - Exploded
 */
 
 type BuildSquareProps = {
   color: 'RED' | 'BLUE';
   type: 0 | 1 | 2 | 3;
-  id: number;
+  id: string;
 };
 
 export default function BuildSquare(props: BuildSquareProps) {
@@ -34,6 +34,9 @@ export default function BuildSquare(props: BuildSquareProps) {
   switch (type) {
     case 0:
       useImg = currentImage;
+      break;
+    case 1:
+      useImg = `/FARMLAND_${color}.png`;
       break;
     case 3:
       console.log('Should have exploded');

@@ -126,19 +126,31 @@ export default function GridBoard() {
       }
     }
 
-    if (sliderValue < gameTurns.length) {
-      const redBuildings = turnInfo.buildings.RED[0];
-      const blueBuildings = turnInfo.buildings.BLUE[0];
-      if (redBuildings!.health != 0) {
-        tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
-      } else {
-        tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
-      }
-      if (blueBuildings!.health != 0) {
-        tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
-      } else {
-        tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
-      }
+    const redBuildings = turnInfo.buildings.RED;
+    const blueBuildings = turnInfo.buildings.BLUE;
+    if (redBuildings[0]!.health != 0) {
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={0} />;
+    } else {
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={3} />;
+    }
+    if (blueBuildings[0]!.health != 0) {
+      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
+        <BuildSquare id={`bu${1}`} color="BLUE" type={0} />
+      );
+    } else {
+      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
+        <BuildSquare id={`bu${1}`} color="BLUE" type={3} />
+      );
+    }
+
+    for (let i = 1; i < redBuildings.length; i++) {
+      const currB = redBuildings[i]!;
+      tempArr[currB.x]![currB.y] = <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={1} />;
+    }
+
+    for (let i = 1; i < blueBuildings.length; i++) {
+      const currB = blueBuildings[i]!;
+      tempArr[currB.x]![currB.y] = <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={1} />;
     }
 
     setBuildings(tempArr);
@@ -226,7 +238,6 @@ export default function GridBoard() {
     if (0 <= mapChangeI) {
       const tempArr: ReactNode[][] = [];
       const newTiles = mapChangeTiles[mapChangeI];
-      console.log(newTiles);
       // Basic Map
       for (let row = 0; row < nrows; row++) {
         tempArr.push([] as ReactNode[]);
@@ -316,17 +327,31 @@ export default function GridBoard() {
       }
     }
 
-    const redBuildings = turnInfo.buildings.RED[0];
-    const blueBuildings = turnInfo.buildings.BLUE[0];
-    if (redBuildings!.health != 0) {
-      tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={0} />;
+    const redBuildings = turnInfo.buildings.RED;
+    const blueBuildings = turnInfo.buildings.BLUE;
+    if (redBuildings[0]!.health != 0) {
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={0} />;
     } else {
-      tempArr[redBuildings!.x]![redBuildings!.y] = <BuildSquare id={0} color="RED" type={3} />;
+      tempArr[redBuildings[0]!.x]![redBuildings[0]!.y] = <BuildSquare id={`bu${0}`} color="RED" type={3} />;
     }
-    if (blueBuildings!.health != 0) {
-      tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={0} />;
+    if (blueBuildings[0]!.health != 0) {
+      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
+        <BuildSquare id={`bu${1}`} color="BLUE" type={0} />
+      );
     } else {
-      tempArr[blueBuildings!.x]![blueBuildings!.y] = <BuildSquare id={1} color="BLUE" type={3} />;
+      tempArr[blueBuildings[0]!.x]![blueBuildings[0]!.y] = (
+        <BuildSquare id={`bu${1}`} color="BLUE" type={3} />
+      );
+    }
+
+    for (let i = 1; i < redBuildings.length; i++) {
+      const currB = redBuildings[i]!;
+      tempArr[currB.x]![currB.y] = <BuildSquare id={`bur${currB.x}${currB.y}`} color="RED" type={1} />;
+    }
+
+    for (let i = 1; i < blueBuildings.length; i++) {
+      const currB = blueBuildings[i]!;
+      tempArr[currB.x]![currB.y] = <BuildSquare id={`bub${currB.x}${currB.y}`} color="BLUE" type={1} />;
     }
 
     setBuildings(tempArr);
