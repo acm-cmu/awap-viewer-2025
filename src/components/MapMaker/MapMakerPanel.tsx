@@ -119,7 +119,7 @@ export default function MapMakerPanel({ togglePage }: MapMakerProps) {
 
         <Grid container direction="row" alignItems="center">
           <input type="radio" value="I" name="brush" onChange={handleBrushRadio} />
-          <label>Impassible</label>
+          <label>Mountain</label>
         </Grid>
 
         <Grid container direction="row" alignItems="center">
@@ -130,6 +130,16 @@ export default function MapMakerPanel({ togglePage }: MapMakerProps) {
         <Grid container direction="row" alignItems="center">
           <input type="radio" value="RC" name="brush" onChange={handleBrushRadio} />
           <label>Red Castle</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="W" name="brush" onChange={handleBrushRadio} />
+          <label>Water</label>
+        </Grid>
+
+        <Grid container direction="row" alignItems="center">
+          <input type="radio" value="S" name="brush" onChange={handleBrushRadio} />
+          <label>Sand</label>
         </Grid>
 
         {/* <Grid container direction="row" alignItems="center">
